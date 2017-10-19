@@ -17,6 +17,7 @@ namespace HealthyProject.Controllers
     {
         private ApplicationSignInManager _signInManager;
         private ApplicationUserManager _userManager;
+        private HealthyEntities db = new HealthyEntities();
 
         public AccountController()
         {
@@ -156,7 +157,10 @@ namespace HealthyProject.Controllers
                 if (result.Succeeded)
                 {
                     await SignInManager.SignInAsync(user, isPersistent:false, rememberBrowser:false);
-                    
+                    Utilizador newUser = new Utilizador();
+                    newUser.UserID = user.Id;
+                    db.Utilizadors.Add(newUser);
+                    db.SaveChanges();  
                     // For more information on how to enable account confirmation and password reset please visit https://go.microsoft.com/fwlink/?LinkID=320771
                     // Send an email with this link
                     // string code = await UserManager.GenerateEmailConfirmationTokenAsync(user.Id);

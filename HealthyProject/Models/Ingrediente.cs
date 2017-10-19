@@ -28,6 +28,7 @@ namespace HealthyProject.Models
         public int Proteinas { get; set; }
         public int Gordura { get; set; }
         public int HC { get; set; }
+        public int HC_Acucar { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<RefeicaoIngrediente> RefeicaoIngredientes { get; set; }

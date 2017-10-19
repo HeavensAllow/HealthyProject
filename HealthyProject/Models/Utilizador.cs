@@ -23,10 +23,10 @@ namespace HealthyProject.Models
         public int UserID { get; set; }
         public string Nome { get; set; }
         public string Genero { get; set; }
-        public System.DateTime Data_nascimento { get; set; }
-        public int Peso { get; set; }
-        public int Altura { get; set; }
-        public int Actividade_fisica { get; set; }
+        public Nullable<System.DateTime> Data_nascimento { get; set; }
+        public Nullable<int> Peso { get; set; }
+        public Nullable<int> Altura { get; set; }
+        public Nullable<int> Actividade_fisica { get; set; }
         public Nullable<int> Nr_horas_sono { get; set; }
         public Nullable<int> Nr_refeicoes { get; set; }
         public Nullable<bool> Habitos_alcoolicos { get; set; }
