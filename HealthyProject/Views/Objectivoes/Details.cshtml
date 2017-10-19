@@ -1,0 +1,58 @@
+﻿@model HealthyProject.Models.Objectivo
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>Objectivo</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.Data_inicio)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Data_inicio)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Data_fim)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Data_fim)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Peso_objectivo)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Peso_objectivo)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Intake_diario)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Intake_diario)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Utilizador.Nome)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Utilizador.Nome)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.ObjectivoID }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>

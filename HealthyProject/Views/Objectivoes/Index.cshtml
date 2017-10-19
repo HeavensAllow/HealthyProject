@@ -1,0 +1,57 @@
+﻿@model IEnumerable<HealthyProject.Models.Objectivo>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Index</h2>
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.Data_inicio)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Data_fim)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Peso_objectivo)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Intake_diario)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Utilizador.Nome)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.Data_inicio)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Data_fim)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Peso_objectivo)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Intake_diario)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Utilizador.Nome)
+        </td>
+        <td>
+            @Html.ActionLink("Edit", "Edit", new { id=item.ObjectivoID }) |
+            @Html.ActionLink("Details", "Details", new { id=item.ObjectivoID }) |
+            @Html.ActionLink("Delete", "Delete", new { id=item.ObjectivoID })
+        </td>
+    </tr>
+}
+
+</table>
