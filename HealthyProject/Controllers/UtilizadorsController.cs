@@ -36,6 +36,9 @@ namespace HealthyProject.Controllers
             return View(utilizador);
         }
 
+
+       
+
         // GET: Utilizadors/Create
         public ActionResult Create()
         {
