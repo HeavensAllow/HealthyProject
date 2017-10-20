@@ -75,9 +75,10 @@ namespace HealthyProject.Controllers
             return View(model);
         }
 
-        //
-        // POST: /Manage/RemoveLogin
-        [HttpPost]
+
+    //
+    // POST: /Manage/RemoveLogin
+    [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<ActionResult> RemoveLogin(string loginProvider, string providerKey)
         {
