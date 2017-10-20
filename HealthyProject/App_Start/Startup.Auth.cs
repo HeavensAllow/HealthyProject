@@ -57,15 +57,15 @@ namespace HealthyProject
             //   consumerKey: "",
             //   consumerSecret: "");
 
-            app.UseFacebookAuthentication(
-               appId: "152031525399018",
-               appSecret: "7196c11ab47e0c395162a366990462be");
+            //app.UseFacebookAuthentication(
+            //   appId: "",
+            //   appSecret: "");
 
-            app.UseGoogleAuthentication(new GoogleOAuth2AuthenticationOptions()
-            {
-                ClientId = "1094877524450-7akm8m3tdu0uko1s204u6q8vnkdjpst8.apps.googleusercontent.com",
-                ClientSecret = "8b1tR-sPZL95t9wwycPd8Q0y"
-            });
+            //app.UseGoogleAuthentication(new GoogleOAuth2AuthenticationOptions()
+            //{
+            //    ClientId = "",
+            //    ClientSecret = ""
+            //});
         }
     }
 }
