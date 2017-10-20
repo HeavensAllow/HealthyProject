@@ -194,6 +194,7 @@
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
     <Compile Include="Controllers\ObjectivoesController.cs" />
+    <Compile Include="Controllers\UtilizadorsController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -339,6 +340,11 @@
     <Content Include="Views\Objectivoes\Details.cshtml" />
     <Content Include="Views\Objectivoes\Edit.cshtml" />
     <Content Include="Views\Objectivoes\Index.cshtml" />
+    <Content Include="Views\Utilizadors\Create.cshtml" />
+    <Content Include="Views\Utilizadors\Delete.cshtml" />
+    <Content Include="Views\Utilizadors\Details.cshtml" />
+    <Content Include="Views\Utilizadors\Edit.cshtml" />
+    <Content Include="Views\Utilizadors\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

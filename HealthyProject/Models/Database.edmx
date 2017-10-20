@@ -71,14 +71,14 @@
             <PropertyRef Name="IngredientesID" />
           </Key>
           <Property Name="IngredientesID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="Categoria" Type="nvarchar" MaxLength="50" Nullable="false" />
-          <Property Name="Nome" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="Categoria" Type="nvarchar" MaxLength="100" Nullable="false" />
+          <Property Name="Nome" Type="nvarchar" MaxLength="100" Nullable="false" />
           <Property Name="Unidade" Type="int" Nullable="false" />
-          <Property Name="Kcal" Type="int" Nullable="false" />
-          <Property Name="Proteinas" Type="int" Nullable="false" />
-          <Property Name="Gordura" Type="int" Nullable="false" />
-          <Property Name="HC" Type="int" Nullable="false" />
-          <Property Name="HC_Acucar" Type="int" Nullable="false" />
+          <Property Name="Kcal" Type="float" Nullable="false" />
+          <Property Name="Proteinas" Type="float" Nullable="false" />
+          <Property Name="Gordura" Type="float" Nullable="false" />
+          <Property Name="HidCarbono" Type="float" Nullable="false" />
+          <Property Name="HC_Acucar" Type="float" Nullable="false" />
         </EntityType>
         <EntityType Name="Objectivo">
           <Key>
@@ -89,21 +89,22 @@
           <Property Name="Data_inicio" Type="date" />
           <Property Name="Data_fim" Type="date" />
           <Property Name="Peso_objectivo" Type="int" />
-          <Property Name="Intake_diario" Type="int" />
+          <Property Name="Intake_diarioR" Type="int" />
+          <Property Name="Intake_diarioA" Type="int" />
         </EntityType>
         <EntityType Name="Pratos">
           <Key>
             <PropertyRef Name="PratosID" />
           </Key>
           <Property Name="PratosID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="Categoria" Type="nvarchar" MaxLength="50" Nullable="false" />
-          <Property Name="Nome" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="Categoria" Type="nvarchar" MaxLength="100" Nullable="false" />
+          <Property Name="Nome" Type="nvarchar" MaxLength="100" Nullable="false" />
           <Property Name="Unidade" Type="int" Nullable="false" />
-          <Property Name="Kcal" Type="int" Nullable="false" />
-          <Property Name="Proteinas" Type="int" Nullable="false" />
-          <Property Name="Gordura" Type="int" Nullable="false" />
-          <Property Name="HC" Type="int" Nullable="false" />
-          <Property Name="HC_Acucar" Type="int" Nullable="false" />
+          <Property Name="Kcal" Type="float" Nullable="false" />
+          <Property Name="Proteinas" Type="float" Nullable="false" />
+          <Property Name="Gordura" Type="float" Nullable="false" />
+          <Property Name="HidCarbono" Type="float" Nullable="false" />
+          <Property Name="HC_Acucar" Type="float" Nullable="false" />
         </EntityType>
         <EntityType Name="RefeicaoIngredientes">
           <Key>
@@ -139,10 +140,10 @@
           <Property Name="RegistoID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="ObjectivoID" Type="int" />
           <Property Name="Data" Type="date" Nullable="false" />
-          <Property Name="Total_Kcal" Type="int" Nullable="false" />
-          <Property Name="Total_proteinas" Type="int" Nullable="false" />
-          <Property Name="Total_gordura" Type="int" Nullable="false" />
-          <Property Name="Total_HC" Type="int" Nullable="false" />
+          <Property Name="Total_Kcal" Type="float" Nullable="false" />
+          <Property Name="Total_proteinas" Type="float" Nullable="false" />
+          <Property Name="Total_gordura" Type="float" Nullable="false" />
+          <Property Name="Total_HC" Type="float" Nullable="false" />
         </EntityType>
         <EntityType Name="sysdiagrams">
           <Key>
@@ -457,15 +458,15 @@
             <PropertyRef Name="IngredientesID" />
           </Key>
           <Property Name="IngredientesID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="Categoria" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
-          <Property Name="Nome" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Categoria" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Nome" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
           <Property Name="Unidade" Type="Int32" Nullable="false" />
           <Property Name="Kcal" Type="Int32" Nullable="false" />
           <Property Name="Proteinas" Type="Int32" Nullable="false" />
           <Property Name="Gordura" Type="Int32" Nullable="false" />
-          <Property Name="HC" Type="Int32" Nullable="false" />
           <NavigationProperty Name="RefeicaoIngredientes" Relationship="Self.FK_RefeicaoIngredientes_Refeicoes" FromRole="Ingredientes" ToRole="RefeicaoIngredientes" />
           <Property Name="HC_Acucar" Type="Int32" Nullable="false" />
+          <Property Name="HidCarbono" Type="Double" Nullable="false" />
         </EntityType>
         <EntityType Name="Objectivo">
           <Key>
@@ -476,24 +477,25 @@
           <Property Name="Data_inicio" Type="DateTime" Precision="0" />
           <Property Name="Data_fim" Type="DateTime" Precision="0" />
           <Property Name="Peso_objectivo" Type="Int32" />
-          <Property Name="Intake_diario" Type="Int32" />
           <NavigationProperty Name="Utilizador" Relationship="Self.FK_Objectivo_Objectivo" FromRole="Objectivo" ToRole="Utilizador" />
           <NavigationProperty Name="RegistoDiarios" Relationship="Self.FK_RegistoDiario_RegistoDiario" FromRole="Objectivo" ToRole="RegistoDiario" />
+          <Property Name="Intake_diarioR" Type="Int32" />
+          <Property Name="Intake_diarioA" Type="Int32" />
         </EntityType>
         <EntityType Name="Prato">
           <Key>
             <PropertyRef Name="PratosID" />
           </Key>
           <Property Name="PratosID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="Nome" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Nome" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
           <Property Name="Unidade" Type="Int32" Nullable="false" />
           <Property Name="Kcal" Type="Int32" Nullable="false" />
           <Property Name="Proteinas" Type="Int32" Nullable="false" />
           <Property Name="Gordura" Type="Int32" Nullable="false" />
-          <Property Name="HC" Type="Int32" Nullable="false" />
           <NavigationProperty Name="RefeicaoPratos" Relationship="Self.FK_RefeicaoPratos_Pratos1" FromRole="Pratos" ToRole="RefeicaoPratos" />
-          <Property Name="Categoria" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Categoria" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="true" />
           <Property Name="HC_Acucar" Type="Int32" Nullable="false" />
+          <Property Name="HidCarbono" Type="Double" Nullable="false" />
         </EntityType>
         <EntityType Name="RefeicaoIngrediente">
           <Key>
@@ -824,6 +826,7 @@
           <EntitySetMapping Name="Ingredientes">
             <EntityTypeMapping TypeName="HealthyModel.Ingrediente">
               <MappingFragment StoreEntitySet="Ingredientes">
+                <ScalarProperty Name="HidCarbono" ColumnName="HidCarbono" />
                 <ScalarProperty Name="HC_Acucar" ColumnName="HC_Acucar" />
                 <ScalarProperty Name="IngredientesID" ColumnName="IngredientesID" />
                 <ScalarProperty Name="Categoria" ColumnName="Categoria" />
@@ -832,25 +835,26 @@
                 <ScalarProperty Name="Kcal" ColumnName="Kcal" />
                 <ScalarProperty Name="Proteinas" ColumnName="Proteinas" />
                 <ScalarProperty Name="Gordura" ColumnName="Gordura" />
-                <ScalarProperty Name="HC" ColumnName="HC" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="Objectivoes">
             <EntityTypeMapping TypeName="HealthyModel.Objectivo">
               <MappingFragment StoreEntitySet="Objectivo">
+                <ScalarProperty Name="Intake_diarioA" ColumnName="Intake_diarioA" />
+                <ScalarProperty Name="Intake_diarioR" ColumnName="Intake_diarioR" />
                 <ScalarProperty Name="ObjectivoID" ColumnName="ObjectivoID" />
                 <ScalarProperty Name="UserID" ColumnName="UserID" />
                 <ScalarProperty Name="Data_inicio" ColumnName="Data_inicio" />
                 <ScalarProperty Name="Data_fim" ColumnName="Data_fim" />
                 <ScalarProperty Name="Peso_objectivo" ColumnName="Peso_objectivo" />
-                <ScalarProperty Name="Intake_diario" ColumnName="Intake_diario" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="Pratos">
             <EntityTypeMapping TypeName="HealthyModel.Prato">
               <MappingFragment StoreEntitySet="Pratos">
+                <ScalarProperty Name="HidCarbono" ColumnName="HidCarbono" />
                 <ScalarProperty Name="HC_Acucar" ColumnName="HC_Acucar" />
                 <ScalarProperty Name="Categoria" ColumnName="Categoria" />
                 <ScalarProperty Name="PratosID" ColumnName="PratosID" />
@@ -859,7 +863,6 @@
                 <ScalarProperty Name="Kcal" ColumnName="Kcal" />
                 <ScalarProperty Name="Proteinas" ColumnName="Proteinas" />
                 <ScalarProperty Name="Gordura" ColumnName="Gordura" />
-                <ScalarProperty Name="HC" ColumnName="HC" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
