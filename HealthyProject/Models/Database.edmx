@@ -4,7 +4,7 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-      <Schema Namespace="HealthyModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012.Azure" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+    <Schema Namespace="HealthyModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012.Azure" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
         <EntityType Name="__MigrationHistory">
           <Key>
             <PropertyRef Name="MigrationId" />
@@ -78,6 +78,7 @@
           <Property Name="Proteinas" Type="int" Nullable="false" />
           <Property Name="Gordura" Type="int" Nullable="false" />
           <Property Name="HC" Type="int" Nullable="false" />
+          <Property Name="HC_Acucar" Type="int" Nullable="false" />
         </EntityType>
         <EntityType Name="Objectivo">
           <Key>
@@ -85,22 +86,24 @@
           </Key>
           <Property Name="ObjectivoID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="UserID" Type="int" Nullable="false" />
-          <Property Name="Data_inicio" Type="date" Nullable="false" />
-          <Property Name="Data_fim" Type="date" Nullable="false" />
-          <Property Name="Peso_objectivo" Type="int" Nullable="false" />
-          <Property Name="Intake_diario" Type="int" Nullable="false" />
+          <Property Name="Data_inicio" Type="date" />
+          <Property Name="Data_fim" Type="date" />
+          <Property Name="Peso_objectivo" Type="int" />
+          <Property Name="Intake_diario" Type="int" />
         </EntityType>
         <EntityType Name="Pratos">
           <Key>
             <PropertyRef Name="PratosID" />
           </Key>
           <Property Name="PratosID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Categoria" Type="nvarchar" MaxLength="50" Nullable="false" />
           <Property Name="Nome" Type="nvarchar" MaxLength="50" Nullable="false" />
           <Property Name="Unidade" Type="int" Nullable="false" />
           <Property Name="Kcal" Type="int" Nullable="false" />
           <Property Name="Proteinas" Type="int" Nullable="false" />
           <Property Name="Gordura" Type="int" Nullable="false" />
           <Property Name="HC" Type="int" Nullable="false" />
+          <Property Name="HC_Acucar" Type="int" Nullable="false" />
         </EntityType>
         <EntityType Name="RefeicaoIngredientes">
           <Key>
@@ -156,12 +159,12 @@
             <PropertyRef Name="UserID" />
           </Key>
           <Property Name="UserID" Type="int" Nullable="false" />
-          <Property Name="Nome" Type="nvarchar" MaxLength="50" Nullable="false" />
-          <Property Name="Genero" Type="nvarchar" MaxLength="10" Nullable="false" />
-          <Property Name="Data_nascimento" Type="date" Nullable="false" />
-          <Property Name="Peso" Type="int" Nullable="false" />
-          <Property Name="Altura" Type="int" Nullable="false" />
-          <Property Name="Actividade_fisica" Type="int" Nullable="false" />
+          <Property Name="Nome" Type="nvarchar" MaxLength="50" />
+          <Property Name="Genero" Type="nvarchar" MaxLength="10" />
+          <Property Name="Data_nascimento" Type="date" />
+          <Property Name="Peso" Type="int" />
+          <Property Name="Altura" Type="int" />
+          <Property Name="Actividade_fisica" Type="int" />
           <Property Name="Nr_horas_sono" Type="int" />
           <Property Name="Nr_refeicoes" Type="int" />
           <Property Name="Habitos_alcoolicos" Type="bit" />
@@ -385,8 +388,7 @@
             <End Role="Utilizador" EntitySet="Utilizador" />
           </AssociationSet>
         </EntityContainer>
-      </Schema>
-    </edmx:StorageModels>
+      </Schema></edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
       <Schema Namespace="HealthyModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
@@ -463,6 +465,7 @@
           <Property Name="Gordura" Type="Int32" Nullable="false" />
           <Property Name="HC" Type="Int32" Nullable="false" />
           <NavigationProperty Name="RefeicaoIngredientes" Relationship="Self.FK_RefeicaoIngredientes_Refeicoes" FromRole="Ingredientes" ToRole="RefeicaoIngredientes" />
+          <Property Name="HC_Acucar" Type="Int32" Nullable="false" />
         </EntityType>
         <EntityType Name="Objectivo">
           <Key>
@@ -470,10 +473,10 @@
           </Key>
           <Property Name="ObjectivoID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="UserID" Type="Int32" Nullable="false" />
-          <Property Name="Data_inicio" Type="DateTime" Nullable="false" Precision="0" />
-          <Property Name="Data_fim" Type="DateTime" Nullable="false" Precision="0" />
-          <Property Name="Peso_objectivo" Type="Int32" Nullable="false" />
-          <Property Name="Intake_diario" Type="Int32" Nullable="false" />
+          <Property Name="Data_inicio" Type="DateTime" Precision="0" />
+          <Property Name="Data_fim" Type="DateTime" Precision="0" />
+          <Property Name="Peso_objectivo" Type="Int32" />
+          <Property Name="Intake_diario" Type="Int32" />
           <NavigationProperty Name="Utilizador" Relationship="Self.FK_Objectivo_Objectivo" FromRole="Objectivo" ToRole="Utilizador" />
           <NavigationProperty Name="RegistoDiarios" Relationship="Self.FK_RegistoDiario_RegistoDiario" FromRole="Objectivo" ToRole="RegistoDiario" />
         </EntityType>
@@ -489,6 +492,8 @@
           <Property Name="Gordura" Type="Int32" Nullable="false" />
           <Property Name="HC" Type="Int32" Nullable="false" />
           <NavigationProperty Name="RefeicaoPratos" Relationship="Self.FK_RefeicaoPratos_Pratos1" FromRole="Pratos" ToRole="RefeicaoPratos" />
+          <Property Name="Categoria" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="HC_Acucar" Type="Int32" Nullable="false" />
         </EntityType>
         <EntityType Name="RefeicaoIngrediente">
           <Key>
@@ -553,12 +558,12 @@
             <PropertyRef Name="UserID" />
           </Key>
           <Property Name="UserID" Type="Int32" Nullable="false" />
-          <Property Name="Nome" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
-          <Property Name="Genero" Type="String" MaxLength="10" FixedLength="false" Unicode="true" Nullable="false" />
-          <Property Name="Data_nascimento" Type="DateTime" Nullable="false" Precision="0" />
-          <Property Name="Peso" Type="Int32" Nullable="false" />
-          <Property Name="Altura" Type="Int32" Nullable="false" />
-          <Property Name="Actividade_fisica" Type="Int32" Nullable="false" />
+          <Property Name="Nome" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Genero" Type="String" MaxLength="10" FixedLength="false" Unicode="true" />
+          <Property Name="Data_nascimento" Type="DateTime" Precision="0" />
+          <Property Name="Peso" Type="Int32" />
+          <Property Name="Altura" Type="Int32" />
+          <Property Name="Actividade_fisica" Type="Int32" />
           <Property Name="Nr_horas_sono" Type="Int32" />
           <Property Name="Nr_refeicoes" Type="Int32" />
           <Property Name="Habitos_alcoolicos" Type="Boolean" />
@@ -819,6 +824,7 @@
           <EntitySetMapping Name="Ingredientes">
             <EntityTypeMapping TypeName="HealthyModel.Ingrediente">
               <MappingFragment StoreEntitySet="Ingredientes">
+                <ScalarProperty Name="HC_Acucar" ColumnName="HC_Acucar" />
                 <ScalarProperty Name="IngredientesID" ColumnName="IngredientesID" />
                 <ScalarProperty Name="Categoria" ColumnName="Categoria" />
                 <ScalarProperty Name="Nome" ColumnName="Nome" />
@@ -845,6 +851,8 @@
           <EntitySetMapping Name="Pratos">
             <EntityTypeMapping TypeName="HealthyModel.Prato">
               <MappingFragment StoreEntitySet="Pratos">
+                <ScalarProperty Name="HC_Acucar" ColumnName="HC_Acucar" />
+                <ScalarProperty Name="Categoria" ColumnName="Categoria" />
                 <ScalarProperty Name="PratosID" ColumnName="PratosID" />
                 <ScalarProperty Name="Nome" ColumnName="Nome" />
                 <ScalarProperty Name="Unidade" ColumnName="Unidade" />

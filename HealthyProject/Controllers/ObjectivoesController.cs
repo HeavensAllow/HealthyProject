@@ -7,6 +7,7 @@ using System.Net;
 using System.Web;
 using System.Web.Mvc;
 using HealthyProject.Models;
+using Microsoft.AspNet.Identity;
 
 namespace HealthyProject.Controllers
 {
@@ -48,10 +49,12 @@ namespace HealthyProject.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "ObjectivoID,UserID,Data_inicio,Data_fim,Peso_objectivo,Intake_diario")] Objectivo objectivo)
+        public ActionResult Create([Bind(Include = "ObjectivoID,Data_inicio,Peso_objectivo")] Objectivo objectivo)
         {
             if (ModelState.IsValid)
             {
+                var userId = User.Identity.GetUserId();
+                objectivo.UserID = Convert.ToInt32(userId);
                 db.Objectivoes.Add(objectivo);
                 db.SaveChanges();
                 return RedirectToAction("Index");

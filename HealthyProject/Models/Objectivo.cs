@@ -11,7 +11,8 @@ namespace HealthyProject.Models
 {
     using System;
     using System.Collections.Generic;
-    
+    using System.ComponentModel.DataAnnotations;
+
     public partial class Objectivo
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
@@ -22,10 +23,14 @@ namespace HealthyProject.Models
     
         public int ObjectivoID { get; set; }
         public int UserID { get; set; }
-        public System.DateTime Data_inicio { get; set; }
-        public System.DateTime Data_fim { get; set; }
-        public int Peso_objectivo { get; set; }
-        public int Intake_diario { get; set; }
+
+        [Required]
+        public Nullable<System.DateTime> Data_inicio { get; set; }
+        public Nullable<System.DateTime> Data_fim { get; set; }
+
+        [Required]
+        public Nullable<int> Peso_objectivo { get; set; }
+        public Nullable<int> Intake_diario { get; set; }
     
         public virtual Utilizador Utilizador { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
