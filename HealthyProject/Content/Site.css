@@ -22,18 +22,3 @@ select,
 textarea {
     max-width: 280px;
 }
-#Facebook {
-    background-image: url(https://www.facebook.com/images/fb_icon_325x325.png);
-}
-
-
-#Google {
-    background-image: url(https://www.outsystems.com/forgeCore/_image.aspx/A28atdGCIn2i_ZW11S_0KWgJm3iqRyDV-m8=/google-login-plugin);
-}
-
-#Facebook, #Google{
-    background-size:cover; /* faz com que a imagem se adeque ao tamanho do botão */
-    height:45px;
-    width:45px;
-    border-radius:25px; /* faz com que os botões tenham cantos curvos */
-}
