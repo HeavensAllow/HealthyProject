@@ -55,61 +55,67 @@
 }
 
 </table>
-    <div id="chartContainer" style="height: 300px; width: 100%;">
+    <div id="chartContainer" style="height: 500px; width: 100%;">
     </div>
 
 @section Scripts{
 <script type="text/javascript">
   window.onload = function () {
-    var chart = new CanvasJS.Chart("chartContainer",
-    {
-      title:{
-        text: "A Combination of Column & Line Chart"
+  var chart = new CanvasJS.Chart("chartContainer",{
+    animationEnabled: true,
+    backgroundColor: "#ffffff",
+    title:{
+        text: "Objectivo Actual"
+    },
 
-      },
-      data: [{
+    toolTip: {
+        shared: true
+    },
+
+    axisY: {
+        interlacedColor: "#F0F8FF",
+        title: "Intake diário"
+    }, 
+
+    axisX: {
+        title: "Dia da semana"
+    },
+
+    data: [{
         type: "column",
+        showInLegend: true,
+        name: "IDA",
+        legendText: "Intake Diário Submetido",
         dataPoints: [
-        { x: 10, y: 171 },
-        { x: 20, y: 155},
-        { x: 30, y: 150 },
-        { x: 40, y: 165 },
-        { x: 50, y: 195 },
-        { x: 60, y: 168 },
-        { x: 70, y: 128 },
-        { x: 80, y: 134 },
-        { x: 90, y: 114}
+            { y: 171, label: "Segunda"},
+            { y: 155, label: "Terça" },
+            { y: 150, label: "Quarta" },
+            { y: 165, label: "Quinta" },
+            { y: 195, label: "Sexta" },
+            { y: 168, label: "Sábado" },
+            { y: 128, label: "Domingo"}
         ]
-      },
-      {
+    },
+    {
         type: "line",
+        showInLegend: true,
+        name: "IDR",
+        legendText: "Intake Diário Recomendado",
         dataPoints: [
-        { x: 10, y: 71 },
-        { x: 20, y: 55},
-        { x: 30, y: 50 },
-        { x: 40, y: 65 },
-        { x: 50, y: 95 },
-        { x: 60, y: 68 },
-        { x: 70, y: 28 },
-        { x: 80, y: 34 },
-        { x: 90, y: 14}
+            { y: 150 },
+            { y: 150 },
+            { y: 150 },
+            { y: 150 },
+            { y: 150 },
+            { y: 150 },
+            { y: 150 }
         ]
-      }
-
-      ]
-          });
-
-    var weekcount = 1;
-    var updateChart = function () {
-        dataPoints({
-            y = null
-        });
-        chart.options.title.text = "Week" + weekcount
     }
 
-    setInterval(function () { updateChart() }, 10000);
+    ]
+  });
 
-    chart.render();
+  chart.render();
   }
 </script>
 <script src="@Url.Content("~/Content/canvasjs.min.js")"></script>

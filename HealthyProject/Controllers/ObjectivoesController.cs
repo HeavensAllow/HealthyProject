@@ -54,7 +54,7 @@ namespace HealthyProject.Controllers
         {
             if (ModelState.IsValid)
             {
-                var userId = User.Identity.GetUserId();
+                var userId = Convert.ToInt32(User.Identity.GetUserId());
                 objectivo.UserID = Convert.ToInt32(userId);
                 Utilizador utilizador = db.Utilizadors.Find(userId);
                 UtilizadorsController x = new UtilizadorsController();
@@ -66,7 +66,7 @@ namespace HealthyProject.Controllers
                 }
                 else {
                     objectivo.Intake_diarioA = Convert.ToInt32(662 - (9.53 * age) + (utilizador.Actividade_fisica * (15.91 * utilizador.Peso + 539.6 * (utilizador.Altura / 100))));
-                    objectivo.Intake_diarioA = Convert.ToInt32(662 - (9.53 * age) + (utilizador.Actividade_fisica * (15.91 * objectivo.Peso_objectivo + 539.6 * (utilizador.Altura / 100))));
+                    objectivo.Intake_diarioR = Convert.ToInt32(662 - (9.53 * age) + (utilizador.Actividade_fisica * (15.91 * objectivo.Peso_objectivo + 539.6 * (utilizador.Altura / 100))));
                 }
                 db.Objectivoes.Add(objectivo);
                 db.SaveChanges();
