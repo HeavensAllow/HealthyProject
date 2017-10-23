@@ -12,7 +12,7 @@ namespace HealthyProject.Controllers
 {
     public class UtilizadorsController : Controller
     {
-        private HealthyEntities db = new HealthyEntities();
+        private HealthyEntities1 db = new HealthyEntities1();
 
         // GET: Utilizadors
         public ActionResult Index()

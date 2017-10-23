@@ -15,6 +15,7 @@ namespace HealthyProject.Controllers
     {
         private ApplicationSignInManager _signInManager;
         private ApplicationUserManager _userManager;
+        private HealthyEntities1 db = new HealthyEntities1();  // Chama se base de dados
 
         public ManageController()
         {
@@ -51,9 +52,10 @@ namespace HealthyProject.Controllers
         }
 
         //
-        // GET: /Manage/Index
-        public async Task<ActionResult> Index(ManageMessageId? message)
+        // GET: /Manage/Index 
+        public async Task< ActionResult> Index(ManageMessageId? message)
         {
+
             ViewBag.StatusMessage =
                 message == ManageMessageId.ChangePasswordSuccess ? "Your password has been changed."
                 : message == ManageMessageId.SetPasswordSuccess ? "Your password has been set."
@@ -63,16 +65,23 @@ namespace HealthyProject.Controllers
                 : message == ManageMessageId.RemovePhoneSuccess ? "Your phone number was removed."
                 : "";
 
-            var userId = User.Identity.GetUserId();
-            var model = new IndexViewModel
-            {
-                HasPassword = HasPassword(),
-                PhoneNumber = await UserManager.GetPhoneNumberAsync(User.Identity.GetUserId<int>()),
-                TwoFactor = await UserManager.GetTwoFactorEnabledAsync(User.Identity.GetUserId<int>()),
-                Logins = await UserManager.GetLoginsAsync(User.Identity.GetUserId<int>()),
-                BrowserRemembered = await AuthenticationManager.TwoFactorBrowserRememberedAsync(userId)
-            };
-            return View(model);
+            var userId = Convert.ToInt32(User.Identity.GetUserId()); // estava em string
+
+            //var model = new IndexViewModel
+            //{
+            //    HasPassword = HasPassword(),
+            //    PhoneNumber = await UserManager.GetPhoneNumberAsync(User.Identity.GetUserId<int>()),
+            //    TwoFactor = await UserManager.GetTwoFactorEnabledAsync(User.Identity.GetUserId<int>()),
+            //    Logins = await UserManager.GetLoginsAsync(User.Identity.GetUserId<int>()),
+            //    BrowserRemembered = await AuthenticationManager.TwoFactorBrowserRememberedAsync(userId)
+
+            //};
+            // User.Identity.GetUserId-- - depois defazer log in tenho este
+
+            Utilizador perfil = db.Utilizadors.Find(userId);
+
+            return View(perfil);
+            // manda oos dados do utilizador para a view
         }
 
         //

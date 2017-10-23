@@ -24,10 +24,11 @@ namespace HealthyProject.Models
         public string Categoria { get; set; }
         public string Nome { get; set; }
         public int Unidade { get; set; }
-        public int Kcal { get; set; }
-        public int Proteinas { get; set; }
-        public int Gordura { get; set; }
-        public int HC { get; set; }
+        public double Kcal { get; set; }
+        public double Proteinas { get; set; }
+        public double Gordura { get; set; }
+        public double HidCarbono { get; set; }
+        public double HC_Acucar { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<RefeicaoIngrediente> RefeicaoIngredientes { get; set; }

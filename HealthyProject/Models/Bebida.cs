@@ -12,29 +12,25 @@ namespace HealthyProject.Models
     using System;
     using System.Collections.Generic;
     
-    public partial class Utilizador
+    public partial class Bebida
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public Utilizador()
+        public Bebida()
         {
-            this.Objectivoes = new HashSet<Objectivo>();
+            this.RefeicaoBebidas = new HashSet<RefeicaoBebida>();
         }
     
-        public int UserID { get; set; }
+        public int BebidasID { get; set; }
+        public string Categoria { get; set; }
         public string Nome { get; set; }
-        public string Genero { get; set; }
-        public Nullable<System.DateTime> Data_nascimento { get; set; }
-        public Nullable<int> Peso { get; set; }
-        public Nullable<int> Altura { get; set; }
-        public Nullable<int> Actividade_fisica { get; set; }
-        public Nullable<int> Nr_horas_sono { get; set; }
-        public Nullable<int> Nr_refeicoes { get; set; }
-        public Nullable<bool> Habitos_alcoolicos { get; set; }
-        public Nullable<double> MMuscular { get; set; }
-        public Nullable<double> MGorda { get; set; }
+        public int Unidade { get; set; }
+        public double Kcal { get; set; }
+        public double Proteinas { get; set; }
+        public double Gordura { get; set; }
+        public double HidCarbono { get; set; }
+        public double HC_Acucar { get; set; }
     
-        public virtual AspNetUser AspNetUser { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Objectivo> Objectivoes { get; set; }
+        public virtual ICollection<RefeicaoBebida> RefeicaoBebidas { get; set; }
     }
 }

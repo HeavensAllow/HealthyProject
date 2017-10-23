@@ -13,10 +13,10 @@ namespace HealthyProject.Models
     using System.Data.Entity;
     using System.Data.Entity.Infrastructure;
     
-    public partial class HealthyEntities : DbContext
+    public partial class HealthyEntities1 : DbContext
     {
-        public HealthyEntities()
-            : base("name=HealthyEntities")
+        public HealthyEntities1()
+            : base("name=HealthyEntities1")
         {
         }
     
@@ -30,13 +30,20 @@ namespace HealthyProject.Models
         public virtual DbSet<AspNetUserClaim> AspNetUserClaims { get; set; }
         public virtual DbSet<AspNetUserLogin> AspNetUserLogins { get; set; }
         public virtual DbSet<AspNetUser> AspNetUsers { get; set; }
+        public virtual DbSet<Bebida> Bebidas { get; set; }
+        public virtual DbSet<Categoria> Categorias { get; set; }
+        public virtual DbSet<Comentario> Comentarios { get; set; }
         public virtual DbSet<Ingrediente> Ingredientes { get; set; }
         public virtual DbSet<Objectivo> Objectivoes { get; set; }
+        public virtual DbSet<Opiniao> Opiniaos { get; set; }
+        public virtual DbSet<Post> Posts { get; set; }
         public virtual DbSet<Prato> Pratos { get; set; }
+        public virtual DbSet<RefeicaoBebida> RefeicaoBebidas { get; set; }
         public virtual DbSet<RefeicaoIngrediente> RefeicaoIngredientes { get; set; }
         public virtual DbSet<RefeicaoPrato> RefeicaoPratos { get; set; }
         public virtual DbSet<Refeico> Refeicoes { get; set; }
         public virtual DbSet<RegistoDiario> RegistoDiarios { get; set; }
+        public virtual DbSet<Subcategoria> Subcategorias { get; set; }
         public virtual DbSet<sysdiagram> sysdiagrams { get; set; }
         public virtual DbSet<Utilizador> Utilizadors { get; set; }
     }
