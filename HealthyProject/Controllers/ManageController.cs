@@ -90,19 +90,21 @@ namespace HealthyProject.Controllers
         [HttpPost]
         [ValidateAntiForgeryToken]
         // para editar os campos
+
         public async Task<ActionResult> Index(Utilizador perfilEdit)
         {
             if (ModelState.IsValid)
             {
                 var userId = Convert.ToInt32(User.Identity.GetUserId()); // vai burcar o utilizador 
 
-                Utilizador perfil = db.Utilizadors.Find(userId); // crio novo
+                //Utilizador perfil = db.Utilizadors.Find(userId); // o que tenho la
 
-                perfilEdit.Nome = perfil.Nome; // substitui o valor
+                //perfilEdit.Nome = perfil.Nome; // substitui o valor
 
                 db.Entry(perfilEdit).State = EntityState.Modified;
 
                 db.SaveChanges();
+
                 return RedirectToAction("Index", "Manage");
            
             }
