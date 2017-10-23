@@ -21,6 +21,29 @@ namespace HealthyProject.Controllers
             return View(Categorias.ToList());
         }
 
+        public ActionResult Subcategorias(int?id)
+        {
+            Subcategoria subcategoria = db.Subcategorias.Find(id);
+            if(subcategoria == null)
+            {
+                return HttpNotFound();
+            }
+            return View(subcategoria);
+        }
+
+        public ActionResult Post(int?id)
+        {
+            Post post = db.Posts.Find(id);
+            if (post == null)
+            {
+                return HttpNotFound();
+            }
+            return View(post);
+
+        }
+
+
+
 
         protected override void Dispose(bool disposing)
         {
