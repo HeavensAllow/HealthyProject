@@ -55,3 +55,63 @@
 }
 
 </table>
+    <div id="chartContainer" style="height: 300px; width: 100%;">
+    </div>
+
+@section Scripts{
+<script type="text/javascript">
+  window.onload = function () {
+    var chart = new CanvasJS.Chart("chartContainer",
+    {
+      title:{
+        text: "A Combination of Column & Line Chart"
+
+      },
+      data: [{
+        type: "column",
+        dataPoints: [
+        { x: 10, y: 171 },
+        { x: 20, y: 155},
+        { x: 30, y: 150 },
+        { x: 40, y: 165 },
+        { x: 50, y: 195 },
+        { x: 60, y: 168 },
+        { x: 70, y: 128 },
+        { x: 80, y: 134 },
+        { x: 90, y: 114}
+        ]
+      },
+      {
+        type: "line",
+        dataPoints: [
+        { x: 10, y: 71 },
+        { x: 20, y: 55},
+        { x: 30, y: 50 },
+        { x: 40, y: 65 },
+        { x: 50, y: 95 },
+        { x: 60, y: 68 },
+        { x: 70, y: 28 },
+        { x: 80, y: 34 },
+        { x: 90, y: 14}
+        ]
+      }
+
+      ]
+          });
+
+    var weekcount = 1;
+    var updateChart = function () {
+        dataPoints({
+            y = null
+        });
+        chart.options.title.text = "Week" + weekcount
+    }
+
+    setInterval(function () { updateChart() }, 10000);
+
+    chart.render();
+  }
+</script>
+<script src="@Url.Content("~/Content/canvasjs.min.js")"></script>
+<script src="@Url.Content("~/Content/jquery.canvasjs.min.js")"></script>
+}
