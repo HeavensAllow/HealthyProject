@@ -7,6 +7,7 @@ using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.Owin;
 using Microsoft.Owin.Security;
 using HealthyProject.Models;
+using System.Data.Entity;
 
 namespace HealthyProject.Controllers
 {
@@ -52,7 +53,7 @@ namespace HealthyProject.Controllers
         }
 
         //
-        // GET: /Manage/Index 
+        // GET: /Manage/Index : onde se mostra dados do utilizador
         public async Task< ActionResult> Index(ManageMessageId? message)
         {
 
@@ -84,8 +85,36 @@ namespace HealthyProject.Controllers
             // manda oos dados do utilizador para a view
         }
 
+
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        // para editar os campos
+        public async Task<ActionResult> Index(Utilizador perfilEdit)
+        {
+            if (ModelState.IsValid)
+            {
+                var userId = Convert.ToInt32(User.Identity.GetUserId()); // vai burcar o utilizador 
+
+                Utilizador perfil = db.Utilizadors.Find(userId); // crio novo
+
+                perfilEdit.Nome = perfil.Nome; // substitui o valor
+
+                db.Entry(perfilEdit).State = EntityState.Modified;
+
+                db.SaveChanges();
+                return RedirectToAction("Index", "Manage");
+           
+            }
+
+            return View(perfilEdit);
+        }
+
+         
+
+
         //
-        // POST: /Manage/RemoveLogin
+        // POST: /Manage/RemoveLogin 
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<ActionResult> RemoveLogin(string loginProvider, string providerKey)
