@@ -1,0 +1,20 @@
+﻿@model IEnumerable<HealthyProject.Models.Categoria>
+@{
+    ViewBag.Title = "Forum";
+}
+
+<h2>Forum</h2>
+
+@foreach (var categoria in Model)
+{
+    <h3>
+        @Html.DisplayFor(modelItem => categoria.Nome)
+    </h3>
+
+    foreach (var subcategoria in categoria.Subcategorias)
+    {
+        <h5>
+            @Html.DisplayFor(modelItem => subcategoria.Nome)
+        </h5>
+    }
+}

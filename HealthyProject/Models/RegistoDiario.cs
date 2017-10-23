@@ -23,10 +23,10 @@ namespace HealthyProject.Models
         public int RegistoID { get; set; }
         public Nullable<int> ObjectivoID { get; set; }
         public System.DateTime Data { get; set; }
-        public int Total_Kcal { get; set; }
-        public int Total_proteinas { get; set; }
-        public int Total_gordura { get; set; }
-        public int Total_HC { get; set; }
+        public double Total_Kcal { get; set; }
+        public double Total_proteinas { get; set; }
+        public double Total_gordura { get; set; }
+        public double Total_HC { get; set; }
     
         public virtual Objectivo Objectivo { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]

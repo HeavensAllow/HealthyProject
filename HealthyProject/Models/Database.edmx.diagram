@@ -5,31 +5,46 @@
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
       <Diagram DiagramId="b3908fd538bf45ff9939540f072c82af" Name="Diagram1">
-        <EntityTypeShape EntityType="HealthyModel.C__MigrationHistory" Width="1.5" PointX="0.75" PointY="0.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="HealthyModel.AspNetRole" Width="1.5" PointX="0.75" PointY="5.5" IsExpanded="true" />
-        <EntityTypeShape EntityType="HealthyModel.AspNetUserClaim" Width="1.5" PointX="5.25" PointY="1.875" IsExpanded="true" />
-        <EntityTypeShape EntityType="HealthyModel.AspNetUserLogin" Width="1.5" PointX="5.25" PointY="4.5" IsExpanded="true" />
-        <EntityTypeShape EntityType="HealthyModel.AspNetUser" Width="1.5" PointX="3" PointY="4.25" IsExpanded="true" />
-        <EntityTypeShape EntityType="HealthyModel.Ingrediente" Width="1.5" PointX="12" PointY="11.625" IsExpanded="true" />
-        <EntityTypeShape EntityType="HealthyModel.Objectivo" Width="1.5" PointX="7.5" PointY="7.625" IsExpanded="true" />
-        <EntityTypeShape EntityType="HealthyModel.Prato" Width="1.5" PointX="12" PointY="3.625" IsExpanded="true" />
-        <EntityTypeShape EntityType="HealthyModel.RefeicaoIngrediente" Width="1.5" PointX="14.25" PointY="8" IsExpanded="true" />
-        <EntityTypeShape EntityType="HealthyModel.RefeicaoPrato" Width="1.5" PointX="14.25" PointY="5" IsExpanded="true" />
-        <EntityTypeShape EntityType="HealthyModel.Refeico" Width="1.5" PointX="12" PointY="7.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="HealthyModel.RegistoDiario" Width="1.5" PointX="9.75" PointY="7.625" IsExpanded="true" />
-        <EntityTypeShape EntityType="HealthyModel.sysdiagram" Width="1.5" PointX="7.75" PointY="0.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="HealthyModel.Utilizador" Width="1.5" PointX="5.25" PointY="7.125" IsExpanded="true" />
-        <AssociationConnector Association="HealthyModel.FK_dbo_AspNetUserClaims_dbo_AspNetUsers_UserId" ManuallyRouted="false" />
-        <AssociationConnector Association="HealthyModel.FK_dbo_AspNetUserLogins_dbo_AspNetUsers_UserId" ManuallyRouted="false" />
-        <AssociationConnector Association="HealthyModel.FK_Utilizador_AspNetUsers" ManuallyRouted="false" />
-        <AssociationConnector Association="HealthyModel.FK_RefeicaoIngredientes_Refeicoes" ManuallyRouted="false" />
-        <AssociationConnector Association="HealthyModel.FK_Objectivo_Objectivo" ManuallyRouted="false" />
-        <AssociationConnector Association="HealthyModel.FK_RegistoDiario_RegistoDiario" ManuallyRouted="false" />
-        <AssociationConnector Association="HealthyModel.FK_RefeicaoPratos_Pratos1" ManuallyRouted="false" />
-        <AssociationConnector Association="HealthyModel.FK_RefeicaoIngredientes_Refeicoes1" ManuallyRouted="false" />
-        <AssociationConnector Association="HealthyModel.FK_RefeicaoPratos_Pratos" ManuallyRouted="false" />
-        <AssociationConnector Association="HealthyModel.FK_Refeicoes_RegistoDiario" ManuallyRouted="false" />
-        <AssociationConnector Association="HealthyModel.AspNetUserRoles" ManuallyRouted="false" />
+        <EntityTypeShape EntityType="HealthyModel.C__MigrationHistory" Width="1.5" PointX="0.75" PointY="0.75" />
+        <EntityTypeShape EntityType="HealthyModel.AspNetRole" Width="1.5" PointX="0.75" PointY="10.625" />
+        <EntityTypeShape EntityType="HealthyModel.AspNetUserClaim" Width="1.5" PointX="5.25" PointY="10.25" />
+        <EntityTypeShape EntityType="HealthyModel.AspNetUserLogin" Width="1.5" PointX="5.25" PointY="16.25" />
+        <EntityTypeShape EntityType="HealthyModel.AspNetUser" Width="1.5" PointX="3" PointY="9.25" />
+        <EntityTypeShape EntityType="HealthyModel.Bebida" Width="1.5" PointX="12" PointY="15.25" />
+        <EntityTypeShape EntityType="HealthyModel.Comentario" Width="1.5" PointX="10.5" PointY="10.125" />
+        <EntityTypeShape EntityType="HealthyModel.Ingrediente" Width="1.5" PointX="12" PointY="27.25" />
+        <EntityTypeShape EntityType="HealthyModel.Objectivo" Width="1.5" PointX="7.5" PointY="19.375" />
+        <EntityTypeShape EntityType="HealthyModel.Opiniao" Width="1.5" PointX="12.75" PointY="10.5" />
+        <EntityTypeShape EntityType="HealthyModel.Post" Width="1.5" PointX="8.25" PointY="10.125" />
+        <EntityTypeShape EntityType="HealthyModel.Prato" Width="1.5" PointX="12" PointY="23.25" />
+        <EntityTypeShape EntityType="HealthyModel.RefeicaoBebida" Width="1.5" PointX="14.25" PointY="16.75" />
+        <EntityTypeShape EntityType="HealthyModel.RefeicaoIngrediente" Width="1.5" PointX="14.25" PointY="22.75" />
+        <EntityTypeShape EntityType="HealthyModel.RefeicaoPrato" Width="1.5" PointX="14.25" PointY="19.75" />
+        <EntityTypeShape EntityType="HealthyModel.Refeico" Width="1.5" PointX="12" PointY="19.375" />
+        <EntityTypeShape EntityType="HealthyModel.RegistoDiario" Width="1.5" PointX="9.75" PointY="19.375" />
+        <EntityTypeShape EntityType="HealthyModel.Subcategoria" Width="1.5" PointX="6" PointY="6.5" />
+        <EntityTypeShape EntityType="HealthyModel.sysdiagram" Width="1.5" PointX="2.75" PointY="0.75" />
+        <EntityTypeShape EntityType="HealthyModel.Utilizador" Width="1.5" PointX="5.25" PointY="18.875" />
+        <AssociationConnector Association="HealthyModel.FK_dbo_AspNetUserClaims_dbo_AspNetUsers_UserId" />
+        <AssociationConnector Association="HealthyModel.FK_dbo_AspNetUserLogins_dbo_AspNetUsers_UserId" />
+        <AssociationConnector Association="HealthyModel.FK_Comentarios_AspNetUsers" />
+        <AssociationConnector Association="HealthyModel.FK_Posts_AspNetUsers" />
+        <AssociationConnector Association="HealthyModel.FK_Utilizador_AspNetUsers" />
+        <AssociationConnector Association="HealthyModel.FK_RefeicaoBebida_Bebidas" />
+        <AssociationConnector Association="HealthyModel.FK_Comentarios_Posts" />
+        <AssociationConnector Association="HealthyModel.FK_Opiniao_Comentarios" />
+        <AssociationConnector Association="HealthyModel.FK_RefeicaoIngredientes_Refeicoes" />
+        <AssociationConnector Association="HealthyModel.FK_Objectivo_Objectivo" />
+        <AssociationConnector Association="HealthyModel.FK_RegistoDiario_RegistoDiario" />
+        <AssociationConnector Association="HealthyModel.FK_Posts_Subcategorias" />
+        <AssociationConnector Association="HealthyModel.FK_RefeicaoPratos_Pratos1" />
+        <AssociationConnector Association="HealthyModel.FK_RefeicaoBebida_Refeicoes" />
+        <AssociationConnector Association="HealthyModel.FK_RefeicaoIngredientes_Refeicoes1" />
+        <AssociationConnector Association="HealthyModel.FK_RefeicaoPratos_Pratos" />
+        <AssociationConnector Association="HealthyModel.FK_Refeicoes_RegistoDiario" />
+        <AssociationConnector Association="HealthyModel.AspNetUserRoles" />
+        <EntityTypeShape EntityType="HealthyModel.Categoria" Width="1.5" PointX="3.75" PointY="6.75" />
+        <AssociationConnector Association="HealthyModel.FK_Subcategorias_Categorias" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>
