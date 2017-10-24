@@ -7,7 +7,7 @@
 <h2>Post</h2>
 
 <p>
-    @Html.ActionLink("Create New", "Create")
+    @Html.ActionLink("Novo Post", "Create")
 </p>
 <table class="table">
     <tr>
@@ -17,7 +17,7 @@
     <tr>
         <td>
             @Model.AspNetUser.Utilizador.Nome
-            <br/>
+            <br />
             @Model.Data
         </td>
         <td>
@@ -25,17 +25,39 @@
         </td>
 
     </tr>
-@foreach (var comentario in Model.Comentarios) {
-    <tr>
-        <td>
-            @comentario.AspNetUser.Utilizador.Nome
-            <br />
-            @comentario.Data
-        </td>
-        <td>
-            @comentario.Comment
-        </td>
-    </tr>
-}
-
+    @foreach (var comentario in Model.Comentarios)
+    {
+        <tr>
+            <td>
+                @comentario.AspNetUser.Utilizador.Nome
+                <br />
+                @comentario.Data
+            </td>
+            <td>
+                @comentario.Comment
+            </td>
+        </tr>
+    }
 </table>
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+    <p>
+        @Html.TextArea("Novo comentário", "CreateComment")
+    </p>
+    <div class="form-group">
+        <label class="control-label col-md-2" for="Texto">Texto</label>
+        <div class="col-md-10">
+            @Html.EditorFor(model => model.Comentarios, new { htmlAttributes = new { @class = "form-control" } })
+
+        </div>
+    </div>
+    <br />
+    <br />
+    <div class="form-group">
+        <div class="col-md-offset-2 col-md-10">
+            <input type="submit" value="Create" class="btn btn-default" />
+        </div>
+    </div>
+
+}

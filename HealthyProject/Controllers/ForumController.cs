@@ -70,7 +70,28 @@ namespace HealthyProject.Controllers
             db.SaveChanges();
             return View("Index");
         }
+        //GET
+        public ActionResult CreateComment()
+        {
+            return View();
+        }
+        //POST
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult CreateComment([Bind(Include = "Comment")] Comentario newComment, int? post)
+        {
+            if (post == null)
+            {
+                return HttpNotFound();
+            }
+            newComment.UserID = Convert.ToInt32(User.Identity.GetUserId());
+            newComment.Data = DateTime.Now;
+            newComment.PostID = (int)post;
 
+            db.Comentarios.Add(newComment);
+            db.SaveChanges();
+            return View("Index");
+        }
 
 
 
