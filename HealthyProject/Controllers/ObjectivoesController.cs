@@ -19,8 +19,11 @@ namespace HealthyProject.Controllers
         // GET: Objectivoes
         public ActionResult Index()
         {
+            var userId = Convert.ToInt32(User.Identity.GetUserId());
             var objectivoes = db.Objectivoes.Include(o => o.Utilizador);
-            return View(objectivoes.ToList());
+            var refeicoes = db.RegistoDiarios.Include(i => i.Objectivo);
+            var actual = db.Objectivoes.FirstOrDefault(p => p.UserID == userId && p.Data_fim == null);
+            return View(objectivoes.Where(o => o.UserID == userId).ToList());
         }
 
         // GET: Objectivoes/Details/5
@@ -41,8 +44,21 @@ namespace HealthyProject.Controllers
         // GET: Objectivoes/Create
         public ActionResult Create()
         {
-            ViewBag.UserID = new SelectList(db.Utilizadors, "UserID", "Nome");
-            return View();
+            var userId = Convert.ToInt32(User.Identity.GetUserId());
+            //var objectivos = db.Objectivoes.Include(o => o.Utilizador);
+            var actual = db.Objectivoes.FirstOrDefault(p => p.UserID == userId && p.Data_fim == null);
+            //var procura = objectivoes.Where(p => p.UserID == userId);
+            //var actual = procura.Where(l => l.Data_fim == null);
+            if (actual == null)
+            {
+                ViewBag.UserID = new SelectList(db.Utilizadors, "UserID", "Nome");
+                return View();
+            }
+            else
+            {
+                TempData["Alert"] = "Ja existe um objectivo activo. Por favor conclua o objectivo actual antes de iniciar um novo";
+                return RedirectToAction("Index");
+            }
         }
 
         // POST: Objectivoes/Create
@@ -55,27 +71,38 @@ namespace HealthyProject.Controllers
             if (ModelState.IsValid)
             {
                 var userId = Convert.ToInt32(User.Identity.GetUserId());
-                objectivo.UserID = Convert.ToInt32(userId);
-                Utilizador utilizador = db.Utilizadors.Find(userId);
-                UtilizadorsController x = new UtilizadorsController();
-                var age = x.GetAge((DateTime)utilizador.Data_nascimento);
-                if (utilizador.Genero == "Feminino")
+                var actual = db.Objectivoes.FirstOrDefault(p => p.UserID == userId && p.Data_fim == null);
+                if (actual == null)
                 {
-                    objectivo.Intake_diarioA = Convert.ToInt32(354 - (6.91 * age) + (utilizador.Actividade_fisica * (9.36 * utilizador.Peso + 726 * (utilizador.Altura / 100))));
-                    objectivo.Intake_diarioR = Convert.ToInt32(354 - (6.91 * age) + (utilizador.Actividade_fisica * (9.36 * objectivo.Peso_objectivo + 726 * (utilizador.Altura / 100))));
+                    objectivo.UserID = Convert.ToInt32(userId);
+                    Utilizador utilizador = db.Utilizadors.Find(userId);
+                    UtilizadorsController x = new UtilizadorsController();
+                    var age = x.GetAge((DateTime)utilizador.Data_nascimento);
+                    if (utilizador.Genero == "Feminino")
+                    {
+                        objectivo.Intake_diarioA = Convert.ToInt32(354 - (6.91 * age) + (utilizador.Actividade_fisica * (9.36 * utilizador.Peso + 726 * (utilizador.Altura / 100))));
+                        objectivo.Intake_diarioR = Convert.ToInt32(354 - (6.91 * age) + (utilizador.Actividade_fisica * (9.36 * objectivo.Peso_objectivo + 726 * (utilizador.Altura / 100))));
+                    }
+                    else
+                    {
+                        objectivo.Intake_diarioA = Convert.ToInt32(662 - (9.53 * age) + (utilizador.Actividade_fisica * (15.91 * utilizador.Peso + 539.6 * (utilizador.Altura / 100))));
+                        objectivo.Intake_diarioR = Convert.ToInt32(662 - (9.53 * age) + (utilizador.Actividade_fisica * (15.91 * objectivo.Peso_objectivo + 539.6 * (utilizador.Altura / 100))));
+                    }
+                    db.Objectivoes.Add(objectivo);
+                    db.SaveChanges();
+                    return RedirectToAction("Index", "Home");
                 }
-                else {
-                    objectivo.Intake_diarioA = Convert.ToInt32(662 - (9.53 * age) + (utilizador.Actividade_fisica * (15.91 * utilizador.Peso + 539.6 * (utilizador.Altura / 100))));
-                    objectivo.Intake_diarioR = Convert.ToInt32(662 - (9.53 * age) + (utilizador.Actividade_fisica * (15.91 * objectivo.Peso_objectivo + 539.6 * (utilizador.Altura / 100))));
+                else
+                {
+                    TempData["notice"] = "<script>alert('Ja existe um objectivo criado e por terminar')>;</script>";
+                    return RedirectToAction("Index", "Objectivo");
                 }
-                db.Objectivoes.Add(objectivo);
-                db.SaveChanges();
-                return RedirectToAction("Index", "Home");
             }
 
-            ViewBag.UserID = new SelectList(db.Utilizadors, "UserID", "Nome", objectivo.UserID);
-            return View(objectivo);
+        ViewBag.UserID = new SelectList(db.Utilizadors, "UserID", "Nome", objectivo.UserID);
+        return View(objectivo);
         }
+            
 
         // GET: Objectivoes/Edit/5
         public ActionResult Edit(int? id)

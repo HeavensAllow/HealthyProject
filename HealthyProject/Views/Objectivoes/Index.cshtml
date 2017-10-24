@@ -9,6 +9,16 @@
 <p>
     @Html.ActionLink("Create New", "Create")
 </p>
+
+@if (TempData["Alert"] != null)
+{
+    <div class="alert alert-success alert-dismissable">
+        <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+        <strong><i class="fa fa-exclamation-triangle" aria-hidden="true"></i> Ja existe um objectivo definido por concluir.</strong>
+    </div>
+}
+    
+
 <table class="table">
     <tr>
         <th>
