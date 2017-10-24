@@ -49,7 +49,7 @@ namespace HealthyProject.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "CommentID,UserID,Data,Comntario,PostID")] Comentario comentario)
+        public ActionResult Create([Bind(Include = "CommentID,UserID,Data,PostID,Comment")] Comentario comentario)
         {
             if (ModelState.IsValid)
             {
@@ -85,7 +85,7 @@ namespace HealthyProject.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "CommentID,UserID,Data,Comntario,PostID")] Comentario comentario)
+        public ActionResult Edit([Bind(Include = "CommentID,UserID,Data,PostID,Comment")] Comentario comentario)
         {
             if (ModelState.IsValid)
             {

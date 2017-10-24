@@ -7,6 +7,7 @@ using System.Net;
 using System.Web;
 using System.Web.Mvc;
 using HealthyProject.Models;
+using Microsoft.AspNet.Identity;
 
 namespace HealthyProject.Controllers
 {
@@ -17,21 +18,25 @@ namespace HealthyProject.Controllers
 
         public ActionResult Index()
         {
-            var Categorias= db.Categorias.Include(c => c.Subcategorias);
+            var Categorias = db.Categorias.Include(c => c.Subcategorias);
             return View(Categorias.ToList());
         }
 
-        public ActionResult Subcategorias(int?id)
+        public ActionResult Subcategoria(int? id)
         {
-            Subcategoria subcategoria = db.Subcategorias.Find(id);
-            if(subcategoria == null)
+            var result = db.Subcategorias.Include(s => s.Posts.Select(p => p.AspNetUser).Select(a => a.Utilizador));
+            //var result = db.Subcategorias.Include("Subcategoria.Posts.AspNetUser.Utilizador");
+
+
+            Subcategoria subcategoria = result.FirstOrDefault(s => s.SubcategoriaID == id);
+            if (subcategoria == null)
             {
                 return HttpNotFound();
             }
             return View(subcategoria);
         }
 
-        public ActionResult Post(int?id)
+        public ActionResult Post(int? id)
         {
             Post post = db.Posts.Find(id);
             if (post == null)
@@ -40,6 +45,30 @@ namespace HealthyProject.Controllers
             }
             return View(post);
 
+        }
+
+
+        //GET
+        public ActionResult CreatePost()
+        {
+            return View();
+        }
+        //POST
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult CreatePost([Bind( Include="Titulo,Texto")] Post newPost, int? subcategoria)
+        {
+            if (subcategoria == null)
+            {
+                return HttpNotFound();
+            }
+            newPost.UserID = Convert.ToInt32(User.Identity.GetUserId());
+            newPost.Data = DateTime.Now;
+            newPost.SubcategoriaID = (int)subcategoria;
+
+            db.Posts.Add(newPost);
+            db.SaveChanges();
+            return View("Index");
         }
 
 

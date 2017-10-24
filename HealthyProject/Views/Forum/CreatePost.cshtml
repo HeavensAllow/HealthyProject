@@ -1,0 +1,39 @@
+﻿@model HealthyProject.Models.Post
+@{
+    ViewBag.Title = "Novo Post";
+}
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+<h2>Novo Post</h2>
+<div class="form-group">
+    <label class="control-label col-md-2" for="Titulo">Titulo</label>
+    <div class="col-md-10">
+        @Html.EditorFor(model => model.Titulo, new { htmlAttributes = new { @class = "form-control" } })
+      
+    </div>
+</div>
+<br/>
+<br/>
+<div class="form-group">
+    <label class="control-label col-md-2" for="Texto">Texto</label>
+    <div class="col-md-10">
+        @Html.EditorFor(model => model.Texto, new { htmlAttributes = new { @class = "form-control" } })
+
+    </div>
+</div>
+<br/>
+<br/>
+<div class="form-group">
+    <div class="col-md-offset-2 col-md-10">
+        <input type="submit" value="Create" class="btn btn-default" />
+    </div>
+</div>
+
+    
+
+}
+<div>
+    @Html.ActionLink("Back to List", "Index")
+</div>
+

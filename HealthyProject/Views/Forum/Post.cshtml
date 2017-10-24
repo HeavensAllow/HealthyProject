@@ -1,4 +1,4 @@
-﻿@model IEnumerable<HealthyProject.Models.Post>
+﻿@model HealthyProject.Models.Post
 
 @{
     ViewBag.Title = "Post";
@@ -11,39 +11,29 @@
 </p>
 <table class="table">
     <tr>
-        <th>
-            @Html.DisplayNameFor(model => model.UserID)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Data)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Titulo)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.SubcategoriaID)
-        </th>
+        <th></th>
         <th></th>
     </tr>
-
-@foreach (var item in Model) {
     <tr>
         <td>
-            @Html.DisplayFor(modelItem => item.UserID)
+            @Model.AspNetUser.Utilizador.Nome
+            <br/>
+            @Model.Data
         </td>
         <td>
-            @Html.DisplayFor(modelItem => item.Data)
+            @Model.Texto
+        </td>
+
+    </tr>
+@foreach (var comentario in Model.Comentarios) {
+    <tr>
+        <td>
+            @comentario.AspNetUser.Utilizador.Nome
+            <br />
+            @comentario.Data
         </td>
         <td>
-            @Html.DisplayFor(modelItem => item.Titulo)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.SubcategoriaID)
-        </td>
-        <td>
-            @Html.ActionLink("Edit", "Edit", new { id=item.PostID }) |
-            @Html.ActionLink("Details", "Details", new { id=item.PostID }) |
-            @Html.ActionLink("Delete", "Delete", new { id=item.PostID })
+            @comentario.Comment
         </td>
     </tr>
 }

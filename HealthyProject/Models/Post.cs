@@ -25,6 +25,7 @@ namespace HealthyProject.Models
         public System.DateTime Data { get; set; }
         public string Titulo { get; set; }
         public int SubcategoriaID { get; set; }
+        public string Texto { get; set; }
     
         public virtual AspNetUser AspNetUser { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]

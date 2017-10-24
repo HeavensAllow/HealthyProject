@@ -14,7 +14,7 @@
     foreach (var subcategoria in categoria.Subcategorias)
     {
         <h5>
-            @Html.DisplayFor(modelItem => subcategoria.Nome)
+            @Html.ActionLink(subcategoria.Nome,"Subcategoria","Forum",new { id = subcategoria.SubcategoriaID },null)
         </h5>
     }
 }

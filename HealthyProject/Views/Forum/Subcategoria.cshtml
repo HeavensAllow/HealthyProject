@@ -1,0 +1,37 @@
+﻿@model HealthyProject.Models.Subcategoria
+
+@{
+    ViewBag.Title = Model.Nome;
+}
+
+<h2>@Model.Nome</h2>
+
+<p>
+    @Html.ActionLink("Novo Tópico", "CreatePost", new { subcategoria = Model.SubcategoriaID })
+</p>
+<table class="table">
+    <tr>
+        <th>
+            
+        </th>
+        <th>
+            Criado por
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var subcategoria in Model.Posts) {
+    <tr>
+        <td>
+            @Html.ActionLink(subcategoria.Titulo, "Post", "Forum", new { id = subcategoria.PostID }, null)
+        </td>
+        <td>
+            @subcategoria.Data
+            <br />
+            @subcategoria.AspNetUser.Utilizador.Nome
+                       
+        </td>
+    </tr>
+}
+
+</table>
