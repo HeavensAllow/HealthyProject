@@ -23,7 +23,7 @@ namespace HealthyProject.Models
         public int CommentID { get; set; }
         public int UserID { get; set; }
         public System.DateTime Data { get; set; }
-        public string Comntario { get; set; }
+        public string Comment { get; set; }
         public int PostID { get; set; }
     
         public virtual AspNetUser AspNetUser { get; set; }
