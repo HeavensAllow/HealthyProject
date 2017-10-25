@@ -195,6 +195,7 @@
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
+    <Compile Include="Controllers\RefeicoesController.cs" />
     <Compile Include="Controllers\UtilizadorsController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
@@ -341,6 +342,11 @@
     <Content Include="Views\Utilizadors\Details.cshtml" />
     <Content Include="Views\Utilizadors\Edit.cshtml" />
     <Content Include="Views\Utilizadors\Index.cshtml" />
+    <Content Include="Views\Refeicoes\Create.cshtml" />
+    <Content Include="Views\Refeicoes\Delete.cshtml" />
+    <Content Include="Views\Refeicoes\Details.cshtml" />
+    <Content Include="Views\Refeicoes\Edit.cshtml" />
+    <Content Include="Views\Refeicoes\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
