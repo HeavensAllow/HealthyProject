@@ -23,6 +23,7 @@ textarea {
     max-width: 280px;
 }
 
+/* LOGIN */
 #Facebook {
     background-image: url(https://www.facebook.com/images/fb_icon_325x325.png);
 }
@@ -38,3 +39,21 @@ textarea {
     width: 45px;
     border-radius: 25px; /* faz com que os botões tenham cantos curvos */
 }
+
+/* FORUM */
+
+.form-newComment textarea{
+    width:650px;
+    height:200px;
+    max-width:none;
+    resize:none;
+}
+.Gosto {
+    background-image: url(http://images.clipartpanda.com/green-smiley-face-png-52bdbd3b5f61fglassy-smiley-good.png);
+    background-size: cover;
+    height: 45px;
+    width: 45px;
+    border-radius: 25px;
+}
+
+

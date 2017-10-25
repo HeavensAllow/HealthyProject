@@ -36,16 +36,6 @@ namespace HealthyProject.Controllers
             return View(subcategoria);
         }
 
-        public ActionResult Post(int? id)
-        {
-            Post post = db.Posts.Find(id);
-            if (post == null)
-            {
-                return HttpNotFound();
-            }
-            return View(post);
-
-        }
 
 
         //GET
@@ -70,27 +60,55 @@ namespace HealthyProject.Controllers
             db.SaveChanges();
             return View("Index");
         }
+
+
+
         //GET
-        public ActionResult CreateComment()
+
+        public ActionResult Post(int? id)
         {
-            return View();
-        }
-        //POST
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public ActionResult CreateComment([Bind(Include = "Comment")] Comentario newComment, int? post)
-        {
+            Post post = db.Posts.Find(id);
             if (post == null)
             {
                 return HttpNotFound();
             }
+            return View(post);
+
+        }
+        //POST
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult Post([Bind(Include = "Comment")] Comentario newComment, int? postId)
+        {
+            if (postId == null)
+            {
+                return HttpNotFound();
+            }
+            Post post = db.Posts.Find(postId);
+            if (post == null)
+            {
+                return HttpNotFound();
+            }
+
             newComment.UserID = Convert.ToInt32(User.Identity.GetUserId());
             newComment.Data = DateTime.Now;
-            newComment.PostID = (int)post;
+            newComment.PostID = (int)postId;
 
             db.Comentarios.Add(newComment);
             db.SaveChanges();
-            return View("Index");
+            return View(post);
+        }
+
+        public ActionResult Gosto(int? id)
+        {
+            Comentario comentario = db.Comentarios.Find(id);
+            Opiniao o = new Opiniao();
+            o.Opiniao1 = 1;
+            o.userID = Convert.ToInt32(User.Identity.GetUserId());
+            o.commentID = Convert.ToInt32(User.Identity.GetUserId());
+            db.Opiniaos.Add(o);
+            db.SaveChanges();
+            return View("Post");
         }
 
 

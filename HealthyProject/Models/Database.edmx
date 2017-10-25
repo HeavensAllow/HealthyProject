@@ -93,7 +93,7 @@
           </Key>
           <Property Name="CommentID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="UserID" Type="int" Nullable="false" />
-          <Property Name="Data" Type="date" Nullable="false" />
+          <Property Name="Data" Type="datetime" Nullable="false" />
           <Property Name="Comment" Type="varchar(max)" Nullable="false" />
           <Property Name="PostID" Type="int" Nullable="false" />
         </EntityType>
@@ -130,7 +130,7 @@
           </Key>
           <Property Name="commentID" Type="int" Nullable="false" />
           <Property Name="userID" Type="int" Nullable="false" />
-          <Property Name="Opiniao" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="Opiniao" Type="bit" Nullable="false" />
         </EntityType>
         <EntityType Name="Posts">
           <Key>
@@ -603,7 +603,6 @@
           <EntitySet Name="AspNetUserLogins" EntityType="HealthyModel.AspNetUserLogin" />
           <EntitySet Name="AspNetUsers" EntityType="HealthyModel.AspNetUser" />
           <EntitySet Name="Bebidas" EntityType="HealthyModel.Bebida" />
-          <EntitySet Name="Comentarios" EntityType="HealthyModel.Comentario" />
           <EntitySet Name="Ingredientes" EntityType="HealthyModel.Ingrediente" />
           <EntitySet Name="Objectivoes" EntityType="HealthyModel.Objectivo" />
           <EntitySet Name="Opiniaos" EntityType="HealthyModel.Opiniao" />
@@ -624,10 +623,6 @@
             <End Role="AspNetUser" EntitySet="AspNetUsers" />
             <End Role="AspNetUserLogin" EntitySet="AspNetUserLogins" />
           </AssociationSet>
-          <AssociationSet Name="FK_Comentarios_AspNetUsers" Association="HealthyModel.FK_Comentarios_AspNetUsers">
-            <End Role="AspNetUser" EntitySet="AspNetUsers" />
-            <End Role="Comentario" EntitySet="Comentarios" />
-          </AssociationSet>
           <AssociationSet Name="FK_Utilizador_AspNetUsers" Association="HealthyModel.FK_Utilizador_AspNetUsers">
             <End Role="AspNetUser" EntitySet="AspNetUsers" />
             <End Role="Utilizador" EntitySet="Utilizadors" />
@@ -635,10 +630,6 @@
           <AssociationSet Name="FK_RefeicaoBebida_Bebidas" Association="HealthyModel.FK_RefeicaoBebida_Bebidas">
             <End Role="Bebida" EntitySet="Bebidas" />
             <End Role="RefeicaoBebida" EntitySet="RefeicaoBebidas" />
-          </AssociationSet>
-          <AssociationSet Name="FK_Opiniao_Comentarios" Association="HealthyModel.FK_Opiniao_Comentarios">
-            <End Role="Comentario" EntitySet="Comentarios" />
-            <End Role="Opiniao" EntitySet="Opiniaos" />
           </AssociationSet>
           <AssociationSet Name="FK_RefeicaoIngredientes_Refeicoes" Association="HealthyModel.FK_RefeicaoIngredientes_Refeicoes">
             <End Role="Ingrediente" EntitySet="Ingredientes" />
@@ -686,13 +677,22 @@
             <End Role="AspNetUser" EntitySet="AspNetUsers" />
             <End Role="Post" EntitySet="Posts" />
           </AssociationSet>
+          <AssociationSet Name="FK_Posts_Subcategorias" Association="HealthyModel.FK_Posts_Subcategorias">
+            <End Role="Subcategoria" EntitySet="Subcategorias" />
+            <End Role="Post" EntitySet="Posts" />
+          </AssociationSet>
+          <EntitySet Name="Comentarios" EntityType="HealthyModel.Comentario" />
+          <AssociationSet Name="FK_Comentarios_AspNetUsers" Association="HealthyModel.FK_Comentarios_AspNetUsers">
+            <End Role="AspNetUser" EntitySet="AspNetUsers" />
+            <End Role="Comentario" EntitySet="Comentarios" />
+          </AssociationSet>
           <AssociationSet Name="FK_Comentarios_Posts" Association="HealthyModel.FK_Comentarios_Posts">
             <End Role="Post" EntitySet="Posts" />
             <End Role="Comentario" EntitySet="Comentarios" />
           </AssociationSet>
-          <AssociationSet Name="FK_Posts_Subcategorias" Association="HealthyModel.FK_Posts_Subcategorias">
-            <End Role="Subcategoria" EntitySet="Subcategorias" />
-            <End Role="Post" EntitySet="Posts" />
+          <AssociationSet Name="FK_Opiniao_Comentarios" Association="HealthyModel.FK_Opiniao_Comentarios">
+            <End Role="Comentario" EntitySet="Comentarios" />
+            <End Role="Opiniao" EntitySet="Opiniaos" />
           </AssociationSet>
           </EntityContainer>
         <EntityType Name="C__MigrationHistory">
@@ -752,10 +752,10 @@
           <Property Name="UserName" Type="String" Nullable="false" MaxLength="256" FixedLength="false" Unicode="true" />
           <NavigationProperty Name="AspNetUserClaims" Relationship="HealthyModel.FK_dbo_AspNetUserClaims_dbo_AspNetUsers_UserId" FromRole="AspNetUser" ToRole="AspNetUserClaim" />
           <NavigationProperty Name="AspNetUserLogins" Relationship="HealthyModel.FK_dbo_AspNetUserLogins_dbo_AspNetUsers_UserId" FromRole="AspNetUser" ToRole="AspNetUserLogin" />
-          <NavigationProperty Name="Comentarios" Relationship="HealthyModel.FK_Comentarios_AspNetUsers" FromRole="AspNetUser" ToRole="Comentario" />
           <NavigationProperty Name="Utilizador" Relationship="HealthyModel.FK_Utilizador_AspNetUsers" FromRole="AspNetUser" ToRole="Utilizador" />
           <NavigationProperty Name="AspNetRoles" Relationship="HealthyModel.AspNetUserRoles" FromRole="AspNetUser" ToRole="AspNetRole" />
           <NavigationProperty Name="Posts" Relationship="HealthyModel.FK_Posts_AspNetUsers" FromRole="AspNetUser" ToRole="Post" />
+          <NavigationProperty Name="Comentarios" Relationship="HealthyModel.FK_Comentarios_AspNetUsers" FromRole="AspNetUser" ToRole="Comentario" />
         </EntityType>
         <EntityType Name="Bebida">
           <Key>
@@ -771,19 +771,6 @@
           <Property Name="HidCarbono" Type="Double" Nullable="false" />
           <Property Name="HC_Acucar" Type="Double" Nullable="false" />
           <NavigationProperty Name="RefeicaoBebidas" Relationship="HealthyModel.FK_RefeicaoBebida_Bebidas" FromRole="Bebida" ToRole="RefeicaoBebida" />
-        </EntityType>
-        <EntityType Name="Comentario">
-          <Key>
-            <PropertyRef Name="CommentID" />
-          </Key>
-          <Property Name="CommentID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="UserID" Type="Int32" Nullable="false" />
-          <Property Name="Data" Type="DateTime" Nullable="false" Precision="0" />
-          <Property Name="PostID" Type="Int32" Nullable="false" />
-          <NavigationProperty Name="AspNetUser" Relationship="HealthyModel.FK_Comentarios_AspNetUsers" FromRole="Comentario" ToRole="AspNetUser" />
-          <NavigationProperty Name="Opiniaos" Relationship="HealthyModel.FK_Opiniao_Comentarios" FromRole="Comentario" ToRole="Opiniao" />
-          <Property Name="Comment" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="false" />
-          <NavigationProperty Name="Post" Relationship="HealthyModel.FK_Comentarios_Posts" FromRole="Comentario" ToRole="Post" />
         </EntityType>
         <EntityType Name="Ingrediente">
           <Key>
@@ -821,7 +808,7 @@
           </Key>
           <Property Name="commentID" Type="Int32" Nullable="false" />
           <Property Name="userID" Type="Int32" Nullable="false" />
-          <Property Name="Opiniao1" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Opiniao1" Type="String" Nullable="false" />
           <NavigationProperty Name="Comentario" Relationship="HealthyModel.FK_Opiniao_Comentarios" FromRole="Opiniao" ToRole="Comentario" />
         </EntityType>
         <EntityType Name="Prato">
@@ -966,18 +953,6 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK_Comentarios_AspNetUsers">
-          <End Type="HealthyModel.AspNetUser" Role="AspNetUser" Multiplicity="1" />
-          <End Type="HealthyModel.Comentario" Role="Comentario" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="AspNetUser">
-              <PropertyRef Name="Id" />
-            </Principal>
-            <Dependent Role="Comentario">
-              <PropertyRef Name="UserID" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
         <Association Name="FK_Utilizador_AspNetUsers">
           <End Type="HealthyModel.AspNetUser" Role="AspNetUser" Multiplicity="1" />
           <End Type="HealthyModel.Utilizador" Role="Utilizador" Multiplicity="0..1" />
@@ -999,18 +974,6 @@
             </Principal>
             <Dependent Role="RefeicaoBebida">
               <PropertyRef Name="BebidaID" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_Opiniao_Comentarios">
-          <End Type="HealthyModel.Comentario" Role="Comentario" Multiplicity="1" />
-          <End Type="HealthyModel.Opiniao" Role="Opiniao" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Comentario">
-              <PropertyRef Name="CommentID" />
-            </Principal>
-            <Dependent Role="Opiniao">
-              <PropertyRef Name="commentID" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -1145,8 +1108,8 @@
           <Property Name="SubcategoriaID" Type="Int32" Nullable="false" />
           <Property Name="Texto" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="false" />
           <NavigationProperty Name="AspNetUser" Relationship="HealthyModel.FK_Posts_AspNetUsers" FromRole="Post" ToRole="AspNetUser" />
-          <NavigationProperty Name="Comentarios" Relationship="HealthyModel.FK_Comentarios_Posts" FromRole="Post" ToRole="Comentario" />
           <NavigationProperty Name="Subcategoria" Relationship="HealthyModel.FK_Posts_Subcategorias" FromRole="Post" ToRole="Subcategoria" />
+          <NavigationProperty Name="Comentarios" Relationship="HealthyModel.FK_Comentarios_Posts" FromRole="Post" ToRole="Comentario" />
         </EntityType>
         <Association Name="FK_Posts_AspNetUsers">
           <End Type="HealthyModel.AspNetUser" Role="AspNetUser" Multiplicity="1" />
@@ -1156,6 +1119,43 @@
               <PropertyRef Name="Id" />
             </Principal>
             <Dependent Role="Post">
+              <PropertyRef Name="UserID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Posts_Subcategorias">
+          <End Type="HealthyModel.Subcategoria" Role="Subcategoria" Multiplicity="1" />
+          <End Type="HealthyModel.Post" Role="Post" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Subcategoria">
+              <PropertyRef Name="SubcategoriaID" />
+            </Principal>
+            <Dependent Role="Post">
+              <PropertyRef Name="SubcategoriaID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="Comentario">
+          <Key>
+            <PropertyRef Name="CommentID" />
+          </Key>
+          <Property Name="CommentID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="UserID" Type="Int32" Nullable="false" />
+          <Property Name="Data" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="Comment" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="PostID" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="AspNetUser" Relationship="HealthyModel.FK_Comentarios_AspNetUsers" FromRole="Comentario" ToRole="AspNetUser" />
+          <NavigationProperty Name="Post" Relationship="HealthyModel.FK_Comentarios_Posts" FromRole="Comentario" ToRole="Post" />
+          <NavigationProperty Name="Opiniaos" Relationship="HealthyModel.FK_Opiniao_Comentarios" FromRole="Comentario" ToRole="Opiniao" />
+        </EntityType>
+        <Association Name="FK_Comentarios_AspNetUsers">
+          <End Type="HealthyModel.AspNetUser" Role="AspNetUser" Multiplicity="1" />
+          <End Type="HealthyModel.Comentario" Role="Comentario" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="AspNetUser">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Comentario">
               <PropertyRef Name="UserID" />
             </Dependent>
           </ReferentialConstraint>
@@ -1172,15 +1172,15 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK_Posts_Subcategorias">
-          <End Type="HealthyModel.Subcategoria" Role="Subcategoria" Multiplicity="1" />
-          <End Type="HealthyModel.Post" Role="Post" Multiplicity="*" />
+        <Association Name="FK_Opiniao_Comentarios">
+          <End Type="HealthyModel.Comentario" Role="Comentario" Multiplicity="1" />
+          <End Type="HealthyModel.Opiniao" Role="Opiniao" Multiplicity="*" />
           <ReferentialConstraint>
-            <Principal Role="Subcategoria">
-              <PropertyRef Name="SubcategoriaID" />
+            <Principal Role="Comentario">
+              <PropertyRef Name="CommentID" />
             </Principal>
-            <Dependent Role="Post">
-              <PropertyRef Name="SubcategoriaID" />
+            <Dependent Role="Opiniao">
+              <PropertyRef Name="commentID" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -1257,17 +1257,6 @@
                 <ScalarProperty Name="Nome" ColumnName="Nome" />
                 <ScalarProperty Name="Categoria" ColumnName="Categoria" />
                 <ScalarProperty Name="BebidasID" ColumnName="BebidasID" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="Comentarios">
-            <EntityTypeMapping TypeName="HealthyModel.Comentario">
-              <MappingFragment StoreEntitySet="Comentarios">
-                <ScalarProperty Name="Comment" ColumnName="Comment" />
-                <ScalarProperty Name="PostID" ColumnName="PostID" />
-                <ScalarProperty Name="Data" ColumnName="Data" />
-                <ScalarProperty Name="UserID" ColumnName="UserID" />
-                <ScalarProperty Name="CommentID" ColumnName="CommentID" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
@@ -1436,6 +1425,17 @@
                 <ScalarProperty Name="Data" ColumnName="Data" />
                 <ScalarProperty Name="UserID" ColumnName="UserID" />
                 <ScalarProperty Name="PostID" ColumnName="PostID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Comentarios">
+            <EntityTypeMapping TypeName="HealthyModel.Comentario">
+              <MappingFragment StoreEntitySet="Comentarios">
+                <ScalarProperty Name="PostID" ColumnName="PostID" />
+                <ScalarProperty Name="Comment" ColumnName="Comment" />
+                <ScalarProperty Name="Data" ColumnName="Data" />
+                <ScalarProperty Name="UserID" ColumnName="UserID" />
+                <ScalarProperty Name="CommentID" ColumnName="CommentID" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

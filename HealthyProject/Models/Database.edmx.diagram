@@ -11,7 +11,6 @@
         <EntityTypeShape EntityType="HealthyModel.AspNetUserLogin" Width="1.5" PointX="5.25" PointY="16.25" />
         <EntityTypeShape EntityType="HealthyModel.AspNetUser" Width="1.5" PointX="3" PointY="9.25" />
         <EntityTypeShape EntityType="HealthyModel.Bebida" Width="1.5" PointX="12" PointY="15.25" />
-        <EntityTypeShape EntityType="HealthyModel.Comentario" Width="1.5" PointX="10.5" PointY="10.125" />
         <EntityTypeShape EntityType="HealthyModel.Ingrediente" Width="1.5" PointX="12" PointY="27.25" />
         <EntityTypeShape EntityType="HealthyModel.Objectivo" Width="1.5" PointX="7.5" PointY="19.375" />
         <EntityTypeShape EntityType="HealthyModel.Opiniao" Width="1.5" PointX="12.75" PointY="10.5" />
@@ -26,10 +25,8 @@
         <EntityTypeShape EntityType="HealthyModel.Utilizador" Width="1.5" PointX="5.25" PointY="18.875" />
         <AssociationConnector Association="HealthyModel.FK_dbo_AspNetUserClaims_dbo_AspNetUsers_UserId" />
         <AssociationConnector Association="HealthyModel.FK_dbo_AspNetUserLogins_dbo_AspNetUsers_UserId" />
-        <AssociationConnector Association="HealthyModel.FK_Comentarios_AspNetUsers" />
         <AssociationConnector Association="HealthyModel.FK_Utilizador_AspNetUsers" />
         <AssociationConnector Association="HealthyModel.FK_RefeicaoBebida_Bebidas" />
-        <AssociationConnector Association="HealthyModel.FK_Opiniao_Comentarios" />
         <AssociationConnector Association="HealthyModel.FK_RefeicaoIngredientes_Refeicoes" />
         <AssociationConnector Association="HealthyModel.FK_Objectivo_Objectivo" />
         <AssociationConnector Association="HealthyModel.FK_RegistoDiario_RegistoDiario" />
@@ -43,8 +40,11 @@
         <AssociationConnector Association="HealthyModel.FK_Subcategorias_Categorias" />
         <EntityTypeShape EntityType="HealthyModel.Post" Width="1.5" PointX="8.25" PointY="8.75" />
         <AssociationConnector Association="HealthyModel.FK_Posts_AspNetUsers" />
-        <AssociationConnector Association="HealthyModel.FK_Comentarios_Posts" />
         <AssociationConnector Association="HealthyModel.FK_Posts_Subcategorias" />
+        <EntityTypeShape EntityType="HealthyModel.Comentario" Width="1.5" PointX="10.5" PointY="10" />
+        <AssociationConnector Association="HealthyModel.FK_Comentarios_AspNetUsers" />
+        <AssociationConnector Association="HealthyModel.FK_Comentarios_Posts" />
+        <AssociationConnector Association="HealthyModel.FK_Opiniao_Comentarios" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

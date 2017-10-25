@@ -28,8 +28,8 @@ namespace HealthyProject.Models
         public string Texto { get; set; }
     
         public virtual AspNetUser AspNetUser { get; set; }
+        public virtual Subcategoria Subcategoria { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Comentario> Comentarios { get; set; }
-        public virtual Subcategoria Subcategoria { get; set; }
     }
 }

@@ -5,7 +5,7 @@
 //     Manual changes to this file may cause unexpected behavior in your application.
 //     Manual changes to this file will be overwritten if the code is regenerated.
 // </auto-generated>
-//------------------------------------------------------------------------------http://localhost:50463/Models/Comentario.cs
+//------------------------------------------------------------------------------
 
 namespace HealthyProject.Models
 {
@@ -23,12 +23,12 @@ namespace HealthyProject.Models
         public int CommentID { get; set; }
         public int UserID { get; set; }
         public System.DateTime Data { get; set; }
-        public int PostID { get; set; }
         public string Comment { get; set; }
+        public int PostID { get; set; }
     
         public virtual AspNetUser AspNetUser { get; set; }
+        public virtual Post Post { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Opiniao> Opiniaos { get; set; }
-        public virtual Post Post { get; set; }
     }
 }
