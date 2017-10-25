@@ -7,7 +7,7 @@
 
 <p class="text-success">@ViewBag.StatusMessage</p>
 <div>
-    <h4>Dados do Utilizador</h4>
+   @*<h4>Dados do Utilizador</h4>*@ 
     <hr />
     <dl class="dl-horizontal">
         
@@ -34,8 +34,8 @@
             @Html.DisplayNameFor(model => model.Data_nascimento)
         </dt>
         <dd>
-          
-           @Model.Data_nascimento.Value.ToString("dd-MM-yyyy")
+            @*@Html.DisplayFor(model => model.Data_nascimento)*@
+         @Model.Data_nascimento.Value.ToString("dd-MM-yyyy")  
         </dd>
     </dl>
 
@@ -61,7 +61,7 @@
                     </th>
                 </tr>
                 <tr>
-
+                    
                     <th>@Html.DisplayNameFor(model => model.Data_nascimento)</th>
 
                     <th>@Html.EditorFor(model => model.Data_nascimento)</th>
@@ -126,13 +126,12 @@
            $('#tabela').removeClass("hidden");
            $('#tabela').show();
 
-           $('#submeter').removeClass("hidden");
-         
-           
+           $('#submeter').removeClass("hidden");        
 
        })
-       
-       
+
+     
+
    </script>
 
 }

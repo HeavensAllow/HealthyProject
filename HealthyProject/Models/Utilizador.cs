@@ -24,8 +24,9 @@ namespace HealthyProject.Models
         public int UserID { get; set; }
         public string Nome { get; set; }
         public string Genero { get; set; }
+        
         [DataType(DataType.Date)]
-        [DisplayFormat(DataFormatString ="{0:dd:MM:yyyy}",ApplyFormatInEditMode =true)]
+        [DisplayFormat(DataFormatString ="{0:dd-MM-yyyy}",ApplyFormatInEditMode = true)]
 
         public Nullable<System.DateTime> Data_nascimento { get; set; }
         public Nullable<int> Peso { get; set; }
