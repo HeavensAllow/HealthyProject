@@ -11,29 +11,21 @@ namespace HealthyProject.Models
 {
     using System;
     using System.Collections.Generic;
-    using System.ComponentModel.DataAnnotations;
-
+    
     public partial class Utilizador
     {
-        
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public Utilizador()
         {
             this.Objectivoes = new HashSet<Objectivo>();
         }
-        
+    
         public int UserID { get; set; }
-        [Required]
         public string Nome { get; set; }
-        [Required]
         public string Genero { get; set; }
-        [Required]
         public Nullable<System.DateTime> Data_nascimento { get; set; }
-        [Required]
         public Nullable<int> Peso { get; set; }
-        [Required]
         public Nullable<int> Altura { get; set; }
-        [Required]
         public Nullable<int> Actividade_fisica { get; set; }
         public Nullable<int> Nr_horas_sono { get; set; }
         public Nullable<int> Nr_refeicoes { get; set; }

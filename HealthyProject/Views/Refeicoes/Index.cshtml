@@ -6,51 +6,120 @@
 
 <h2>Index</h2>
 
-<script type="text/javascript">
-    $(function () {
-        // This will make every element with the class "date-picker" into a DatePicker element
-        $('.date-picker').datepicker();
-    })
-</script>
+<p>Select Date</p>
+<select id="selectDay">
+    <option>1</option>
+    <option>2</option>
+    <option>3</option>
+    <option>4</option>
+</select>
+<select id="selectMonth">
+    <option>January</option>
+    <option>February</option>
+    <option>March</option>
+    <option>April</option>
+</select>
+<select id="selectYear">
+    <option>2015</option>
+    <option>2016</option>
+    <option>2017</option>
+    <option>2018</option>
+</select>
 
-<input class="date-picker" />
-@Html.TextBox("YourTextBox", "", new { @class = "date-picker" })
+<br />
+<br />
+<br />
 
-
-<p>
-    @Html.ActionLink("Create New", "Create")
-</p>
-<table class="table">
+<table class="table tableDailyMeals">
     <tr>
-        <th>
-            @Html.DisplayNameFor(model => model.Data)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Tipo)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.RegistoDiario.RegistoID)
-        </th>
+        <th></th>
+        <th>Meal</th>
+        <th>Quantity</th>
+        <th></th>
         <th></th>
     </tr>
-
-@foreach (var item in Model) {
     <tr>
+        <td>Pequeno-almoço</td>
         <td>
-            @Html.DisplayFor(modelItem => item.Data)
+            <input list="selectDish">
+                <datalist id="selectDish">
+                    <option>Prato1</option>
+                    <option>Prato2</option>
+                    <option>Prato3</option>
+                </datalist>
+            </input>
         </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Tipo)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.RegistoDiario.RegistoID)
-        </td>
-        <td>
-            @Html.ActionLink("Edit", "Edit", new { id=item.RefeicaoID }) |
-            @Html.ActionLink("Details", "Details", new { id=item.RefeicaoID }) |
-            @Html.ActionLink("Delete", "Delete", new { id=item.RefeicaoID })
-        </td>
+        <td><input type="number"/>gr</td>
+        <td></td>
+        <td></td>
     </tr>
-}
-
+    <tr>
+        <td>Almoço</td>
+        <td></td>
+        <td></td>
+        <td></td>
+    </tr>
+    <tr>
+        <td>Lanche</td>
+        <td></td>
+        <td></td>
+        <td></td>
+    </tr>
+    <tr>
+        <td>Jantar</td>
+        <td></td>
+        <td></td>
+        <td></td>
+    </tr>
+    <tr>
+        <td><a href="">Add meal</a></td>
+        <td></td>
+        <td></td>
+        <td></td>
+    </tr>
 </table>
+
+
+
+
+            @*View inicial*@
+            @*<div>
+                    <p>
+                        @Html.ActionLink("Create New", "Create")
+                    </p>
+                    <table class="table">
+                        <tr>
+                            <th>
+                                @Html.DisplayNameFor(model => model.Data)
+                            </th>
+                            <th>
+                                @Html.DisplayNameFor(model => model.Tipo)
+                            </th>
+                            <th>
+                                @Html.DisplayNameFor(model => model.RegistoDiario.RegistoID)
+                            </th>
+                            <th></th>
+                        </tr>
+
+                        @foreach (var item in Model)
+                        {
+                            <tr>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.Data)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.Tipo)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.RegistoDiario.RegistoID)
+                                </td>
+                                <td>
+                                    @Html.ActionLink("Edit", "Edit", new { id = item.RefeicaoID }) |
+                                    @Html.ActionLink("Details", "Details", new { id = item.RefeicaoID }) |
+                                    @Html.ActionLink("Delete", "Delete", new { id = item.RefeicaoID })
+                                </td>
+                            </tr>
+                        }
+
+                    </table>
+                </div>*@

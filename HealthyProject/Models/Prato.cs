@@ -26,7 +26,7 @@ namespace HealthyProject.Models
         public int Kcal { get; set; }
         public int Proteinas { get; set; }
         public int Gordura { get; set; }
-        public int HC { get; set; }
+        public int Hidratos { get; set; }
         public string Categoria { get; set; }
         public int HC_Acucar { get; set; }
     

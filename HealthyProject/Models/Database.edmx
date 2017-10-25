@@ -490,7 +490,7 @@
           <Property Name="Kcal" Type="Int32" Nullable="false" />
           <Property Name="Proteinas" Type="Int32" Nullable="false" />
           <Property Name="Gordura" Type="Int32" Nullable="false" />
-          <Property Name="HC" Type="Int32" Nullable="false" />
+          <Property Name="Hidratos" Type="Int32" Nullable="false" />
           <NavigationProperty Name="RefeicaoPratos" Relationship="Self.FK_RefeicaoPratos_Pratos1" FromRole="Pratos" ToRole="RefeicaoPratos" />
           <Property Name="Categoria" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="HC_Acucar" Type="Int32" Nullable="false" />
@@ -859,7 +859,7 @@
                 <ScalarProperty Name="Kcal" ColumnName="Kcal" />
                 <ScalarProperty Name="Proteinas" ColumnName="Proteinas" />
                 <ScalarProperty Name="Gordura" ColumnName="Gordura" />
-                <ScalarProperty Name="HC" ColumnName="HC" />
+                <ScalarProperty Name="Hidratos" ColumnName="HC" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
