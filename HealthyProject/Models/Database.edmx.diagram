@@ -13,7 +13,6 @@
         <EntityTypeShape EntityType="HealthyModel.Bebida" Width="1.5" PointX="12" PointY="15.25" />
         <EntityTypeShape EntityType="HealthyModel.Ingrediente" Width="1.5" PointX="12" PointY="27.25" />
         <EntityTypeShape EntityType="HealthyModel.Objectivo" Width="1.5" PointX="7.5" PointY="19.375" />
-        <EntityTypeShape EntityType="HealthyModel.Opiniao" Width="1.5" PointX="12.75" PointY="10.5" />
         <EntityTypeShape EntityType="HealthyModel.Prato" Width="1.5" PointX="12" PointY="23.25" />
         <EntityTypeShape EntityType="HealthyModel.RefeicaoBebida" Width="1.5" PointX="14.25" PointY="16.75" />
         <EntityTypeShape EntityType="HealthyModel.RefeicaoIngrediente" Width="1.5" PointX="14.25" PointY="22.75" />
@@ -44,6 +43,7 @@
         <EntityTypeShape EntityType="HealthyModel.Comentario" Width="1.5" PointX="10.5" PointY="10" />
         <AssociationConnector Association="HealthyModel.FK_Comentarios_AspNetUsers" />
         <AssociationConnector Association="HealthyModel.FK_Comentarios_Posts" />
+        <EntityTypeShape EntityType="HealthyModel.Opiniao" Width="1.5" PointX="12.75" PointY="10.375" />
         <AssociationConnector Association="HealthyModel.FK_Opiniao_Comentarios" />
       </Diagram>
     </edmx:Diagrams>

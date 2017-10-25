@@ -103,7 +103,7 @@ namespace HealthyProject.Controllers
         {
             Comentario comentario = db.Comentarios.Find(id);
             Opiniao o = new Opiniao();
-            o.Opiniao1 = 1;
+            o.Opiniao1 = true;
             o.userID = Convert.ToInt32(User.Identity.GetUserId());
             o.commentID = Convert.ToInt32(User.Identity.GetUserId());
             db.Opiniaos.Add(o);

@@ -605,7 +605,6 @@
           <EntitySet Name="Bebidas" EntityType="HealthyModel.Bebida" />
           <EntitySet Name="Ingredientes" EntityType="HealthyModel.Ingrediente" />
           <EntitySet Name="Objectivoes" EntityType="HealthyModel.Objectivo" />
-          <EntitySet Name="Opiniaos" EntityType="HealthyModel.Opiniao" />
           <EntitySet Name="Pratos" EntityType="HealthyModel.Prato" />
           <EntitySet Name="RefeicaoBebidas" EntityType="HealthyModel.RefeicaoBebida" />
           <EntitySet Name="RefeicaoIngredientes" EntityType="HealthyModel.RefeicaoIngrediente" />
@@ -690,6 +689,7 @@
             <End Role="Post" EntitySet="Posts" />
             <End Role="Comentario" EntitySet="Comentarios" />
           </AssociationSet>
+          <EntitySet Name="Opiniaos" EntityType="HealthyModel.Opiniao" />
           <AssociationSet Name="FK_Opiniao_Comentarios" Association="HealthyModel.FK_Opiniao_Comentarios">
             <End Role="Comentario" EntitySet="Comentarios" />
             <End Role="Opiniao" EntitySet="Opiniaos" />
@@ -800,16 +800,6 @@
           <Property Name="Intake_diarioA" Type="Int32" />
           <NavigationProperty Name="Utilizador" Relationship="HealthyModel.FK_Objectivo_Objectivo" FromRole="Objectivo" ToRole="Utilizador" />
           <NavigationProperty Name="RegistoDiarios" Relationship="HealthyModel.FK_RegistoDiario_RegistoDiario" FromRole="Objectivo" ToRole="RegistoDiario" />
-        </EntityType>
-        <EntityType Name="Opiniao">
-          <Key>
-            <PropertyRef Name="commentID" />
-            <PropertyRef Name="userID" />
-          </Key>
-          <Property Name="commentID" Type="Int32" Nullable="false" />
-          <Property Name="userID" Type="Int32" Nullable="false" />
-          <Property Name="Opiniao1" Type="String" Nullable="false" />
-          <NavigationProperty Name="Comentario" Relationship="HealthyModel.FK_Opiniao_Comentarios" FromRole="Opiniao" ToRole="Comentario" />
         </EntityType>
         <EntityType Name="Prato">
           <Key>
@@ -1172,6 +1162,16 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <EntityType Name="Opiniao">
+          <Key>
+            <PropertyRef Name="commentID" />
+            <PropertyRef Name="userID" />
+          </Key>
+          <Property Name="commentID" Type="Int32" Nullable="false" />
+          <Property Name="userID" Type="Int32" Nullable="false" />
+          <Property Name="Opiniao1" Type="Boolean" Nullable="false" />
+          <NavigationProperty Name="Comentario" Relationship="HealthyModel.FK_Opiniao_Comentarios" FromRole="Opiniao" ToRole="Comentario" />
+        </EntityType>
         <Association Name="FK_Opiniao_Comentarios">
           <End Type="HealthyModel.Comentario" Role="Comentario" Multiplicity="1" />
           <End Type="HealthyModel.Opiniao" Role="Opiniao" Multiplicity="*" />
@@ -1285,15 +1285,6 @@
                 <ScalarProperty Name="Data_inicio" ColumnName="Data_inicio" />
                 <ScalarProperty Name="UserID" ColumnName="UserID" />
                 <ScalarProperty Name="ObjectivoID" ColumnName="ObjectivoID" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="Opiniaos">
-            <EntityTypeMapping TypeName="HealthyModel.Opiniao">
-              <MappingFragment StoreEntitySet="Opiniao">
-                <ScalarProperty Name="Opiniao1" ColumnName="Opiniao" />
-                <ScalarProperty Name="userID" ColumnName="userID" />
-                <ScalarProperty Name="commentID" ColumnName="commentID" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
@@ -1436,6 +1427,15 @@
                 <ScalarProperty Name="Data" ColumnName="Data" />
                 <ScalarProperty Name="UserID" ColumnName="UserID" />
                 <ScalarProperty Name="CommentID" ColumnName="CommentID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Opiniaos">
+            <EntityTypeMapping TypeName="HealthyModel.Opiniao">
+              <MappingFragment StoreEntitySet="Opiniao">
+                <ScalarProperty Name="Opiniao1" ColumnName="Opiniao" />
+                <ScalarProperty Name="userID" ColumnName="userID" />
+                <ScalarProperty Name="commentID" ColumnName="commentID" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

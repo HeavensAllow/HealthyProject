@@ -33,7 +33,6 @@ namespace HealthyProject.Models
         public virtual DbSet<Bebida> Bebidas { get; set; }
         public virtual DbSet<Ingrediente> Ingredientes { get; set; }
         public virtual DbSet<Objectivo> Objectivoes { get; set; }
-        public virtual DbSet<Opiniao> Opiniaos { get; set; }
         public virtual DbSet<Prato> Pratos { get; set; }
         public virtual DbSet<RefeicaoBebida> RefeicaoBebidas { get; set; }
         public virtual DbSet<RefeicaoIngrediente> RefeicaoIngredientes { get; set; }
@@ -46,5 +45,6 @@ namespace HealthyProject.Models
         public virtual DbSet<Categoria> Categorias { get; set; }
         public virtual DbSet<Post> Posts { get; set; }
         public virtual DbSet<Comentario> Comentarios { get; set; }
+        public virtual DbSet<Opiniao> Opiniaos { get; set; }
     }
 }

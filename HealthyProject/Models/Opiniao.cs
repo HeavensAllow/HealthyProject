@@ -16,7 +16,7 @@ namespace HealthyProject.Models
     {
         public int commentID { get; set; }
         public int userID { get; set; }
-        public string Opiniao1 { get; set; }
+        public bool Opiniao1 { get; set; }
     
         public virtual Comentario Comentario { get; set; }
     }
