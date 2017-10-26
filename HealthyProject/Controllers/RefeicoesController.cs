@@ -15,9 +15,15 @@ namespace HealthyProject.Controllers
         private HealthyEntities db = new HealthyEntities();
 
         // GET: Refeicoes
-        public ActionResult Index()
+        public ActionResult Index(string data)
         {
             var refeicoes = db.Refeicoes.Include(r => r.RegistoDiario);
+
+             data = DateTime.Today.ToString("dd/MM/yyyy");
+            //var RefeicaoData = db.Refeicoes.Where(model => model.Data == "data");
+          
+
+            
             return View(refeicoes.ToList());
         }
 

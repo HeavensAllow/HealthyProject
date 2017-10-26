@@ -4,122 +4,199 @@
     ViewBag.Title = "Index";
 }
 
-<h2>Index</h2>
+<h2>Diário Alimentar</h2>
 
-<p>Select Date</p>
+<br />
+
+@{}
+
+Seleccione a data que pretende ver:
 <select id="selectDay">
     <option>1</option>
     <option>2</option>
     <option>3</option>
     <option>4</option>
+    <option>5</option>
+    <option>6</option>
+    <option>7</option>
+    <option>8</option>
+    <option>9</option>
+    <option>10</option>
+    <option>11</option>
+    <option>12</option>
+    <option>13</option>
+    <option>14</option>
+    <option>15</option>
+    <option>16</option>
+    <option>17</option>
+    <option>18</option>
+    <option>19</option>
+    <option>20</option>
+    <option>21</option>
+    <option>22</option>
+    <option>23</option>
+    <option>24</option>
+    <option>25</option>
+    <option>26</option>
+    <option>27</option>
+    <option>28</option>
+    <option>29</option>
+    <option>30</option>
+    <option>31</option>
 </select>
 <select id="selectMonth">
-    <option>January</option>
-    <option>February</option>
-    <option>March</option>
-    <option>April</option>
+    <option>Jan</option>
+    <option>Fev</option>
+    <option>Mar</option>
+    <option>Abr</option>
+    <option>Mai</option>
+    <option>Jun</option>
+    <option>Jul</option>
+    <option>Ago</option>
+    <option>Set</option>
+    <option>Out</option>
+    <option>Nov</option>
+    <option>Dez</option>
 </select>
 <select id="selectYear">
-    <option>2015</option>
-    <option>2016</option>
     <option>2017</option>
     <option>2018</option>
 </select>
 
-<br />
-<br />
-<br />
+    <br />
+    <br />
+    <br />
 
-<table class="table tableDailyMeals">
-    <tr>
-        <th></th>
-        <th>Meal</th>
-        <th>Quantity</th>
-        <th></th>
-        <th></th>
-    </tr>
-    <tr>
-        <td>Pequeno-almoço</td>
-        <td>
-            <input list="selectDish">
-                <datalist id="selectDish">
-                    <option>Prato1</option>
-                    <option>Prato2</option>
-                    <option>Prato3</option>
-                </datalist>
-            </input>
-        </td>
-        <td><input type="number"/>gr</td>
-        <td></td>
-        <td></td>
-    </tr>
-    <tr>
-        <td>Almoço</td>
-        <td></td>
-        <td></td>
-        <td></td>
-    </tr>
-    <tr>
-        <td>Lanche</td>
-        <td></td>
-        <td></td>
-        <td></td>
-    </tr>
-    <tr>
-        <td>Jantar</td>
-        <td></td>
-        <td></td>
-        <td></td>
-    </tr>
-    <tr>
-        <td><a href="">Add meal</a></td>
-        <td></td>
-        <td></td>
-        <td></td>
-    </tr>
-</table>
+    <table class="table tableDailyMeals">
+        <tr>
+            <th>Refeição</th>
+            <th>Descrição</th>
+            <th>Kcal</th>
+            <th>Proteínas</th>
+            <th>
+                <p>Hidratos de Carbono</p>
+                <p style="font-size:80%">Açúcar</p></th>
+            <th>Gordura</th>
+            <th></th>
+        </tr>
+        @foreach (var item in Model)
+        {
+           @*if (item.Data == data) {*@
+                <tr>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.RefeicaoID)<br />
+                        @Html.DisplayFor(modelItem => item.Data)<br />
+                        @Html.DisplayFor(modelItem => item.Tipo)
+                    </td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td>
+                        <p style="font-size:80%">@Html.ActionLink("Adicionar Prato", "Create", "RefeicaoPratoes")</p>
+                        <p style="font-size:80%"><a href="">Adicionar Produto</a></p>
+                    </td>
+                </tr>
+            }
+        @*}*@
+<!--        <tr>
+            <td>Pequeno-almoço</td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td>
+                <p style="font-size:80%">@Html.ActionLink("Add dish", "Create", "RefeicaoPratoes")</p>
+                <p style="font-size:80%"><a href="">Add ingredients</a></p>
+            </td>
+        </tr>
+        <tr>
+            <td>Almoço</td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td>
+                <p style="font-size:80%"> @Html.ActionLink("Add dish", "Create", "RefeicaoPratoes")</p>
+                <p style="font-size:80%"><a href="">Add ingredients</a></p>
+            </td>
+        </tr>
+        <tr>
+            <td>Lanche</td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td>
+                <p style="font-size:80%"> @Html.ActionLink("Add dish", "Create", "RefeicaoPratoes")</p>
+                <p style="font-size:80%"><a href="">Add ingredients</a></p>
+            </td>
+        </tr>
+        <tr>
+            <td>Jantar</td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td>
+                <p style="font-size:80%"> @Html.ActionLink("Add dish", "Create", "RefeicaoPratoes")</p>
+                <p style="font-size:80%"><a href="">Add ingredients</a></p>
+            </td>
+        </tr>-->
+        <tr>
+            <td>@Html.ActionLink("Adicionar Refeição", "Create")</td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+        </tr>
+    </table>
 
 
+    @*<div>
+            <p>
+                @Html.ActionLink("Create New", "Create")
+            </p>
+            <table class="table">
+                <tr>
+                    <th>
+                        @Html.DisplayNameFor(model => model.Data)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.Tipo)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.RegistoDiario.RegistoID)
+                    </th>
+                    <th></th>
+                </tr>
 
+                @foreach (var item in Model)
+                {
+                    <tr>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Data)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Tipo)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.RegistoDiario.RegistoID)
+                        </td>
+                        <td>
+                            @Html.ActionLink("Edit", "Edit", new { id = item.RefeicaoID }) |
+                            @Html.ActionLink("Details", "Details", new { id = item.RefeicaoID }) |
+                            @Html.ActionLink("Delete", "Delete", new { id = item.RefeicaoID })
+                        </td>
+                    </tr>
+                }
 
-            @*View inicial*@
-            @*<div>
-                    <p>
-                        @Html.ActionLink("Create New", "Create")
-                    </p>
-                    <table class="table">
-                        <tr>
-                            <th>
-                                @Html.DisplayNameFor(model => model.Data)
-                            </th>
-                            <th>
-                                @Html.DisplayNameFor(model => model.Tipo)
-                            </th>
-                            <th>
-                                @Html.DisplayNameFor(model => model.RegistoDiario.RegistoID)
-                            </th>
-                            <th></th>
-                        </tr>
-
-                        @foreach (var item in Model)
-                        {
-                            <tr>
-                                <td>
-                                    @Html.DisplayFor(modelItem => item.Data)
-                                </td>
-                                <td>
-                                    @Html.DisplayFor(modelItem => item.Tipo)
-                                </td>
-                                <td>
-                                    @Html.DisplayFor(modelItem => item.RegistoDiario.RegistoID)
-                                </td>
-                                <td>
-                                    @Html.ActionLink("Edit", "Edit", new { id = item.RefeicaoID }) |
-                                    @Html.ActionLink("Details", "Details", new { id = item.RefeicaoID }) |
-                                    @Html.ActionLink("Delete", "Delete", new { id = item.RefeicaoID })
-                                </td>
-                            </tr>
-                        }
-
-                    </table>
-                </div>*@
+            </table>
+        </div>*@

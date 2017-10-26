@@ -195,6 +195,7 @@
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
+    <Compile Include="Controllers\RefeicaoPratoesController.cs" />
     <Compile Include="Controllers\RefeicoesController.cs" />
     <Compile Include="Controllers\UtilizadorsController.cs" />
     <Compile Include="Global.asax.cs">
@@ -211,6 +212,15 @@
       <DependentUpon>Database.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\AspNetUserLogin.cs">
+      <DependentUpon>Database.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Bebida.cs">
+      <DependentUpon>Database.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Categoria.cs">
+      <DependentUpon>Database.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Comentario.cs">
       <DependentUpon>Database.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\C__MigrationHistory.cs">
@@ -239,7 +249,16 @@
     <Compile Include="Models\Objectivo.cs">
       <DependentUpon>Database.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\Opiniao.cs">
+      <DependentUpon>Database.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Post.cs">
+      <DependentUpon>Database.tt</DependentUpon>
+    </Compile>
     <Compile Include="Models\Prato.cs">
+      <DependentUpon>Database.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\RefeicaoBebida.cs">
       <DependentUpon>Database.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\RefeicaoIngrediente.cs">
@@ -252,6 +271,9 @@
       <DependentUpon>Database.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\RegistoDiario.cs">
+      <DependentUpon>Database.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Subcategoria.cs">
       <DependentUpon>Database.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\sysdiagram.cs">
@@ -347,6 +369,11 @@
     <Content Include="Views\Refeicoes\Details.cshtml" />
     <Content Include="Views\Refeicoes\Edit.cshtml" />
     <Content Include="Views\Refeicoes\Index.cshtml" />
+    <Content Include="Views\RefeicaoPratoes\Create.cshtml" />
+    <Content Include="Views\RefeicaoPratoes\Delete.cshtml" />
+    <Content Include="Views\RefeicaoPratoes\Details.cshtml" />
+    <Content Include="Views\RefeicaoPratoes\Edit.cshtml" />
+    <Content Include="Views\RefeicaoPratoes\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

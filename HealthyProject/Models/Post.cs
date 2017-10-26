@@ -12,25 +12,24 @@ namespace HealthyProject.Models
     using System;
     using System.Collections.Generic;
     
-    public partial class Prato
+    public partial class Post
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public Prato()
+        public Post()
         {
-            this.RefeicaoPratos = new HashSet<RefeicaoPrato>();
+            this.Comentarios = new HashSet<Comentario>();
         }
     
-        public int PratosID { get; set; }
-        public string Nome { get; set; }
-        public int Unidade { get; set; }
-        public int Kcal { get; set; }
-        public int Proteinas { get; set; }
-        public int Gordura { get; set; }
-        public string Categoria { get; set; }
-        public int HC_Acucar { get; set; }
-        public double HidCarbono { get; set; }
+        public int PostID { get; set; }
+        public int UserID { get; set; }
+        public System.DateTime Data { get; set; }
+        public string Titulo { get; set; }
+        public int SubcategoriaID { get; set; }
+        public string Texto { get; set; }
     
+        public virtual AspNetUser AspNetUser { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<RefeicaoPrato> RefeicaoPratos { get; set; }
+        public virtual ICollection<Comentario> Comentarios { get; set; }
+        public virtual Subcategoria Subcategoria { get; set; }
     }
 }

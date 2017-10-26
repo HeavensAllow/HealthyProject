@@ -30,6 +30,21 @@
         <AssociationConnector Association="HealthyModel.FK_RefeicaoPratos_Pratos" ManuallyRouted="false" />
         <AssociationConnector Association="HealthyModel.FK_Refeicoes_RegistoDiario" ManuallyRouted="false" />
         <AssociationConnector Association="HealthyModel.AspNetUserRoles" ManuallyRouted="false" />
+        <EntityTypeShape EntityType="HealthyModel.Bebida" Width="1.5" PointX="12" PointY="15.5" />
+        <EntityTypeShape EntityType="HealthyModel.Categoria" Width="1.5" PointX="3.75" PointY="12.75" />
+        <EntityTypeShape EntityType="HealthyModel.Comentario" Width="1.5" PointX="14.5" PointY="1.125" />
+        <EntityTypeShape EntityType="HealthyModel.Opiniao" Width="1.5" PointX="16.75" PointY="1.5" />
+        <EntityTypeShape EntityType="HealthyModel.Post" Width="1.5" PointX="8.25" PointY="4.125" />
+        <EntityTypeShape EntityType="HealthyModel.RefeicaoBebida" Width="1.5" PointX="14.25" PointY="11" />
+        <EntityTypeShape EntityType="HealthyModel.Subcategoria" Width="1.5" PointX="6" PointY="12.5" />
+        <AssociationConnector Association="HealthyModel.FK_Comentarios_AspNetUsers" />
+        <AssociationConnector Association="HealthyModel.FK_Posts_AspNetUsers" />
+        <AssociationConnector Association="HealthyModel.FK_RefeicaoBebida_Bebidas" />
+        <AssociationConnector Association="HealthyModel.FK_Subcategorias_Categorias" />
+        <AssociationConnector Association="HealthyModel.FK_Comentarios_Posts" />
+        <AssociationConnector Association="HealthyModel.FK_Opiniao_Comentarios" />
+        <AssociationConnector Association="HealthyModel.FK_Posts_Subcategorias" />
+        <AssociationConnector Association="HealthyModel.FK_RefeicaoBebida_Refeicoes" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>
