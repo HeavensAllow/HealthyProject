@@ -34,7 +34,18 @@
                 @comentario.Comment
             </td>
             <td>
-                <button class="Gosto"/>@*fazer com actionLink em vez de button!!! e fazer um count para aparecer o numero de likes!*@
+                @using (Ajax.BeginForm("Gosto", "Forum", new { id = comentario.CommentID }, new AjaxOptions() { HttpMethod = "POST", OnSuccess = "increaseLikes" }, null))
+                {
+                    <button class="Gosto"></button>
+                    <label class="likesLabel">@(comentario.Opiniaos.Count())</label> <label>Likes</label>
+                }
+            </td>
+            <td>
+                @using (Ajax.BeginForm("naoGosto", "Forum", new { id = comentario.CommentID }, new AjaxOptions() { HttpMethod = "POST", OnSuccess = "decreaseLikes" }, null))
+                {
+                    <button class="naoGosto"></button>
+                    <label class="disLikesLabel">@(comentario.Opiniaos.Count())</label> <label>Dislikes</label>
+                }
             </td>
         </tr>
     }
@@ -45,7 +56,7 @@
 
     <div class="form-horizontal">
         <label class="control-label col-md-2" for="Texto">Novo Comentário</label>
-        <br />
+        <br />S
         <div class="form-group">
             <div class="col-md-10">
                 @Html.TextArea("Comment")
@@ -61,3 +72,16 @@
     </div>
 
         }
+@section Scripts{
+    <script src="~/Scripts/jquery.unobtrusive-ajax.js"></script>
+    <script>
+        function increaseLikes() {
+            var currentLikes = $('.likesLabel', $(this)).text();
+            $('.likesLabel', $(this)).text(Number(currentLikes) + 1);
+        }
+        function decreaseLikes() {
+            var currentDisLikes = $('.disLikesLabel', $(this)).text();
+            $('.disLikesLabel', $(this)).text(Number(currentDisLikes) + 1);
+        }
+    </script>
+}
