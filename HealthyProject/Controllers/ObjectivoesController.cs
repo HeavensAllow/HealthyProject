@@ -23,6 +23,124 @@ namespace HealthyProject.Controllers
             var objectivoes = db.Objectivoes.Include(o => o.Utilizador);
             var refeicoes = db.RegistoDiarios.Include(i => i.Objectivo);
             var actual = db.Objectivoes.FirstOrDefault(p => p.UserID == userId && p.Data_fim == null);
+            DateTime today = DateTime.Today;
+            int day = (int)today.DayOfWeek;
+            switch (day) {
+                case 0:
+                    var Domingo = refeicoes.FirstOrDefault(p => p.Data == DateTime.Today);
+                    var Segunda = refeicoes.FirstOrDefault(p => p.Data == DateTime.Today.AddDays(-6));
+                    var Terca = refeicoes.FirstOrDefault(p => p.Data == DateTime.Today.AddDays(-5));
+                    var Quarta = refeicoes.FirstOrDefault(p => p.Data == DateTime.Today.AddDays(-4));
+                    var Quinta = refeicoes.FirstOrDefault(p => p.Data == DateTime.Today.AddDays(-3));
+                    var Sexta = refeicoes.FirstOrDefault(p => p.Data == DateTime.Today.AddDays(-2));
+                    var Sabado = refeicoes.FirstOrDefault(p => p.Data == DateTime.Today.AddDays(-1));
+                    List<DataPoint> datapoints6 = new List<DataPoint>
+                        {
+                            new DataPoint("Segunda", Segunda.Total_Kcal),
+                            new DataPoint("Terca", Terca.Total_Kcal),
+                            new DataPoint("Quarta", Quarta.Total_Kcal),
+                            new DataPoint("Quinta", Quinta.Total_Kcal),
+                            new DataPoint("Sexta", Sexta.Total_Kcal),
+                            new DataPoint("Sabado", Sabado.Total_Kcal),
+                            new DataPoint("Domingo", Domingo.Total_Kcal),
+                    };
+                    break;
+                case 1:
+                    var Segunda1 = refeicoes.FirstOrDefault(p => p.Data == DateTime.Today);
+                    List<DataPoint> datapoints = new List<DataPoint>
+                        {
+                            new DataPoint("Segunda", Segunda1.Total_Kcal),
+                            new DataPoint("Terca", null),
+                            new DataPoint("Quarta", null),
+                            new DataPoint("Quinta", null),
+                            new DataPoint("Sexta", null),
+                            new DataPoint("Sabado", null),
+                            new DataPoint("Domingo", null),
+                    };
+                        
+                    
+                    break;
+                case 2:
+                    var Segunda2 = refeicoes.FirstOrDefault(p => p.Data == DateTime.Today.AddDays(-1));
+                    var Terca1 = refeicoes.FirstOrDefault(p => p.Data == DateTime.Today);
+                    List<DataPoint> datapoints1 = new List<DataPoint>
+                        {
+                            new DataPoint("Segunda", Segunda2.Total_Kcal),
+                            new DataPoint("Terca", Terca1.Total_Kcal),
+                            new DataPoint("Quarta", null),
+                            new DataPoint("Quinta", null),
+                            new DataPoint("Sexta", null),
+                            new DataPoint("Sabado", null),
+                            new DataPoint("Domingo", null),
+                    };
+                    break;
+                case 3:
+                    var Segunda3 = refeicoes.FirstOrDefault(p => p.Data == DateTime.Today.AddDays(-2));
+                    var Terca2 = refeicoes.FirstOrDefault(p => p.Data == DateTime.Today.AddDays(-1));
+                    var Quarta1 = refeicoes.FirstOrDefault(p => p.Data == DateTime.Today);
+                    List<DataPoint> datapoints2 = new List<DataPoint>
+                        {
+                            new DataPoint("Segunda", Segunda3.Total_Kcal),
+                            new DataPoint("Terca", Terca2.Total_Kcal),
+                            new DataPoint("Quarta", Quarta1.Total_Kcal),
+                            new DataPoint("Quinta", null),
+                            new DataPoint("Sexta", null),
+                            new DataPoint("Sabado", null),
+                            new DataPoint("Domingo", null),
+                    };
+                    break;
+                case 4:
+                    var Segunda4 = refeicoes.FirstOrDefault(p => p.Data == DateTime.Today.AddDays(-3));
+                    var Terca3 = refeicoes.FirstOrDefault(p => p.Data == DateTime.Today.AddDays(-2));
+                    var Quarta2 = refeicoes.FirstOrDefault(p => p.Data == DateTime.Today.AddDays(-1));
+                    var Quinta1 = refeicoes.FirstOrDefault(p => p.Data == DateTime.Today);
+                    List<DataPoint> datapoints3 = new List<DataPoint>
+                        {
+                            new DataPoint("Segunda", Segunda4.Total_Kcal),
+                            new DataPoint("Terca", Terca3.Total_Kcal),
+                            new DataPoint("Quarta", Quarta2.Total_Kcal),
+                            new DataPoint("Quinta", Quinta1.Total_Kcal),
+                            new DataPoint("Sexta", null),
+                            new DataPoint("Sabado", null),
+                            new DataPoint("Domingo", null),
+                    };
+                    break;
+                case 5:
+                    var Segunda5 = refeicoes.FirstOrDefault(p => p.Data == DateTime.Today.AddDays(-4));
+                    var Terca4 = refeicoes.FirstOrDefault(p => p.Data == DateTime.Today.AddDays(-3));
+                    var Quarta3 = refeicoes.FirstOrDefault(p => p.Data == DateTime.Today.AddDays(-2));
+                    var Quinta2 = refeicoes.FirstOrDefault(p => p.Data == DateTime.Today.AddDays(-1));
+                    var Sexta1 = refeicoes.FirstOrDefault(p => p.Data == DateTime.Today);
+                    List<DataPoint> datapoints4 = new List<DataPoint>
+                        {
+                            new DataPoint("Segunda", Segunda5.Total_Kcal),
+                            new DataPoint("Terca", Terca4.Total_Kcal),
+                            new DataPoint("Quarta", Quarta3.Total_Kcal),
+                            new DataPoint("Quinta", Quinta2.Total_Kcal),
+                            new DataPoint("Sexta", Sexta1.Total_Kcal),
+                            new DataPoint("Sabado", null),
+                            new DataPoint("Domingo", null),
+                    };
+                    break;
+                case 6:
+                    var Segunda6 = refeicoes.FirstOrDefault(p => p.Data == DateTime.Today.AddDays(-5));
+                    var Terca5 = refeicoes.FirstOrDefault(p => p.Data == DateTime.Today.AddDays(-4));
+                    var Quarta4 = refeicoes.FirstOrDefault(p => p.Data == DateTime.Today.AddDays(-3));
+                    var Quinta3 = refeicoes.FirstOrDefault(p => p.Data == DateTime.Today.AddDays(-2));
+                    var Sexta2 = refeicoes.FirstOrDefault(p => p.Data == DateTime.Today.AddDays(-1));
+                    var Sabado1 = refeicoes.FirstOrDefault(p => p.Data == DateTime.Today);
+                    List<DataPoint> datapoints5 = new List<DataPoint>
+                        {
+                            new DataPoint("Segunda", Segunda6.Total_Kcal),
+                            new DataPoint("Terca", Terca5.Total_Kcal),
+                            new DataPoint("Quarta", Quarta4.Total_Kcal),
+                            new DataPoint("Quinta", Quinta3.Total_Kcal),
+                            new DataPoint("Sexta", Sexta2.Total_Kcal),
+                            new DataPoint("Sabado", Sabado1.Total_Kcal),
+                            new DataPoint("Domingo", null),
+                    };
+                    break;
+            }
             return View(objectivoes.Where(o => o.UserID == userId).ToList());
         }
 
