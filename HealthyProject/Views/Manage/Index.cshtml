@@ -7,15 +7,15 @@
 
 <p class="text-success">@ViewBag.StatusMessage</p>
 <div>
-   @*<h4>Dados do Utilizador</h4>*@ 
+    @*<h4>Dados do Utilizador</h4>*@
     <hr />
     <dl class="dl-horizontal">
-        
 
 
-        
+
+
         <dt>
-            @Html.DisplayNameFor(model => model.Nome) 
+            @Html.DisplayNameFor(model => model.Nome)
 
             @*Mostra o nome*@
         </dt>
@@ -34,19 +34,20 @@
             @Html.DisplayNameFor(model => model.Data_nascimento)
         </dt>
         <dd>
-           @Model.Data_nascimento.Value.ToString("dd/MM/yyyy")
+            @Model.Data_nascimento.Value.ToString("dd/MM/yyyy")
 
         </dd>
     </dl>
 
     <button type="button" id="edit"> Clique para Editar</button>
 
-@using (Html.BeginForm("Index", "Manage"))
+    @using (Html.BeginForm("Index", "Manage"))
             {
-    @Html.HiddenFor(model => model.UserID)
-    <table class="hidden" id="tabela"> @*a classe hiden esconde toda esta tabela*@
-        <thead></thead>
-        <tbody>
+        @Html.HiddenFor(model => model.UserID)
+        <table class="hidden" id="tabela">
+            @*a classe hiden esconde toda esta tabela*@
+            <thead></thead>
+            <tbody>
                 @*utilizo o begin form que reconhece a acao como post no conrolador manage*@
                 <tr>
                     <th>@Html.DisplayNameFor(model => model.Nome)</th>
@@ -56,16 +57,19 @@
                 <tr>
                     <th>@Html.DisplayNameFor(model => model.Genero)</th>
 
-                    <th>@Html.DropDownListFor(model => model.Genero, (IEnumerable<SelectListItem>)ViewBag.Genders)
+                    <th>
+                        @Html.DropDownListFor(model => model.Genero, (IEnumerable<SelectListItem>)ViewBag.Genders)
 
                     </th>
                 </tr>
                 <tr>
-                    
-                    <th>@Html.DisplayNameFor(model => model.Data_nascimento)</th>
+                    <th>
 
-                    <th>@Html.EditorFor(model => model.Data_nascimento)</th>
-                </tr>
+                       @Html.DisplayNameFor(model => model.Data_nascimento)
+
+                    </th>
+
+                    <th>@Html.EditorFor(model => model.Data_nascimento)
                 <tr>
                     <th>@Html.DisplayNameFor(model => model.Peso)</th>
 
@@ -106,35 +110,36 @@
 
                     <th>@Html.EditorFor(model => model.MGorda)</th>
                 </tr>
-              
 
 
-        </tbody>
 
-    </table>
 
-    <input type="submit" value="Guardar" class="hidden " id="submeter" />
+            </tbody>
 
-    @Html.AntiForgeryToken()
-}
-   @section Scripts {
-    @Scripts.Render("~/bundles/jqueryval")
-    @*permite a utilizacao de comandos query*@
-   <script>
+        </table>
 
-       $('#edit').click(function() {
-           $('#tabela').removeClass("hidden");
-           $('#tabela').show();
+        <input type="submit" value="Guardar" class="hidden " id="submeter" />
 
-           $('#submeter').removeClass("hidden");        
+        @Html.AntiForgeryToken()
+    }
+    @section Scripts {
+        @Scripts.Render("~/bundles/jqueryval")
+        @*permite a utilizacao de comandos query*@
+        <script>
 
-       })
+            $('#edit').click(function () {
+                $('#tabela').removeClass("hidden");
+                $('#tabela').show();
 
-     
+                $('#submeter').removeClass("hidden");
 
-   </script>
+            })
 
-}
+
+
+        </script>
+
+    }
     @* <dt>Password:</dt> *@
     @*  [
             @if (Model.HasPassword)
@@ -208,7 +213,7 @@
                     </dd>
         }*@
 
-    
+
 
 
 </div>
