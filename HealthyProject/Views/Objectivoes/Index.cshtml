@@ -70,25 +70,25 @@
 
 @section Scripts{
 <script type="text/javascript">
-  window.onload = function () {
-  var chart = new CanvasJS.Chart("chartContainer",{
-    animationEnabled: true,
-    backgroundColor: "#ffffff",
-    title:{
-        text: "Objectivo Actual"
-    },
+    window.onload = function () {
+        var chart = new CanvasJS.Chart("chartContainer", {
+            animationEnabled: true,
+            backgroundColor: "#ffffff",
+            title: {
+                text: "Objectivo Actual"
+            },
 
-    toolTip: {
-        shared: true
-    },
+            toolTip: {
+                shared: true
+            },
 
-    axisY: {
-        interlacedColor: "#F0F8FF",
-        title: "Intake diário"
-    }, 
+            axisY: {
+                interlacedColor: "#F0F8FF",
+                title: "Intake diário"
+    },
 
     axisX: {
-        title: "Dia da semana"
+        title: "Dia da semana",
     },
 
     data: [{
@@ -96,15 +96,7 @@
         showInLegend: true,
         name: "IDA",
         legendText: "Intake Diário Submetido",
-        dataPoints: [
-            { y: 171, label: "Segunda"},
-            { y: 155, label: "Terça" },
-            { y: 150, label: "Quarta" },
-            { y: 165, label: "Quinta" },
-            { y: 195, label: "Sexta" },
-            { y: 168, label: "Sábado" },
-            { y: 128, label: "Domingo"}
-        ]
+        dataPoints: @Html.Raw(ViewBag.DataPoints)
     },
     {
         type: "line",
