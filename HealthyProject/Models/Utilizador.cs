@@ -12,7 +12,7 @@ namespace HealthyProject.Models
     using System;
     using System.Collections.Generic;
     using System.ComponentModel.DataAnnotations;
-
+    //Modelo do utilizador
     public partial class Utilizador
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
@@ -22,21 +22,36 @@ namespace HealthyProject.Models
         }
 
         public int UserID { get; set; }
+        [Required]
         public string Nome { get; set; }
+        [Required]
         public string Genero { get; set; }
-        
-        [DataType(DataType.Date)]
-        [DisplayFormat(DataFormatString ="{0:dd-MM-yyyy}",ApplyFormatInEditMode = true)]
 
-        public Nullable<System.DateTime> Data_nascimento { get; set; }
+        [Required]
+        [DisplayFormat(DataFormatString = "{0:dd.MM.yyyy}", ApplyFormatInEditMode = true)]
+        [DataType(DataType.Date)]
+        [Display(Name = "Data de Nascimento")]
+        public Nullable<System.DateTime> Data_nascimento  { get; set; }
+       
+        
+
+        [Required]
         public Nullable<int> Peso { get; set; }
+        [Required]
         public Nullable<int> Altura { get; set; }
+        [Required]
         [Display(Name = "Indice de Atividade Fisica")]
         public Nullable<int> Actividade_fisica { get; set; }
+        
+        [Display(Name = "Numero de Horas de Sono Diarias")]
         public Nullable<int> Nr_horas_sono { get; set; }
+        [Display(Name = "Numero de Refeicoes Diarias")]
         public Nullable<int> Nr_refeicoes { get; set; }
+        [Display(Name = "Habitos Alcoolicos")]
         public Nullable<bool> Habitos_alcoolicos { get; set; }
+        [Display(Name = "Indice de Massa Muscular")]
         public Nullable<double> MMuscular { get; set; }
+        [Display(Name = "Indice de Massa Gorda")]
         public Nullable<double> MGorda { get; set; }
 
     
