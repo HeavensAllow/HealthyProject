@@ -11,7 +11,8 @@ namespace HealthyProject.Models
 {
     using System;
     using System.Collections.Generic;
-    
+    using System.ComponentModel.DataAnnotations;
+
     public partial class RegistoDiario
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
@@ -22,9 +23,14 @@ namespace HealthyProject.Models
     
         public int RegistoID { get; set; }
         public Nullable<int> ObjectivoID { get; set; }
+        [DataType(DataType.Date)]
+        [DisplayFormat(DataFormatString = "{0:dd-MM-yyyy}", ApplyFormatInEditMode = true)]
         public System.DateTime Data { get; set; }
+        [Display(Name = "Total de Kcal")]
         public int Total_Kcal { get; set; }
+        [Display(Name = "Total de proteinas")]
         public int Total_proteinas { get; set; }
+        [Display(Name = "Total de gorduras")]
         public int Total_gordura { get; set; }
         public int Total_HC { get; set; }
     
