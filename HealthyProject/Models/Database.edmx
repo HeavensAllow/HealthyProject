@@ -239,6 +239,7 @@
           <Property Name="Habitos_alcoolicos" Type="bit" />
           <Property Name="MMuscular" Type="float" />
           <Property Name="MGorda" Type="float" />
+          <Property Name="Role" Type="nvarchar" MaxLength="50" />
         </EntityType>
         <Association Name="FK_Comentarios_AspNetUsers">
           <End Role="AspNetUsers" Type="Self.AspNetUsers" Multiplicity="1" />
@@ -613,7 +614,6 @@
           <EntitySet Name="RegistoDiarios" EntityType="HealthyModel.RegistoDiario" />
           <EntitySet Name="Subcategorias" EntityType="HealthyModel.Subcategoria" />
           <EntitySet Name="sysdiagrams" EntityType="HealthyModel.sysdiagram" />
-          <EntitySet Name="Utilizadors" EntityType="HealthyModel.Utilizador" />
           <AssociationSet Name="FK_dbo_AspNetUserClaims_dbo_AspNetUsers_UserId" Association="HealthyModel.FK_dbo_AspNetUserClaims_dbo_AspNetUsers_UserId">
             <End Role="AspNetUser" EntitySet="AspNetUsers" />
             <End Role="AspNetUserClaim" EntitySet="AspNetUserClaims" />
@@ -622,10 +622,6 @@
             <End Role="AspNetUser" EntitySet="AspNetUsers" />
             <End Role="AspNetUserLogin" EntitySet="AspNetUserLogins" />
           </AssociationSet>
-          <AssociationSet Name="FK_Utilizador_AspNetUsers" Association="HealthyModel.FK_Utilizador_AspNetUsers">
-            <End Role="AspNetUser" EntitySet="AspNetUsers" />
-            <End Role="Utilizador" EntitySet="Utilizadors" />
-          </AssociationSet>
           <AssociationSet Name="FK_RefeicaoBebida_Bebidas" Association="HealthyModel.FK_RefeicaoBebida_Bebidas">
             <End Role="Bebida" EntitySet="Bebidas" />
             <End Role="RefeicaoBebida" EntitySet="RefeicaoBebidas" />
@@ -633,10 +629,6 @@
           <AssociationSet Name="FK_RefeicaoIngredientes_Refeicoes" Association="HealthyModel.FK_RefeicaoIngredientes_Refeicoes">
             <End Role="Ingrediente" EntitySet="Ingredientes" />
             <End Role="RefeicaoIngrediente" EntitySet="RefeicaoIngredientes" />
-          </AssociationSet>
-          <AssociationSet Name="FK_Objectivo_Objectivo" Association="HealthyModel.FK_Objectivo_Objectivo">
-            <End Role="Utilizador" EntitySet="Utilizadors" />
-            <End Role="Objectivo" EntitySet="Objectivoes" />
           </AssociationSet>
           <AssociationSet Name="FK_RegistoDiario_RegistoDiario" Association="HealthyModel.FK_RegistoDiario_RegistoDiario">
             <End Role="Objectivo" EntitySet="Objectivoes" />
@@ -693,6 +685,15 @@
           <AssociationSet Name="FK_Opiniao_Comentarios" Association="HealthyModel.FK_Opiniao_Comentarios">
             <End Role="Comentario" EntitySet="Comentarios" />
             <End Role="Opiniao" EntitySet="Opiniaos" />
+          </AssociationSet>
+          <EntitySet Name="Utilizadors" EntityType="HealthyModel.Utilizador" />
+          <AssociationSet Name="FK_Utilizador_AspNetUsers" Association="HealthyModel.FK_Utilizador_AspNetUsers">
+            <End Role="AspNetUser" EntitySet="AspNetUsers" />
+            <End Role="Utilizador" EntitySet="Utilizadors" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Objectivo_Objectivo" Association="HealthyModel.FK_Objectivo_Objectivo">
+            <End Role="Utilizador" EntitySet="Utilizadors" />
+            <End Role="Objectivo" EntitySet="Objectivoes" />
           </AssociationSet>
           </EntityContainer>
         <EntityType Name="C__MigrationHistory">
@@ -752,10 +753,10 @@
           <Property Name="UserName" Type="String" Nullable="false" MaxLength="256" FixedLength="false" Unicode="true" />
           <NavigationProperty Name="AspNetUserClaims" Relationship="HealthyModel.FK_dbo_AspNetUserClaims_dbo_AspNetUsers_UserId" FromRole="AspNetUser" ToRole="AspNetUserClaim" />
           <NavigationProperty Name="AspNetUserLogins" Relationship="HealthyModel.FK_dbo_AspNetUserLogins_dbo_AspNetUsers_UserId" FromRole="AspNetUser" ToRole="AspNetUserLogin" />
-          <NavigationProperty Name="Utilizador" Relationship="HealthyModel.FK_Utilizador_AspNetUsers" FromRole="AspNetUser" ToRole="Utilizador" />
           <NavigationProperty Name="AspNetRoles" Relationship="HealthyModel.AspNetUserRoles" FromRole="AspNetUser" ToRole="AspNetRole" />
           <NavigationProperty Name="Posts" Relationship="HealthyModel.FK_Posts_AspNetUsers" FromRole="AspNetUser" ToRole="Post" />
           <NavigationProperty Name="Comentarios" Relationship="HealthyModel.FK_Comentarios_AspNetUsers" FromRole="AspNetUser" ToRole="Comentario" />
+          <NavigationProperty Name="Utilizador" Relationship="HealthyModel.FK_Utilizador_AspNetUsers" FromRole="AspNetUser" ToRole="Utilizador" />
         </EntityType>
         <EntityType Name="Bebida">
           <Key>
@@ -798,8 +799,8 @@
           <Property Name="Peso_objectivo" Type="Int32" />
           <Property Name="Intake_diarioR" Type="Int32" />
           <Property Name="Intake_diarioA" Type="Int32" />
-          <NavigationProperty Name="Utilizador" Relationship="HealthyModel.FK_Objectivo_Objectivo" FromRole="Objectivo" ToRole="Utilizador" />
           <NavigationProperty Name="RegistoDiarios" Relationship="HealthyModel.FK_RegistoDiario_RegistoDiario" FromRole="Objectivo" ToRole="RegistoDiario" />
+          <NavigationProperty Name="Utilizador" Relationship="HealthyModel.FK_Objectivo_Objectivo" FromRole="Objectivo" ToRole="Utilizador" />
         </EntityType>
         <EntityType Name="Prato">
           <Key>
@@ -896,25 +897,6 @@
           <Property Name="version" Type="Int32" />
           <Property Name="definition" Type="Binary" MaxLength="Max" FixedLength="false" />
         </EntityType>
-        <EntityType Name="Utilizador">
-          <Key>
-            <PropertyRef Name="UserID" />
-          </Key>
-          <Property Name="UserID" Type="Int32" Nullable="false" />
-          <Property Name="Nome" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="Genero" Type="String" MaxLength="10" FixedLength="false" Unicode="true" />
-          <Property Name="Data_nascimento" Type="DateTime" Precision="0" />
-          <Property Name="Peso" Type="Int32" />
-          <Property Name="Altura" Type="Int32" />
-          <Property Name="Actividade_fisica" Type="Int32" />
-          <Property Name="Nr_horas_sono" Type="Int32" />
-          <Property Name="Nr_refeicoes" Type="Int32" />
-          <Property Name="Habitos_alcoolicos" Type="Boolean" />
-          <Property Name="MMuscular" Type="Double" />
-          <Property Name="MGorda" Type="Double" />
-          <NavigationProperty Name="AspNetUser" Relationship="HealthyModel.FK_Utilizador_AspNetUsers" FromRole="Utilizador" ToRole="AspNetUser" />
-          <NavigationProperty Name="Objectivoes" Relationship="HealthyModel.FK_Objectivo_Objectivo" FromRole="Utilizador" ToRole="Objectivo" />
-        </EntityType>
         <Association Name="FK_dbo_AspNetUserClaims_dbo_AspNetUsers_UserId">
           <End Type="HealthyModel.AspNetUser" Role="AspNetUser" Multiplicity="1">
             <OnDelete Action="Cascade" />
@@ -943,18 +925,6 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK_Utilizador_AspNetUsers">
-          <End Type="HealthyModel.AspNetUser" Role="AspNetUser" Multiplicity="1" />
-          <End Type="HealthyModel.Utilizador" Role="Utilizador" Multiplicity="0..1" />
-          <ReferentialConstraint>
-            <Principal Role="AspNetUser">
-              <PropertyRef Name="Id" />
-            </Principal>
-            <Dependent Role="Utilizador">
-              <PropertyRef Name="UserID" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
         <Association Name="FK_RefeicaoBebida_Bebidas">
           <End Type="HealthyModel.Bebida" Role="Bebida" Multiplicity="1" />
           <End Type="HealthyModel.RefeicaoBebida" Role="RefeicaoBebida" Multiplicity="*" />
@@ -976,18 +946,6 @@
             </Principal>
             <Dependent Role="RefeicaoIngrediente">
               <PropertyRef Name="IngredienteID" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_Objectivo_Objectivo">
-          <End Type="HealthyModel.Utilizador" Role="Utilizador" Multiplicity="1" />
-          <End Type="HealthyModel.Objectivo" Role="Objectivo" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Utilizador">
-              <PropertyRef Name="UserID" />
-            </Principal>
-            <Dependent Role="Objectivo">
-              <PropertyRef Name="UserID" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -1184,6 +1142,50 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <EntityType Name="Utilizador">
+          <Key>
+            <PropertyRef Name="UserID" />
+          </Key>
+          <Property Name="UserID" Type="Int32" Nullable="false" />
+          <Property Name="Nome" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Genero" Type="String" MaxLength="10" FixedLength="false" Unicode="true" />
+          <Property Name="Data_nascimento" Type="DateTime" Precision="0" />
+          <Property Name="Peso" Type="Int32" />
+          <Property Name="Altura" Type="Int32" />
+          <Property Name="Actividade_fisica" Type="Int32" />
+          <Property Name="Nr_horas_sono" Type="Int32" />
+          <Property Name="Nr_refeicoes" Type="Int32" />
+          <Property Name="Habitos_alcoolicos" Type="Boolean" />
+          <Property Name="MMuscular" Type="Double" />
+          <Property Name="MGorda" Type="Double" />
+          <Property Name="Role" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="AspNetUser" Relationship="HealthyModel.FK_Utilizador_AspNetUsers" FromRole="Utilizador" ToRole="AspNetUser" />
+          <NavigationProperty Name="Objectivoes" Relationship="HealthyModel.FK_Objectivo_Objectivo" FromRole="Utilizador" ToRole="Objectivo" />
+        </EntityType>
+        <Association Name="FK_Utilizador_AspNetUsers">
+          <End Type="HealthyModel.AspNetUser" Role="AspNetUser" Multiplicity="1" />
+          <End Type="HealthyModel.Utilizador" Role="Utilizador" Multiplicity="0..1" />
+          <ReferentialConstraint>
+            <Principal Role="AspNetUser">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Utilizador">
+              <PropertyRef Name="UserID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Objectivo_Objectivo">
+          <End Type="HealthyModel.Utilizador" Role="Utilizador" Multiplicity="1" />
+          <End Type="HealthyModel.Objectivo" Role="Objectivo" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Utilizador">
+              <PropertyRef Name="UserID" />
+            </Principal>
+            <Dependent Role="Objectivo">
+              <PropertyRef Name="UserID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -1373,24 +1375,6 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <EntitySetMapping Name="Utilizadors">
-            <EntityTypeMapping TypeName="HealthyModel.Utilizador">
-              <MappingFragment StoreEntitySet="Utilizador">
-                <ScalarProperty Name="MGorda" ColumnName="MGorda" />
-                <ScalarProperty Name="MMuscular" ColumnName="MMuscular" />
-                <ScalarProperty Name="Habitos_alcoolicos" ColumnName="Habitos_alcoolicos" />
-                <ScalarProperty Name="Nr_refeicoes" ColumnName="Nr_refeicoes" />
-                <ScalarProperty Name="Nr_horas_sono" ColumnName="Nr_horas_sono" />
-                <ScalarProperty Name="Actividade_fisica" ColumnName="Actividade_fisica" />
-                <ScalarProperty Name="Altura" ColumnName="Altura" />
-                <ScalarProperty Name="Peso" ColumnName="Peso" />
-                <ScalarProperty Name="Data_nascimento" ColumnName="Data_nascimento" />
-                <ScalarProperty Name="Genero" ColumnName="Genero" />
-                <ScalarProperty Name="Nome" ColumnName="Nome" />
-                <ScalarProperty Name="UserID" ColumnName="UserID" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
           <AssociationSetMapping Name="AspNetUserRoles" TypeName="HealthyModel.AspNetUserRoles" StoreEntitySet="AspNetUserRoles">
             <EndProperty Name="AspNetUser">
               <ScalarProperty Name="Id" ColumnName="UserId" />
@@ -1436,6 +1420,25 @@
                 <ScalarProperty Name="Opiniao1" ColumnName="Opiniao" />
                 <ScalarProperty Name="userID" ColumnName="userID" />
                 <ScalarProperty Name="commentID" ColumnName="commentID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Utilizadors">
+            <EntityTypeMapping TypeName="HealthyModel.Utilizador">
+              <MappingFragment StoreEntitySet="Utilizador">
+                <ScalarProperty Name="Role" ColumnName="Role" />
+                <ScalarProperty Name="MGorda" ColumnName="MGorda" />
+                <ScalarProperty Name="MMuscular" ColumnName="MMuscular" />
+                <ScalarProperty Name="Habitos_alcoolicos" ColumnName="Habitos_alcoolicos" />
+                <ScalarProperty Name="Nr_refeicoes" ColumnName="Nr_refeicoes" />
+                <ScalarProperty Name="Nr_horas_sono" ColumnName="Nr_horas_sono" />
+                <ScalarProperty Name="Actividade_fisica" ColumnName="Actividade_fisica" />
+                <ScalarProperty Name="Altura" ColumnName="Altura" />
+                <ScalarProperty Name="Peso" ColumnName="Peso" />
+                <ScalarProperty Name="Data_nascimento" ColumnName="Data_nascimento" />
+                <ScalarProperty Name="Genero" ColumnName="Genero" />
+                <ScalarProperty Name="Nome" ColumnName="Nome" />
+                <ScalarProperty Name="UserID" ColumnName="UserID" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
