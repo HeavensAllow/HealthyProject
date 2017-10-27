@@ -53,14 +53,22 @@ namespace HealthyProject.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Index(string qqr)
+        public ActionResult Index(DateTime? dateInput)
         {
-            string textoData = "26/10/2017";
-            var dataFiltro = DateTime.Parse(textoData);
-            var refeicoes = db.Refeicoes.Include(r => r.RegistoDiario).Where(d => d.Data == dataFiltro);
+            if (dateInput == null)
+            {
+                var refeicoes1 = db.Refeicoes.Include(r => r.RegistoDiario).Where(d => d.Data == DateTime.Today);
+                return View(refeicoes1);
 
-            return View(refeicoes.ToList());
+            }
+            else
+            {
+                var refeicoes = db.Refeicoes.Include(r => r.RegistoDiario).Where(d => d.Data == dateInput);
+                return View(refeicoes);
+            }
+            
         }
+
         [HttpPost]
         [ValidateAntiForgeryToken]
         public ActionResult Create([Bind(Include = "RefeicaoID,RegistoID,Data,Tipo")] Refeico refeico)
