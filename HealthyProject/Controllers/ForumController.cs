@@ -90,37 +90,69 @@ namespace HealthyProject.Controllers
                 return HttpNotFound();
             }
 
-            newComment.UserID = Convert.ToInt32(User.Identity.GetUserId());
+            newComment.AspNetUser = db.AspNetUsers.Find(Convert.ToInt32(User.Identity.GetUserId()));
             newComment.Data = DateTime.Now;
             newComment.PostID = (int)postId;
 
             db.Comentarios.Add(newComment);
             db.SaveChanges();
+            post = db.Posts.Find(postId);
             return View(post);
         }
 
         [HttpPost]
         public ActionResult Gosto(int? id)
         {
+            var userID = Convert.ToInt32(User.Identity.GetUserId());
             Comentario comentario = db.Comentarios.Find(id);
-            Opiniao o = new Opiniao();
-            o.Opiniao1 = true;
-            o.userID = Convert.ToInt32(User.Identity.GetUserId());
-            o.commentID = comentario.CommentID;
-            db.Opiniaos.Add(o);
+            if (comentario == null)
+            {
+                return HttpNotFound();
+            }
+            Opiniao opiniao = comentario.Opiniaos.FirstOrDefault(c => c.userID == userID);
+
+            if (opiniao == null) // se não existir, adicionamos uma nova
+            {
+                opiniao = new Opiniao();
+                opiniao.userID = userID;
+                opiniao.commentID = comentario.CommentID;
+                opiniao.Opiniao1 = true;
+                db.Opiniaos.Add(opiniao);
+            }
+            else //update
+            {
+                opiniao.Opiniao1 = true;
+                db.Entry(opiniao).State = EntityState.Modified;
+            }
             db.SaveChanges();
             return View("Post", comentario.Post);
         }
         [HttpPost]
         public ActionResult naoGosto(int? id)
         {
+            var userID = Convert.ToInt32(User.Identity.GetUserId());
             Comentario comentario = db.Comentarios.Find(id);
-            Opiniao o = new Opiniao();
-            o.Opiniao1 = true;
-            o.userID = Convert.ToInt32(User.Identity.GetUserId());
-            o.commentID = comentario.CommentID;
-            db.Opiniaos.Add(o);
+            if(comentario == null)
+            {
+                return HttpNotFound();
+            }
+            Opiniao opiniao = comentario.Opiniaos.FirstOrDefault(c => c.userID == userID);
+
+            if (opiniao == null) // se não existir, adicionamos uma nova
+            {
+                opiniao = new Opiniao();
+                opiniao.userID = userID;
+                opiniao.commentID = comentario.CommentID;
+                opiniao.Opiniao1 = false;
+                db.Opiniaos.Add(opiniao);
+            }
+            else //update
+            {
+                opiniao.Opiniao1 = false;
+                db.Entry(opiniao).State = EntityState.Modified;
+            }
             db.SaveChanges();
+            ViewBag.Likes = comentario.Opiniaos.Where(o => o.Opiniao1 == true).Count() - comentario.Opiniaos.Where(o => o.Opiniao1 == false).Count();
             return View("Post", comentario.Post);
         }
 

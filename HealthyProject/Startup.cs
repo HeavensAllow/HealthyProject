@@ -18,9 +18,9 @@ namespace HealthyProject
         private void createRolesandUsers()
         {
             ApplicationDbContext context = new ApplicationDbContext();
-            
-            var roleManager = new RoleManager<CustomRole,int>(new CustomRoleStore(context));
-            var UserManager = new UserManager<ApplicationUser,int>(new CustomUserStore(context));
+
+            var roleManager = new RoleManager<CustomRole, int>(new CustomRoleStore(context));
+            var UserManager = new UserManager<ApplicationUser, int>(new CustomUserStore(context));
 
 
             // In Startup iam creating first Admin Role and creating a default Admin User     
