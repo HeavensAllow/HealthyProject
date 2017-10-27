@@ -15,19 +15,16 @@ namespace HealthyProject.Controllers
         private HealthyEntities db = new HealthyEntities();
 
         // GET: Refeicoes
-        public ActionResult Index(string data)
+        public ActionResult Index()
         {
+
+
             var refeicoes = db.Refeicoes.Include(r => r.RegistoDiario);
 
-             data = DateTime.Today.ToString("dd/MM/yyyy");
-            //var RefeicaoData = db.Refeicoes.Where(model => model.Data == "data");
-          
-
-            
             return View(refeicoes.ToList());
         }
-
-        // GET: Refeicoes/Details/5
+       
+      
         public ActionResult Details(int? id)
         {
             if (id == null)
@@ -52,6 +49,18 @@ namespace HealthyProject.Controllers
         // POST: Refeicoes/Create
         // Para se proteger de mais ataques, ative as propriedades específicas a que você quer se conectar. Para 
         // obter mais detalhes, consulte https://go.microsoft.com/fwlink/?LinkId=317598.
+        // POST: Refeicoes
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult Index(string qqr)
+        {
+            string textoData = "26/10/2017";
+            var dataFiltro = DateTime.Parse(textoData);
+            var refeicoes = db.Refeicoes.Include(r => r.RegistoDiario).Where(d => d.Data == dataFiltro);
+
+            return View(refeicoes.ToList());
+        }
         [HttpPost]
         [ValidateAntiForgeryToken]
         public ActionResult Create([Bind(Include = "RefeicaoID,RegistoID,Data,Tipo")] Refeico refeico)
@@ -136,3 +145,12 @@ namespace HealthyProject.Controllers
         }
     }
 }
+//// GET: Refeicoes
+//public ActionResult Index()
+//{
+//    string textoData = "26/10/2017";
+//    var dataFiltro = DateTime.Parse(textoData);
+//    var refeicoes = db.Refeicoes.Include(r => r.RegistoDiario).Where(d => d.Data == dataFiltro);
+
+//    return View(refeicoes.ToList());
+//}
