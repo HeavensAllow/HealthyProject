@@ -4,12 +4,6 @@
     ViewBag.Title = "Index";
 }
 
-<h2>Index</h2>
-
-<p>
-    @Html.ActionLink("Create New", "Create")
-</p>
-
 @if (TempData["Alert"] != null)
 {
     <div class="alert alert-success alert-dismissable">
@@ -17,59 +11,24 @@
         <strong><i class="fa fa-exclamation-triangle" aria-hidden="true"></i> Ja existe um objectivo definido por concluir.</strong>
     </div>
 }
-    
 
-<table class="table">
-    <tr>
-        <th>
-            @Html.DisplayNameFor(model => model.Data_inicio)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Data_fim)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Peso_objectivo)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Intake_diarioR)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Utilizador.Nome)
-        </th>
-        <th></th>
-    </tr>
+@if (ViewBag.IntakeR == null)
+{
+    <p>
+        @Html.ActionLink("Create Objective", "Create")
+    </p>
 
-@foreach (var item in Model) {
-    <tr>
-        <td>
-            @Html.DisplayFor(modelItem => item.Data_inicio)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Data_fim)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Peso_objectivo)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Intake_diarioR)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Utilizador.Nome)
-        </td>
-        <td>
-            @Html.ActionLink("Edit", "Edit", new { id=item.ObjectivoID }) |
-            @Html.ActionLink("Details", "Details", new { id=item.ObjectivoID }) |
-            @Html.ActionLink("Delete", "Delete", new { id=item.ObjectivoID })
-        </td>
-    </tr>
+    <div id="chartContainer" style="height: 500px; width: 100%;"></div>
+}
+else
+{
+    <div id="chartContainer" style="height: 500px; width: 100%;"></div>
+    @Html.ActionLink("Delete Objective", "Delete")
 }
 
-</table>
-    <div id="chartContainer" style="height: 500px; width: 100%;">
-    </div>
 
 @section Scripts{
-<script type="text/javascript">
+    <script type="text/javascript">
     window.onload = function () {
         var chart = new CanvasJS.Chart("chartContainer", {
             animationEnabled: true,
@@ -83,6 +42,8 @@
             },
 
             axisY: {
+                minimum: @Html.Raw(ViewBag.IMath)-750,
+                maximum: @Html.Raw(ViewBag.IMath)+750,
                 interlacedColor: "#F0F8FF",
                 title: "Intake diário"
     },
@@ -91,35 +52,25 @@
         title: "Dia da semana",
     },
 
-    data: [{
-        type: "column",
-        showInLegend: true,
-        name: "IDA",
-        legendText: "Intake Diário Submetido",
-        dataPoints: @Html.Raw(ViewBag.DataPoints)
+        data: [{
+            type: "column",
+            showInLegend: true,
+            name: "IDA",
+            legendText: "Intake Diário Submetido",
+            dataPoints: @Html.Raw(ViewBag.DataPoints),
     },
-    {
-        type: "line",
-        showInLegend: true,
-        name: "IDR",
-        legendText: "Intake Diário Recomendado",
-        dataPoints: [
-            { y: 150 },
-            { y: 150 },
-            { y: 150 },
-            { y: 150 },
-            { y: 150 },
-            { y: 150 },
-            { y: 150 }
-        ]
-    }
-
-    ]
+        {
+            type: "line",
+            showInLegend: true,
+            name: "IDR",
+            legendText: "Intake Diário Recomendado",
+            dataPoints: @Html.Raw(ViewBag.IntakeR),
+        }]
   });
 
-  chart.render();
+    chart.render();
   }
-</script>
-<script src="@Url.Content("~/Content/canvasjs.min.js")"></script>
-<script src="@Url.Content("~/Content/jquery.canvasjs.min.js")"></script>
+    </script>
+    <script src="@Url.Content("~/Content/canvasjs.min.js")"></script>
+    <script src="@Url.Content("~/Content/jquery.canvasjs.min.js")"></script>
 }

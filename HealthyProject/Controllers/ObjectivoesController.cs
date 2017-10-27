@@ -24,6 +24,7 @@ namespace HealthyProject.Controllers
             var userId = Convert.ToInt32(User.Identity.GetUserId());
             var objectivoes = db.Objectivoes.Include(o => o.Utilizador);
             var refeicoes = db.RegistoDiarios.Include(i => i.Objectivo);
+            Objectivo objectivo = objectivoes.FirstOrDefault(o => o.UserID == userId && o.Data_fim == null);
             var today = DateTime.Now;
             
             int dayOfWeek = (int)today.DayOfWeek;
@@ -33,431 +34,40 @@ namespace HealthyProject.Controllers
             {
                 delta -= 7;
             }
+            double counter = 0;
             List<DataPoint> datapoints = new List<DataPoint>{};
+            List<DataPoint> intake = new List<DataPoint> { };
             while (delta <= 0)
             {
                 var day = today.AddDays(delta);
                 var dailyMeal = refeicoes.FirstOrDefault(p => p.Data == day);
                 if(dailyMeal == null)
                 {
-                    datapoints.Add(new DataPoint(day.ToString("dddd"), null));
+                    datapoints.Add(new DataPoint(counter, null, day.ToString("dddd")));
+                    intake.Add(new DataPoint(counter, objectivo.Intake_diarioR, day.ToString("dddd")));
+                    counter++;
                 }
                 else
                 {
-                    datapoints.Add(new DataPoint(day.ToString("dddd"),dailyMeal.Total_Kcal));
+                    datapoints.Add(new DataPoint(counter,dailyMeal.Total_Kcal, day.ToString("dddd")));
+                    intake.Add(new DataPoint(counter, objectivo.Intake_diarioR, day.ToString("dddd")));
+                    counter++;
                 }
                 delta++;
             }
 
-            while (datapoints.Count < 7)
+            while (intake.Count < 7)
             {
                 today = today.AddDays(1);
-                datapoints.Add(new DataPoint(today.ToString("dddd"), null));
+                datapoints.Add(new DataPoint(counter, null, today.ToString("dddd")));
+                intake.Add(new DataPoint(counter, objectivo.Intake_diarioR, today.ToString("dddd")));
+                counter++;
             }
 
             ViewBag.DataPoints = JsonConvert.SerializeObject(datapoints);
+            ViewBag.IntakeR = JsonConvert.SerializeObject(intake);
+            ViewBag.IMath = JsonConvert.SerializeObject(objectivo.Intake_diarioR);
             return View(objectivoes.Where(o => o.UserID == userId && o.Data_fim == null).ToList());
-
-
-            //switch (day) {
-            //    case 0:
-
-            //        var Tdomingo = today.AddDays(-1);
-            //        var Tdomingo1 = today.AddDays(-2);
-            //        var Tdomingo2 = today.AddDays(-3);
-            //        var Tdomingo3 = today.AddDays(-4);
-            //        var Tdomingo4 = today.AddDays(-5);
-            //        var Tdomingo5 = today.AddDays(-6);
-            //        var Domingo = refeicoes.FirstOrDefault(p => p.Data == today);
-            //        var Segunda = refeicoes.FirstOrDefault(p => p.Data == Tdomingo5);
-            //        var Terca = refeicoes.FirstOrDefault(p => p.Data == Tdomingo4);
-            //        var Quarta = refeicoes.FirstOrDefault(p => p.Data == Tdomingo3);
-            //        var Quinta = refeicoes.FirstOrDefault(p => p.Data == Tdomingo2);
-            //        var Sexta = refeicoes.FirstOrDefault(p => p.Data == Tdomingo1);
-            //        var Sabado = refeicoes.FirstOrDefault(p => p.Data == Tdomingo);
-            //        List<DataPoint> datapoints6 = new List<DataPoint>
-            //            {
-            //                new DataPoint("Segunda", Segunda.Total_Kcal),
-            //                new DataPoint("Terca", Terca.Total_Kcal),
-            //                new DataPoint("Quarta", Quarta.Total_Kcal),
-            //                new DataPoint("Quinta", Quinta.Total_Kcal),
-            //                new DataPoint("Sexta", Sexta.Total_Kcal),
-            //                new DataPoint("Sabado", Sabado.Total_Kcal),
-            //                new DataPoint("Domingo", Domingo.Total_Kcal),
-            //        };
-            //        ViewBag.DataPoints = JsonConvert.SerializeObject(datapoints6);
-            //        return View(objectivoes.Where(o => o.UserID == userId && o.Data_fim == null).ToList());
-            //    case 1:
-            //        var Segunda1 = refeicoes.FirstOrDefault(p => p.Data == today);
-            //        List<DataPoint> datapoints = new List<DataPoint>
-            //            {
-            //                new DataPoint("Segunda", Segunda1.Total_Kcal),
-            //                new DataPoint("Terca", null),
-            //                new DataPoint("Quarta", null),
-            //                new DataPoint("Quinta", null),
-            //                new DataPoint("Sexta", null),
-            //                new DataPoint("Sabado", null),
-            //                new DataPoint("Domingo", null),
-            //        };
-            //        ViewBag.DataPoints = JsonConvert.SerializeObject(datapoints);
-            //        return View(objectivoes.Where(o => o.UserID == userId && o.Data_fim == null).ToList());
-            //    case 2:
-            //        var Tterca = today.AddDays(-1);
-            //        var Segunda2 = refeicoes.FirstOrDefault(p => p.Data == Tterca);
-            //        var Terca1 = refeicoes.FirstOrDefault(p => p.Data == today);
-            //        List<DataPoint> datapoints1 = new List<DataPoint>
-            //            {
-            //                new DataPoint("Segunda", Segunda2.Total_Kcal),
-            //                new DataPoint("Terca", Terca1.Total_Kcal),
-            //                new DataPoint("Quarta", null),
-            //                new DataPoint("Quinta", null),
-            //                new DataPoint("Sexta", null),
-            //                new DataPoint("Sabado", null),
-            //                new DataPoint("Domingo", null),
-            //        };
-            //        ViewBag.DataPoints = JsonConvert.SerializeObject(datapoints1);
-            //        return View(objectivoes.Where(o => o.UserID == userId && o.Data_fim == null).ToList());
-            //    case 3:
-            //        var Tquarta = today.AddDays(-1);
-            //        var Tquarta1 = today.AddDays(-2);
-            //        var Segunda3 = refeicoes.FirstOrDefault(p => p.Data == Tquarta1);
-            //        var Terca2 = refeicoes.FirstOrDefault(p => p.Data == Tquarta);
-            //        var Quarta1 = refeicoes.FirstOrDefault(p => p.Data == today);
-            //        List<DataPoint> datapoints2 = new List<DataPoint>
-            //            {
-            //                new DataPoint("Segunda", Segunda3.Total_Kcal),
-            //                new DataPoint("Terca", Terca2.Total_Kcal),
-            //                new DataPoint("Quarta", Quarta1.Total_Kcal),
-            //                new DataPoint("Quinta", null),
-            //                new DataPoint("Sexta", null),
-            //                new DataPoint("Sabado", null),
-            //                new DataPoint("Domingo", null),
-            //        };
-            //        ViewBag.DataPoints = JsonConvert.SerializeObject(datapoints2);
-            //        return View(objectivoes.Where(o => o.UserID == userId && o.Data_fim == null).ToList());
-            //    case 4:
-            //        var Tquinta = today.AddDays(-1);
-            //        var Tquinta1 = today.AddDays(-2);
-            //        var Tquinta2 = today.AddDays(-3);
-            //        var Segunda4 = refeicoes.FirstOrDefault(p => p.Data == Tquinta2);
-            //        var Terca3 = refeicoes.FirstOrDefault(p => p.Data == Tquinta1);
-            //        var Quarta2 = refeicoes.FirstOrDefault(p => p.Data == Tquinta);
-            //        var Quinta1 = refeicoes.FirstOrDefault(p => p.Data == today);
-            //        if(Quinta1 == null)
-            //        {
-            //            if(Quarta2 == null)
-            //            {
-            //                if(Terca3 == null)
-            //                {
-            //                    if(Segunda4 == null)
-            //                    {
-            //                        List<DataPoint> datapoint3 = new List<DataPoint>
-            //                        {
-            //                            new DataPoint("Segunda", null),
-            //                            new DataPoint("Terca", null),
-            //                            new DataPoint("Quarta", null),
-            //                            new DataPoint("Quinta", null),
-            //                            new DataPoint("Sexta", null),
-            //                            new DataPoint("Sabado", null),
-            //                            new DataPoint("Domingo", null),
-            //                        };
-            //                        ViewBag.DataPoints = JsonConvert.SerializeObject(datapoint3);
-            //                    }
-            //                    else
-            //                    {
-            //                        List<DataPoint> datapoint3 = new List<DataPoint>
-            //                        {
-            //                            new DataPoint("Segunda", Segunda4.Total_Kcal),
-            //                            new DataPoint("Terca", null),
-            //                            new DataPoint("Quarta", null),
-            //                            new DataPoint("Quinta", null),
-            //                            new DataPoint("Sexta", null),
-            //                            new DataPoint("Sabado", null),
-            //                            new DataPoint("Domingo", null),
-            //                        };
-            //                        ViewBag.DataPoints = JsonConvert.SerializeObject(datapoint3);
-            //                    }
-            //                }
-            //                else
-            //                {
-            //                    if(Segunda4 == null)
-            //                    {
-            //                        List<DataPoint> datapoint3 = new List<DataPoint>
-            //                        {
-            //                            new DataPoint("Segunda", null),
-            //                            new DataPoint("Terca", Terca3.Total_Kcal),
-            //                            new DataPoint("Quarta", null),
-            //                            new DataPoint("Quinta", null),
-            //                            new DataPoint("Sexta", null),
-            //                            new DataPoint("Sabado", null),
-            //                            new DataPoint("Domingo", null),
-            //                        };
-            //                        ViewBag.DataPoints = JsonConvert.SerializeObject(datapoint3);
-            //                    }
-            //                    else
-            //                    {
-            //                        List<DataPoint> datapoint3 = new List<DataPoint>
-            //                        {
-            //                            new DataPoint("Segunda", Segunda4.Total_Kcal),
-            //                            new DataPoint("Terca", Terca3.Total_Kcal),
-            //                            new DataPoint("Quarta", null),
-            //                            new DataPoint("Quinta", null),
-            //                            new DataPoint("Sexta", null),
-            //                            new DataPoint("Sabado", null),
-            //                            new DataPoint("Domingo", null),
-            //                        };
-            //                        ViewBag.DataPoints = JsonConvert.SerializeObject(datapoint3);
-            //                    }
-            //                }
-            //            }
-            //            else
-            //            {
-            //                if(Terca3 == null)
-            //                {
-            //                    if(Segunda4 == null)
-            //                    {
-            //                        List<DataPoint> datapoint3 = new List<DataPoint>
-            //                        {
-            //                            new DataPoint("Segunda", null),
-            //                            new DataPoint("Terca", null),
-            //                            new DataPoint("Quarta", Quarta2.Total_Kcal),
-            //                            new DataPoint("Quinta", null),
-            //                            new DataPoint("Sexta", null),
-            //                            new DataPoint("Sabado", null),
-            //                            new DataPoint("Domingo", null),
-            //                        };
-            //                        ViewBag.DataPoints = JsonConvert.SerializeObject(datapoint3);
-            //                    }
-            //                    else
-            //                    {
-            //                        List<DataPoint> datapoint3 = new List<DataPoint>
-            //                        {
-            //                            new DataPoint("Segunda", Segunda4.Total_Kcal),
-            //                            new DataPoint("Terca", null),
-            //                            new DataPoint("Quarta", Quarta2.Total_Kcal),
-            //                            new DataPoint("Quinta", null),
-            //                            new DataPoint("Sexta", null),
-            //                            new DataPoint("Sabado", null),
-            //                            new DataPoint("Domingo", null),
-            //                        };
-            //                        ViewBag.DataPoints = JsonConvert.SerializeObject(datapoint3);
-            //                    }
-            //                }
-            //                else
-            //                {
-            //                    if(Segunda4 == null)
-            //                    {
-            //                        List<DataPoint> datapoint3 = new List<DataPoint>
-            //                        {
-            //                            new DataPoint("Segunda", null),
-            //                            new DataPoint("Terca", Terca3.Total_Kcal),
-            //                            new DataPoint("Quarta", Quarta2.Total_Kcal),
-            //                            new DataPoint("Quinta", null),
-            //                            new DataPoint("Sexta", null),
-            //                            new DataPoint("Sabado", null),
-            //                            new DataPoint("Domingo", null),
-            //                        };
-            //                        ViewBag.DataPoints = JsonConvert.SerializeObject(datapoint3);
-            //                    }
-            //                    else
-            //                    {
-            //                        List<DataPoint> datapoint3 = new List<DataPoint>
-            //                        {
-            //                            new DataPoint("Segunda", Segunda4.Total_Kcal),
-            //                            new DataPoint("Terca", Terca3.Total_Kcal),
-            //                            new DataPoint("Quarta", Quarta2.Total_Kcal),
-            //                            new DataPoint("Quinta", null),
-            //                            new DataPoint("Sexta", null),
-            //                            new DataPoint("Sabado", null),
-            //                            new DataPoint("Domingo", null),
-            //                        };
-            //                        ViewBag.DataPoints = JsonConvert.SerializeObject(datapoint3);
-            //                    }
-            //                }
-            //            }
-            //        }
-            //        else if (Quinta1 != null)
-            //        {
-            //            if (Quarta2 == null)
-            //            {
-            //                if (Terca3 == null)
-            //                {
-            //                    if (Segunda4 == null)
-            //                    {
-            //                        List<DataPoint> datapoint3 = new List<DataPoint>
-            //                        {
-            //                            new DataPoint("Segunda", null),
-            //                            new DataPoint("Terca", null),
-            //                            new DataPoint("Quarta", null),
-            //                            new DataPoint("Quinta", Quinta1.Total_Kcal),
-            //                            new DataPoint("Sexta", null),
-            //                            new DataPoint("Sabado", null),
-            //                            new DataPoint("Domingo", null),
-            //                        };
-            //                        ViewBag.DataPoints = JsonConvert.SerializeObject(datapoint3);
-            //                    }
-            //                    else
-            //                    {
-            //                        List<DataPoint> datapoint3 = new List<DataPoint>
-            //                        {
-            //                            new DataPoint("Segunda", Segunda4.Total_Kcal),
-            //                            new DataPoint("Terca", null),
-            //                            new DataPoint("Quarta", null),
-            //                            new DataPoint("Quinta", Quinta1.Total_Kcal),
-            //                            new DataPoint("Sexta", null),
-            //                            new DataPoint("Sabado", null),
-            //                            new DataPoint("Domingo", null),
-            //                        };
-            //                        ViewBag.DataPoints = JsonConvert.SerializeObject(datapoint3);
-            //                    }
-            //                }
-            //                else
-            //                {
-            //                    if (Segunda4 == null)
-            //                    {
-            //                        List<DataPoint> datapoint3 = new List<DataPoint>
-            //                        {
-            //                            new DataPoint("Segunda", null),
-            //                            new DataPoint("Terca", Terca3.Total_Kcal),
-            //                            new DataPoint("Quarta", null),
-            //                            new DataPoint("Quinta", Quinta1.Total_Kcal),
-            //                            new DataPoint("Sexta", null),
-            //                            new DataPoint("Sabado", null),
-            //                            new DataPoint("Domingo", null),
-            //                        };
-            //                        ViewBag.DataPoints = JsonConvert.SerializeObject(datapoint3);
-            //                    }
-            //                    else
-            //                    {
-            //                        List<DataPoint> datapoint3 = new List<DataPoint>
-            //                        {
-            //                            new DataPoint("Segunda", Segunda4.Total_Kcal),
-            //                            new DataPoint("Terca", Terca3.Total_Kcal),
-            //                            new DataPoint("Quarta", null),
-            //                            new DataPoint("Quinta", Quinta1.Total_Kcal),
-            //                            new DataPoint("Sexta", null),
-            //                            new DataPoint("Sabado", null),
-            //                            new DataPoint("Domingo", null),
-            //                        };
-            //                        ViewBag.DataPoints = JsonConvert.SerializeObject(datapoint3);
-            //                    }
-            //                }
-            //            }
-            //            else
-            //            {
-            //                if (Terca3 == null)
-            //                {
-            //                    if (Segunda4 == null)
-            //                    {
-            //                        List<DataPoint> datapoint3 = new List<DataPoint>
-            //                        {
-            //                            new DataPoint("Segunda", null),
-            //                            new DataPoint("Terca", null),
-            //                            new DataPoint("Quarta", Quarta2.Total_Kcal),
-            //                            new DataPoint("Quinta", Quinta1.Total_Kcal),
-            //                            new DataPoint("Sexta", null),
-            //                            new DataPoint("Sabado", null),
-            //                            new DataPoint("Domingo", null),
-            //                        };
-            //                        ViewBag.DataPoints = JsonConvert.SerializeObject(datapoint3);
-            //                    }
-            //                    else
-            //                    {
-            //                        List<DataPoint> datapoint3 = new List<DataPoint>
-            //                        {
-            //                            new DataPoint("Segunda", Segunda4.Total_Kcal),
-            //                            new DataPoint("Terca", null),
-            //                            new DataPoint("Quarta", Quarta2.Total_Kcal),
-            //                            new DataPoint("Quinta", Quinta1.Total_Kcal),
-            //                            new DataPoint("Sexta", null),
-            //                            new DataPoint("Sabado", null),
-            //                            new DataPoint("Domingo", null),
-            //                        };
-            //                        ViewBag.DataPoints = JsonConvert.SerializeObject(datapoint3);
-            //                    }
-            //                }
-            //                else
-            //                {
-            //                    if (Segunda4 == null)
-            //                    {
-            //                        List<DataPoint> datapoint3 = new List<DataPoint>
-            //                        {
-            //                            new DataPoint("Segunda", null),
-            //                            new DataPoint("Terca", Terca3.Total_Kcal),
-            //                            new DataPoint("Quarta", Quarta2.Total_Kcal),
-            //                            new DataPoint("Quinta", Quinta1.Total_Kcal),
-            //                            new DataPoint("Sexta", null),
-            //                            new DataPoint("Sabado", null),
-            //                            new DataPoint("Domingo", null),
-            //                        };
-            //                        ViewBag.DataPoints = JsonConvert.SerializeObject(datapoint3);
-            //                    }
-            //                    else
-            //                    {
-            //                        List<DataPoint> datapoint3 = new List<DataPoint>
-            //                        {
-            //                            new DataPoint("Segunda", Segunda4.Total_Kcal),
-            //                            new DataPoint("Terca", Terca3.Total_Kcal),
-            //                            new DataPoint("Quarta", Quarta2.Total_Kcal),
-            //                            new DataPoint("Quinta", Quinta1.Total_Kcal),
-            //                            new DataPoint("Sexta", null),
-            //                            new DataPoint("Sabado", null),
-            //                            new DataPoint("Domingo", null),
-            //                        };
-            //                        ViewBag.DataPoints = JsonConvert.SerializeObject(datapoint3);
-            //                    }
-            //                }
-            //            }
-            //        }
-            //        return View(objectivoes.Where(o => o.UserID == userId && o.Data_fim == null).ToList());
-            //    case 5:
-            //        var Tsexta = today.AddDays(-1);
-            //        var Tsexta1 = today.AddDays(-2);
-            //        var Tsexta2 = today.AddDays(-3);
-            //        var Tsexta3 = today.AddDays(-4);
-            //        var Segunda5 = refeicoes.FirstOrDefault(p => p.Data == Tsexta3);
-            //        var Terca4 = refeicoes.FirstOrDefault(p => p.Data == Tsexta2);
-            //        var Quarta3 = refeicoes.FirstOrDefault(p => p.Data == Tsexta1);
-            //        var Quinta2 = refeicoes.FirstOrDefault(p => p.Data == Tsexta);
-            //        var Sexta1 = refeicoes.FirstOrDefault(p => p.Data == today);
-            //        List<DataPoint> datapoints4 = new List<DataPoint>
-            //            {
-            //                new DataPoint("Segunda", Segunda5.Total_Kcal),
-            //                new DataPoint("Terca", Terca4.Total_Kcal),
-            //                new DataPoint("Quarta", Quarta3.Total_Kcal),
-            //                new DataPoint("Quinta", Quinta2.Total_Kcal),
-            //                new DataPoint("Sexta", Sexta1.Total_Kcal),
-            //                new DataPoint("Sabado", null),
-            //                new DataPoint("Domingo", null),
-            //        };
-            //        ViewBag.DataPoints = JsonConvert.SerializeObject(datapoints4);
-            //        return View(objectivoes.Where(o => o.UserID == userId && o.Data_fim == null).ToList());
-            //    case 6:
-            //        var Tsabado = today.AddDays(-1);
-            //        var Tsabado1 = today.AddDays(-2);
-            //        var Tsabado2 = today.AddDays(-3);
-            //        var Tsabado3 = today.AddDays(-4);
-            //        var Tsabado4 = today.AddDays(-5);
-            //        var Segunda6 = refeicoes.FirstOrDefault(p => p.Data == Tsabado4);
-            //        var Terca5 = refeicoes.FirstOrDefault(p => p.Data == Tsabado3);
-            //        var Quarta4 = refeicoes.FirstOrDefault(p => p.Data == Tsabado2);
-            //        var Quinta3 = refeicoes.FirstOrDefault(p => p.Data == Tsabado1);
-            //        var Sexta2 = refeicoes.FirstOrDefault(p => p.Data == Tsabado);
-            //        var Sabado1 = refeicoes.FirstOrDefault(p => p.Data == today);
-            //        List<DataPoint> datapoints5 = new List<DataPoint>
-            //            {
-            //                new DataPoint("Segunda", Segunda6.Total_Kcal),
-            //                new DataPoint("Terca", Terca5.Total_Kcal),
-            //                new DataPoint("Quarta", Quarta4.Total_Kcal),
-            //                new DataPoint("Quinta", Quinta3.Total_Kcal),
-            //                new DataPoint("Sexta", Sexta2.Total_Kcal),
-            //                new DataPoint("Sabado", Sabado1.Total_Kcal),
-            //                new DataPoint("Domingo", null),
-            //        };
-            //        ViewBag.DataPoints = JsonConvert.SerializeObject(datapoints5);
-            //        return View(objectivoes.Where(o => o.UserID == userId && o.Data_fim == null).ToList());
-            //}
-            //return View(objectivoes.Where(o => o.UserID == userId && o.Data_fim == null).ToList());
         }
 
         // GET: Objectivoes/Details/5
@@ -572,13 +182,16 @@ namespace HealthyProject.Controllers
         }
 
         // GET: Objectivoes/Delete/5
-        public ActionResult Delete(int? id)
+        public ActionResult Delete()
         {
-            if (id == null)
+            var userId = Convert.ToInt32(User.Identity.GetUserId());
+            var objectivoes = db.Objectivoes.Include(o => o.Utilizador);
+            var refeicoes = db.RegistoDiarios.Include(i => i.Objectivo);
+            Objectivo objectivo = objectivoes.FirstOrDefault(o => o.UserID == userId && o.Data_fim == null);
+            if (objectivo.ObjectivoID == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Objectivo objectivo = db.Objectivoes.Find(id);
             if (objectivo == null)
             {
                 return HttpNotFound();
