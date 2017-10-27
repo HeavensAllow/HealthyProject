@@ -19,9 +19,9 @@ namespace HealthyProject.Controllers
         {
 
 
-            var refeicoes = db.Refeicoes.Include(r => r.RegistoDiario);
+            var refeicoes = db.Refeicoes.Include(r => r.RegistoDiario).Where(d => d.Data == DateTime.Today);
 
-            return View(refeicoes.ToList());
+            return View(refeicoes);
         }
        
       
