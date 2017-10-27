@@ -10,112 +10,112 @@ using HealthyProject.Models;
 
 namespace HealthyProject.Controllers
 {
-    public class UtilizadorsController : Controller
+    public class SubcategoriasController : Controller
     {
         private HealthyEntities db = new HealthyEntities();
 
-        // GET: Utilizadors
+        // GET: Subcategorias
         public ActionResult Index()
         {
-            var utilizadors = db.Utilizadors.Include(u => u.AspNetUser);
-            return View(utilizadors.ToList());
+            var subcategorias = db.Subcategorias.Include(s => s.Categoria);
+            return View(subcategorias.ToList());
         }
 
-        // GET: Utilizadors/Details/5
+        // GET: Subcategorias/Details/5
         public ActionResult Details(int? id)
         {
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Utilizador utilizador = db.Utilizadors.Find(id);
-            if (utilizador == null)
+            Subcategoria subcategoria = db.Subcategorias.Find(id);
+            if (subcategoria == null)
             {
                 return HttpNotFound();
             }
-            return View(utilizador);
+            return View(subcategoria);
         }
 
-        // GET: Utilizadors/Create
+        // GET: Subcategorias/Create
         public ActionResult Create()
         {
-            ViewBag.UserID = new SelectList(db.AspNetUsers, "Id", "Email");
+            ViewBag.CategoriaID = new SelectList(db.Categorias, "CategoriaID", "Nome");
             return View();
         }
 
-        // POST: Utilizadors/Create
+        // POST: Subcategorias/Create
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "UserID,Nome,Genero,Data_nascimento,Peso,Altura,Actividade_fisica,Nr_horas_sono,Nr_refeicoes,Habitos_alcoolicos,MMuscular,MGorda")] Utilizador utilizador)
+        public ActionResult Create([Bind(Include = "SubcategoriaID,Nome,CategoriaID")] Subcategoria subcategoria)
         {
             if (ModelState.IsValid)
             {
-                db.Utilizadors.Add(utilizador);
+                db.Subcategorias.Add(subcategoria);
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
 
-            ViewBag.UserID = new SelectList(db.AspNetUsers, "Id", "Email", utilizador.UserID);
-            return View(utilizador);
+            ViewBag.CategoriaID = new SelectList(db.Categorias, "CategoriaID", "Nome", subcategoria.CategoriaID);
+            return View(subcategoria);
         }
 
-        // GET: Utilizadors/Edit/5
+        // GET: Subcategorias/Edit/5
         public ActionResult Edit(int? id)
         {
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Utilizador utilizador = db.Utilizadors.Find(id);
-            if (utilizador == null)
+            Subcategoria subcategoria = db.Subcategorias.Find(id);
+            if (subcategoria == null)
             {
                 return HttpNotFound();
             }
-            ViewBag.UserID = new SelectList(db.AspNetUsers, "Id", "Email", utilizador.UserID);
-            return View(utilizador);
+            ViewBag.CategoriaID = new SelectList(db.Categorias, "CategoriaID", "Nome", subcategoria.CategoriaID);
+            return View(subcategoria);
         }
 
-        // POST: Utilizadors/Edit/5
+        // POST: Subcategorias/Edit/5
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "UserID,Nome,Genero,Data_nascimento,Peso,Altura,Actividade_fisica,Nr_horas_sono,Nr_refeicoes,Habitos_alcoolicos,MMuscular,MGorda")] Utilizador utilizador)
+        public ActionResult Edit([Bind(Include = "SubcategoriaID,Nome,CategoriaID")] Subcategoria subcategoria)
         {
             if (ModelState.IsValid)
             {
-                db.Entry(utilizador).State = EntityState.Modified;
+                db.Entry(subcategoria).State = EntityState.Modified;
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
-            ViewBag.UserID = new SelectList(db.AspNetUsers, "Id", "Email", utilizador.UserID);
-            return View(utilizador);
+            ViewBag.CategoriaID = new SelectList(db.Categorias, "CategoriaID", "Nome", subcategoria.CategoriaID);
+            return View(subcategoria);
         }
 
-        // GET: Utilizadors/Delete/5
+        // GET: Subcategorias/Delete/5
         public ActionResult Delete(int? id)
         {
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Utilizador utilizador = db.Utilizadors.Find(id);
-            if (utilizador == null)
+            Subcategoria subcategoria = db.Subcategorias.Find(id);
+            if (subcategoria == null)
             {
                 return HttpNotFound();
             }
-            return View(utilizador);
+            return View(subcategoria);
         }
 
-        // POST: Utilizadors/Delete/5
+        // POST: Subcategorias/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(int id)
         {
-            Utilizador utilizador = db.Utilizadors.Find(id);
-            db.Utilizadors.Remove(utilizador);
+            Subcategoria subcategoria = db.Subcategorias.Find(id);
+            db.Subcategorias.Remove(subcategoria);
             db.SaveChanges();
             return RedirectToAction("Index");
         }

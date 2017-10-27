@@ -99,30 +99,18 @@ namespace HealthyProject.Controllers
             return View(post);
         }
 
-        [HttpPost]
         public ActionResult Gosto(int? id)
         {
             Comentario comentario = db.Comentarios.Find(id);
             Opiniao o = new Opiniao();
             o.Opiniao1 = true;
             o.userID = Convert.ToInt32(User.Identity.GetUserId());
-            o.commentID = comentario.CommentID;
+            o.commentID = Convert.ToInt32(User.Identity.GetUserId());
             db.Opiniaos.Add(o);
             db.SaveChanges();
-            return View("Post", comentario.Post);
+            return View("Post");
         }
-        [HttpPost]
-        public ActionResult naoGosto(int? id)
-        {
-            Comentario comentario = db.Comentarios.Find(id);
-            Opiniao o = new Opiniao();
-            o.Opiniao1 = true;
-            o.userID = Convert.ToInt32(User.Identity.GetUserId());
-            o.commentID = comentario.CommentID;
-            db.Opiniaos.Add(o);
-            db.SaveChanges();
-            return View("Post", comentario.Post);
-        }
+
 
 
         protected override void Dispose(bool disposing)

@@ -10,112 +10,116 @@ using HealthyProject.Models;
 
 namespace HealthyProject.Controllers
 {
-    public class UtilizadorsController : Controller
+    public class ComentariosController : Controller
     {
         private HealthyEntities db = new HealthyEntities();
 
-        // GET: Utilizadors
+        // GET: Comentarios
         public ActionResult Index()
         {
-            var utilizadors = db.Utilizadors.Include(u => u.AspNetUser);
-            return View(utilizadors.ToList());
+            var comentarios = db.Comentarios.Include(c => c.AspNetUser).Include(c => c.Post);
+            return View(comentarios.ToList());
         }
 
-        // GET: Utilizadors/Details/5
+        // GET: Comentarios/Details/5
         public ActionResult Details(int? id)
         {
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Utilizador utilizador = db.Utilizadors.Find(id);
-            if (utilizador == null)
+            Comentario comentario = db.Comentarios.Find(id);
+            if (comentario == null)
             {
                 return HttpNotFound();
             }
-            return View(utilizador);
+            return View(comentario);
         }
 
-        // GET: Utilizadors/Create
+        // GET: Comentarios/Create
         public ActionResult Create()
         {
             ViewBag.UserID = new SelectList(db.AspNetUsers, "Id", "Email");
+            ViewBag.PostID = new SelectList(db.Posts, "PostID", "Titulo");
             return View();
         }
 
-        // POST: Utilizadors/Create
+        // POST: Comentarios/Create
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "UserID,Nome,Genero,Data_nascimento,Peso,Altura,Actividade_fisica,Nr_horas_sono,Nr_refeicoes,Habitos_alcoolicos,MMuscular,MGorda")] Utilizador utilizador)
+        public ActionResult Create([Bind(Include = "CommentID,UserID,Data,PostID,Comment")] Comentario comentario)
         {
             if (ModelState.IsValid)
             {
-                db.Utilizadors.Add(utilizador);
+                db.Comentarios.Add(comentario);
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
 
-            ViewBag.UserID = new SelectList(db.AspNetUsers, "Id", "Email", utilizador.UserID);
-            return View(utilizador);
+            ViewBag.UserID = new SelectList(db.AspNetUsers, "Id", "Email", comentario.UserID);
+            ViewBag.PostID = new SelectList(db.Posts, "PostID", "Titulo", comentario.PostID);
+            return View(comentario);
         }
 
-        // GET: Utilizadors/Edit/5
+        // GET: Comentarios/Edit/5
         public ActionResult Edit(int? id)
         {
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Utilizador utilizador = db.Utilizadors.Find(id);
-            if (utilizador == null)
+            Comentario comentario = db.Comentarios.Find(id);
+            if (comentario == null)
             {
                 return HttpNotFound();
             }
-            ViewBag.UserID = new SelectList(db.AspNetUsers, "Id", "Email", utilizador.UserID);
-            return View(utilizador);
+            ViewBag.UserID = new SelectList(db.AspNetUsers, "Id", "Email", comentario.UserID);
+            ViewBag.PostID = new SelectList(db.Posts, "PostID", "Titulo", comentario.PostID);
+            return View(comentario);
         }
 
-        // POST: Utilizadors/Edit/5
+        // POST: Comentarios/Edit/5
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "UserID,Nome,Genero,Data_nascimento,Peso,Altura,Actividade_fisica,Nr_horas_sono,Nr_refeicoes,Habitos_alcoolicos,MMuscular,MGorda")] Utilizador utilizador)
+        public ActionResult Edit([Bind(Include = "CommentID,UserID,Data,PostID,Comment")] Comentario comentario)
         {
             if (ModelState.IsValid)
             {
-                db.Entry(utilizador).State = EntityState.Modified;
+                db.Entry(comentario).State = EntityState.Modified;
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
-            ViewBag.UserID = new SelectList(db.AspNetUsers, "Id", "Email", utilizador.UserID);
-            return View(utilizador);
+            ViewBag.UserID = new SelectList(db.AspNetUsers, "Id", "Email", comentario.UserID);
+            ViewBag.PostID = new SelectList(db.Posts, "PostID", "Titulo", comentario.PostID);
+            return View(comentario);
         }
 
-        // GET: Utilizadors/Delete/5
+        // GET: Comentarios/Delete/5
         public ActionResult Delete(int? id)
         {
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Utilizador utilizador = db.Utilizadors.Find(id);
-            if (utilizador == null)
+            Comentario comentario = db.Comentarios.Find(id);
+            if (comentario == null)
             {
                 return HttpNotFound();
             }
-            return View(utilizador);
+            return View(comentario);
         }
 
-        // POST: Utilizadors/Delete/5
+        // POST: Comentarios/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(int id)
         {
-            Utilizador utilizador = db.Utilizadors.Find(id);
-            db.Utilizadors.Remove(utilizador);
+            Comentario comentario = db.Comentarios.Find(id);
+            db.Comentarios.Remove(comentario);
             db.SaveChanges();
             return RedirectToAction("Index");
         }

@@ -10,112 +10,107 @@ using HealthyProject.Models;
 
 namespace HealthyProject.Controllers
 {
-    public class UtilizadorsController : Controller
+    public class CategoriasController : Controller
     {
         private HealthyEntities db = new HealthyEntities();
 
-        // GET: Utilizadors
+        // GET: Categorias
         public ActionResult Index()
         {
-            var utilizadors = db.Utilizadors.Include(u => u.AspNetUser);
-            return View(utilizadors.ToList());
+            return View(db.Categorias.ToList());
         }
 
-        // GET: Utilizadors/Details/5
+        // GET: Categorias/Details/5
         public ActionResult Details(int? id)
         {
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Utilizador utilizador = db.Utilizadors.Find(id);
-            if (utilizador == null)
+            Categoria categoria = db.Categorias.Find(id);
+            if (categoria == null)
             {
                 return HttpNotFound();
             }
-            return View(utilizador);
+            return View(categoria);
         }
 
-        // GET: Utilizadors/Create
+        // GET: Categorias/Create
         public ActionResult Create()
         {
-            ViewBag.UserID = new SelectList(db.AspNetUsers, "Id", "Email");
             return View();
         }
 
-        // POST: Utilizadors/Create
+        // POST: Categorias/Create
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "UserID,Nome,Genero,Data_nascimento,Peso,Altura,Actividade_fisica,Nr_horas_sono,Nr_refeicoes,Habitos_alcoolicos,MMuscular,MGorda")] Utilizador utilizador)
+        public ActionResult Create([Bind(Include = "CategoriaID,Nome")] Categoria categoria)
         {
             if (ModelState.IsValid)
             {
-                db.Utilizadors.Add(utilizador);
+                db.Categorias.Add(categoria);
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
 
-            ViewBag.UserID = new SelectList(db.AspNetUsers, "Id", "Email", utilizador.UserID);
-            return View(utilizador);
+            return View(categoria);
         }
 
-        // GET: Utilizadors/Edit/5
+        // GET: Categorias/Edit/5
         public ActionResult Edit(int? id)
         {
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Utilizador utilizador = db.Utilizadors.Find(id);
-            if (utilizador == null)
+            Categoria categoria = db.Categorias.Find(id);
+            if (categoria == null)
             {
                 return HttpNotFound();
             }
-            ViewBag.UserID = new SelectList(db.AspNetUsers, "Id", "Email", utilizador.UserID);
-            return View(utilizador);
+            return View(categoria);
         }
 
-        // POST: Utilizadors/Edit/5
+        // POST: Categorias/Edit/5
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "UserID,Nome,Genero,Data_nascimento,Peso,Altura,Actividade_fisica,Nr_horas_sono,Nr_refeicoes,Habitos_alcoolicos,MMuscular,MGorda")] Utilizador utilizador)
+        public ActionResult Edit([Bind(Include = "CategoriaID,Nome")] Categoria categoria)
         {
             if (ModelState.IsValid)
             {
-                db.Entry(utilizador).State = EntityState.Modified;
+                db.Entry(categoria).State = EntityState.Modified;
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
-            ViewBag.UserID = new SelectList(db.AspNetUsers, "Id", "Email", utilizador.UserID);
-            return View(utilizador);
+            return View(categoria);
         }
 
-        // GET: Utilizadors/Delete/5
+        // GET: Categorias/Delete/5
         public ActionResult Delete(int? id)
         {
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Utilizador utilizador = db.Utilizadors.Find(id);
-            if (utilizador == null)
+            Categoria categoria = db.Categorias.Find(id);
+            if (categoria == null)
             {
                 return HttpNotFound();
             }
-            return View(utilizador);
+            return View(categoria);
         }
 
-        // POST: Utilizadors/Delete/5
+        // POST: Categorias/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(int id)
         {
-            Utilizador utilizador = db.Utilizadors.Find(id);
-            db.Utilizadors.Remove(utilizador);
+            Categoria categoria = db.Categorias.Find(id);
+            db.Categorias.Remove(categoria);
             db.SaveChanges();
             return RedirectToAction("Index");
         }
