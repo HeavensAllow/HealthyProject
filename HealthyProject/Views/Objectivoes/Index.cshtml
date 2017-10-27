@@ -12,6 +12,8 @@
     </div>
 }
 
+<br />
+<br />
 @if (ViewBag.IntakeR == null)
 {
     <p>
@@ -22,8 +24,19 @@
 }
 else
 {
-    <div id="chartContainer" style="height: 500px; width: 100%;"></div>
-    @Html.ActionLink("Delete Objective", "Delete")
+    <div>
+        <div id="chartContainer" style="height: 500px; width: 100%;"></div>
+        <br />
+        <div style="float:left">
+            @Html.ActionLink("Add Meal", "Create", "Refeicoes", htmlAttributes: (new { @class = "mybtn" }))
+        </div>
+        <div style="float:right">
+            @Html.ActionLink("Delete Objective", "Delete", null, htmlAttributes: (new { @class = "mybtn"}))
+        </div>
+        <br />
+        <br />
+    </div>
+    <br />
 }
 
 

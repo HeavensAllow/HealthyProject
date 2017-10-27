@@ -218,17 +218,5 @@ namespace HealthyProject.Controllers
             }
             base.Dispose(disposing);
         }
-
-        public ActionResult MyChart()
-        {
-            var myChart = new Chart(width: 600, height: 400, theme: ChartTheme.Green)
-                .AddTitle("Chart Title")
-                .AddSeries(
-                    name: "Employee",
-                    xValue: new[] { "Segunda", "Terça", "Quarta", "Quinta", "Sexta", "Sabado", "Domingo" },
-                    yValues: new[] { "2", "6", "4", "5", "3", "7", "2" })
-                .Write("png");
-            return null;
-        }
     }
 }
