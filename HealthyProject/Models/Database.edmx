@@ -66,6 +66,20 @@
           <Property Name="AccessFailedCount" Type="int" Nullable="false" />
           <Property Name="UserName" Type="nvarchar" MaxLength="256" Nullable="false" />
         </EntityType>
+        <EntityType Name="Bebidas">
+          <Key>
+            <PropertyRef Name="BebidasID" />
+          </Key>
+          <Property Name="BebidasID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Categoria" Type="nvarchar" MaxLength="100" Nullable="false" />
+          <Property Name="Nome" Type="nvarchar" MaxLength="100" Nullable="false" />
+          <Property Name="Unidade" Type="int" Nullable="false" />
+          <Property Name="Kcal" Type="float" Nullable="false" />
+          <Property Name="Proteinas" Type="float" Nullable="false" />
+          <Property Name="Gordura" Type="float" Nullable="false" />
+          <Property Name="HidCarbono" Type="float" Nullable="false" />
+          <Property Name="HC_Acucar" Type="float" Nullable="false" />
+        </EntityType>
         <EntityType Name="Ingredientes">
           <Key>
             <PropertyRef Name="IngredientesID" />
@@ -106,6 +120,15 @@
           <Property Name="HidCarbono" Type="float" Nullable="false" />
           <Property Name="HC_Acucar" Type="float" Nullable="false" />
         </EntityType>
+        <EntityType Name="RefeicaoBebida">
+          <Key>
+            <PropertyRef Name="BebidaID" />
+            <PropertyRef Name="RefeicaoID" />
+          </Key>
+          <Property Name="BebidaID" Type="int" Nullable="false" />
+          <Property Name="RefeicaoID" Type="int" Nullable="false" />
+          <Property Name="Quantidade" Type="int" Nullable="false" />
+        </EntityType>
         <EntityType Name="RefeicaoIngredientes">
           <Key>
             <PropertyRef Name="IngredienteID" />
@@ -144,6 +167,15 @@
           <Property Name="Total_proteinas" Type="float" Nullable="false" />
           <Property Name="Total_gordura" Type="float" Nullable="false" />
           <Property Name="Total_HC" Type="float" Nullable="false" />
+        </EntityType>
+        <EntityType Name="RegistoPeso">
+          <Key>
+            <PropertyRef Name="RegistoP_ID" />
+          </Key>
+          <Property Name="RegistoP_ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="User_ID" Type="int" Nullable="false" />
+          <Property Name="Peso" Type="int" />
+          <Property Name="Data" Type="date" />
         </EntityType>
         <EntityType Name="sysdiagrams">
           <Key>
@@ -240,6 +272,30 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK_RefeicaoBebida_Bebidas">
+          <End Role="Bebidas" Type="Self.Bebidas" Multiplicity="1" />
+          <End Role="RefeicaoBebida" Type="Self.RefeicaoBebida" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Bebidas">
+              <PropertyRef Name="BebidasID" />
+            </Principal>
+            <Dependent Role="RefeicaoBebida">
+              <PropertyRef Name="BebidaID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_RefeicaoBebida_Refeicoes">
+          <End Role="Refeicoes" Type="Self.Refeicoes" Multiplicity="1" />
+          <End Role="RefeicaoBebida" Type="Self.RefeicaoBebida" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Refeicoes">
+              <PropertyRef Name="RefeicaoID" />
+            </Principal>
+            <Dependent Role="RefeicaoBebida">
+              <PropertyRef Name="RefeicaoID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK_RefeicaoIngredientes_Refeicoes">
           <End Role="Ingredientes" Type="Self.Ingredientes" Multiplicity="1" />
           <End Role="RefeicaoIngredientes" Type="Self.RefeicaoIngredientes" Multiplicity="*" />
@@ -312,6 +368,18 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK_RegistoPeso_Utilizador">
+          <End Role="Utilizador" Type="Self.Utilizador" Multiplicity="1" />
+          <End Role="RegistoPeso" Type="Self.RegistoPeso" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Utilizador">
+              <PropertyRef Name="UserID" />
+            </Principal>
+            <Dependent Role="RegistoPeso">
+              <PropertyRef Name="User_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK_Utilizador_AspNetUsers">
           <End Role="AspNetUsers" Type="Self.AspNetUsers" Multiplicity="1" />
           <End Role="Utilizador" Type="Self.Utilizador" Multiplicity="0..1" />
@@ -331,13 +399,16 @@
           <EntitySet Name="AspNetUserLogins" EntityType="Self.AspNetUserLogins" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="AspNetUserRoles" EntityType="Self.AspNetUserRoles" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="AspNetUsers" EntityType="Self.AspNetUsers" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Bebidas" EntityType="Self.Bebidas" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Ingredientes" EntityType="Self.Ingredientes" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Objectivo" EntityType="Self.Objectivo" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Pratos" EntityType="Self.Pratos" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="RefeicaoBebida" EntityType="Self.RefeicaoBebida" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="RefeicaoIngredientes" EntityType="Self.RefeicaoIngredientes" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="RefeicaoPratos" EntityType="Self.RefeicaoPratos" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Refeicoes" EntityType="Self.Refeicoes" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="RegistoDiario" EntityType="Self.RegistoDiario" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="RegistoPeso" EntityType="Self.RegistoPeso" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Utilizador" EntityType="Self.Utilizador" Schema="dbo" store:Type="Tables" />
           <AssociationSet Name="FK_dbo_AspNetUserClaims_dbo_AspNetUsers_UserId" Association="Self.FK_dbo_AspNetUserClaims_dbo_AspNetUsers_UserId">
@@ -359,6 +430,14 @@
           <AssociationSet Name="FK_Objectivo_Objectivo" Association="Self.FK_Objectivo_Objectivo">
             <End Role="Utilizador" EntitySet="Utilizador" />
             <End Role="Objectivo" EntitySet="Objectivo" />
+          </AssociationSet>
+          <AssociationSet Name="FK_RefeicaoBebida_Bebidas" Association="Self.FK_RefeicaoBebida_Bebidas">
+            <End Role="Bebidas" EntitySet="Bebidas" />
+            <End Role="RefeicaoBebida" EntitySet="RefeicaoBebida" />
+          </AssociationSet>
+          <AssociationSet Name="FK_RefeicaoBebida_Refeicoes" Association="Self.FK_RefeicaoBebida_Refeicoes">
+            <End Role="Refeicoes" EntitySet="Refeicoes" />
+            <End Role="RefeicaoBebida" EntitySet="RefeicaoBebida" />
           </AssociationSet>
           <AssociationSet Name="FK_RefeicaoIngredientes_Refeicoes" Association="Self.FK_RefeicaoIngredientes_Refeicoes">
             <End Role="Ingredientes" EntitySet="Ingredientes" />
@@ -383,6 +462,10 @@
           <AssociationSet Name="FK_RegistoDiario_RegistoDiario" Association="Self.FK_RegistoDiario_RegistoDiario">
             <End Role="Objectivo" EntitySet="Objectivo" />
             <End Role="RegistoDiario" EntitySet="RegistoDiario" />
+          </AssociationSet>
+          <AssociationSet Name="FK_RegistoPeso_Utilizador" Association="Self.FK_RegistoPeso_Utilizador">
+            <End Role="Utilizador" EntitySet="Utilizador" />
+            <End Role="RegistoPeso" EntitySet="RegistoPeso" />
           </AssociationSet>
           <AssociationSet Name="FK_Utilizador_AspNetUsers" Association="Self.FK_Utilizador_AspNetUsers">
             <End Role="AspNetUsers" EntitySet="AspNetUsers" />
@@ -530,6 +613,7 @@
           <NavigationProperty Name="RefeicaoIngredientes" Relationship="Self.FK_RefeicaoIngredientes_Refeicoes1" FromRole="Refeicoes" ToRole="RefeicaoIngredientes" />
           <NavigationProperty Name="RefeicaoPratos" Relationship="Self.FK_RefeicaoPratos_Pratos" FromRole="Refeicoes" ToRole="RefeicaoPratos" />
           <NavigationProperty Name="RegistoDiario" Relationship="Self.FK_Refeicoes_RegistoDiario" FromRole="Refeicoes" ToRole="RegistoDiario" />
+          <NavigationProperty Name="RefeicaoBebidas" Relationship="HealthyModel.FK_RefeicaoBebida_Refeicoes" FromRole="Refeico" ToRole="RefeicaoBebida" />
         </EntityType>
         <EntityType Name="RegistoDiario">
           <Key>
@@ -573,6 +657,7 @@
           <Property Name="MGorda" Type="Double" />
           <NavigationProperty Name="AspNetUser" Relationship="Self.FK_Utilizador_AspNetUsers" FromRole="Utilizador" ToRole="AspNetUsers" />
           <NavigationProperty Name="Objectivoes" Relationship="Self.FK_Objectivo_Objectivo" FromRole="Utilizador" ToRole="Objectivo" />
+          <NavigationProperty Name="RegistoPesoes" Relationship="HealthyModel.FK_RegistoPeso_Utilizador" FromRole="Utilizador" ToRole="RegistoPeso" />
         </EntityType>
         <Association Name="FK_dbo_AspNetUserClaims_dbo_AspNetUsers_UserId">
           <End Role="AspNetUsers" Type="Self.AspNetUser" Multiplicity="1">
@@ -761,7 +846,94 @@
             <End Role="AspNetRoles" EntitySet="AspNetRoles" />
             <End Role="AspNetUsers" EntitySet="AspNetUsers" />
           </AssociationSet>
+          <EntitySet Name="Bebidas" EntityType="HealthyModel.Bebida" />
+          <EntitySet Name="RefeicaoBebidas" EntityType="HealthyModel.RefeicaoBebida" />
+          <EntitySet Name="RegistoPesoes" EntityType="HealthyModel.RegistoPeso" />
+          <AssociationSet Name="FK_RefeicaoBebida_Bebidas" Association="HealthyModel.FK_RefeicaoBebida_Bebidas">
+            <End Role="Bebida" EntitySet="Bebidas" />
+            <End Role="RefeicaoBebida" EntitySet="RefeicaoBebidas" />
+          </AssociationSet>
+          <AssociationSet Name="FK_RefeicaoBebida_Refeicoes" Association="HealthyModel.FK_RefeicaoBebida_Refeicoes">
+            <End Role="Refeico" EntitySet="Refeicoes" />
+            <End Role="RefeicaoBebida" EntitySet="RefeicaoBebidas" />
+          </AssociationSet>
+          <AssociationSet Name="FK_RegistoPeso_Utilizador" Association="HealthyModel.FK_RegistoPeso_Utilizador">
+            <End Role="Utilizador" EntitySet="Utilizadors" />
+            <End Role="RegistoPeso" EntitySet="RegistoPesoes" />
+          </AssociationSet>
         </EntityContainer>
+        <EntityType Name="Bebida">
+          <Key>
+            <PropertyRef Name="BebidasID" />
+          </Key>
+          <Property Name="BebidasID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Categoria" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="Nome" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="Unidade" Type="Int32" Nullable="false" />
+          <Property Name="Kcal" Type="Double" Nullable="false" />
+          <Property Name="Proteinas" Type="Double" Nullable="false" />
+          <Property Name="Gordura" Type="Double" Nullable="false" />
+          <Property Name="HidCarbono" Type="Double" Nullable="false" />
+          <Property Name="HC_Acucar" Type="Double" Nullable="false" />
+          <NavigationProperty Name="RefeicaoBebidas" Relationship="HealthyModel.FK_RefeicaoBebida_Bebidas" FromRole="Bebida" ToRole="RefeicaoBebida" />
+        </EntityType>
+        <EntityType Name="RefeicaoBebida">
+          <Key>
+            <PropertyRef Name="BebidaID" />
+            <PropertyRef Name="RefeicaoID" />
+          </Key>
+          <Property Name="BebidaID" Type="Int32" Nullable="false" />
+          <Property Name="RefeicaoID" Type="Int32" Nullable="false" />
+          <Property Name="Quantidade" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Bebida" Relationship="HealthyModel.FK_RefeicaoBebida_Bebidas" FromRole="RefeicaoBebida" ToRole="Bebida" />
+          <NavigationProperty Name="Refeico" Relationship="HealthyModel.FK_RefeicaoBebida_Refeicoes" FromRole="RefeicaoBebida" ToRole="Refeico" />
+        </EntityType>
+        <EntityType Name="RegistoPeso">
+          <Key>
+            <PropertyRef Name="RegistoP_ID" />
+          </Key>
+          <Property Name="RegistoP_ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="User_ID" Type="Int32" Nullable="false" />
+          <Property Name="Peso" Type="Int32" />
+          <NavigationProperty Name="Utilizador" Relationship="HealthyModel.FK_RegistoPeso_Utilizador" FromRole="RegistoPeso" ToRole="Utilizador" />
+          <Property Name="Data" Type="DateTime" Precision="0" />
+        </EntityType>
+        <Association Name="FK_RefeicaoBebida_Bebidas">
+          <End Type="HealthyModel.Bebida" Role="Bebida" Multiplicity="1" />
+          <End Type="HealthyModel.RefeicaoBebida" Role="RefeicaoBebida" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Bebida">
+              <PropertyRef Name="BebidasID" />
+            </Principal>
+            <Dependent Role="RefeicaoBebida">
+              <PropertyRef Name="BebidaID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_RefeicaoBebida_Refeicoes">
+          <End Type="HealthyModel.Refeico" Role="Refeico" Multiplicity="1" />
+          <End Type="HealthyModel.RefeicaoBebida" Role="RefeicaoBebida" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Refeico">
+              <PropertyRef Name="RefeicaoID" />
+            </Principal>
+            <Dependent Role="RefeicaoBebida">
+              <PropertyRef Name="RefeicaoID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_RegistoPeso_Utilizador">
+          <End Type="HealthyModel.Utilizador" Role="Utilizador" Multiplicity="1" />
+          <End Type="HealthyModel.RegistoPeso" Role="RegistoPeso" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Utilizador">
+              <PropertyRef Name="UserID" />
+            </Principal>
+            <Dependent Role="RegistoPeso">
+              <PropertyRef Name="User_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -944,6 +1116,40 @@
               <ScalarProperty Name="Id" ColumnName="UserId" />
             </EndProperty>
           </AssociationSetMapping>
+          <EntitySetMapping Name="Bebidas">
+            <EntityTypeMapping TypeName="HealthyModel.Bebida">
+              <MappingFragment StoreEntitySet="Bebidas">
+                <ScalarProperty Name="HC_Acucar" ColumnName="HC_Acucar" />
+                <ScalarProperty Name="HidCarbono" ColumnName="HidCarbono" />
+                <ScalarProperty Name="Gordura" ColumnName="Gordura" />
+                <ScalarProperty Name="Proteinas" ColumnName="Proteinas" />
+                <ScalarProperty Name="Kcal" ColumnName="Kcal" />
+                <ScalarProperty Name="Unidade" ColumnName="Unidade" />
+                <ScalarProperty Name="Nome" ColumnName="Nome" />
+                <ScalarProperty Name="Categoria" ColumnName="Categoria" />
+                <ScalarProperty Name="BebidasID" ColumnName="BebidasID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="RefeicaoBebidas">
+            <EntityTypeMapping TypeName="HealthyModel.RefeicaoBebida">
+              <MappingFragment StoreEntitySet="RefeicaoBebida">
+                <ScalarProperty Name="Quantidade" ColumnName="Quantidade" />
+                <ScalarProperty Name="RefeicaoID" ColumnName="RefeicaoID" />
+                <ScalarProperty Name="BebidaID" ColumnName="BebidaID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="RegistoPesoes">
+            <EntityTypeMapping TypeName="HealthyModel.RegistoPeso">
+              <MappingFragment StoreEntitySet="RegistoPeso">
+                <ScalarProperty Name="Data" ColumnName="Data" />
+                <ScalarProperty Name="Peso" ColumnName="Peso" />
+                <ScalarProperty Name="User_ID" ColumnName="User_ID" />
+                <ScalarProperty Name="RegistoP_ID" ColumnName="RegistoP_ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
         </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>

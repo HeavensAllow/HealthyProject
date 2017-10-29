@@ -11,8 +11,7 @@ namespace HealthyProject.Models
 {
     using System;
     using System.Collections.Generic;
-    using System.ComponentModel.DataAnnotations;
-
+    
     public partial class Objectivo
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
@@ -23,19 +22,10 @@ namespace HealthyProject.Models
     
         public int ObjectivoID { get; set; }
         public int UserID { get; set; }
-        [DataType(DataType.Date)]
-        [DisplayFormat(DataFormatString = "{0:dd-MM-yyyy}", ApplyFormatInEditMode = true)]
-        [Display(Name = "Data de Inicio")]
         public Nullable<System.DateTime> Data_inicio { get; set; }
-        [DataType(DataType.Date)]
-        [DisplayFormat(DataFormatString = "{0:dd-MM-yyyy}", ApplyFormatInEditMode = true)]
-        [Display(Name = "Data Final do Objectivo")]
         public Nullable<System.DateTime> Data_fim { get; set; }
-        [Display(Name = "Peso objectivo")]
         public Nullable<int> Peso_objectivo { get; set; }
-        [Display(Name = "Indice diario recomendado")]
         public Nullable<int> Intake_diarioR { get; set; }
-        [Display(Name = "Indice diario actual")]
         public Nullable<int> Intake_diarioA { get; set; }
     
         public virtual Utilizador Utilizador { get; set; }

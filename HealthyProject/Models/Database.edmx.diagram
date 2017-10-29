@@ -30,6 +30,12 @@
         <AssociationConnector Association="HealthyModel.FK_RefeicaoPratos_Pratos" ManuallyRouted="false" />
         <AssociationConnector Association="HealthyModel.FK_Refeicoes_RegistoDiario" ManuallyRouted="false" />
         <AssociationConnector Association="HealthyModel.AspNetUserRoles" ManuallyRouted="false" />
+        <EntityTypeShape EntityType="HealthyModel.Bebida" Width="1.5" PointX="12" PointY="15.5" />
+        <EntityTypeShape EntityType="HealthyModel.RefeicaoBebida" Width="1.5" PointX="14.25" PointY="11" />
+        <EntityTypeShape EntityType="HealthyModel.RegistoPeso" Width="1.5" PointX="7.5" PointY="11.125" />
+        <AssociationConnector Association="HealthyModel.FK_RefeicaoBebida_Bebidas" />
+        <AssociationConnector Association="HealthyModel.FK_RefeicaoBebida_Refeicoes" />
+        <AssociationConnector Association="HealthyModel.FK_RegistoPeso_Utilizador" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

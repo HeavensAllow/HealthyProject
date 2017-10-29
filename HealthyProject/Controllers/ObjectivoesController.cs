@@ -25,6 +25,7 @@ namespace HealthyProject.Controllers
             var objectivoes = db.Objectivoes.Include(o => o.Utilizador);
             var refeicoes = db.RegistoDiarios.Include(i => i.Objectivo);
             Objectivo objectivo = objectivoes.FirstOrDefault(o => o.UserID == userId && o.Data_fim == null);
+            RegistoPeso peso = db.RegistoPesoes.FirstOrDefault(o => o.User_ID == userId && o.Data == DateTime.Today);
             var today = DateTime.Now;
             
             int dayOfWeek = (int)today.DayOfWeek;
@@ -67,7 +68,15 @@ namespace HealthyProject.Controllers
             ViewBag.DataPoints = JsonConvert.SerializeObject(datapoints);
             ViewBag.IntakeR = JsonConvert.SerializeObject(intake);
             ViewBag.IMath = JsonConvert.SerializeObject(objectivo.Intake_diarioR);
-            return View(objectivoes.Where(o => o.UserID == userId && o.Data_fim == null).ToList());
+            if((int)DateTime.Now.DayOfWeek == 0 && peso == null)
+            {
+               ViewBag.Teste = "Por favor indique o seu novo peso";
+                return View();
+            }
+            else
+            {
+                return View(objectivoes.Where(o => o.UserID == userId && o.Data_fim == null).ToList());
+            }
         }
 
         // GET: Objectivoes/Details/5

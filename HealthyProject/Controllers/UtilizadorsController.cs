@@ -53,6 +53,10 @@ namespace HealthyProject.Controllers
             if (ModelState.IsValid)
             {
                 db.Utilizadors.Add(utilizador);
+                RegistoPeso peso = new RegistoPeso();
+                peso.Peso = utilizador.Peso;
+                peso.Data = DateTime.Today;
+                db.RegistoPesoes.Add(peso);
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }

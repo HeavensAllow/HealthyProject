@@ -11,52 +11,33 @@ namespace HealthyProject.Models
 {
     using System;
     using System.Collections.Generic;
-    using System.ComponentModel.DataAnnotations;
-
+    
     public partial class Utilizador
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public Utilizador()
         {
             this.Objectivoes = new HashSet<Objectivo>();
+            this.RegistoPesoes = new HashSet<RegistoPeso>();
         }
     
         public int UserID { get; set; }
-        [Required]
-        [StringLength(50, ErrorMessage = "O Nome não pode conter mais do que 50 caracteres")]
         public string Nome { get; set; }
-
-        [Required]
         public string Genero { get; set; }
-
-        [Required]
-        [DataType(DataType.Date)]
-        [DisplayFormat(DataFormatString = "{0:dd-MM-yyyy}", ApplyFormatInEditMode = true)]
-        [Display(Name = "Data de Nascimento")]
         public Nullable<System.DateTime> Data_nascimento { get; set; }
-
-        [Required]
         public Nullable<int> Peso { get; set; }
-
-        [Required]
         public Nullable<int> Altura { get; set; }
-
-        [Required]
-        [Display(Name = "Índice de Actividade Fisica")]
         public Nullable<int> Actividade_fisica { get; set; }
-        [Display(Name = "Número de horas de sono")]
         public Nullable<int> Nr_horas_sono { get; set; }
-        [Display(Name = "Número de refeicoes diarias")]
         public Nullable<int> Nr_refeicoes { get; set; }
-        [Display(Name = "Consumos alcoólicos")]
         public Nullable<bool> Habitos_alcoolicos { get; set; }
-        [Display(Name = "Percentagem de Massa Muscular")]
         public Nullable<double> MMuscular { get; set; }
-        [Display(Name = "Percentagem de Massa Gorda")]
         public Nullable<double> MGorda { get; set; }
     
         public virtual AspNetUser AspNetUser { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Objectivo> Objectivoes { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<RegistoPeso> RegistoPesoes { get; set; }
     }
 }

@@ -217,6 +217,9 @@
     <Compile Include="Models\AspNetUserLogin.cs">
       <DependentUpon>Database.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\Bebida.cs">
+      <DependentUpon>Database.tt</DependentUpon>
+    </Compile>
     <Compile Include="Models\Chart.cs" />
     <Compile Include="Models\C__MigrationHistory.cs">
       <DependentUpon>Database.tt</DependentUpon>
@@ -247,6 +250,9 @@
     <Compile Include="Models\Prato.cs">
       <DependentUpon>Database.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\RefeicaoBebida.cs">
+      <DependentUpon>Database.tt</DependentUpon>
+    </Compile>
     <Compile Include="Models\RefeicaoIngrediente.cs">
       <DependentUpon>Database.tt</DependentUpon>
     </Compile>
@@ -257,6 +263,9 @@
       <DependentUpon>Database.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\RegistoDiario.cs">
+      <DependentUpon>Database.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\RegistoPeso.cs">
       <DependentUpon>Database.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\sysdiagram.cs">

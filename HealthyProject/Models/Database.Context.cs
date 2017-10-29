@@ -39,5 +39,8 @@ namespace HealthyProject.Models
         public virtual DbSet<RegistoDiario> RegistoDiarios { get; set; }
         public virtual DbSet<sysdiagram> sysdiagrams { get; set; }
         public virtual DbSet<Utilizador> Utilizadors { get; set; }
+        public virtual DbSet<Bebida> Bebidas { get; set; }
+        public virtual DbSet<RefeicaoBebida> RefeicaoBebidas { get; set; }
+        public virtual DbSet<RegistoPeso> RegistoPesoes { get; set; }
     }
 }

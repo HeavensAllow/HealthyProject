@@ -12,24 +12,25 @@ namespace HealthyProject.Models
     using System;
     using System.Collections.Generic;
     
-    public partial class RegistoDiario
+    public partial class Bebida
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public RegistoDiario()
+        public Bebida()
         {
-            this.Refeicoes = new HashSet<Refeico>();
+            this.RefeicaoBebidas = new HashSet<RefeicaoBebida>();
         }
     
-        public int RegistoID { get; set; }
-        public Nullable<int> ObjectivoID { get; set; }
-        public System.DateTime Data { get; set; }
-        public int Total_Kcal { get; set; }
-        public int Total_proteinas { get; set; }
-        public int Total_gordura { get; set; }
-        public int Total_HC { get; set; }
+        public int BebidasID { get; set; }
+        public string Categoria { get; set; }
+        public string Nome { get; set; }
+        public int Unidade { get; set; }
+        public double Kcal { get; set; }
+        public double Proteinas { get; set; }
+        public double Gordura { get; set; }
+        public double HidCarbono { get; set; }
+        public double HC_Acucar { get; set; }
     
-        public virtual Objectivo Objectivo { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Refeico> Refeicoes { get; set; }
+        public virtual ICollection<RefeicaoBebida> RefeicaoBebidas { get; set; }
     }
 }
