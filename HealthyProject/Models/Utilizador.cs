@@ -21,27 +21,41 @@ namespace HealthyProject.Models
             this.Objectivoes = new HashSet<Objectivo>();
             this.RegistoPesoes = new HashSet<RegistoPeso>();
         }
-    
+
         public int UserID { get; set; }
+        [Required]
         public string Nome { get; set; }
+        [Required]
         public string Genero { get; set; }
 
+        [Required]
+        [Display(Name = "Data de Nascimento")]
+
+        [DisplayFormat(DataFormatString = "{0:dd/M/yyyy}", ApplyFormatInEditMode = true)]
 
         [DataType(DataType.Date)]
 
-        [DisplayFormat(DataFormatString = "{0:dd/MM/yyyy}", ApplyFormatInEditMode = true)]
 
         public Nullable<System.DateTime> Data_nascimento { get; set; }
+        [Required]
 
         public Nullable<int> Peso { get; set; }
+        [Required]
         public Nullable<int> Altura { get; set; }
+        [Required]
+        [Display(Name = "Atividade Fisica")]
         public Nullable<int> Actividade_fisica { get; set; }
+        [Display(Name = "Numero de Horas de Sono Diarias")]
         public Nullable<int> Nr_horas_sono { get; set; }
+        [Display(Name = "Numero de Refeicoes")]
         public Nullable<int> Nr_refeicoes { get; set; }
+        [Display(Name = "Habitos Alcoolicos")]
         public Nullable<bool> Habitos_alcoolicos { get; set; }
+        [Display(Name = "Indice de Massa Muscular")]
         public Nullable<double> MMuscular { get; set; }
+        [Display(Name = "Indice de Massa Gorda")]
         public Nullable<double> MGorda { get; set; }
-    
+
         public virtual AspNetUser AspNetUser { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Objectivo> Objectivoes { get; set; }

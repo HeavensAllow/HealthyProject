@@ -34,6 +34,7 @@
             @Html.DisplayNameFor(model => model.Data_nascimento)
         </dt>
         <dd>
+            
             @Html.DisplayFor(model=>model.Data_nascimento)
             @*@Model.Data_nascimento.Value.ToString("dd/MM/yyyy")*@
 
@@ -70,8 +71,10 @@
 
                     </th>
 
-                    <th>@Html.EditorFor(model => model.Data_nascimento)
+                    <th> @Html.EditorFor(model => model.Data_nascimento)
 
+                       @* @Html.EditorFor(model => model.Data_nascimento)
+                    *@
                 <tr>
                     <th>@Html.DisplayNameFor(model => model.Peso)</th>
 
@@ -140,6 +143,12 @@
 
 
         </script>
+
+  
+
+
+
+
 
     }
     @* <dt>Password:</dt> *@
