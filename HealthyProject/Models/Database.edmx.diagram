@@ -45,6 +45,8 @@
         <EntityTypeShape EntityType="HealthyModel.Utilizador" Width="1.5" PointX="5.25" PointY="1.625" />
         <AssociationConnector Association="HealthyModel.FK_Utilizador_AspNetUsers" />
         <AssociationConnector Association="HealthyModel.FK_Objectivo_Objectivo" />
+        <EntityTypeShape EntityType="HealthyModel.RegistoPeso" Width="1.5" PointX="7.5" PointY="2.625" />
+        <AssociationConnector Association="HealthyModel.FK_RegistoPeso_Utilizador" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

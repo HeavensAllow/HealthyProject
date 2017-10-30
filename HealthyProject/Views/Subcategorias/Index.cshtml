@@ -7,7 +7,7 @@
 <h2>Index</h2>
 
 <p>
-    @Html.ActionLink("Create New", "Create")
+    @Html.ActionLink("Nova subcategoria", "createSubcategoria", "Subcategorias");
 </p>
 <table class="table">
     <tr>
@@ -31,7 +31,7 @@
         <td>
             @Html.ActionLink("Edit", "Edit", new { id=item.SubcategoriaID }) |
             @Html.ActionLink("Details", "Details", new { id=item.SubcategoriaID }) |
-            @Html.ActionLink("Delete", "Delete", new { id=item.SubcategoriaID })
+         
         </td>
     </tr>
 }

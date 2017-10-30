@@ -46,5 +46,6 @@ namespace HealthyProject.Models
         public virtual DbSet<Comentario> Comentarios { get; set; }
         public virtual DbSet<Opiniao> Opiniaos { get; set; }
         public virtual DbSet<Utilizador> Utilizadors { get; set; }
+        public virtual DbSet<RegistoPeso> RegistoPesoes { get; set; }
     }
 }

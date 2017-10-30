@@ -18,6 +18,7 @@ namespace HealthyProject.Models
         public Utilizador()
         {
             this.Objectivoes = new HashSet<Objectivo>();
+            this.RegistoPesoes = new HashSet<RegistoPeso>();
         }
     
         public int UserID { get; set; }
@@ -36,5 +37,7 @@ namespace HealthyProject.Models
         public virtual AspNetUser AspNetUser { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Objectivo> Objectivoes { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<RegistoPeso> RegistoPesoes { get; set; }
     }
 }

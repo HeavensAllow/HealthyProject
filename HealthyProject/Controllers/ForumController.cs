@@ -35,14 +35,10 @@ namespace HealthyProject.Controllers
             }
             return View(subcategoria);
         }
+        
+         
 
 
-
-        //GET
-        public ActionResult CreatePost()
-        {
-            return View();
-        }
         //POST
         [HttpPost]
         [ValidateAntiForgeryToken]
