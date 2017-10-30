@@ -27,8 +27,9 @@ namespace HealthyProject.Models
         public string Genero { get; set; }
 
 
+        [DataType(DataType.Date)]
 
-        [DisplayFormat(DataFormatString = "{0:dd/MM/yyyy}", ApplyFormatInEditMode = true)
+        [DisplayFormat(DataFormatString = "{0:dd/MM/yyyy}", ApplyFormatInEditMode = true)]
 
         public Nullable<System.DateTime> Data_nascimento { get; set; }
 
