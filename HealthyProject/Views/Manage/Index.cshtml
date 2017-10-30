@@ -71,10 +71,10 @@
 
                     </th>
 
-                    <th> @Html.EditorFor(model => model.Data_nascimento)
+                    <th> @Html.EditorFor(model => model.Data_nascimento, "{0:dd/MM/yyyy}")
 
-                       @* @Html.EditorFor(model => model.Data_nascimento)
-                    *@
+                       
+                   
                 <tr>
                     <th>@Html.DisplayNameFor(model => model.Peso)</th>
 
@@ -144,7 +144,17 @@
 
         </script>
 
-  
+    <script>
+
+            $(function () {
+
+                $('#Data_Nascimento').datepicker({
+                    dateFormat: 'dd/mm/yy'
+                });
+
+            });
+
+    </script>
 
 
 
