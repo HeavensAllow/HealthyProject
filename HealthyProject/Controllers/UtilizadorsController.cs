@@ -7,6 +7,7 @@ using System.Net;
 using System.Web;
 using System.Web.Mvc;
 using HealthyProject.Models;
+using System.Collections;
 
 namespace HealthyProject.Controllers
 {
@@ -17,6 +18,7 @@ namespace HealthyProject.Controllers
         // GET: Utilizadors
         public ActionResult Index()
         {
+            
             var utilizadors = db.Utilizadors.Include(u => u.AspNetUser);
             return View(utilizadors.ToList());
         }

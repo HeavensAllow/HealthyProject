@@ -269,6 +269,9 @@
     <Compile Include="Models\RegistoDiario.cs">
       <DependentUpon>Database.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\RegistoPeso.cs">
+      <DependentUpon>Database.tt</DependentUpon>
+    </Compile>
     <Compile Include="Models\Subcategoria.cs">
       <DependentUpon>Database.tt</DependentUpon>
     </Compile>

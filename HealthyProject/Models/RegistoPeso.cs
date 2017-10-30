@@ -12,12 +12,13 @@ namespace HealthyProject.Models
     using System;
     using System.Collections.Generic;
     
-    public partial class Opiniao
+    public partial class RegistoPeso
     {
-        public int commentID { get; set; }
-        public int userID { get; set; }
-        public bool Opiniao1 { get; set; }
+        public int RegistoP_ID { get; set; }
+        public int User_ID { get; set; }
+        public Nullable<int> Peso { get; set; }
+        public Nullable<System.DateTime> Data { get; set; }
     
-        public virtual Comentario Comentario { get; set; }
+        public virtual Utilizador Utilizador { get; set; }
     }
 }
