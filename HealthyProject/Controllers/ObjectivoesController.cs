@@ -68,9 +68,9 @@ namespace HealthyProject.Controllers
             ViewBag.DataPoints = JsonConvert.SerializeObject(datapoints);
             ViewBag.IntakeR = JsonConvert.SerializeObject(intake);
             ViewBag.IMath = JsonConvert.SerializeObject(objectivo.Intake_diarioR);
-            if((int)DateTime.Now.DayOfWeek == 0 && peso == null)
+            if((int)DateTime.Now.DayOfWeek == 1 && peso == null)
             {
-               ViewBag.Teste = "Por favor indique o seu novo peso";
+                ViewBag.Teste = "Por favor indique o seu novo peso";
                 return View();
             }
             else
@@ -79,6 +79,32 @@ namespace HealthyProject.Controllers
             }
         }
 
+        public ActionResult getPeso()
+        {
+            var userId = Convert.ToInt32(User.Identity.GetUserId());
+            Utilizador user = new Utilizador();
+            user = db.Utilizadors.FirstOrDefault(o => o.UserID == userId);
+            return PartialView("_Peso", user);
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult getPeso([Bind(Include = "UserID,Nome,Genero,Data_nascimento,Peso,Altura,Actividade_fisica,Nr_horas_sono,Nr_refeicoes,Habitos_alcoolicos,MMuscular,MGorda")] Utilizador utilizador)
+        {
+            if (ModelState.IsValid)
+            {
+                db.Entry(utilizador).State = EntityState.Modified;
+                RegistoPeso peso = new RegistoPeso();
+                peso.Peso = utilizador.Peso;
+                peso.Data = DateTime.Today;
+                peso.User_ID = 10;
+                db.RegistoPesoes.Add(peso);
+                db.SaveChanges();
+                return RedirectToAction("Index");
+            }
+            ViewBag.UserID = new SelectList(db.AspNetUsers, "Id", "Email", utilizador.UserID);
+            return View(utilizador);
+        }
         // GET: Objectivoes/Details/5
         public ActionResult Details(int? id)
         {

@@ -386,6 +386,7 @@
     <Content Include="Views\Refeicoes\Details.cshtml" />
     <Content Include="Views\Refeicoes\Edit.cshtml" />
     <Content Include="Views\Refeicoes\Index.cshtml" />
+    <Content Include="Views\Objectivoes\_Peso.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

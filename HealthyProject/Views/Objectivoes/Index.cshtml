@@ -14,27 +14,12 @@
     </div>
 }
 
-@if (ViewBag.Teste != null)
-{
-    <div class="modal fade">
-        <div class="modal-dialog">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">×</span><span class="sr-only">Close</span></button>
-                    <h4 class="modal-title">Modal title</h4>
-                </div>
-                <div class="modal-body">
-                    <p>One fine body…</p>
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-                    <button type="button" class="btn btn-primary">Save changes</button>
-                </div>
-            </div>
+<div id="modal-container" class="modal fade" tabindex="-1" role="dialog">
+    <div class="modal-content" style="width: 570px !important; margin: 100px auto !important; border: 5px solid #3A87AD;">
+        <div class="modal-body">
         </div>
     </div>
-}
-
+</div>  
 <br />
 <br />
 @if (ViewBag.IntakeR == null)
@@ -51,7 +36,14 @@ else
         <div id="chartContainer" style="height: 500px; width: 100%;"></div>
         <br />
         <div style="float:left">
-            @Html.ActionLink("Add Meal", "Create", "Refeicoes", htmlAttributes: (new { @class = "mybtn" }))
+            @if(ViewBag.Teste != null)
+            {
+                @Html.ActionLink("Editar Peso", "getPeso", null, new { @class = "img-btn-getpeso modal-link mybtn", title = "Modificar Peso" })
+            }
+            else
+            {
+                @Html.ActionLink("Adicionar refeicao", "Create", "Refeicoes", htmlAttributes: (new { @class = "mybtn" }))
+            }      
         </div>
         <div style="float:right">
             @Html.ActionLink("Delete Objective", "Delete", null, htmlAttributes: (new { @class = "mybtn"}))
@@ -105,7 +97,14 @@ else
   });
 
     chart.render();
-  }
+}
+        $(function () {
+            $('body').on('click', '.modal-link', function (e) {
+                e.preventDefault();
+                $(this).attr('data-target', '#modal-container');
+                $(this).attr('data-toggle', 'modal');
+            });
+        });
     </script>
     <script src="@Url.Content("~/Content/canvasjs.min.js")"></script>
     <script src="@Url.Content("~/Content/jquery.canvasjs.min.js")"></script>

@@ -40,3 +40,13 @@ textarea {
     margin: 4px 2px;
     cursor: pointer;
 }
+
+.banzai{
+    width: 800px;
+    height: 220px;
+    padding: 10px;
+}
+
+.super{
+    padding-left:15px;
+}
