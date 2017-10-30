@@ -42,7 +42,7 @@
         <AssociationConnector Association="HealthyModel.FK_Comentarios_Posts" />
         <EntityTypeShape EntityType="HealthyModel.Opiniao" Width="1.5" PointX="12.75" PointY="10.375" />
         <AssociationConnector Association="HealthyModel.FK_Opiniao_Comentarios" />
-        <EntityTypeShape EntityType="HealthyModel.Utilizador" Width="1.5" PointX="15.375" PointY="4.375" />
+        <EntityTypeShape EntityType="HealthyModel.Utilizador" Width="1.5" PointX="5.25" PointY="1.625" />
         <AssociationConnector Association="HealthyModel.FK_Utilizador_AspNetUsers" />
         <AssociationConnector Association="HealthyModel.FK_Objectivo_Objectivo" />
       </Diagram>

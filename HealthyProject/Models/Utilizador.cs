@@ -32,7 +32,6 @@ namespace HealthyProject.Models
         public Nullable<bool> Habitos_alcoolicos { get; set; }
         public Nullable<double> MMuscular { get; set; }
         public Nullable<double> MGorda { get; set; }
-        public string Role { get; set; }
     
         public virtual AspNetUser AspNetUser { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]

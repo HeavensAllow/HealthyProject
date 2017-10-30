@@ -239,7 +239,6 @@
           <Property Name="Habitos_alcoolicos" Type="bit" />
           <Property Name="MMuscular" Type="float" />
           <Property Name="MGorda" Type="float" />
-          <Property Name="Role" Type="nvarchar" MaxLength="50" />
         </EntityType>
         <Association Name="FK_Comentarios_AspNetUsers">
           <End Role="AspNetUsers" Type="Self.AspNetUsers" Multiplicity="1" />
@@ -1158,7 +1157,6 @@
           <Property Name="Habitos_alcoolicos" Type="Boolean" />
           <Property Name="MMuscular" Type="Double" />
           <Property Name="MGorda" Type="Double" />
-          <Property Name="Role" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
           <NavigationProperty Name="AspNetUser" Relationship="HealthyModel.FK_Utilizador_AspNetUsers" FromRole="Utilizador" ToRole="AspNetUser" />
           <NavigationProperty Name="Objectivoes" Relationship="HealthyModel.FK_Objectivo_Objectivo" FromRole="Utilizador" ToRole="Objectivo" />
         </EntityType>
@@ -1426,7 +1424,6 @@
           <EntitySetMapping Name="Utilizadors">
             <EntityTypeMapping TypeName="HealthyModel.Utilizador">
               <MappingFragment StoreEntitySet="Utilizador">
-                <ScalarProperty Name="Role" ColumnName="Role" />
                 <ScalarProperty Name="MGorda" ColumnName="MGorda" />
                 <ScalarProperty Name="MMuscular" ColumnName="MMuscular" />
                 <ScalarProperty Name="Habitos_alcoolicos" ColumnName="Habitos_alcoolicos" />

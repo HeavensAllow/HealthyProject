@@ -46,7 +46,7 @@ namespace HealthyProject.Controllers
         //POST
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult CreatePost([Bind( Include="Titulo,Texto")] Post newPost, int? subcategoria)
+        public ActionResult CreatePost([Bind(Include = "Titulo,Texto")] Post newPost, int? subcategoria)
         {
             if (subcategoria == null)
             {
@@ -58,23 +58,22 @@ namespace HealthyProject.Controllers
 
             db.Posts.Add(newPost);
             db.SaveChanges();
-            return View("Index");
+            return RedirectToAction("Post", new { id = newPost.PostID });
+
         }
+            //GET
 
-
-
-        //GET
-
-        public ActionResult Post(int? id)
-        {
-            Post post = db.Posts.Find(id);
-            if (post == null)
+            public ActionResult Post(int? id)
             {
-                return HttpNotFound();
-            }
-            return View(post);
+                Post post = db.Posts.Find(id);
+                if (post == null)
+                {
+                    return HttpNotFound();
+                }
+                return View(post);
 
-        }
+            }
+       
         //POST
         [HttpPost]
         [ValidateAntiForgeryToken]
@@ -97,7 +96,8 @@ namespace HealthyProject.Controllers
             db.Comentarios.Add(newComment);
             db.SaveChanges();
             post = db.Posts.Find(postId);
-            return View(post);
+            return PartialView("_PostPartial", post);
+           
         }
 
         [HttpPost]
@@ -111,7 +111,7 @@ namespace HealthyProject.Controllers
             }
             Opiniao opiniao = comentario.Opiniaos.FirstOrDefault(c => c.userID == userID);
 
-            if (opiniao == null) // se não existir, adicionamos uma nova
+            if (opiniao == null) 
             {
                 opiniao = new Opiniao();
                 opiniao.userID = userID;
@@ -125,7 +125,7 @@ namespace HealthyProject.Controllers
                 db.Entry(opiniao).State = EntityState.Modified;
             }
             db.SaveChanges();
-            return View("Post", comentario.Post);
+            return PartialView("Post", comentario.Post);
         }
         [HttpPost]
         public ActionResult naoGosto(int? id)
@@ -138,7 +138,7 @@ namespace HealthyProject.Controllers
             }
             Opiniao opiniao = comentario.Opiniaos.FirstOrDefault(c => c.userID == userID);
 
-            if (opiniao == null) // se não existir, adicionamos uma nova
+            if (opiniao == null)
             {
                 opiniao = new Opiniao();
                 opiniao.userID = userID;
@@ -153,7 +153,7 @@ namespace HealthyProject.Controllers
             }
             db.SaveChanges();
             ViewBag.Likes = comentario.Opiniaos.Where(o => o.Opiniao1 == true).Count() - comentario.Opiniaos.Where(o => o.Opiniao1 == false).Count();
-            return View("Post", comentario.Post);
+            return PartialView("Post", comentario.Post);
         }
 
 
