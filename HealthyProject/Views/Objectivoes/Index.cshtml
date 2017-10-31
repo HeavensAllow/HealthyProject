@@ -55,12 +55,15 @@ else
 }
 <br />
 <h1 class="centerAlign">Histórico</h1>
+<div style="width:100%; overflow-x:auto;">
+    <div id="Totalkg" style="height: 500px; width: 100%;"></div>
+    <br />
+    </div>
 
 
-
-@section Scripts{
-    <script type="text/javascript">
-    window.onload = function () {
+    @section Scripts{
+        <script type="text/javascript">
+        window.onload = function () {
         var chart = new CanvasJS.Chart("chartContainer", {
             animationEnabled: true,
             backgroundColor: "#ffffff",
@@ -97,8 +100,38 @@ else
             legendText: "Intake Diário Recomendado",
             dataPoints: @Html.Raw(ViewBag.IntakeR),
         }]
-  });
+            });
+            chart.render();
 
+        var chart = new CanvasJS.Chart("Totalkg", {
+            animationEnabled: true,
+            backgroundColor: "#ffffff",
+            title: {
+                text: "Evolução do Peso desde o registo"
+            },
+
+            toolTip: {
+                shared: true
+            },
+
+            axisY: {
+                interlacedColor: "#F0F8FF",
+                title: "Peso"
+            },
+
+            axisX: {
+                title: "Data",
+             },
+
+            data: [
+                {
+                type: "line",
+                showInLegend: true,
+                name: "Peso",
+                legendText: "Peso por data",
+                dataPoints: @Html.Raw(ViewBag.Total),
+                }]
+            });
     chart.render();
 }
         $(function () {
@@ -108,7 +141,7 @@ else
                 $(this).attr('data-toggle', 'modal');
             });
         });
-    </script>
-    <script src="@Url.Content("~/Content/canvasjs.min.js")"></script>
-    <script src="@Url.Content("~/Content/jquery.canvasjs.min.js")"></script>
-}
+        </script>
+        <script src="@Url.Content("~/Content/canvasjs.min.js")"></script>
+        <script src="@Url.Content("~/Content/jquery.canvasjs.min.js")"></script>
+    }

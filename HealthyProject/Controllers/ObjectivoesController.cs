@@ -37,7 +37,7 @@ namespace HealthyProject.Controllers
             }
             double counter = 0;
             List<DataPoint> datapoints = new List<DataPoint>{};
-            List<DataPoint> intake = new List<DataPoint> { };
+            List<DataPoint> intake = new List<DataPoint>{};
             while (delta <= 0)
             {
                 var day = today.AddDays(delta);
@@ -65,9 +65,34 @@ namespace HealthyProject.Controllers
                 counter++;
             }
 
+            var total = db.RegistoPesoes.Include(o => o.Utilizador).Where(i => i.User_ID == userId);
+            List<DataPoint> kg = new List<DataPoint>{};
+            counter = 0;
+            foreach(RegistoPeso i in total)
+            {
+                kg.Add(new DataPoint(counter, i.Peso, i.Data.Value.ToString("dd-MM-yyyy")));
+                counter++;
+            }
+            List<DataPoint> objectiv = new List<DataPoint> { };
+            counter = 0;
+            int counter2 = 0;
+            foreach(Objectivo i in objectivoes)
+            {
+                if(i.Data_fim != null && i.Peso_Final != i.Peso_objectivo)
+                {
+                    counter2++;
+                }
+                if(i.Data_fim != null && i.Peso_Final == i.Peso_objectivo)
+                {
+                    counter++;
+                }
+            }
+            objectiv.Add(new DataPoint(0, counter, "Numero de objectivos concluidos com sucesso"));
+            objectiv.Add(new DataPoint(1, counter2, "Numero de objectivos terminados sem sucesso"));
             ViewBag.DataPoints = JsonConvert.SerializeObject(datapoints);
             ViewBag.IntakeR = JsonConvert.SerializeObject(intake);
             ViewBag.IMath = JsonConvert.SerializeObject(objectivo.Intake_diarioR);
+            ViewBag.Total = JsonConvert.SerializeObject(kg);
             if((int)DateTime.Now.DayOfWeek == 1 && peso == null)
             {
                 ViewBag.Teste = "Por favor indique o seu novo peso";
@@ -305,7 +330,10 @@ namespace HealthyProject.Controllers
         public ActionResult DeleteConfirmed(int id)
         {
             Objectivo objectivo = db.Objectivoes.Find(id);
-            db.Objectivoes.Remove(objectivo);
+            var userId = Convert.ToInt32(User.Identity.GetUserId());
+            var utilizador = db.Utilizadors.FirstOrDefault(i => i.UserID == userId);
+            objectivo.Data_fim = DateTime.Today;
+            objectivo.Peso_Final = utilizador.Peso;
             db.SaveChanges();
             return RedirectToAction("Index");
         }

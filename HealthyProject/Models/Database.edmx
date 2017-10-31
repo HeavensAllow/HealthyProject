@@ -105,6 +105,7 @@
           <Property Name="Peso_objectivo" Type="int" />
           <Property Name="Intake_diarioR" Type="int" />
           <Property Name="Intake_diarioA" Type="int" />
+          <Property Name="Peso_Final" Type="int" />
         </EntityType>
         <EntityType Name="Pratos">
           <Key>
@@ -564,6 +565,7 @@
           <NavigationProperty Name="RegistoDiarios" Relationship="Self.FK_RegistoDiario_RegistoDiario" FromRole="Objectivo" ToRole="RegistoDiario" />
           <Property Name="Intake_diarioR" Type="Int32" />
           <Property Name="Intake_diarioA" Type="Int32" />
+          <Property Name="Peso_Final" Type="Int32" />
         </EntityType>
         <EntityType Name="Prato">
           <Key>
@@ -1013,6 +1015,7 @@
           <EntitySetMapping Name="Objectivoes">
             <EntityTypeMapping TypeName="HealthyModel.Objectivo">
               <MappingFragment StoreEntitySet="Objectivo">
+                <ScalarProperty Name="Peso_Final" ColumnName="Peso_Final" />
                 <ScalarProperty Name="Intake_diarioA" ColumnName="Intake_diarioA" />
                 <ScalarProperty Name="Intake_diarioR" ColumnName="Intake_diarioR" />
                 <ScalarProperty Name="ObjectivoID" ColumnName="ObjectivoID" />

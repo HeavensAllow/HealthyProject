@@ -56,6 +56,7 @@ namespace HealthyProject.Controllers
                 RegistoPeso peso = new RegistoPeso();
                 peso.Peso = utilizador.Peso;
                 peso.Data = DateTime.Today;
+                peso.User_ID = utilizador.UserID;
                 db.RegistoPesoes.Add(peso);
                 db.SaveChanges();
                 return RedirectToAction("Index");
@@ -91,6 +92,11 @@ namespace HealthyProject.Controllers
             if (ModelState.IsValid)
             {
                 db.Entry(utilizador).State = EntityState.Modified;
+                RegistoPeso peso = new RegistoPeso();
+                peso.Peso = utilizador.Peso;
+                peso.Data = DateTime.Today;
+                peso.User_ID = utilizador.UserID;
+                db.RegistoPesoes.Add(peso);
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
