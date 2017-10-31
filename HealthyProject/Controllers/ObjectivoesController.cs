@@ -68,7 +68,7 @@ namespace HealthyProject.Controllers
             ViewBag.DataPoints = JsonConvert.SerializeObject(datapoints);
             ViewBag.IntakeR = JsonConvert.SerializeObject(intake);
             ViewBag.IMath = JsonConvert.SerializeObject(objectivo.Intake_diarioR);
-            if((int)DateTime.Now.DayOfWeek == 1 && peso == null)
+            if((int)DateTime.Now.DayOfWeek == 2 && peso == null)
             {
                 ViewBag.Teste = "Por favor indique o seu novo peso";
                 return View();
@@ -93,11 +93,52 @@ namespace HealthyProject.Controllers
         {
             if (ModelState.IsValid)
             {
-                db.Entry(utilizador).State = EntityState.Modified;
+                var userId = Convert.ToInt32(User.Identity.GetUserId());
+                Utilizador mudar = db.Utilizadors.FirstOrDefault(o => o.UserID == userId);
+                mudar.Peso = utilizador.Peso;
+                db.Entry(mudar).State = EntityState.Modified;
+                var actual = db.Objectivoes.FirstOrDefault(p => p.UserID == userId && p.Data_fim == null);
+                UtilizadorsController x = new UtilizadorsController();
+                var age = x.GetAge((DateTime)mudar.Data_nascimento);
+                if (utilizador.Genero == "Feminino")
+                {
+                    actual.Intake_diarioA = Convert.ToInt32(354 - (6.91 * age) + (mudar.Actividade_fisica * (9.36 * mudar.Peso + (726 * (mudar.Altura / 100)))));
+                    int Intake_diarioR = Convert.ToInt32(354 - (6.91 * age) + (mudar.Actividade_fisica * (9.36 * actual.Peso_objectivo + (726 * (mudar.Altura / 100)))));
+                    if (Intake_diarioR > 1800 & actual.Intake_diarioA - Intake_diarioR > 500)
+                    {
+                        actual.Intake_diarioR = actual.Intake_diarioA - 500;
+                    }
+                    else if (Intake_diarioR < 1800 & actual.Intake_diarioA - Intake_diarioR < 500)
+                    {
+                        actual.Intake_diarioR = 1800;
+                    }
+                    else
+                    {
+                        actual.Intake_diarioR = Intake_diarioR;
+                    }
+                }
+                else
+                {
+                    actual.Intake_diarioA = Convert.ToInt32(662 - (9.53 * age) + (mudar.Actividade_fisica * (15.91 * mudar.Peso + (539.6 * (mudar.Altura / 100)))));
+                    int Intake_diarioR = Convert.ToInt32(662 - (9.53 * age) + (mudar.Actividade_fisica * (15.91 * actual.Peso_objectivo + (539.6 * (mudar.Altura / 100)))));
+                    if (Intake_diarioR > 1800 & actual.Intake_diarioA - Intake_diarioR > 500)
+                    {
+                        actual.Intake_diarioR = actual.Intake_diarioA - 500;
+                    }
+                    else if (Intake_diarioR < 1800 & actual.Intake_diarioA - Intake_diarioR < 500)
+                    {
+                        actual.Intake_diarioR = 1800;
+                    }
+                    else
+                    {
+                        actual.Intake_diarioR = Intake_diarioR;
+                    }
+                }
+                db.Entry(actual).State = EntityState.Modified;
                 RegistoPeso peso = new RegistoPeso();
                 peso.Peso = utilizador.Peso;
                 peso.Data = DateTime.Today;
-                peso.User_ID = 10;
+                peso.User_ID = userId;
                 db.RegistoPesoes.Add(peso);
                 db.SaveChanges();
                 return RedirectToAction("Index");
@@ -159,13 +200,37 @@ namespace HealthyProject.Controllers
                     var age = x.GetAge((DateTime)utilizador.Data_nascimento);
                     if (utilizador.Genero == "Feminino")
                     {
-                        objectivo.Intake_diarioA = Convert.ToInt32(354 - (6.91 * age) + (utilizador.Actividade_fisica * (9.36 * utilizador.Peso + 726 * (utilizador.Altura / 100))));
-                        objectivo.Intake_diarioR = Convert.ToInt32(354 - (6.91 * age) + (utilizador.Actividade_fisica * (9.36 * objectivo.Peso_objectivo + 726 * (utilizador.Altura / 100))));
+                        objectivo.Intake_diarioA = Convert.ToInt32(354 - (6.91 * age) + (utilizador.Actividade_fisica * (9.36 * utilizador.Peso + (726 * (utilizador.Altura / 100)))));
+                        int Intake_diarioR = Convert.ToInt32(354 - (6.91 * age) + (utilizador.Actividade_fisica * (9.36 * objectivo.Peso_objectivo + (726 * (utilizador.Altura / 100)))));
+                        if(Intake_diarioR > 1800 & objectivo.Intake_diarioA - Intake_diarioR > 500)
+                        {
+                            objectivo.Intake_diarioR = objectivo.Intake_diarioA - 500;
+                        }
+                        else if(Intake_diarioR < 1800 & objectivo.Intake_diarioA - Intake_diarioR < 500)
+                        {
+                            objectivo.Intake_diarioR = 1800;
+                        }
+                        else
+                        {
+                            objectivo.Intake_diarioR = Intake_diarioR;
+                        }
                     }
                     else
                     {
-                        objectivo.Intake_diarioA = Convert.ToInt32(662 - (9.53 * age) + (utilizador.Actividade_fisica * (15.91 * utilizador.Peso + 539.6 * (utilizador.Altura / 100))));
-                        objectivo.Intake_diarioR = Convert.ToInt32(662 - (9.53 * age) + (utilizador.Actividade_fisica * (15.91 * objectivo.Peso_objectivo + 539.6 * (utilizador.Altura / 100))));
+                        objectivo.Intake_diarioA = Convert.ToInt32(662 - (9.53 * age) + (utilizador.Actividade_fisica * (15.91 * utilizador.Peso + (539.6 * (utilizador.Altura / 100)))));
+                        int Intake_diarioR = Convert.ToInt32(662 - (9.53 * age) + (utilizador.Actividade_fisica * (15.91 * objectivo.Peso_objectivo + (539.6 * (utilizador.Altura / 100)))));
+                        if (Intake_diarioR > 1800 & objectivo.Intake_diarioA - Intake_diarioR > 500)
+                        {
+                            objectivo.Intake_diarioR = objectivo.Intake_diarioA - 500;
+                        }
+                        else if (Intake_diarioR < 1800 & objectivo.Intake_diarioA - Intake_diarioR < 500)
+                        {
+                            objectivo.Intake_diarioR = 1800;
+                        }
+                        else
+                        {
+                            objectivo.Intake_diarioR = Intake_diarioR;
+                        }
                     }
                     db.Objectivoes.Add(objectivo);
                     db.SaveChanges();
