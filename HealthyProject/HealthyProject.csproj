@@ -194,11 +194,11 @@
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\Startup.Auth.cs" />
     <Compile Include="Controllers\AccountController.cs" />
-    <Compile Include="Controllers\Categorias.cs" />
+    <Compile Include="Controllers\CategoriasController.cs" />
     <Compile Include="Controllers\ForumController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
-    <Compile Include="Controllers\Subcategorias.cs" />
+    <Compile Include="Controllers\SubcategoriasController.cs" />
     <Compile Include="Controllers\UtilizadorsController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
@@ -376,11 +376,11 @@
     <Content Include="Views\Forum\Post.cshtml" />
     <Content Include="Views\Forum\CreatePost.cshtml" />
     <Content Include="Views\Forum\_PostPartial.cshtml" />
-    <Content Include="Views\Categorias\Create.cshtml" />
+    <Content Include="Views\Categorias\CreateCategoria.cshtml" />
     <Content Include="Views\Categorias\Details.cshtml" />
     <Content Include="Views\Categorias\Edit.cshtml" />
     <Content Include="Views\Categorias\Index.cshtml" />
-    <Content Include="Views\Subcategorias\Create.cshtml" />
+    <Content Include="Views\Subcategorias\CreateSubcategoria.cshtml" />
     <Content Include="Views\Subcategorias\Details.cshtml" />
     <Content Include="Views\Subcategorias\Edit.cshtml" />
     <Content Include="Views\Subcategorias\Index.cshtml" />

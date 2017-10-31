@@ -4,7 +4,6 @@
     ViewBag.Title = "Index";
 }
 
-<h2>Index</h2>
 
 <p>
     @Html.ActionLink("Nova subcategoria", "createSubcategoria", "Subcategorias");
@@ -15,7 +14,7 @@
             @Html.DisplayNameFor(model => model.Nome)
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.Categoria.Nome)
+            @Html.DisplayNameFor(model => model.Categoria)
         </th>
         <th></th>
     </tr>
@@ -31,7 +30,7 @@
         <td>
             @Html.ActionLink("Edit", "Edit", new { id=item.SubcategoriaID }) |
             @Html.ActionLink("Details", "Details", new { id=item.SubcategoriaID }) |
-         
+            @Html.ActionLink("Delete", "Delete", new { id = item.SubcategoriaID }) |
         </td>
     </tr>
 }

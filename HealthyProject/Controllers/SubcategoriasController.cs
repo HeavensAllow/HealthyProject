@@ -10,80 +10,85 @@ using HealthyProject.Models;
 
 namespace HealthyProject.Controllers
 {
-    public class Categorias : Controller
+    [Authorize(Roles = "Admin")]
+    public class SubcategoriasController : Controller
     {
         private HealthyEntities db = new HealthyEntities();
 
-        // GET: Categorias
+        // GET: Subcategorias
         public ActionResult Index()
         {
-            return View(db.Categorias.ToList());
+            var subcategorias = db.Subcategorias.Include(s => s.Categoria);
+            return View(subcategorias.ToList());
         }
 
-        // GET: Categorias/Details/5
+        // GET: Subcategorias/Details/5
         public ActionResult Details(int? id)
         {
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Categoria categoria = db.Categorias.Find(id);
-            if (categoria == null)
+            Subcategoria subcategoria = db.Subcategorias.Find(id);
+            if (subcategoria == null)
             {
                 return HttpNotFound();
             }
-            return View(categoria);
+            return View(subcategoria);
         }
 
         //GET
-        public ActionResult CreateCategoria()
+        
+        public ActionResult CreateSubcategoria()
         {
+            ViewBag.Categorias = new SelectList(db.Categorias, "CategoriaID", "Nome");
             return View();
         }
 
-        //POST
+        ////POST
+       
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult CreateCategoria([Bind(Include = "Nome")] Categoria newCategoria)
+        public ActionResult CreateSubcategoria([Bind(Include = "CategoriaID,Nome")] Subcategoria newSubcategoria)
         {
-
-            db.Categorias.Add(newCategoria);
+            db.Subcategorias.Add(newSubcategoria);
             db.SaveChanges();
             return RedirectToAction("Index");
 
         }
-
-        // GET: Categorias/Edit/5
+        // GET: Subcategorias/Edit/5
         public ActionResult Edit(int? id)
         {
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Categoria categoria = db.Categorias.Find(id);
-            if (categoria == null)
+            Subcategoria subcategoria = db.Subcategorias.Find(id);
+            if (subcategoria == null)
             {
                 return HttpNotFound();
             }
-            return View(categoria);
+            ViewBag.CategoriaID = new SelectList(db.Categorias, "CategoriaID", "Nome", subcategoria.CategoriaID);
+            return View(subcategoria);
         }
 
-        // POST: Categorias/Edit/5
+        // POST: Subcategorias/Edit/5
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "CategoriaID,Nome")] Categoria categoria)
+        public ActionResult Edit([Bind(Include = "SubcategoriaID,Nome,CategoriaID")] Subcategoria subcategoria)
         {
             if (ModelState.IsValid)
             {
-                db.Entry(categoria).State = EntityState.Modified;
+                db.Entry(subcategoria).State = EntityState.Modified;
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
-            return View(categoria);
+            ViewBag.CategoriaID = new SelectList(db.Categorias, "CategoriaID", "Nome", subcategoria.CategoriaID);
+            return View(subcategoria);
         }
-
+     
         protected override void Dispose(bool disposing)
         {
             if (disposing)
