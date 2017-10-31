@@ -1,15 +1,88 @@
 ﻿@{
     ViewBag.Title = "Home Page";
 }
+@Styles.Render("~/Content/css")
+@Scripts.Render("~/bundles/modernizr")
 
-<div>
+<body>
+    <img src="~/Content/Images/Logo.PNG" alt="Logotipo" style="float:right;width:200px;height:100px;" />
+    <br />
+    <br />
+    <div>
 
-    <h1>Pagina Inicial</h1>
-    @*<p class="lead">ASP.NET is a free web framework for building great Web sites and Web applications using HTML, CSS and JavaScript.</p>
-    <p><a href="https://asp.net" class="btn btn-primary btn-lg">Learn more &raquo;</a></p>*@
+        <h1 align ="center"> Healthy Project </h1>
+        @*<p class="lead">ASP.NET is a free web framework for building great Web sites and Web applications using HTML, CSS and JavaScript.</p>
+            <p><a href="https://asp.net" class="btn btn-primary btn-lg">Learn more &raquo;</a></p>*@
 
-</div>
-<div>
+        <br />
+        <br />
+        <br />
+        <br />
+
+
+    </div>
+    <div>
+        <h3 style="text-align:left">  Gostaria de ter maior controlo sobre o seu peso? </h3>
+     
+            <h3 style="text-align:center"> Um estilo de vida saudavel? </h3>
+
+        <h3 style="text-align:right"> Melhor gestao das suas Refeicoes ?  </h3>
+
+      
+        <br />
+        <br />
+        <br />
+        <br />
+
+    </div>
+    <div>
+        <h3 style="text-align:center"> A nova aplicacao Healthy Project tem como objetivo  monitorizar o seu peso ajudando-o a alcancar os seus objetivos de forma rapida e eficaz!</h3>.
+        <br />
+        <br />
+        <br />
+        <br />
+
+
+        <h3 style="text-align:center"> O que oferecemos?  </h3>
+            <h3 style= "text-align:left">
+                <br />
+                Sistema de avaliacao continua, onde sera possivel acompanhar a evolucao do seu peso tendo em conta todas as suas o seu estilo de vida!
+                <br />
+                <br />
+                Sugestoes de Refeicoes e Exercicio Fisico para o ajudar a cumprir os seus objetivos!
+                <br />
+                <br />
+                Um forum onde podera partilhar receitas e opinioes com outros utilizadores!
+           
+        </h3>
+    </div>
+
+    <br />
+    <br />
+    <br />
+
+    <div style="text-align:center">
+
+        <h3>Junte se a Nos</h3>
+
+        <button style="background-color:lightblue; width:100px;height:50px;"> @Html.ActionLink("Registe-se", "Register", "Account", routeValues: null, htmlAttributes: new { id = "registerLink" })</button>
+
+
+
+    </div>
+
+
+
+</body>
+
+
+
+
+
+
+
+
+@*Informacao Anterior*@
 @*<div class="row">
     <div class="col-md-4">
         <h2>Getting started</h2>
@@ -30,6 +103,6 @@
         <p>You can easily find a web hosting company that offers the right mix of features and price for your applications.</p>
         <p><a class="btn btn-default" href="https://go.microsoft.com/fwlink/?LinkId=301867">Learn more &raquo;</a></p>
     </div>*@
-</div>
 
-@*class="jumbotron"*@
+
+@*class="jumbotron"*@ 
