@@ -4,6 +4,11 @@
 @Styles.Render("~/Content/css")
 @Scripts.Render("~/bundles/modernizr")
 
+<style>
+    body {
+      
+</style>
+
 <body>
     <img src="~/Content/Images/Logo.PNG" alt="Logotipo" style="float:right;width:200px;height:100px;" />
     <br />
@@ -66,7 +71,7 @@
         <h3>Junte se a Nos</h3>
 
         <button style="background-color:lightblue; width:100px;height:50px;"> @Html.ActionLink("Registe-se", "Register", "Account", routeValues: null, htmlAttributes: new { id = "registerLink" })</button>
-
+        
 
 
     </div>
