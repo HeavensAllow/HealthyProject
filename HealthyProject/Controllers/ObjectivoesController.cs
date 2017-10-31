@@ -93,6 +93,7 @@ namespace HealthyProject.Controllers
             ViewBag.IntakeR = JsonConvert.SerializeObject(intake);
             ViewBag.IMath = JsonConvert.SerializeObject(objectivo.Intake_diarioR);
             ViewBag.Total = JsonConvert.SerializeObject(kg);
+            ViewBag.Object = JsonConvert.SerializeObject(objectiv);
             if((int)DateTime.Now.DayOfWeek == 1 && peso == null)
             {
                 ViewBag.Teste = "Por favor indique o seu novo peso";

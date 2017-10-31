@@ -55,10 +55,29 @@ else
 }
 <br />
 <h1 class="centerAlign">Histórico</h1>
-<div style="width:100%; overflow-x:auto;">
-    <div id="Totalkg" style="height: 500px; width: 100%;"></div>
-    <br />
+
+<div class="container">
+    <div id="imgcarousel" class="carousel slide" data-ride="carousel">
+        <ol class="carousel-indicators">
+            <li data-target="#imgcarousel" data-slide-to="0" class="active"></li>
+            <li data-target="#imgcarousel" data-slide-to="1"></li>
+        </ol>
+        <div class="carousel-inner">
+            <div class="item active">
+                <p id="Totalkg" style="width:99%; position: absolute; height:500px;"></p>
+            </div>
+            <div class="item">
+                <p id="NrObjectivos" style="height:500px; width: 99%; position:absolute; left:1250px;"></p>
+            </div>
+            @*http://www.dotnetcurry.com/jquery/1173/responsive-image-carousel-bootstrap-jquery*@
+        </div>
     </div>
+</div>
+@*<div style="width:100%; overflow-x:scroll; height: 550px; overflow-y: hidden; position: relative;">
+    <p id="Totalkg" style="width:99%; position: absolute; height:500px;"></p>
+    <p id="NrObjectivos" style="height:500px; width: 99%; position:absolute; left:1250px;"></p>
+    <br />
+    </div>*@
 
 
     @section Scripts{
@@ -130,6 +149,36 @@ else
                 name: "Peso",
                 legendText: "Peso por data",
                 dataPoints: @Html.Raw(ViewBag.Total),
+                }]
+            });
+            chart.render();
+
+                    var chart = new CanvasJS.Chart("NrObjectivos", {
+            animationEnabled: true,
+            backgroundColor: "#ffffff",
+            title: {
+                text: "Nr de Objectivos"
+            },
+
+            toolTip: {
+                shared: true
+            },
+
+            axisY: {
+                interlacedColor: "#F0F8FF",
+            },
+
+            axisX: {
+                title: "Objectivos",
+             },
+
+            data: [
+                {
+                type: "column",
+                showInLegend: true,
+                name: "Número",
+                legendText: "Número de objectivos",
+                dataPoints: @Html.Raw(ViewBag.Object),
                 }]
             });
     chart.render();
