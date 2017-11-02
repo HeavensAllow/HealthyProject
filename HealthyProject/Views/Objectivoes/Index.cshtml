@@ -19,7 +19,7 @@
         <div class="modal-body">
         </div>
     </div>
-</div>  
+</div>
 <br />
 <br />
 @if (ViewBag.IntakeR == null)
@@ -36,17 +36,17 @@ else
         <div id="chartContainer" style="height: 500px; width: 100%;"></div>
         <br />
         <div style="float:left">
-            @if(ViewBag.Teste != null)
+            @if (ViewBag.Teste != null)
             {
                 @Html.ActionLink("Editar Peso", "getPeso", null, new { @class = "img-btn-getpeso modal-link mybtn", title = "Modificar Peso" })
             }
             else
             {
                 @Html.ActionLink("Adicionar refeicao", "Create", "Refeicoes", htmlAttributes: (new { @class = "mybtn" }))
-            }      
+            }
         </div>
         <div style="float:right">
-            @Html.ActionLink("Delete Objective", "Delete", null, htmlAttributes: (new { @class = "mybtn"}))
+            @Html.ActionLink("Delete Objective", "Delete", null, htmlAttributes: (new { @class = "mybtn" }))
         </div>
         <br />
         <br />
@@ -62,14 +62,27 @@ else
     <div class="slidediv" style="width:85%; overflow-x:scroll; height: 550px; overflow-y: hidden; position: relative;">
         <p id="Totalkg" style="width:100%; position: absolute; height:500px;left:0px;"></p>
         <p id="NrObjectivos" style="height:500px; width: 100%; position:absolute; left:1250px;"></p>
+        @if (ViewBag.Registos != null)
+        {
+            <p id="Totalkcal" style="height:500px; width: 100%; position:absolute; left:2500px;"></p>
+        }
+        @if (ViewBag.Favoritos != null)
+        {
+            <p id="Favoritos" style="height:500px; width: 100%; position:absolute; left:3750px;"></p>
+        }
+        @if (ViewBag.Count != null)
+        {
+            <p id="Count" style="height:500px; width: 100%; position:absolute; left:5000px;"></p>
+        }
+
         <br />
     </div>
-    
 </div>
-    @section Scripts{
-        <script type="text/javascript">
+
+@section Scripts{
+    <script type="text/javascript">
         window.onload = function () {
-        var chart = new CanvasJS.Chart("chartContainer", {
+        var chart1 = new CanvasJS.Chart("chartContainer", {
             animationEnabled: true,
             backgroundColor: "#ffffff",
             title: {
@@ -108,7 +121,7 @@ else
             });
             chart.render();
 
-        var chart = new CanvasJS.Chart("Totalkg", {
+        var chart2 = new CanvasJS.Chart("Totalkg", {
             animationEnabled: true,
             backgroundColor: "#ffffff",
             title: {
@@ -139,7 +152,7 @@ else
             });
             chart.render();
 
-                    var chart = new CanvasJS.Chart("NrObjectivos", {
+                    var chart3 = new CanvasJS.Chart("NrObjectivos", {
             animationEnabled: true,
             backgroundColor: "#ffffff",
             title: {
@@ -152,6 +165,7 @@ else
 
             axisY: {
                 interlacedColor: "#F0F8FF",
+                title: "Numero de objectivos"
             },
 
             axisX: {
@@ -167,22 +181,129 @@ else
                 dataPoints: @Html.Raw(ViewBag.Object),
                 }]
             });
-    chart.render();
-}
-        $(function () {
-            $('body').on('click', '.modal-link', function (e) {
-                e.preventDefault();
-                $(this).attr('data-target', '#modal-container');
-                $(this).attr('data-toggle', 'modal');
+                    chart.render();
+
+            @if(ViewBag.Registos != null)
+            {
+                <text>
+
+                var chart4 = new CanvasJS.Chart("Totalkcal", {
+            animationEnabled: true,
+            backgroundColor: "#ffffff",
+            title: {
+                    text: "Kcal registadas por dia"
+            },
+
+            toolTip: {
+                    shared: true
+            },
+
+            axisY: {
+                    interlacedColor: "#F0F8FF",
+                title: "Kcal"
+            },
+
+            axisX: {
+                    title: "Data",
+             },
+
+            data: [{
+                    type: "line",
+                showInLegend: true,
+                name: "Kcal",
+                legendText: "Kcal por data",
+                dataPoints: @Html.Raw(ViewBag.Registos),
+                }]
             });
+            chart.render();
+            </text>
+            }
+             @if(ViewBag.Favoritos != null)
+            {
+                <text>
+
+                var chart5 = new CanvasJS.Chart("Totalkcal", {
+            animationEnabled: true,
+            backgroundColor: "#ffffff",
+            title: {
+                    text: "Pratos favoritos"
+            },
+
+            toolTip: {
+                    shared: true
+            },
+
+            axisY: {
+                interlacedColor: "#F0F8FF",
+                title: "Numero de vezes ingerida"
+            },
+
+            axisX: {
+                    title: "Prato",
+             },
+
+            data: [{
+                type: "column",
+                showInLegend: true,
+                name: "Numero de vezes ingeridas",
+                legendText: "Top 5 pratos",
+                dataPoints: @Html.Raw(ViewBag.Favoritos),
+                }]
+            });
+            chart.render();
+            </text>
+            }
+             @if(ViewBag.Registos != null)
+            {
+                <text>
+
+                var chart6 = new CanvasJS.Chart("Count", {
+            animationEnabled: true,
+            backgroundColor: "#ffffff",
+            title: {
+                    text: "Total de dias com/sem objectivos"
+            },
+
+            toolTip: {
+                    shared: true
+            },
+
+            axisY: {
+                interlacedColor: "#F0F8FF",
+                title: "Numero de dias"
+            },
+
+            axisX: {
+                    title: "Objectivo",
+             },
+
+            data: [{
+                type: "column",
+                showInLegend: true,
+                name: "Numero de dias",
+                legendText: "Numero de dias com/sem objectivos",
+                dataPoints: @Html.Raw(ViewBag.Count),
+                }]
+            });
+            chart.render();
+            </text>
+            }
+            }
+        $(function () {
+            var div = 1;
+            var max = $('.slidediv').children("p").length;
             $("#btnright").click(function () {
+                if (div + 1 > max) return;
+                div++;
                 $('.slidediv').children().animate({ left:  '-=1250px' });
             });
             $("#btnleft").click(function () {
+                if (div - 1 < 1) return;
+                div--;
                 $('.slidediv').children().animate({ left: '+=1250px' });
             });
         });
-        </script>
-        <script src="@Url.Content("~/Content/canvasjs.min.js")"></script>
-        <script src="@Url.Content("~/Content/jquery.canvasjs.min.js")"></script>
-    }
+    </script>
+    <script src="@Url.Content("~/Content/canvasjs.min.js")"></script>
+    <script src="@Url.Content("~/Content/jquery.canvasjs.min.js")"></script>
+}
