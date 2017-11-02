@@ -4,18 +4,34 @@
 @Styles.Render("~/Content/css")
 @Scripts.Render("~/bundles/modernizr")
 
-<style>
-    body {
-      
-</style>
 
-<body>
-    <img src="~/Content/Images/Logo.PNG" alt="Logotipo" style="float:right;width:200px;height:100px;" />
-    <br />
-    <br />
-    <div>
 
-        <h1 align ="center"> Healthy Project </h1>
+    <body>
+        @*<img src="http://www.dream-wallpaper.com/free-wallpaper/nature-wallpaper/grass-football-pitches-wallpaper/1440x900/free-wallpaper-20.jpg" id="imagem" />
+
+        <style>
+            #imagem {
+                position: fixed;
+                top: 0;
+                left: 0;
+                /* Preserve aspet ratio */
+                min-width: 100%;
+                min-height: 100%;
+            }
+        </style>*@
+        <div>
+
+            <br />
+            <br />
+            <br />
+            <img src="~/Content/Images/Logo.PNG" alt="Logotipo" style="float:initial;width:200px;height:100px;" />
+        </div>
+
+        <br />
+
+
+
+        <h1 align="center"> Healthy Project </h1>
         @*<p class="lead">ASP.NET is a free web framework for building great Web sites and Web applications using HTML, CSS and JavaScript.</p>
             <p><a href="https://asp.net" class="btn btn-primary btn-lg">Learn more &raquo;</a></p>*@
 
@@ -25,31 +41,31 @@
         <br />
 
 
-    </div>
-    <div>
-        <h3 style="text-align:left">  Gostaria de ter maior controlo sobre o seu peso? </h3>
-     
+        <div>
+            @*<div style="background-image:url(https://cdn.pixabay.com/photo/2013/04/14/20/24/water-103817_960_720.jpg);">*@
+            <h3 style="text-align:left">  Gostaria de ter maior controlo sobre o seu peso? </h3>
+
             <h3 style="text-align:center"> Um estilo de vida saudavel? </h3>
 
-        <h3 style="text-align:right"> Melhor gestao das suas Refeicoes ?  </h3>
-
-      
-        <br />
-        <br />
-        <br />
-        <br />
-
-    </div>
-    <div>
-        <h3 style="text-align:center"> A nova aplicacao Healthy Project tem como objetivo  monitorizar o seu peso ajudando-o a alcancar os seus objetivos de forma rapida e eficaz!</h3>.
-        <br />
-        <br />
-        <br />
-        <br />
+            <h3 style="text-align:right"> Melhor gestao das suas Refeicoes ?  </h3>
 
 
-        <h3 style="text-align:center"> O que oferecemos?  </h3>
-            <h3 style= "text-align:left">
+            <br />
+            <br />
+            <br />
+            <br />
+
+        </div>
+        <div>
+            <h3 style="text-align:center"> A nova aplicacao Healthy Project tem como objetivo  monitorizar o seu peso ajudando-o a alcancar os seus objetivos de forma rapida e eficaz!</h3>.
+            <br />
+            <br />
+            <br />
+            <br />
+
+
+            <h3 style="text-align:center"> O que oferecemos?  </h3>
+            <h3 style="text-align:left">
                 <br />
                 Sistema de avaliacao continua, onde sera possivel acompanhar a evolucao do seu peso tendo em conta todas as suas o seu estilo de vida!
                 <br />
@@ -58,24 +74,26 @@
                 <br />
                 <br />
                 Um forum onde podera partilhar receitas e opinioes com outros utilizadores!
-           
-        </h3>
-    </div>
 
-    <br />
-    <br />
-    <br />
+            </h3>
+        </div>
 
-    <div style="text-align:center">
+        <br />
+        <br />
+        <br />
 
-        <h3>Junte se a Nos</h3>
+        <div style="text-align:center">
 
-        <button style="background-color:lightblue; width:100px;height:50px;"> @Html.ActionLink("Registe-se", "Register", "Account", routeValues: null, htmlAttributes: new { id = "registerLink" })</button>
-        
+            <h3>Junte se a Nos</h3>
+
+            <button style="background-color:lightgray; width:500px;height:50px;"> @Html.ActionLink("Registe-se", "Register", "Account", routeValues: null, htmlAttributes: new { id = "registerLink" })</button>
 
 
-    </div>
 
+        </div>
+
+
+   
 
 
 </body>
