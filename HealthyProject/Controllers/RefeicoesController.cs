@@ -17,8 +17,6 @@ namespace HealthyProject.Controllers
         // GET: Refeicoes
         public ActionResult Index()
         {
-
-
             var refeicoes = db.Refeicoes.Include(r => r.RegistoDiario).Where(d => d.Data == DateTime.Today);
 
             return View(refeicoes);

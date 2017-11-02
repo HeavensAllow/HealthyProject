@@ -20,6 +20,12 @@ namespace HealthyProject.Controllers
             var refeicaoPratos = db.RefeicaoPratos.Include(r => r.Prato).Include(r => r.Refeico);
             return View(refeicaoPratos.ToList());
         }
+        
+        public ActionResult ListDishes(int RefeicaoID)
+        {
+            var refeicaoPratos = db.RefeicaoPratos.Include(r => r.Prato).Include(r => r.Refeico).Where(id => id.RefeicaoID == RefeicaoID);
+            return View(refeicaoPratos.ToList());
+        }
 
         // GET: RefeicaoPratoes/Details/5
         public ActionResult Details(int? id)
@@ -37,10 +43,13 @@ namespace HealthyProject.Controllers
         }
 
         // GET: RefeicaoPratoes/Create
-        public ActionResult Create()
+        public ActionResult Create(int RefeicaoID)
         {
-            ViewBag.PratoID = new SelectList(db.Pratos, "PratosID", "Nome");
-            ViewBag.RefeicaoID = new SelectList(db.Refeicoes, "RefeicaoID", "Tipo");
+            var nomeRefeicao = db.Refeicoes.Where(r => r.RefeicaoID == RefeicaoID).Distinct();
+            ViewBag.NomeRefeicao = nomeRefeicao;
+
+            ViewBag.PratoID = new SelectList(db.Pratos.OrderBy(p => p.Nome), "PratosID", "Nome");
+            ViewBag.RefeicaoID = new SelectList(db.Refeicoes,"RefeicaoID", "Tipo");
             return View();
         }
 

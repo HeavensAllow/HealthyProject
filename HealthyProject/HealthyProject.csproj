@@ -198,6 +198,7 @@
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
+    <Compile Include="Controllers\RefeicaoBebidasController.cs" />
     <Compile Include="Controllers\RefeicaoPratoesController.cs" />
     <Compile Include="Controllers\RefeicoesController.cs" />
     <Compile Include="Controllers\UtilizadorsController.cs" />
@@ -244,7 +245,6 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>Database.edmx</DependentUpon>
     </Compile>
-    <Compile Include="Models\FoodDiaryDate.cs" />
     <Compile Include="Models\IdentityModels.cs" />
     <Compile Include="Models\Ingrediente.cs">
       <DependentUpon>Database.tt</DependentUpon>
@@ -416,6 +416,11 @@
     <Content Include="Views\RefeicaoPratoes\Details.cshtml" />
     <Content Include="Views\RefeicaoPratoes\Edit.cshtml" />
     <Content Include="Views\RefeicaoPratoes\Index.cshtml" />
+    <Content Include="Views\RefeicaoBebidas\Create.cshtml" />
+    <Content Include="Views\RefeicaoBebidas\Delete.cshtml" />
+    <Content Include="Views\RefeicaoBebidas\Details.cshtml" />
+    <Content Include="Views\RefeicaoBebidas\Edit.cshtml" />
+    <Content Include="Views\RefeicaoBebidas\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

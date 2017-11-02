@@ -13,14 +13,14 @@ Seleccione a data que pretende ver:
 @using (Html.BeginForm("Index", "Refeicoes"))
 {
     @Html.AntiForgeryToken()
-    <input id="dateInput" type="date"  width="10" class="date" name="dateInput"  value="Guardar"  />
+    <input id="dateInput" type="date" width="10" class="date" name="dateInput"  value="Guardar"  />
     <input id="button" type="submit" value="Guardar">
 }
 
+<br />
+<br />
+<br />
 
-<br />
-<br />
-<br />
 <table class="table tableDailyMeals">
     <tr>
         <th>Refeição</th>
@@ -35,23 +35,33 @@ Seleccione a data que pretende ver:
         <th></th>
     </tr>
 
-    @foreach (var item in Model)
+    @foreach (var refeicao in Model)
     {
             <tr>
                 <td>
-                    @Html.DisplayFor(modelItem => item.RefeicaoID)<br />
-                    @Html.DisplayFor(modelItem => item.Data)<br />
-                    
-                    @Html.DisplayFor(modelItem => item.Tipo)
+                    @*@Html.DisplayFor(modelItem => refeicao.RefeicaoID)<br />
+                    @Html.DisplayFor(modelItem => refeicao.Data)<br />*@
+                    @Html.DisplayFor(modelItem => refeicao.Tipo)
+                    <p style="font-size:70%; color:red">@Html.ActionLink("Eliminar refeição", "Delete", new { id = refeicao.RefeicaoID })</p>
+</td>
+                <td>
+                    @foreach (var prato in refeicao.RefeicaoPratos)
+                    {
+                        <p> @prato.Prato.Nome <span>   </span> @prato.Dose <span> gr</span> </p>
+                    }
+                    @foreach (var bebida in refeicao.RefeicaoBebidas)
+                    {
+                        <p> @bebida.Bebida.Nome <span>   </span> @bebida.Quantidade <span> ml</span> </p>
+                    }
                 </td>
                 <td></td>
                 <td></td>
                 <td></td>
                 <td></td>
-                <td></td>
                 <td>
-                    <p style="font-size:80%">@Html.ActionLink("Adicionar Prato", "Create", "RefeicaoPratoes")</p>
-                    <p style="font-size:80%"><a href="">Adicionar Produto</a></p>
+                    <p style="font-size:80%">@Html.ActionLink("Adicionar Prato", "Create", "RefeicaoPratoes", new { RefeicaoID = refeicao.RefeicaoID }, null)</p>
+                    <p style="font-size:80%"><a href="">Adicionar Ingrediente</a></p>
+                    <p style="font-size:80%">@Html.ActionLink("Adicionar Bebida", "Create", "RefeicaoBebidas", new { RefeicaoID = refeicao.RefeicaoID }, null)</p>
                 </td>
             </tr>
         }
