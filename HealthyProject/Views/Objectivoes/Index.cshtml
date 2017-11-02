@@ -56,30 +56,16 @@ else
 <br />
 <h1 class="centerAlign">Histórico</h1>
 
-<div class="container">
-    <div id="imgcarousel" class="carousel slide" data-ride="carousel">
-        <ol class="carousel-indicators">
-            <li data-target="#imgcarousel" data-slide-to="0" class="active"></li>
-            <li data-target="#imgcarousel" data-slide-to="1"></li>
-        </ol>
-        <div class="carousel-inner">
-            <div class="item active">
-                <p id="Totalkg" style="width:99%; position: absolute; height:500px;"></p>
-            </div>
-            <div class="item">
-                <p id="NrObjectivos" style="height:500px; width: 99%; position:absolute; left:1250px;"></p>
-            </div>
-            @*http://www.dotnetcurry.com/jquery/1173/responsive-image-carousel-bootstrap-jquery*@
-        </div>
+<div style="display:inline;">
+    <button class="btn btn-default" id="btnleft" value="Left to right" style="width:5%; height:300px; float:left; font-size:50px; margin-top: 100px;"><</button>
+    <button class="btn btn-default" id="btnright" value="Right to left" style="width:5%; height:300px; float:right; font-size:50px; margin-top: 100px;">></button>
+    <div class="slidediv" style="width:85%; overflow-x:scroll; height: 550px; overflow-y: hidden; position: relative;">
+        <p id="Totalkg" style="width:100%; position: absolute; height:500px;left:0px;"></p>
+        <p id="NrObjectivos" style="height:500px; width: 100%; position:absolute; left:1250px;"></p>
+        <br />
     </div>
+    
 </div>
-@*<div style="width:100%; overflow-x:scroll; height: 550px; overflow-y: hidden; position: relative;">
-    <p id="Totalkg" style="width:99%; position: absolute; height:500px;"></p>
-    <p id="NrObjectivos" style="height:500px; width: 99%; position:absolute; left:1250px;"></p>
-    <br />
-    </div>*@
-
-
     @section Scripts{
         <script type="text/javascript">
         window.onload = function () {
@@ -188,6 +174,12 @@ else
                 e.preventDefault();
                 $(this).attr('data-target', '#modal-container');
                 $(this).attr('data-toggle', 'modal');
+            });
+            $("#btnright").click(function () {
+                $('.slidediv').children().animate({ left:  '-=1250px' });
+            });
+            $("#btnleft").click(function () {
+                $('.slidediv').children().animate({ left: '+=1250px' });
             });
         });
         </script>
