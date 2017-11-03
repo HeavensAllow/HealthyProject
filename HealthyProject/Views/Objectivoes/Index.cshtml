@@ -4,7 +4,9 @@
     ViewBag.Title = "Index";
 }
 
-@if (TempData["Alert"] != null)
+@if(ViewBag.Sem == null)
+{
+if (TempData["Alert"] != null)
 {
     <br />
     <br />
@@ -14,70 +16,76 @@
     </div>
 }
 
-<div id="modal-container" class="modal fade" tabindex="-1" role="dialog">
-    <div class="modal-content" style="width: 570px !important; margin: 100px auto !important; border: 5px solid #3A87AD;">
-        <div class="modal-body">
+    <div id="modal-container" class="modal fade" tabindex="-1" role="dialog">
+        <div class="modal-content" style="width: 570px !important; margin: 100px auto !important; border: 5px solid #3A87AD;">
+            <div class="modal-body">
+            </div>
         </div>
     </div>
-</div>
-<br />
-<br />
-@if (ViewBag.IntakeR == null)
-{
-    <p>
-        @Html.ActionLink("Create Objective", "Create")
-    </p>
+    <br />
+    <br />
+    if (ViewBag.IntakeR == null)
+    {
+        <p>
+            @Html.ActionLink("Create Objective", "Create")
+        </p>
 
-    <div id="chartContainer" style="height: 500px; width: 100%;"></div>
+        <div id="chartContainer" style="height: 500px; width: 100%;"></div>
+    }
+    else
+    {
+        <div>
+            <div id="chartContainer" style="height: 500px; width: 100%;"></div>
+            <br />
+            <div style="float:left">
+                @if (ViewBag.Teste != null)
+                {
+                    @Html.ActionLink("Editar Peso", "GetPeso", null, new { @class = "img-btn-getpeso modal-link mybtn", title = "Modificar Peso" })
+                }
+                else
+                {
+                    @Html.ActionLink("Adicionar refeicao", "Create", "Refeicoes", htmlAttributes: (new { @class = "mybtn" }))
+                }
+            </div>
+            <div style="float:right">
+                @Html.ActionLink("Delete Objective", "Delete", null, htmlAttributes: (new { @class = "mybtn" }))
+            </div>
+            <br />
+            <br />
+        </div>
+        <br />
+    }
+    <br />
+    <h1 class="centerAlign">Histórico</h1>
+
+    <div style="display:inline;">
+        <button class="btn btn-default" id="btnleft" value="Left to right" style="width:5%; height:300px; float:left; font-size:50px; margin-top: 100px;"><</button>
+        <button class="btn btn-default" id="btnright" value="Right to left" style="width:5%; height:300px; float:right; font-size:50px; margin-top: 100px;">></button>
+        <div class="slidediv" style="width:85%; overflow-x:scroll; height: 550px; overflow-y: hidden; position: relative;">
+            <p id="Totalkg" style="width:100%; position: absolute; height:500px;left:0px;"></p>
+            <p id="NrObjectivos" style="height:500px; width: 100%; position:absolute; left:1250px;"></p>
+            @if (ViewBag.Registos != null)
+            {
+                <p id="Totalkcal" style="height:500px; width: 100%; position:absolute; left:2500px;"></p>
+            }
+            @if (ViewBag.Favoritos != null)
+            {
+                <p id="Favoritos" style="height:500px; width: 100%; position:absolute; left:3750px;"></p>
+            }
+            @if (ViewBag.Count != null)
+            {
+                <p id="Count" style="height:500px; width: 100%; position:absolute; left:5000px;"></p>
+            }
+
+            <br />
+        </div>
+    </div>
 }
 else
 {
-    <div>
-        <div id="chartContainer" style="height: 500px; width: 100%;"></div>
-        <br />
-        <div style="float:left">
-            @if (ViewBag.Teste != null)
-            {
-                @Html.ActionLink("Editar Peso", "getPeso", null, new { @class = "img-btn-getpeso modal-link mybtn", title = "Modificar Peso" })
-            }
-            else
-            {
-                @Html.ActionLink("Adicionar refeicao", "Create", "Refeicoes", htmlAttributes: (new { @class = "mybtn" }))
-            }
-        </div>
-        <div style="float:right">
-            @Html.ActionLink("Delete Objective", "Delete", null, htmlAttributes: (new { @class = "mybtn" }))
-        </div>
-        <br />
-        <br />
-    </div>
-    <br />
+    @Html.ActionLink("Criar objectivo", "Create", "Objectivoes", htmlAttributes: (new { @class = "mybtn" }))
 }
-<br />
-<h1 class="centerAlign">Histórico</h1>
 
-<div style="display:inline;">
-    <button class="btn btn-default" id="btnleft" value="Left to right" style="width:5%; height:300px; float:left; font-size:50px; margin-top: 100px;"><</button>
-    <button class="btn btn-default" id="btnright" value="Right to left" style="width:5%; height:300px; float:right; font-size:50px; margin-top: 100px;">></button>
-    <div class="slidediv" style="width:85%; overflow-x:scroll; height: 550px; overflow-y: hidden; position: relative;">
-        <p id="Totalkg" style="width:100%; position: absolute; height:500px;left:0px;"></p>
-        <p id="NrObjectivos" style="height:500px; width: 100%; position:absolute; left:1250px;"></p>
-        @if (ViewBag.Registos != null)
-        {
-            <p id="Totalkcal" style="height:500px; width: 100%; position:absolute; left:2500px;"></p>
-        }
-        @if (ViewBag.Favoritos != null)
-        {
-            <p id="Favoritos" style="height:500px; width: 100%; position:absolute; left:3750px;"></p>
-        }
-        @if (ViewBag.Count != null)
-        {
-            <p id="Count" style="height:500px; width: 100%; position:absolute; left:5000px;"></p>
-        }
-
-        <br />
-    </div>
-</div>
 
 @section Scripts{
     <script type="text/javascript">
