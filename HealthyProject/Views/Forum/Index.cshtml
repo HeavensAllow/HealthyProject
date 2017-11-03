@@ -5,16 +5,26 @@
 
 <h2>Forum</h2>
 
-@foreach (var categoria in Model)
+@if (User.IsInRole("Admin"))
 {
-    <h3>
-        @Html.DisplayFor(modelItem => categoria.Nome)
-    </h3>
-
-    foreach (var subcategoria in categoria.Subcategorias)
+    <div class="form-group">
+        <div class="col-md-offset-2 col-md-10">
+            <button> @Html.ActionLink("Criar Categoria", "CreateCategoria", "Categorias")</button>
+            <button> @Html.ActionLink("Criar Subcategoria", "CreateSubcategoria", "Subcategorias")</button>
+        </div>
+    </div>
+ }
+    @foreach (var categoria in Model)
     {
-        <h5>
-            @Html.ActionLink(subcategoria.Nome,"Subcategoria","Forum",new { id = subcategoria.SubcategoriaID },null)
-        </h5>
+
+        <h3>
+            @Html.DisplayFor(modelItem => categoria.Nome)
+        </h3>
+
+        foreach (var subcategoria in categoria.Subcategorias)
+        {
+            <h5>
+                @Html.ActionLink(subcategoria.Nome, "Subcategoria", "Forum", new { id = subcategoria.SubcategoriaID }, null)
+            </h5>
+        }
     }
-}

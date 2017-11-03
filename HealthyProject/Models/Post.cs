@@ -11,7 +11,8 @@ namespace HealthyProject.Models
 {
     using System;
     using System.Collections.Generic;
-    
+    using System.Web.Mvc;
+
     public partial class Post
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]

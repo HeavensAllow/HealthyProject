@@ -7,31 +7,15 @@
 <h2>@Model.Titulo</h2>
 
 
+
 <div id="divComentarios">
     @{Html.RenderPartial("_PostPartial", Model); }
 </div>
 
-    
-    @*@using (Ajax.BeginForm("Gosto", "Forum", new AjaxOptions() { HttpMethod="Post", UpdateTargetId = "likesLabel"})) 
 
-              
-        {
-            <button class="Gosto"></button>
-            <label id="likesLabel">@(comentario.Opiniaos.Where(o => o.Opiniao1 == true).Count() - comentario.Opiniaos.Where(o => o.Opiniao1 == false).Count())</label> <label>Likes</label>
-        }
-    </td>
-    <td>
-       
-        {
-            <button class="naoGosto"></button>
-        }
-            </td>
-        </tr>
-    }*@
-@*testa*@
 
-@using (Ajax.BeginForm("Post", "Forum", new { postId = Model.PostID }, new AjaxOptions() { HttpMethod = "Post", UpdateTargetId= "divComentarios" }))
-        {
+@using (Ajax.BeginForm("Post", "Forum", new { postId = Model.PostID }, new AjaxOptions() { OnSuccess= "CleanTextArea", HttpMethod = "Post", UpdateTargetId= "divComentarios" }))
+{
                 @Html.AntiForgeryToken()
 
             <div class="form-horizontal">
@@ -54,9 +38,12 @@
         }
 @section Scripts{ 
     <script src="~/Scripts/jquery.unobtrusive-ajax.js"></script>
-   @* <script>
+    <script>
         function updateLikes() {
             $('.likesLabel', $(this)).text(@ViewBag.Likes);
         }
-    </script>*@
+        function CleanTextArea(){
+            $('#Comment').val('');
+        }
+    </script>
 }

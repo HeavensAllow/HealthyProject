@@ -27,6 +27,14 @@
             <td>
                 @comentario.Comment
             </td>
+            <td>
+                @using (Ajax.BeginForm("Opiniao", "Forum", new { id = comentario.CommentID }, new AjaxOptions() { HttpMethod = "Post", UpdateTargetId = "divComentarios" }))
+                {
+                    <button class="Gosto" name="selectedOpinion" value="true"></button>
+                    <label id="likesLabel">@(comentario.Opiniaos.Where(o => o.Opiniao1 == true).Count() - comentario.Opiniaos.Where(o => o.Opiniao1 == false).Count())</label> <label>Likes</label>
+                    <button class="naoGosto" name="selectedOpinion" value="false"></button>
+                }
+            </td>
         </tr>
     }
     </table>

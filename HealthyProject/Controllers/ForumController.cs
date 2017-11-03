@@ -96,11 +96,11 @@ namespace HealthyProject.Controllers
             db.SaveChanges();
             post = db.Posts.Find(postId);
             return PartialView("_PostPartial", post);
-           
+
         }
 
         [HttpPost]
-        public ActionResult Gosto(int? id)
+        public ActionResult Opiniao(int? id, bool selectedOpinion)
         {
             var userID = Convert.ToInt32(User.Identity.GetUserId());
             Comentario comentario = db.Comentarios.Find(id);
@@ -108,33 +108,7 @@ namespace HealthyProject.Controllers
             {
                 return HttpNotFound();
             }
-            Opiniao opiniao = comentario.Opiniaos.FirstOrDefault(c => c.userID == userID);
 
-            if (opiniao == null) 
-            {
-                opiniao = new Opiniao();
-                opiniao.userID = userID;
-                opiniao.commentID = comentario.CommentID;
-                opiniao.Opiniao1 = true;
-                db.Opiniaos.Add(opiniao);
-            }
-            else //update
-            {
-                opiniao.Opiniao1 = true;
-                db.Entry(opiniao).State = EntityState.Modified;
-            }
-            db.SaveChanges();
-            return PartialView("Post", comentario.Post);
-        }
-        [HttpPost]
-        public ActionResult naoGosto(int? id)
-        {
-            var userID = Convert.ToInt32(User.Identity.GetUserId());
-            Comentario comentario = db.Comentarios.Find(id);
-            if(comentario == null)
-            {
-                return HttpNotFound();
-            }
             Opiniao opiniao = comentario.Opiniaos.FirstOrDefault(c => c.userID == userID);
 
             if (opiniao == null)
@@ -142,19 +116,18 @@ namespace HealthyProject.Controllers
                 opiniao = new Opiniao();
                 opiniao.userID = userID;
                 opiniao.commentID = comentario.CommentID;
-                opiniao.Opiniao1 = false;
+                opiniao.Opiniao1 = selectedOpinion;
                 db.Opiniaos.Add(opiniao);
             }
             else //update
             {
-                opiniao.Opiniao1 = false;
+                opiniao.Opiniao1 = selectedOpinion;
                 db.Entry(opiniao).State = EntityState.Modified;
             }
             db.SaveChanges();
             ViewBag.Likes = comentario.Opiniaos.Where(o => o.Opiniao1 == true).Count() - comentario.Opiniaos.Where(o => o.Opiniao1 == false).Count();
-            return PartialView("Post", comentario.Post);
+            return PartialView("_PostPartial", comentario.Post);
         }
-
 
         protected override void Dispose(bool disposing)
         {
