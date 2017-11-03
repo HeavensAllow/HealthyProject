@@ -32,6 +32,7 @@ namespace HealthyProject.Models
         [Display(Name = "Data de Nascimento")]
 
         [DataType(DataType.Date)]
+        [DisplayFormat(DataFormatString = "{0:dd/MM/yyy}", ApplyFormatInEditMode = true)]
         public Nullable<System.DateTime> Data_nascimento { get; set; }
         [Required]
 

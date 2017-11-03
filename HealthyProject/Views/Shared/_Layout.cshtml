@@ -20,8 +20,9 @@
                 @Html.ActionLink("Application name", "Index", "Home", new { area = "" }, new { @class = "navbar-brand" })*@
 
             </div>
-            <div class="navbar navbar-inverse navbar-fixed-top" style="background-color:darkseagreen">
+            <div class="navbar navbar-inverse navbar-fixed-top" style="background-color:slategrey">
                 <ul class="nav navbar-nav">
+               
                     <li>@Html.ActionLink("Pagina Inicial", "Index", "Home")</li>
                     <li>@Html.ActionLink("Sobre Nos", "About", "Home")</li>
                     @*<li>@Html.ActionLink("Contact", "Contact", "Home")</li>*@
@@ -33,9 +34,9 @@
     <div class="container body-content">
         @RenderBody()
         <hr />
-        <footer>
-            <p>@*&copy;*@ @DateTime.Now.Year @*- My ASP.NET Application*@</p>
-        </footer>
+        @*<footer>
+            <p>@*&copy;*@ @DateTime.Now.Year @*- My ASP.NET Application</p>*@
+        @*</footer>*@
     </div>
 
     @Scripts.Render("~/bundles/jquery")
@@ -44,4 +45,4 @@
 </body>
 
 </html>
-navbar-collapse collapse
+@*navbar-collapse collapse*@

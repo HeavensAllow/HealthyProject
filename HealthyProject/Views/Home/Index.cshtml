@@ -6,31 +6,32 @@
 
 
 <body>
-    @*<body style="background-image:url(http://www.dream-wallpaper.com/free-wallpaper/nature-wallpaper/grass-football-pitches-wallpaper/1440x900/free-wallpaper-20.jpg)">
-       
-        <style>
-            #imagem {
-                position: fixed;
-                top: 0;
-                left: 0;
-                /* Preserve aspet ratio */
-                min-width: 100%;
-                min-height: 100%;
-            }
-        </style>*@
-        <div>
+    @*<body style="background-image: url(https://img4.goodfon.com/wallpaper/big/5/fe/healthy-harvest-fresh-ovoshchi-wood-urozhai-vegetables.jpg)" id ="image">
+
+    <style>
+        #imagem {
+            position: fixed;
+            top: 0;
+            left: 0;
+            /* Preserve aspet ratio */
+            min-width: 100%;
+            min-height: 100%;
+        }
+    </style>*@
+
+    <div class="row">
+        <div style="text-align:center">
 
             <br />
             <br />
             <br />
-            <img src="~/Content/Images/Logo.PNG" alt="Logotipo" style="float:initial;width:200px;height:100px;" />
-        </div>
-
+            <img src="~/Content/Images/Logo.PNG" alt="Logotipo" align="middle"   style="float:right" />
+     
         <br />
 
 
 
-        <h1 align="center"> Healthy Project </h1>
+        @*<h1 align="center"> Healthy Project </h1>*@
         @*<p class="lead">ASP.NET is a free web framework for building great Web sites and Web applications using HTML, CSS and JavaScript.</p>
             <p><a href="https://asp.net" class="btn btn-primary btn-lg">Learn more &raquo;</a></p>*@
 
@@ -39,8 +40,6 @@
         <br />
         <br />
 
-
-        <div>
             @*<div style="background-image:url(https://cdn.pixabay.com/photo/2013/04/14/20/24/water-103817_960_720.jpg);">*@
             <h3 style="text-align:left">  Gostaria de ter maior controlo sobre o seu peso? </h3>
 
@@ -85,14 +84,14 @@
 
             <h3>Junte se a Nos</h3>
 
-            <button style="background-color:darkseagreen; width:500px;height:50px;"> @Html.ActionLink("Registe-se", "Register", "Account", routeValues: null, htmlAttributes: new { id = "registerLink" })</button>
+            <button style="background-color:slategrey; width:100px;height:50px;"> @Html.ActionLink("Registe-se", "Register", "Account", routeValues: null, htmlAttributes: new { id = "registerLink" })</button>
 
 
 
         </div>
 
 
-   
+   </div>
 
 
 </body>
