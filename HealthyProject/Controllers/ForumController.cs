@@ -45,7 +45,7 @@ namespace HealthyProject.Controllers
         //POST
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult CreatePost([Bind(Include = "Titulo,Texto")] Post newPost, int? subcategoria)
+        public ActionResult CreatePost([Bind(Include = "Titulo,Texto,Link")] Post newPost, int? subcategoria)
         {
             if (subcategoria == null)
             {
@@ -54,7 +54,16 @@ namespace HealthyProject.Controllers
             newPost.UserID = Convert.ToInt32(User.Identity.GetUserId());
             newPost.Data = DateTime.Now;
             newPost.SubcategoriaID = (int)subcategoria;
-
+            if(newPost.Texto == null)
+            {
+                ModelState.AddModelError("Texto", "Por favor insira o texto");
+                return View();
+            }
+            if (newPost.Titulo == null)
+            {
+                ModelState.AddModelError("Titulo", "Por favor insira o título");
+                return View();
+            }
             db.Posts.Add(newPost);
             db.SaveChanges();
             return RedirectToAction("Post", new { id = newPost.PostID });

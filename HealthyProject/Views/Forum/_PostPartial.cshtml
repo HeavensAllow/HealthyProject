@@ -12,6 +12,10 @@
         </td>
         <td>
             @Model.Texto
+            <br /><br />
+            
+            @{var videoID = Model.Link.Substring(Model.Link.IndexOf("?v=") + 3); }
+            <iframe width="560" height="315" src="https://www.youtube.com/embed/@videoID" frameborder="0" allowfullscreen></iframe>
         </td>
 
     </tr>

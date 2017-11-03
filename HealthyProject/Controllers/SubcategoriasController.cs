@@ -22,20 +22,6 @@ namespace HealthyProject.Controllers
             return View(subcategorias.ToList());
         }
 
-        // GET: Subcategorias/Details/5
-        public ActionResult Details(int? id)
-        {
-            if (id == null)
-            {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-            }
-            Subcategoria subcategoria = db.Subcategorias.Find(id);
-            if (subcategoria == null)
-            {
-                return HttpNotFound();
-            }
-            return View(subcategoria);
-        }
 
         //GET
         

@@ -248,6 +248,7 @@
       <DependentUpon>Database.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\ManageViewModels.cs" />
+    <Compile Include="Models\Metadata\PostMetadata.cs" />
     <Compile Include="Models\Objectivo.cs">
       <DependentUpon>Database.tt</DependentUpon>
     </Compile>
@@ -377,11 +378,9 @@
     <Content Include="Views\Forum\CreatePost.cshtml" />
     <Content Include="Views\Forum\_PostPartial.cshtml" />
     <Content Include="Views\Categorias\CreateCategoria.cshtml" />
-    <Content Include="Views\Categorias\Details.cshtml" />
     <Content Include="Views\Categorias\Edit.cshtml" />
     <Content Include="Views\Categorias\Index.cshtml" />
     <Content Include="Views\Subcategorias\CreateSubcategoria.cshtml" />
-    <Content Include="Views\Subcategorias\Details.cshtml" />
     <Content Include="Views\Subcategorias\Edit.cshtml" />
     <Content Include="Views\Subcategorias\Index.cshtml" />
   </ItemGroup>
