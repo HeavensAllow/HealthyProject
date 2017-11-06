@@ -32,7 +32,11 @@ namespace HealthyProject.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult CreateCategoria([Bind(Include = "Nome")] Categoria newCategoria)
         {
-
+            if (newCategoria.Nome == null)
+            {
+                ModelState.AddModelError("Nome", "Por favor insira o nome");
+                return View();
+            }
             db.Categorias.Add(newCategoria);
             db.SaveChanges();
             return RedirectToAction("Index");

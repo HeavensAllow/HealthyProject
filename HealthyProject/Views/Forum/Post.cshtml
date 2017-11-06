@@ -12,9 +12,7 @@
     @{Html.RenderPartial("_PostPartial", Model); }
 </div>
 
-
-
-@using (Ajax.BeginForm("Post", "Forum", new { postId = Model.PostID }, new AjaxOptions() { OnSuccess= "CleanTextArea", HttpMethod = "Post", UpdateTargetId= "divComentarios" }))
+@using (Ajax.BeginForm("Post", "Forum", new { postId = Model.PostID }, new AjaxOptions() { OnSuccess = "CleanTextArea", HttpMethod = "Post", UpdateTargetId = "divComentarios" }))
 {
                 @Html.AntiForgeryToken()
 
@@ -34,8 +32,7 @@
             </div>
         </div>
     </div>
-    
-        }
+}
 @section Scripts{ 
     <script src="~/Scripts/jquery.unobtrusive-ajax.js"></script>
     <script>
@@ -46,4 +43,5 @@
             $('#Comment').val('');
         }
     </script>
+    @Scripts.Render("~/bundles/jqueryval")
 }

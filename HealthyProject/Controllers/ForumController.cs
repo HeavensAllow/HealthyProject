@@ -54,14 +54,31 @@ namespace HealthyProject.Controllers
             newPost.UserID = Convert.ToInt32(User.Identity.GetUserId());
             newPost.Data = DateTime.Now;
             newPost.SubcategoriaID = (int)subcategoria;
+            var error = false;
             if(newPost.Texto == null)
             {
                 ModelState.AddModelError("Texto", "Por favor insira o texto");
-                return View();
+                error = true;
             }
             if (newPost.Titulo == null)
             {
                 ModelState.AddModelError("Titulo", "Por favor insira o título");
+                error = true;
+            }
+            if (subcategoria == 1)
+            {
+                if(newPost.Link == null)
+                {
+                    ModelState.AddModelError("Link", "Por favor insira o link");
+                    error = true;
+                }
+            }
+            else
+            {
+                newPost.Link = "";
+            }
+            if (error == true)
+            {
                 return View();
             }
             db.Posts.Add(newPost);
@@ -101,6 +118,11 @@ namespace HealthyProject.Controllers
             newComment.Data = DateTime.Now;
             newComment.PostID = (int)postId;
 
+            if (newComment.Comment == null)
+            {
+                ModelState.AddModelError("Comment", "Por favor insira o comentário");
+                return View();
+            }
             db.Comentarios.Add(newComment);
             db.SaveChanges();
             post = db.Posts.Find(postId);

@@ -2,6 +2,9 @@
 @{
     ViewBag.Title = "Novo Post";
 }
+
+
+
 @using (Html.BeginForm())
 {
     @Html.AntiForgeryToken()
@@ -16,7 +19,7 @@
 <br/>
 <br/>
 <div class="form-group">
-    <label class="control-label col-md-2" for="Texto" required>Texto</label>
+    <label class="control-label col-md-2" for="Texto">Texto</label>
     <div class="col-md-10">
         @Html.EditorFor(model => model.Texto, new { htmlAttributes = new { @class = "form-control" } })
         @Html.ValidationMessageFor(model => model.Texto, "", new { @class = "text-danger" })
@@ -24,12 +27,16 @@
 </div>
 <br />
 <br />
+    if (Convert.ToInt32(Request.Params["subcategoria"]) == 1)
+    {
 <div class="form-group">
     <label class="control-label col-md-2" id="Link">Link</label>
     <div class="col-md-10">
         @Html.EditorFor(model => model.Link, new { htmlAttributes = new { @class = "form-control" } })
+        @Html.ValidationMessageFor(model => model.Link, "", new { @class = "text-danger" })
     </div>
 </div>
+    }
     <br />
     <br />
     <div>
@@ -37,7 +44,7 @@
             <input type="submit" value="Create" class="btn btn-default" />
         </div>
     </div>
-    }
+}
     <div>
         @Html.ActionLink("Regressar", "Index")
     </div>

@@ -37,6 +37,12 @@ namespace HealthyProject.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult CreateSubcategoria([Bind(Include = "CategoriaID,Nome")] Subcategoria newSubcategoria)
         {
+            ViewBag.Categorias = new SelectList(db.Categorias, "CategoriaID", "Nome");
+            if (newSubcategoria.Nome == null)
+            {
+                ModelState.AddModelError("Nome", "Por favor insira o nome");
+                return View();
+            }
             db.Subcategorias.Add(newSubcategoria);
             db.SaveChanges();
             return RedirectToAction("Index");

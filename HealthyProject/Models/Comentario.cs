@@ -9,9 +9,13 @@
 
 namespace HealthyProject.Models
 {
+    using HealthyProject.Models.Metadata;
     using System;
     using System.Collections.Generic;
-    
+    using System.ComponentModel.DataAnnotations;
+
+
+    [MetadataType(typeof(ComentariosMetadata))]
     public partial class Comentario
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]

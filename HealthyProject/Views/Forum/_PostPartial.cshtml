@@ -6,21 +6,26 @@
     </tr>
     <tr>
         <td>
+            <img src="http://www.icone-png.com/png/54/53785.png" height="80" width="70" />
+        </td>
+        <td>
             @Model.AspNetUser.Utilizador.Nome 
             <br />
             @Model.Data
         </td>
         <td>
             @Model.Texto
-            <br /><br />
-            
-            @{var videoID = Model.Link.Substring(Model.Link.IndexOf("?v=") + 3); }
-            <iframe width="560" height="315" src="https://www.youtube.com/embed/@videoID" frameborder="0" allowfullscreen></iframe>
+        <br /><br />
+            @if (Model.SubcategoriaID == 1)
+            {
+                var videoID = Model.Link.Substring(Model.Link.IndexOf("?v=") + 3);
+                <iframe width="500" height="280" style="padding-left:150px"; src="https://www.youtube.com/embed/@videoID" frameborder="0" allowfullscreen></iframe>
+            }
         </td>
 
     </tr>
 
-    @foreach (var comentario in Model.Comentarios.OrderBy(c => c.Data)) 
+    @foreach (var comentario in Model.Comentarios.OrderBy(c => c.Data))     
     {
         <tr>
             <td>
