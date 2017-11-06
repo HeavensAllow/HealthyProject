@@ -42,12 +42,21 @@ Seleccione a data que pretende ver:
                     @*@Html.DisplayFor(modelItem => refeicao.RefeicaoID)<br />
                     @Html.DisplayFor(modelItem => refeicao.Data)<br />*@
                     @Html.DisplayFor(modelItem => refeicao.Tipo)
-                    <p style="font-size:70%; color:red">@Html.ActionLink("Eliminar refeição", "Delete", new { id = refeicao.RefeicaoID })</p>
+                    <p style="font-size:70%; color:red">@Html.ActionLink("Editar refeição", "Edit", new { id = refeicao.RefeicaoID })</p>
 </td>
                 <td>
                     @foreach (var prato in refeicao.RefeicaoPratos)
                     {
-                        <p> @prato.Prato.Nome <span>   </span> @prato.Dose <span> gr</span> </p>
+                        <p>
+                            @prato.Prato.Nome <span>   </span> @prato.Dose <span> gr</span>
+                            <span style="font-size:70%">@Html.ActionLink("Eliminar", "Delete", "RefeicaoPratoes")</span>
+                        </p>
+                    }
+                    @foreach (var ingrediente in refeicao.RefeicaoIngredientes)
+                    {
+                        <p>
+                            @ingrediente.Ingrediente.Nome <span>   </span> @ingrediente.Quantidade <span> gr</span>
+                        </p>
                     }
                     @foreach (var bebida in refeicao.RefeicaoBebidas)
                     {
@@ -60,7 +69,7 @@ Seleccione a data que pretende ver:
                 <td></td>
                 <td>
                     <p style="font-size:80%">@Html.ActionLink("Adicionar Prato", "Create", "RefeicaoPratoes", new { RefeicaoID = refeicao.RefeicaoID }, null)</p>
-                    <p style="font-size:80%"><a href="">Adicionar Ingrediente</a></p>
+                    <p style="font-size:80%">@Html.ActionLink("Adicionar Ingrediente", "Create", "RefeicaoIngredientes", new { RefeicaoID = refeicao.RefeicaoID }, null)</p>
                     <p style="font-size:80%">@Html.ActionLink("Adicionar Bebida", "Create", "RefeicaoBebidas", new { RefeicaoID = refeicao.RefeicaoID }, null)</p>
                 </td>
             </tr>

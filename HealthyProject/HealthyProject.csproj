@@ -199,6 +199,7 @@
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
     <Compile Include="Controllers\RefeicaoBebidasController.cs" />
+    <Compile Include="Controllers\RefeicaoIngredientesController.cs" />
     <Compile Include="Controllers\RefeicaoPratoesController.cs" />
     <Compile Include="Controllers\RefeicoesController.cs" />
     <Compile Include="Controllers\UtilizadorsController.cs" />
@@ -225,6 +226,9 @@
       <DependentUpon>Database.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\Comentario.cs">
+      <DependentUpon>Database.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\CounterInfoRefeicao_Result.cs">
       <DependentUpon>Database.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\C__MigrationHistory.cs">
@@ -421,6 +425,11 @@
     <Content Include="Views\RefeicaoBebidas\Details.cshtml" />
     <Content Include="Views\RefeicaoBebidas\Edit.cshtml" />
     <Content Include="Views\RefeicaoBebidas\Index.cshtml" />
+    <Content Include="Views\RefeicaoIngredientes\Create.cshtml" />
+    <Content Include="Views\RefeicaoIngredientes\Delete.cshtml" />
+    <Content Include="Views\RefeicaoIngredientes\Details.cshtml" />
+    <Content Include="Views\RefeicaoIngredientes\Edit.cshtml" />
+    <Content Include="Views\RefeicaoIngredientes\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

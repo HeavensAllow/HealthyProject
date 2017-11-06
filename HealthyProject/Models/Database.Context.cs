@@ -12,6 +12,8 @@ namespace HealthyProject.Models
     using System;
     using System.Data.Entity;
     using System.Data.Entity.Infrastructure;
+    using System.Data.Entity.Core.Objects;
+    using System.Linq;
     
     public partial class HealthyEntities : DbContext
     {
@@ -46,5 +48,14 @@ namespace HealthyProject.Models
         public virtual DbSet<Post> Posts { get; set; }
         public virtual DbSet<RefeicaoBebida> RefeicaoBebidas { get; set; }
         public virtual DbSet<Subcategoria> Subcategorias { get; set; }
+    
+        public virtual ObjectResult<CounterInfoRefeicao_Result> CounterInfoRefeicao(Nullable<int> refeicaoID)
+        {
+            var refeicaoIDParameter = refeicaoID.HasValue ?
+                new ObjectParameter("RefeicaoID", refeicaoID) :
+                new ObjectParameter("RefeicaoID", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<CounterInfoRefeicao_Result>("CounterInfoRefeicao", refeicaoIDParameter);
+        }
     }
 }

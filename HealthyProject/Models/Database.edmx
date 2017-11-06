@@ -122,6 +122,7 @@
           <Property Name="Peso_objectivo" Type="int" />
           <Property Name="Intake_diarioR" Type="int" />
           <Property Name="Intake_diarioA" Type="int" />
+          <Property Name="Peso_Final" Type="int" />
         </EntityType>
         <EntityType Name="Opiniao">
           <Key>
@@ -142,6 +143,7 @@
           <Property Name="Titulo" Type="nvarchar" MaxLength="50" Nullable="false" />
           <Property Name="SubcategoriaID" Type="int" Nullable="false" />
           <Property Name="Texto" Type="varchar(max)" Nullable="false" />
+          <Property Name="Link" Type="nvarchar" MaxLength="250" />
         </EntityType>
         <EntityType Name="Pratos">
           <Key>
@@ -488,6 +490,9 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Function Name="CounterInfoRefeicao" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="RefeicaoID" Type="int" Mode="In" />
+        </Function>
         <EntityContainer Name="HealthyModelStoreContainer">
           <EntitySet Name="__MigrationHistory" EntityType="Self.__MigrationHistory" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="AspNetRoles" EntityType="Self.AspNetRoles" Schema="dbo" store:Type="Tables" />
@@ -686,6 +691,7 @@
           <NavigationProperty Name="RegistoDiarios" Relationship="Self.FK_RegistoDiario_RegistoDiario" FromRole="Objectivo" ToRole="RegistoDiario" />
           <Property Name="Intake_diarioR" Type="Int32" />
           <Property Name="Intake_diarioA" Type="Int32" />
+          <Property Name="Peso_Final" Type="Int32" />
         </EntityType>
         <EntityType Name="Prato">
           <Key>
@@ -1006,6 +1012,9 @@
             <End Role="Refeico" EntitySet="Refeicoes" />
             <End Role="RefeicaoBebida" EntitySet="RefeicaoBebidas" />
           </AssociationSet>
+          <FunctionImport Name="CounterInfoRefeicao" ReturnType="Collection(HealthyModel.CounterInfoRefeicao_Result)">
+            <Parameter Name="RefeicaoID" Mode="In" Type="Int32" />
+          </FunctionImport>
         </EntityContainer>
         <EntityType Name="Bebida">
           <Key>
@@ -1066,6 +1075,7 @@
           <NavigationProperty Name="AspNetUser" Relationship="HealthyModel.FK_Posts_AspNetUsers" FromRole="Post" ToRole="AspNetUser" />
           <NavigationProperty Name="Comentarios" Relationship="HealthyModel.FK_Comentarios_Posts" FromRole="Post" ToRole="Comentario" />
           <NavigationProperty Name="Subcategoria" Relationship="HealthyModel.FK_Posts_Subcategorias" FromRole="Post" ToRole="Subcategoria" />
+          <Property Name="Link" Type="String" MaxLength="250" FixedLength="false" Unicode="true" />
         </EntityType>
         <EntityType Name="RefeicaoBebida">
           <Key>
@@ -1184,6 +1194,14 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <ComplexType Name="CounterInfoRefeicao_Result">
+          <Property Type="Int32" Name="RefeicaoID" Nullable="false" />
+          <Property Type="Double" Name="Kcal" Nullable="true" />
+          <Property Type="Double" Name="Proteinas" Nullable="true" />
+          <Property Type="Double" Name="Gordura" Nullable="true" />
+          <Property Type="Double" Name="Hidratos" Nullable="true" />
+          <Property Type="Double" Name="Acucar" Nullable="true" />
+        </ComplexType>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -1263,6 +1281,7 @@
           <EntitySetMapping Name="Objectivoes">
             <EntityTypeMapping TypeName="HealthyModel.Objectivo">
               <MappingFragment StoreEntitySet="Objectivo">
+                <ScalarProperty Name="Peso_Final" ColumnName="Peso_Final" />
                 <ScalarProperty Name="Intake_diarioA" ColumnName="Intake_diarioA" />
                 <ScalarProperty Name="Intake_diarioR" ColumnName="Intake_diarioR" />
                 <ScalarProperty Name="ObjectivoID" ColumnName="ObjectivoID" />
@@ -1412,6 +1431,7 @@
           <EntitySetMapping Name="Posts">
             <EntityTypeMapping TypeName="HealthyModel.Post">
               <MappingFragment StoreEntitySet="Posts">
+                <ScalarProperty Name="Link" ColumnName="Link" />
                 <ScalarProperty Name="Texto" ColumnName="Texto" />
                 <ScalarProperty Name="SubcategoriaID" ColumnName="SubcategoriaID" />
                 <ScalarProperty Name="Titulo" ColumnName="Titulo" />
@@ -1439,6 +1459,18 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
+          <FunctionImportMapping FunctionImportName="CounterInfoRefeicao" FunctionName="HealthyModel.Store.CounterInfoRefeicao">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="HealthyModel.CounterInfoRefeicao_Result">
+                <ScalarProperty Name="RefeicaoID" ColumnName="RefeicaoID" />
+                <ScalarProperty Name="Kcal" ColumnName="Kcal" />
+                <ScalarProperty Name="Proteinas" ColumnName="Proteinas" />
+                <ScalarProperty Name="Gordura" ColumnName="Gordura" />
+                <ScalarProperty Name="Hidratos" ColumnName="Hidratos" />
+                <ScalarProperty Name="Acucar" ColumnName="Acucar" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
         </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>

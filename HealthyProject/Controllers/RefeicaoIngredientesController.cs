@@ -10,119 +10,119 @@ using HealthyProject.Models;
 
 namespace HealthyProject.Controllers
 {
-    public class RefeicaoBebidasController : Controller
+    public class RefeicaoIngredientesController : Controller
     {
         private HealthyEntities db = new HealthyEntities();
 
-        // GET: RefeicaoBebidas
+        // GET: RefeicaoIngredientes
         public ActionResult Index()
         {
-            var refeicaoBebidas = db.RefeicaoBebidas.Include(r => r.Bebida).Include(r => r.Refeico);
-            return View(refeicaoBebidas.ToList());
+            var refeicaoIngredientes = db.RefeicaoIngredientes.Include(r => r.Ingrediente).Include(r => r.Refeico);
+            return View(refeicaoIngredientes.ToList());
         }
 
-        // GET: RefeicaoBebidas/Details/5
+        // GET: RefeicaoIngredientes/Details/5
         public ActionResult Details(int? id)
         {
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            RefeicaoBebida refeicaoBebida = db.RefeicaoBebidas.Find(id);
-            if (refeicaoBebida == null)
+            RefeicaoIngrediente refeicaoIngrediente = db.RefeicaoIngredientes.Find(id);
+            if (refeicaoIngrediente == null)
             {
                 return HttpNotFound();
             }
-            return View(refeicaoBebida);
+            return View(refeicaoIngrediente);
         }
 
-        // GET: RefeicaoBebidas/Create
+        // GET: RefeicaoIngredientes/Create
         public ActionResult Create(int RefeicaoID)
         {
             var Refeicao = db.Refeicoes.FirstOrDefault(r => r.RefeicaoID == RefeicaoID);
             ViewBag.Refeicao = Refeicao;
 
+            ViewBag.IngredienteID = new SelectList(db.Ingredientes, "IngredientesID", "Categoria");
             ViewBag.RefeicaoID = new SelectList(db.Refeicoes, "RefeicaoID", "Tipo");
-            ViewBag.BebidaID = new SelectList(db.Bebidas.OrderBy(b => b.Nome), "BebidasID", "Nome");
             return View();
         }
 
-        // POST: RefeicaoBebidas/Create
+        // POST: RefeicaoIngredientes/Create
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "BebidaID,RefeicaoID,Quantidade")] RefeicaoBebida refeicaoBebida)
+        public ActionResult Create([Bind(Include = "IngredienteID,RefeicaoID,Quantidade")] RefeicaoIngrediente refeicaoIngrediente)
         {
             if (ModelState.IsValid)
             {
-                db.RefeicaoBebidas.Add(refeicaoBebida);
+                db.RefeicaoIngredientes.Add(refeicaoIngrediente);
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
 
-            ViewBag.BebidaID = new SelectList(db.Bebidas, "BebidasID", "Categoria", refeicaoBebida.BebidaID);
-            ViewBag.RefeicaoID = new SelectList(db.Refeicoes, "RefeicaoID", "Tipo", refeicaoBebida.RefeicaoID);
-            return View(refeicaoBebida);
+            ViewBag.IngredienteID = new SelectList(db.Ingredientes, "IngredientesID", "Categoria", refeicaoIngrediente.IngredienteID);
+            ViewBag.RefeicaoID = new SelectList(db.Refeicoes, "RefeicaoID", "Tipo", refeicaoIngrediente.RefeicaoID);
+            return View(refeicaoIngrediente);
         }
 
-        // GET: RefeicaoBebidas/Edit/5
+        // GET: RefeicaoIngredientes/Edit/5
         public ActionResult Edit(int? id)
         {
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            RefeicaoBebida refeicaoBebida = db.RefeicaoBebidas.Find(id);
-            if (refeicaoBebida == null)
+            RefeicaoIngrediente refeicaoIngrediente = db.RefeicaoIngredientes.Find(id);
+            if (refeicaoIngrediente == null)
             {
                 return HttpNotFound();
             }
-            ViewBag.BebidaID = new SelectList(db.Bebidas, "BebidasID", "Categoria", refeicaoBebida.BebidaID);
-            ViewBag.RefeicaoID = new SelectList(db.Refeicoes, "RefeicaoID", "Tipo", refeicaoBebida.RefeicaoID);
-            return View(refeicaoBebida);
+            ViewBag.IngredienteID = new SelectList(db.Ingredientes, "IngredientesID", "Categoria", refeicaoIngrediente.IngredienteID);
+            ViewBag.RefeicaoID = new SelectList(db.Refeicoes, "RefeicaoID", "Tipo", refeicaoIngrediente.RefeicaoID);
+            return View(refeicaoIngrediente);
         }
 
-        // POST: RefeicaoBebidas/Edit/5
+        // POST: RefeicaoIngredientes/Edit/5
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "BebidaID,RefeicaoID,Quantidade")] RefeicaoBebida refeicaoBebida)
+        public ActionResult Edit([Bind(Include = "IngredienteID,RefeicaoID,Quantidade")] RefeicaoIngrediente refeicaoIngrediente)
         {
             if (ModelState.IsValid)
             {
-                db.Entry(refeicaoBebida).State = EntityState.Modified;
+                db.Entry(refeicaoIngrediente).State = EntityState.Modified;
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
-            ViewBag.BebidaID = new SelectList(db.Bebidas, "BebidasID", "Categoria", refeicaoBebida.BebidaID);
-            ViewBag.RefeicaoID = new SelectList(db.Refeicoes, "RefeicaoID", "Tipo", refeicaoBebida.RefeicaoID);
-            return View(refeicaoBebida);
+            ViewBag.IngredienteID = new SelectList(db.Ingredientes, "IngredientesID", "Categoria", refeicaoIngrediente.IngredienteID);
+            ViewBag.RefeicaoID = new SelectList(db.Refeicoes, "RefeicaoID", "Tipo", refeicaoIngrediente.RefeicaoID);
+            return View(refeicaoIngrediente);
         }
 
-        // GET: RefeicaoBebidas/Delete/5
+        // GET: RefeicaoIngredientes/Delete/5
         public ActionResult Delete(int? id)
         {
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            RefeicaoBebida refeicaoBebida = db.RefeicaoBebidas.Find(id);
-            if (refeicaoBebida == null)
+            RefeicaoIngrediente refeicaoIngrediente = db.RefeicaoIngredientes.Find(id);
+            if (refeicaoIngrediente == null)
             {
                 return HttpNotFound();
             }
-            return View(refeicaoBebida);
+            return View(refeicaoIngrediente);
         }
 
-        // POST: RefeicaoBebidas/Delete/5
+        // POST: RefeicaoIngredientes/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(int id)
         {
-            RefeicaoBebida refeicaoBebida = db.RefeicaoBebidas.Find(id);
-            db.RefeicaoBebidas.Remove(refeicaoBebida);
+            RefeicaoIngrediente refeicaoIngrediente = db.RefeicaoIngredientes.Find(id);
+            db.RefeicaoIngredientes.Remove(refeicaoIngrediente);
             db.SaveChanges();
             return RedirectToAction("Index");
         }

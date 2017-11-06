@@ -7,6 +7,7 @@ using System.Net;
 using System.Web;
 using System.Web.Mvc;
 using HealthyProject.Models;
+using Microsoft.AspNet.Identity;
 
 namespace HealthyProject.Controllers
 {
@@ -21,7 +22,6 @@ namespace HealthyProject.Controllers
 
             return View(refeicoes);
         }
-       
       
         public ActionResult Details(int? id)
         {
@@ -73,9 +73,67 @@ namespace HealthyProject.Controllers
         {
             if (ModelState.IsValid)
             {
-                db.Refeicoes.Add(refeico);
-                db.SaveChanges();
-                return RedirectToAction("Index");
+                double counterkcal = 0, counterproteinas = 0, countergordura = 0, counterhc = 0;
+                var registo = db.RegistoDiarios.FirstOrDefault(p => p.Data == DateTime.Today);
+                if (registo == null)
+                {
+                    RegistoDiario registo1 = new RegistoDiario();
+                    var refeicoes = db.RefeicaoPratos.Include(i => i.Refeico).Where(q => q.Refeico.RegistoID == registo1.RegistoID);
+                    var user = Convert.ToInt32(User.Identity.GetUserId());
+                    Objectivo objectivo = db.Objectivoes.FirstOrDefault(o => o.UserID == user && o.Data_fim == null);
+                    if (objectivo != null)
+                    {
+                        registo1.ObjectivoID = objectivo.ObjectivoID;
+                        db.RegistoDiarios.Add(registo1);
+                        foreach(RefeicaoPrato i in refeicoes)
+                        {
+                            counterkcal += (i.Dose / 100) * i.Prato.Kcal;
+                            counterproteinas += (i.Dose / 100) * i.Prato.Proteinas;
+                            countergordura += (i.Dose / 100) * i.Prato.Gordura;
+                            counterhc += (i.Dose / 100) * i.Prato.HidCarbono;
+                        }
+                        refeico.RegistoID = registo1.RegistoID;
+                        db.Refeicoes.Add(refeico);
+                        db.SaveChanges();
+
+                        return RedirectToAction("Index");
+                    }
+                    else
+                    {
+                        TempData["Alert2"] = "Ainda não existe nenhum objectivo. Por favor, crie um objectivo primeiro.";
+
+                        return RedirectToAction("Index");
+                    }
+                }
+                else
+                {
+                    var user = Convert.ToInt32(User.Identity.GetUserId());
+                    var refeicoes = db.RefeicaoPratos.Include(i => i.Refeico).Where(q => q.Refeico.RegistoID == registo.RegistoID);
+                    Objectivo objectivo = db.Objectivoes.FirstOrDefault(o => o.UserID == user && o.Data_fim == null);
+                    if (objectivo != null)
+                    {
+                        registo.ObjectivoID = objectivo.ObjectivoID;
+                        
+                        foreach (RefeicaoPrato i in refeicoes)
+                        {
+                            counterkcal += (i.Dose / 100) * i.Prato.Kcal;
+                            counterproteinas += (i.Dose / 100) * i.Prato.Proteinas;
+                            countergordura += (i.Dose / 100) * i.Prato.Gordura;
+                            counterhc += (i.Dose / 100) * i.Prato.HidCarbono;
+                        }
+                        db.RegistoDiarios.Add(registo);
+                        refeico.RegistoID = registo.RegistoID;
+                        db.Refeicoes.Add(refeico);
+                        db.SaveChanges();
+                        return RedirectToAction("Index");
+                    }
+                    else
+                    {
+                        TempData["Alert2"] = "Ainda não existe nenhum objectivo. Por favor, crie um objectivo primeiro.";
+
+                        return RedirectToAction("Index");
+                    }
+                }
             }
 
             ViewBag.RegistoID = new SelectList(db.RegistoDiarios, "RegistoID", "RegistoID", refeico.RegistoID);
@@ -141,6 +199,13 @@ namespace HealthyProject.Controllers
             return RedirectToAction("Index");
         }
 
+
+        //public ActionResult NutriInfo (int RefeicaoID)
+        //{
+        //    var nutriInfo = db.Database.SqlQuery("dbo.CounterInfoRefeicao @RefeicaoID", RefeicaoID);
+        //    return View(nutriInfo);
+        //}
+
         protected override void Dispose(bool disposing)
         {
             if (disposing)
@@ -151,12 +216,3 @@ namespace HealthyProject.Controllers
         }
     }
 }
-//// GET: Refeicoes
-//public ActionResult Index()
-//{
-//    string textoData = "26/10/2017";
-//    var dataFiltro = DateTime.Parse(textoData);
-//    var refeicoes = db.Refeicoes.Include(r => r.RegistoDiario).Where(d => d.Data == dataFiltro);
-
-//    return View(refeicoes.ToList());
-//}
