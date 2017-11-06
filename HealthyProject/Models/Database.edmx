@@ -393,6 +393,9 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Function Name="Top5" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="UserID" Type="int" Mode="In" />
+        </Function>
         <EntityContainer Name="HealthyModelStoreContainer">
           <EntitySet Name="__MigrationHistory" EntityType="Self.__MigrationHistory" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="AspNetRoles" EntityType="Self.AspNetRoles" Schema="dbo" store:Type="Tables" />
@@ -863,6 +866,9 @@
             <End Role="Utilizador" EntitySet="Utilizadors" />
             <End Role="RegistoPeso" EntitySet="RegistoPesoes" />
           </AssociationSet>
+          <FunctionImport Name="Top5" ReturnType="Collection(HealthyModel.Top5_Result)">
+            <Parameter Name="UserID" Mode="In" Type="Int32" />
+          </FunctionImport>
         </EntityContainer>
         <EntityType Name="Bebida">
           <Key>
@@ -936,6 +942,10 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <ComplexType Name="Top5_Result">
+          <Property Type="Int32" Name="PratoID" Nullable="false" />
+          <Property Type="Int32" Name="Ocorrencias" Nullable="true" />
+        </ComplexType>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -1153,6 +1163,14 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
+          <FunctionImportMapping FunctionImportName="Top5" FunctionName="HealthyModel.Store.Top5">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="HealthyModel.Top5_Result">
+                <ScalarProperty Name="PratoID" ColumnName="PratoID" />
+                <ScalarProperty Name="Ocorrencias" ColumnName="Ocorrencias" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
         </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>

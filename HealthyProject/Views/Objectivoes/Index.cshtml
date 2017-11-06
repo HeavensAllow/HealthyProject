@@ -83,7 +83,41 @@ if (TempData["Alert"] != null)
 }
 else
 {
-    @Html.ActionLink("Criar objectivo", "Create", "Objectivoes", htmlAttributes: (new { @class = "mybtn" }))
+    <div class="centerAlign">
+        <img src="@Url.Content("http://www.changefactory.com.au/wp-content/uploads/2010/09/bigstock-Vector-Error-Icon-66246010.jpg")" style="height: 600px; width:600px; margin: auto;" />
+        <div class="alert alert-success alert-dismissable">
+            <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+            <strong><i class="fa fa-exclamation-triangle" aria-hidden="true"></i> Ainda não tem um objectivo definido. Por favor crie um objectivo de forma a aceder ao "Objectivo Actual".</strong>
+        </div>
+        <br />
+        <br />
+        <br />
+        @Html.ActionLink("Criar objectivo", "Create", "Objectivoes", htmlAttributes: (new { @class = "mybtn" }))
+    </div>
+    <br />
+    <h1 class="centerAlign">Histórico</h1>
+
+    <div style="display:inline;">
+        <button class="btn btn-default" id="btnleft" value="Left to right" style="width:5%; height:300px; float:left; font-size:50px; margin-top: 100px;"><</button>
+        <button class="btn btn-default" id="btnright" value="Right to left" style="width:5%; height:300px; float:right; font-size:50px; margin-top: 100px;">></button>
+        <div class="slidediv" style="width:85%; overflow-x:scroll; height: 550px; overflow-y: hidden; position: relative;">
+            <p id="Totalkg" style="width:100%; position: absolute; height:500px;left:0px;"></p>
+            <p id="NrObjectivos" style="height:500px; width: 100%; position:absolute; left:1250px;"></p>
+            @if (ViewBag.Registos != null)
+            {
+                <p id="Totalkcal" style="height:500px; width: 100%; position:absolute; left:2500px;"></p>
+            }
+            @if (ViewBag.Count != null)
+            {
+                <p id="Count" style="height:500px; width: 100%; position:absolute; left:3750px;"></p>
+            }
+
+            <br />
+        </div>
+    </div>
+
+
+
 }
 
 

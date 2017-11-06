@@ -12,6 +12,8 @@ namespace HealthyProject.Models
     using System;
     using System.Data.Entity;
     using System.Data.Entity.Infrastructure;
+    using System.Data.Entity.Core.Objects;
+    using System.Linq;
     
     public partial class HealthyEntities : DbContext
     {
@@ -42,5 +44,14 @@ namespace HealthyProject.Models
         public virtual DbSet<Bebida> Bebidas { get; set; }
         public virtual DbSet<RefeicaoBebida> RefeicaoBebidas { get; set; }
         public virtual DbSet<RegistoPeso> RegistoPesoes { get; set; }
+    
+        public virtual ObjectResult<Top5_Result> Top5(Nullable<int> userID)
+        {
+            var userIDParameter = userID.HasValue ?
+                new ObjectParameter("UserID", userID) :
+                new ObjectParameter("UserID", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<Top5_Result>("Top5", userIDParameter);
+        }
     }
 }

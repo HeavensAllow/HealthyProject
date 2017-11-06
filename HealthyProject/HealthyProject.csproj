@@ -271,6 +271,9 @@
     <Compile Include="Models\sysdiagram.cs">
       <DependentUpon>Database.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\Top5_Result.cs">
+      <DependentUpon>Database.tt</DependentUpon>
+    </Compile>
     <Compile Include="Models\Utilizador.cs">
       <DependentUpon>Database.tt</DependentUpon>
     </Compile>
