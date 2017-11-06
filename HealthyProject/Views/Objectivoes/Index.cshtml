@@ -66,15 +66,15 @@
             <p id="NrObjectivos" style="height:500px; width: 100%; position:absolute; left:1250px;"></p>
             @if (ViewBag.Registos != null)
             {
-                <p id="Totalkcal" style="height:500px; width: 100%; position:absolute; left:+1250px;"></p>
+                <p id="Totalkcal" style="height:500px; width: 100%; position:absolute; left:2500px;"></p>
             }
             @if (ViewBag.Favoritos != null)
             {
-                <p id="Favoritos" style="height:500px; width: 100%; position:absolute; left:+1250px;"></p>
+                <p id="Favoritos" style="height:500px; width: 100%; position:absolute; left:3750px;"></p>
             }
             @if (ViewBag.Count != null)
             {
-                <p id="Count" style="height:500px; width: 100%; position:absolute; left:+1250px;"></p>
+                <p id="Count" style="height:500px; width: 100%; position:absolute; left:5000px;"></p>
             }
 
             <br />
@@ -221,7 +221,7 @@ else
             data: [
                 {
                 type: "column",
-                showInLegend: true,
+                showInLegend: false,
                 name: "Número",
                 legendText: "Número de objectivos",
                 dataPoints: @Html.Raw(ViewBag.Object),
@@ -285,12 +285,12 @@ else
             },
 
             axisX: {
-                    title: "Prato",
+                title: "Prato",
              },
 
             data: [{
                 type: "column",
-                showInLegend: true,
+                showInLegend: false,
                 name: "Numero de vezes ingeridas",
                 legendText: "Top 5 pratos",
                 dataPoints: @Html.Raw(ViewBag.Favoritos),
@@ -299,11 +299,11 @@ else
             chart5.render();
             </text>
             }
-             @if(ViewBag.Registos != null)
+             @if(ViewBag.Count != null)
             {
                 <text>
 
-                var chart6 = new CanvasJS.Chart("Count", {
+            var chart6 = new CanvasJS.Chart("Count", {
             animationEnabled: true,
             backgroundColor: "#ffffff",
             title: {
@@ -336,7 +336,7 @@ else
             }
             }
         $(function () {
-            var div = 1;
+            var div = 0;
             var max = $('.slidediv').children("p").length;
             $("#btnright").click(function () {
                 if (div + 1 > max) return;
@@ -344,7 +344,7 @@ else
                 $('.slidediv').children().animate({ left:  '-=1250px' });
             });
             $("#btnleft").click(function () {
-                if (div - 1 < 1) return;
+                if (div < 1) return;
                 div--;
                 $('.slidediv').children().animate({ left: '+=1250px' });
             });

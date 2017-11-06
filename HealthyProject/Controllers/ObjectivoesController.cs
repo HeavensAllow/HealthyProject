@@ -89,8 +89,8 @@ namespace HealthyProject.Controllers
                 }
             }
 
-            objectiv.Add(new DataPoint(0, counter, "Numero de objectivos concluidos com sucesso"));
-            objectiv.Add(new DataPoint(1, counter2, "Numero de objectivos terminados sem sucesso"));
+            objectiv.Add(new DataPoint(0, counter, "Concluidos com sucesso"));
+            objectiv.Add(new DataPoint(1, counter2, "Terminados sem sucesso"));
             List<DataPoint> registod = new List<DataPoint> { };
             counter = 0;
             foreach (RegistoDiario d in refeicoes)
@@ -113,7 +113,7 @@ namespace HealthyProject.Controllers
             counter = 0;
             counter2 = 0;
             List<DataPoint> dias = new List<DataPoint> { };
-            var listaobjectivos = db.Objectivoes.Where(u => u.UserID == userId).OrderByDescending(q => q.Data_inicio);
+            var listaobjectivos = db.Objectivoes.Where(u => u.UserID == userId).OrderBy(q => q.Data_inicio);
             for (int i = 0; i < listaobjectivos.Count(); i++)
             {
                 DateTime inicio = (DateTime)listaobjectivos.ToList()[i].Data_inicio;
@@ -121,14 +121,15 @@ namespace HealthyProject.Controllers
 
                 if (inicio != null && fim != null)
                 {
-                    counter += inicio.Subtract((DateTime)fim).TotalDays;
+                    DateTime fim1 = (DateTime)listaobjectivos.ToList()[i].Data_fim;
+                    counter += fim1.Subtract(inicio).TotalDays;
                     if (i + 1 < listaobjectivos.Count())
                     {
                         var novo = listaobjectivos.ToList()[i + 1].Data_inicio;
                         if (novo != null)
                         {
                             DateTime novo1 = (DateTime)listaobjectivos.ToList()[i + 1].Data_inicio;
-                            counter2 += novo1.Subtract((DateTime)fim).TotalDays;
+                            counter2 += novo1.Subtract((DateTime)fim1).TotalDays;
                         }
                     }
                 }
