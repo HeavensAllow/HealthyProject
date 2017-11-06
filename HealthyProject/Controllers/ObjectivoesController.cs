@@ -11,6 +11,7 @@ using Microsoft.AspNet.Identity;
 using System.Web.Helpers;
 using Newtonsoft.Json;
 using System.Dynamic;
+using System.Data.SqlClient;
 
 namespace HealthyProject.Controllers
 {
@@ -21,15 +22,13 @@ namespace HealthyProject.Controllers
         // GET: Objectivoes
         public ActionResult Index()
         {
-            var userId = Convert.ToInt32(User.Identity.GetUserId());
+            int userId = Convert.ToInt32(User.Identity.GetUserId());
             var objectivoes = db.Objectivoes.Include(o => o.Utilizador);
             Objectivo objectivo = objectivoes.FirstOrDefault(o => o.UserID == userId && o.Data_fim == null);
             var refeicoes = db.RegistoDiarios.Include(i => i.Objectivo).Where(o => o.Objectivo.ObjectivoID == objectivo.ObjectivoID);
-            if (objectivo != null)
-            {
             RegistoPeso peso = db.RegistoPesoes.FirstOrDefault(o => o.User_ID == userId && o.Data == DateTime.Today);
             var today = DateTime.Now;
-            
+
             int dayOfWeek = (int)today.DayOfWeek;
 
             int delta = (int)DayOfWeek.Monday - dayOfWeek;
@@ -38,13 +37,13 @@ namespace HealthyProject.Controllers
                 delta -= 7;
             }
             double counter = 0;
-            List<DataPoint> datapoints = new List<DataPoint>{};
-            List<DataPoint> intake = new List<DataPoint>{};
+            List<DataPoint> datapoints = new List<DataPoint> { };
+            List<DataPoint> intake = new List<DataPoint> { };
             while (delta <= 0)
             {
                 var day = today.AddDays(delta);
                 var dailyMeal = refeicoes.FirstOrDefault(p => p.Data == day);
-                if(dailyMeal == null)
+                if (dailyMeal == null)
                 {
                     datapoints.Add(new DataPoint(counter, null, day.ToString("dddd")));
                     intake.Add(new DataPoint(counter, objectivo.Intake_diarioR, day.ToString("dddd")));
@@ -52,7 +51,7 @@ namespace HealthyProject.Controllers
                 }
                 else
                 {
-                    datapoints.Add(new DataPoint(counter,dailyMeal.Total_Kcal, day.ToString("dddd")));
+                    datapoints.Add(new DataPoint(counter, dailyMeal.Total_Kcal, day.ToString("dddd")));
                     intake.Add(new DataPoint(counter, objectivo.Intake_diarioR, day.ToString("dddd")));
                     counter++;
                 }
@@ -68,9 +67,9 @@ namespace HealthyProject.Controllers
             }
 
             var total = db.RegistoPesoes.Include(o => o.Utilizador).Where(i => i.User_ID == userId);
-            List<DataPoint> kg = new List<DataPoint>{};
+            List<DataPoint> kg = new List<DataPoint> { };
             counter = 0;
-            foreach(RegistoPeso i in total)
+            foreach (RegistoPeso i in total)
             {
                 kg.Add(new DataPoint(counter, i.Peso, i.Data.Value.ToString("dd-MM-yyyy")));
                 counter++;
@@ -78,13 +77,13 @@ namespace HealthyProject.Controllers
             List<DataPoint> objectiv = new List<DataPoint> { };
             counter = 0;
             double counter2 = 0;
-            foreach(Objectivo i in objectivoes)
+            foreach (Objectivo i in objectivoes)
             {
-                if(i.Data_fim != null && i.Peso_Final != i.Peso_objectivo)
+                if (i.Data_fim != null && i.Peso_Final != i.Peso_objectivo)
                 {
                     counter2++;
                 }
-                if(i.Data_fim != null && i.Peso_Final == i.Peso_objectivo)
+                if (i.Data_fim != null && i.Peso_Final == i.Peso_objectivo)
                 {
                     counter++;
                 }
@@ -99,82 +98,96 @@ namespace HealthyProject.Controllers
                 registod.Add(new DataPoint(counter, d.Total_Kcal, d.Data.ToString("dd-MM-yyyy")));
                 counter++;
             }
-                List<DataPoint> ordemCount = new List<DataPoint> { };
-                counter = 0;
-                var objID = objectivo.ObjectivoID;
-                var refeicao = DBContext.Database.SqlQuery<Top5_Result>("Top 5 @UserID", userId).ToList();
-                List<DataPoint> favoritos = new List<DataPoint> { };
-                for(int i = 0; i < refeicao.Count(); i++)
-                {
-                    favoritos.Add(new DataPoint(i, refeicao.ToList()[i].PratoID), refeicao.ToList()[i].Prato.Nome);
-                }
-                foreach (RefeicaoPrato i in refeicao)
-                {
-                    while (favoritos.Count() < 5)
-                    {
-                        favoritos.Add(new DataPoint(counter, i.Ocorrencias, i.Prato.Nome));
-                        counter++;
-                    }
-                }
-                counter = 0;
-                counter2 = 0;
-                List<DataPoint> dias = new List<DataPoint> { };
-                var listaobjectivos = db.Objectivoes.Where(u => u.UserID == userId).OrderByDescending(q => q.Data_inicio);
-                for(int i = 0; i < listaobjectivos.Count(); i++)
-                {
-                    DateTime inicio = (DateTime)listaobjectivos.ToList()[i].Data_inicio;
-                    DateTime fim = (DateTime)listaobjectivos.ToList()[i].Data_fim;
-                    DateTime novo = (DateTime)listaobjectivos.ToList()[i + 1].Data_inicio;
-                    if (inicio != null && fim != null)
-                    {
-                        counter += inicio.Subtract(fim).TotalDays;
-                        if(novo != null)
-                        {
-                            counter2 += novo.Subtract(fim).TotalDays;
-                        }
+            List<DataPoint> ordemCount = new List<DataPoint> { };
+            counter = 0;
+            var objID = objectivo.ObjectivoID;
+            SqlParameter Id = new SqlParameter("@UserID", userId);
+            IList<Favorites> refeicao = db.Database.SqlQuery<Favorites>("Top5 @UserID", Id).ToList();
+            List<DataPoint> favoritos = new List<DataPoint> { };
+            for (int i = 0; i < refeicao.Count(); i++)
+            {
+                var refeicaoID = refeicao[i].PratoID;
+                refeicao[i].Nome = db.Pratos.FirstOrDefault(o => o.PratosID == refeicaoID).Nome;
+                favoritos.Add(new DataPoint(i, refeicao[i].Ocorrencias, refeicao[i].Nome));
+            }
+            counter = 0;
+            counter2 = 0;
+            List<DataPoint> dias = new List<DataPoint> { };
+            var listaobjectivos = db.Objectivoes.Where(u => u.UserID == userId).OrderByDescending(q => q.Data_inicio);
+            for (int i = 0; i < listaobjectivos.Count(); i++)
+            {
+                DateTime inicio = (DateTime)listaobjectivos.ToList()[i].Data_inicio;
+                var fim = listaobjectivos.ToList()[i].Data_fim;
 
-                    }
-                    if (inicio != null && fim == null)
+                if (inicio != null && fim != null)
+                {
+                    counter += inicio.Subtract((DateTime)fim).TotalDays;
+                    if (i + 1 < listaobjectivos.Count())
                     {
-                        counter += inicio.Subtract(DateTime.Today).TotalDays;
+                        var novo = listaobjectivos.ToList()[i + 1].Data_inicio;
+                        if (novo != null)
+                        {
+                            DateTime novo1 = (DateTime)listaobjectivos.ToList()[i + 1].Data_inicio;
+                            counter2 += novo1.Subtract((DateTime)fim).TotalDays;
+                        }
                     }
                 }
+                if (inicio != null && fim == null)
+                {
+                    counter += inicio.Subtract(DateTime.Today).TotalDays;
+                }
+            }
             dias.Add(new DataPoint(0, counter, "Dias com objectivos"));
             dias.Add(new DataPoint(1, counter2, "Dias sem objectivos"));
-            ViewBag.DataPoints = JsonConvert.SerializeObject(datapoints);
-            ViewBag.IntakeR = JsonConvert.SerializeObject(intake);
-            ViewBag.IMath = JsonConvert.SerializeObject(objectivo.Intake_diarioR);
-            ViewBag.Total = JsonConvert.SerializeObject(kg);
-            ViewBag.Object = JsonConvert.SerializeObject(objectiv);
-            if (registod.Count() > 0)
+            if (objectivo != null)
             {
-                ViewBag.Registos = JsonConvert.SerializeObject(registod);
-            }
-            //if(favoritos.Count() > 0)
-            //{
-            //    ViewBag.Favoritos = JsonConvert.SerializeObject(favoritos);
-            //}
-            //if(dias.Count() > 0)
-            //{
-            //    ViewBag.Count = JsonConvert.SerializeObject(dias);
-            //}
-
-            if ((int)DateTime.Now.DayOfWeek == 1 && peso == null)
-            {
-                ViewBag.Teste = "Por favor indique o seu novo peso";
-                return View();
-            }
-            else
-            {
-                return View();
-            }
+                ViewBag.DataPoints = JsonConvert.SerializeObject(datapoints);
+                ViewBag.IntakeR = JsonConvert.SerializeObject(intake);
+                ViewBag.IMath = JsonConvert.SerializeObject(objectivo.Intake_diarioR);
+                ViewBag.Total = JsonConvert.SerializeObject(kg);
+                ViewBag.Object = JsonConvert.SerializeObject(objectiv);
+                if (registod.Count() > 0)
+                {
+                    ViewBag.Registos = JsonConvert.SerializeObject(registod);
+                }
+                if (favoritos.Count() > 0)
+                {
+                    ViewBag.Favoritos = JsonConvert.SerializeObject(favoritos);
+                }
+                if (dias.Count() > 0)
+                {
+                    ViewBag.Count = JsonConvert.SerializeObject(dias);
+                }
+                if ((int)DateTime.Now.DayOfWeek == 1 && peso == null)
+                {
+                    ViewBag.Teste = "Por favor indique o seu novo peso";
+                    return View();
+                }
+                else
+                {
+                    return View();
+                }
             }
             else
             {
                 ViewBag.Sem = "Sem objectivo";
+                ViewBag.Total = JsonConvert.SerializeObject(kg);
+                ViewBag.Object = JsonConvert.SerializeObject(objectiv);
+                if (registod.Count() > 0)
+                {
+                    ViewBag.Registos = JsonConvert.SerializeObject(registod);
+                }
+                if (favoritos.Count() > 0)
+                {
+                    ViewBag.Favoritos = JsonConvert.SerializeObject(favoritos);
+                }
+                if (dias.Count() > 0)
+                {
+                    ViewBag.Count = JsonConvert.SerializeObject(dias);
+                }
                 return View();
             }
-            
+
         }
 
         public ActionResult GetPeso()
@@ -300,11 +313,11 @@ namespace HealthyProject.Controllers
                     {
                         objectivo.Intake_diarioA = Convert.ToInt32(354 - (6.91 * age) + (utilizador.Actividade_fisica * (9.36 * utilizador.Peso + (726 * (utilizador.Altura / 100)))));
                         int Intake_diarioR = Convert.ToInt32(354 - (6.91 * age) + (utilizador.Actividade_fisica * (9.36 * objectivo.Peso_objectivo + (726 * (utilizador.Altura / 100)))));
-                        if(Intake_diarioR > 1800 & objectivo.Intake_diarioA - Intake_diarioR > 500)
+                        if (Intake_diarioR > 1800 & objectivo.Intake_diarioA - Intake_diarioR > 500)
                         {
                             objectivo.Intake_diarioR = objectivo.Intake_diarioA - 500;
                         }
-                        else if(Intake_diarioR < 1800 & objectivo.Intake_diarioA - Intake_diarioR < 500)
+                        else if (Intake_diarioR < 1800 & objectivo.Intake_diarioA - Intake_diarioR < 500)
                         {
                             objectivo.Intake_diarioR = 1800;
                         }
@@ -341,10 +354,10 @@ namespace HealthyProject.Controllers
                 }
             }
 
-        ViewBag.UserID = new SelectList(db.Utilizadors, "UserID", "Nome", objectivo.UserID);
-        return View(objectivo);
+            ViewBag.UserID = new SelectList(db.Utilizadors, "UserID", "Nome", objectivo.UserID);
+            return View(objectivo);
         }
-            
+
 
         // GET: Objectivoes/Edit/5
         public ActionResult Edit(int? id)
@@ -399,7 +412,7 @@ namespace HealthyProject.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(int? id)
         {
-            
+
             var userId = Convert.ToInt32(User.Identity.GetUserId());
             var utilizador = db.Utilizadors.FirstOrDefault(i => i.UserID == userId);
             Objectivo objectivo = db.Objectivoes.Include(o => o.Utilizador).FirstOrDefault(i => i.UserID == userId && i.Data_fim == null);

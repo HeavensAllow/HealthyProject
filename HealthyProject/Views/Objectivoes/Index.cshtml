@@ -4,17 +4,17 @@
     ViewBag.Title = "Index";
 }
 
-@if(ViewBag.Sem == null)
+@if (ViewBag.Sem == null)
 {
-if (TempData["Alert"] != null)
-{
-    <br />
-    <br />
-    <div class="alert alert-success alert-dismissable">
-        <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
-        <strong><i class="fa fa-exclamation-triangle" aria-hidden="true"></i> Ja existe um objectivo definido por concluir.</strong>
-    </div>
-}
+    if (TempData["Alert"] != null)
+    {
+        <br />
+        <br />
+        <div class="alert alert-success alert-dismissable">
+            <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+            <strong><i class="fa fa-exclamation-triangle" aria-hidden="true"></i> Ja existe um objectivo definido por concluir.</strong>
+        </div>
+    }
 
     <div id="modal-container" class="modal fade" tabindex="-1" role="dialog">
         <div class="modal-content" style="width: 570px !important; margin: 100px auto !important; border: 5px solid #3A87AD;">
@@ -66,15 +66,15 @@ if (TempData["Alert"] != null)
             <p id="NrObjectivos" style="height:500px; width: 100%; position:absolute; left:1250px;"></p>
             @if (ViewBag.Registos != null)
             {
-                <p id="Totalkcal" style="height:500px; width: 100%; position:absolute; left:2500px;"></p>
+                <p id="Totalkcal" style="height:500px; width: 100%; position:absolute; left:+1250px;"></p>
             }
             @if (ViewBag.Favoritos != null)
             {
-                <p id="Favoritos" style="height:500px; width: 100%; position:absolute; left:3750px;"></p>
+                <p id="Favoritos" style="height:500px; width: 100%; position:absolute; left:+1250px;"></p>
             }
             @if (ViewBag.Count != null)
             {
-                <p id="Count" style="height:500px; width: 100%; position:absolute; left:5000px;"></p>
+                <p id="Count" style="height:500px; width: 100%; position:absolute; left:+1250px;"></p>
             }
 
             <br />
@@ -107,9 +107,13 @@ else
             {
                 <p id="Totalkcal" style="height:500px; width: 100%; position:absolute; left:2500px;"></p>
             }
+            @if (ViewBag.Favoritos != null)
+            {
+                <p id="Favoritos" style="height:500px; width: 100%; position:absolute; left:3750px;"></p>
+            }
             @if (ViewBag.Count != null)
             {
-                <p id="Count" style="height:500px; width: 100%; position:absolute; left:3750px;"></p>
+                <p id="Count" style="height:500px; width: 100%; position:absolute; left:5000px;"></p>
             }
 
             <br />
@@ -161,7 +165,7 @@ else
             dataPoints: @Html.Raw(ViewBag.IntakeR),
         }]
             });
-            chart.render();
+            chart1.render();
 
         var chart2 = new CanvasJS.Chart("Totalkg", {
             animationEnabled: true,
@@ -192,7 +196,7 @@ else
                 dataPoints: @Html.Raw(ViewBag.Total),
                 }]
             });
-            chart.render();
+            chart2.render();
 
                     var chart3 = new CanvasJS.Chart("NrObjectivos", {
             animationEnabled: true,
@@ -223,7 +227,7 @@ else
                 dataPoints: @Html.Raw(ViewBag.Object),
                 }]
             });
-                    chart.render();
+                    chart3.render();
 
             @if(ViewBag.Registos != null)
             {
@@ -257,14 +261,14 @@ else
                 dataPoints: @Html.Raw(ViewBag.Registos),
                 }]
             });
-            chart.render();
+            chart4.render();
             </text>
             }
              @if(ViewBag.Favoritos != null)
             {
                 <text>
 
-                var chart5 = new CanvasJS.Chart("Totalkcal", {
+                var chart5 = new CanvasJS.Chart("Favoritos", {
             animationEnabled: true,
             backgroundColor: "#ffffff",
             title: {
@@ -292,7 +296,7 @@ else
                 dataPoints: @Html.Raw(ViewBag.Favoritos),
                 }]
             });
-            chart.render();
+            chart5.render();
             </text>
             }
              @if(ViewBag.Registos != null)
@@ -327,7 +331,7 @@ else
                 dataPoints: @Html.Raw(ViewBag.Count),
                 }]
             });
-            chart.render();
+            chart6.render();
             </text>
             }
             }
