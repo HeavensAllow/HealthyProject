@@ -55,7 +55,7 @@ namespace HealthyProject.Controllers
 
         //
         // GET: /Manage/Index : onde se mostra dados do utilizador
-        public async Task<ActionResult> Index(ManageMessageId? message)
+        public ActionResult Index(ManageMessageId? message)
         {
 
             ViewBag.StatusMessage =
@@ -98,7 +98,7 @@ namespace HealthyProject.Controllers
         [ValidateAntiForgeryToken]
         // para editar os campos
 
-        public async Task<ActionResult> Index([Bind(Include = "UserID,Nome,Genero,Data_nascimento,Peso,Altura,Actividade_fisica,Nr_horas_sono,Nr_refeicoes,Habitos_alcoolicos,MMuscular,MGorda")] Utilizador perfilEdit)
+        public ActionResult Index([Bind(Include = "UserID,Nome,Genero,Data_nascimento,Peso,Altura,Actividade_fisica,Nr_horas_sono,Nr_refeicoes,Habitos_alcoolicos,MMuscular,MGorda")] Utilizador perfilEdit)
         {
             if (ModelState.IsValid)
             {

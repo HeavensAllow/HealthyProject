@@ -8,7 +8,7 @@
     @Scripts.Render("~/bundles/modernizr")
 
 </head>
-<body>
+<body style="background-image:url(http://www.bellacor.com/media.bellacor.com/images/1500/2140134720131.jpg); min-height:100vh"  >
     <div class="navbar navbar-inverse navbar-fixed-top" style="background-color:white">
         <div class="container">
            <div class="navbar-header"> 
@@ -34,14 +34,18 @@
             </div>
         </div>
     </div>
-    <div class="container body-content">
-        @RenderBody()
-        <hr />
-        @*<footer>
-            <p>@*&copy;*@ @DateTime.Now.Year @*- My ASP.NET Application</p>*@
-        @*</footer>*@
-    </div>
 
+    
+        <div class="container-fluid body-content" style="background-image:url(http://www.bellacor.com/media.bellacor.com/images/1500/2140134720131.jpg)">
+            <div class="container body-content" style="background-color:white">
+                @RenderBody()
+                @*<hr />*@
+                @*<footer>
+                    <p>@*&copy;*@ @DateTime.Now.Year @*- My ASP.NET Application</p>*@
+                    @*</footer>*@
+                </div>
+            </div>
+       
     @Scripts.Render("~/bundles/jquery")
     @Scripts.Render("~/bundles/bootstrap")
     @RenderSection("scripts", required: false)

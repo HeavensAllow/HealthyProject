@@ -79,7 +79,8 @@ namespace HealthyProject.Controllers
             switch (result)
             {
                 case SignInStatus.Success:
-                    return RedirectToLocal(returnUrl);
+                    //ViewBag.Sucess = "Sucess";
+                    return RedirectToAction("Index","Manage");
                 case SignInStatus.LockedOut:
                     return View("Lockout");
                 case SignInStatus.RequiresVerification:

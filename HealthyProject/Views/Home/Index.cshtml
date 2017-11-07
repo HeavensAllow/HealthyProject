@@ -7,46 +7,77 @@
 
 
 <body>
-    <br/>
-
-     <div class="col-md-12" style="background-image:url(http://www.shineprowindowcleaning.com/wp-content/uploads/2016/02/background-blue-gradient.jpg); display:block;" >
-  
-             @*<h1 align="center"> Healthy Project </h1>*@
-             @*<p class="lead">ASP.NET is a free web framework for building great Web sites and Web applications using HTML, CSS and JavaScript.</p>
-            <p><a href="https://asp.net" class="btn btn-primary btn-lg">Learn more &raquo;</a></p>*@
-             <br />
-             <br />
-             <br />
-             <br />  
-             <h3 style="text-align:center">  Gostaria de ter maior controlo sobre o seu peso? </h3>
-
-             <h3 style="text-align:center"> Um estilo de vida saudavel? </h3>
-
-             <h3 style="text-align:center"> Melhor gestao das suas Refeicoes ?  </h3>
-    
-             <br />
-             <br />
-             <br />
-             <br />
-             <br />
-         </div>
-   
-   
-     <div class="row">
-         <div  class="col-md-4"></div>
-            <h3 style="text-align:center"> a nova aplicacao healthy project tem como objetivo  monitorizar o seu peso ajudando-o a alcancar os seus objetivos de forma rapida e eficaz!</h3>.
+    @*@if(ViewBag.Sucess == null){*@
+    <br />
+    <div class="row">
+        <div class="col-md-7">
             <br />
             <br />
             <br />
             <br />
-
-            <h3>junte se a nos</h3>
-
-            <button style="background-color:lightblue; width:100px;height:50px; align-items:center"> @Html.ActionLink("Registe-se", "register", "account", routeValues: null, htmlAttributes: new { id = "registerLink" })</button>
-
+            <img src="https://portfolios.journalism.ku.edu/natalie-dufek/files/2014/06/healthy-living.jpg" ; style="width:870px; height:500px" />
+            <br />
+            <br />
         </div>
-   
+        <div class="col-md-5">
+            <br />
+            <br />
+            <br />
+            <br />
+            <br />
+            <br />
+            <br />
+            <br />
+            <br />
+            <b style="text-align: right;font-size:x-large">  Gostaria de ter maior controlo sobre o seu peso? </b>
+            <br />
+            <br />
+            <br />
+            <br />
+            <br />
+            <br />
+            <br />
+            <br />
+            <b style="text-align:right;font-size:x-large"> Um estilo de vida saudavel? </b>
+            <br />
+            <br />
+            <br />
+            <br />
+            <b style="text-align:right;font-size:x-large"> Melhor gestao das suas Refeicoes ?  </b>              
+        </div>
+    </div>
+    <div style="text-align:center">
+        <br />
+        <br />
+        <br />
+        <br />
+        <br />
+        <br />
+        <br />
+        <i style="font-size:xx-large"> Healthy Project tem como objetivo  monitorizar o seu peso ajudando-o a alcancar os seus objetivos de forma rapida e eficaz!</i>.
+        <br />
+        <br />
+        <br />
+        <br />
+     
+        </div>
+        <div style="text-align:center">
+            <br />
+            <br />
+            <br />
+            <br />
+            <br />
+            <br />
+            <b style="font-size:xx-large" >Junte se a nos!</b>
+            <br/>
+
+            <button style="background-color:lightgray; width:200px;height:50px;"> @Html.ActionLink("Registe-se", "register", "account", routeValues: null, htmlAttributes: new { id = "registerLink" })</button>
+        </div>
+
+
+ 
     
+
 </body>
 
 
@@ -57,6 +88,8 @@
 
 
 @*Informacao Anterior*@
+@*<p class="lead">ASP.NET is a free web framework for building great Web sites and Web applications using HTML, CSS and JavaScript.</p>
+    <p><a href="https://asp.net" class="btn btn-primary btn-lg">Learn more &raquo;</a></p>*@
 @*<div class="row">
     <div class="col-md-4">
         <h2>Getting started</h2>
