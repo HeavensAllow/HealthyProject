@@ -22,12 +22,10 @@ namespace HealthyProject.Models
     
         public int ObjectivoID { get; set; }
         public int UserID { get; set; }
-        public Nullable<System.DateTime> Data_inicio { get; set; }
-        public Nullable<System.DateTime> Data_fim { get; set; }
-        public Nullable<int> Peso_objectivo { get; set; }
-        public Nullable<int> Intake_diarioR { get; set; }
-        public Nullable<int> Intake_diarioA { get; set; }
-        public Nullable<int> Peso_Final { get; set; }
+        public System.DateTime Data_inicio { get; set; }
+        public System.DateTime Data_fim { get; set; }
+        public int Peso_objectivo { get; set; }
+        public int Intake_diario { get; set; }
     
         public virtual Utilizador Utilizador { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]

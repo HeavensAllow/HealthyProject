@@ -14,11 +14,6 @@
 */
 .dl-horizontal dt {
     white-space: normal;
-    width: 200px;
-}
-
-.dl-horizontal dd {
-    margin-left: 220px;
 }
 
 /* Set width on the form input elements since they're 100% wide by default */
@@ -28,7 +23,6 @@ textarea {
     max-width: 280px;
 }
 
-<<<<<<< HEAD
 #Facebook {
     background-image: url(https://www.facebook.com/images/fb_icon_325x325.png);
 }
@@ -43,31 +37,4 @@ textarea {
     height: 45px;
     width: 45px;
     border-radius: 25px; /* faz com que os botões tenham cantos curvos */
-=======
-.mybtn {
-    background-color: #06ab86;
-    border: thin;
-    color: black;
-    padding: 15px 32px;
-    text-align: center;
-    text-decoration: solid;
-    display: inline-block;
-    font-size: 16px;
-    margin: 4px 2px;
-    cursor: pointer;
-}
-
-.banzai{
-    width: 800px;
-    height: 220px;
-    padding: 10px;
-}
-
-.super{
-    padding-left:15px;
-}
-
-.centerAlign{
-    text-align: center;
->>>>>>> Andre
 }

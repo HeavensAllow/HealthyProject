@@ -19,7 +19,6 @@ namespace HealthyProject.Models
         {
             this.RefeicaoIngredientes = new HashSet<RefeicaoIngrediente>();
             this.RefeicaoPratos = new HashSet<RefeicaoPrato>();
-            this.RefeicaoBebidas = new HashSet<RefeicaoBebida>();
         }
     
         public int RefeicaoID { get; set; }
@@ -32,7 +31,5 @@ namespace HealthyProject.Models
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<RefeicaoPrato> RefeicaoPratos { get; set; }
         public virtual RegistoDiario RegistoDiario { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<RefeicaoBebida> RefeicaoBebidas { get; set; }
     }
 }
