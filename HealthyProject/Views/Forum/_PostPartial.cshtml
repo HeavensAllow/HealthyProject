@@ -1,49 +1,53 @@
 ﻿@model HealthyProject.Models.Post
 <table class="table">
     <tr>
-        <th></th>
-        <th></th>
+
     </tr>
-    <tr>
-        <td>
-            <img src="http://www.icone-png.com/png/54/53785.png" height="80" width="70" />
+    <tr style="border: 4px double black">
+        <td style="padding-top:130px; background-color:papayawhip">
+            <img src="http://www.icone-png.com/png/54/53785.png" height="80" width="70"/>
         </td>
-        <td>
+        <td style="padding-top:145px; background-color:papayawhip; border-right-style:double">
             @Model.AspNetUser.Utilizador.Nome 
-            <br />
-            @Model.Data
         </td>
-        <td>
+        <td style="margin:auto">
             @Model.Texto
         <br /><br />
             @if (Model.SubcategoriaID == 1)
             {
                 var videoID = Model.Link.Substring(Model.Link.IndexOf("?v=") + 3);
-                <iframe width="500" height="280" style="padding-left:150px"; src="https://www.youtube.com/embed/@videoID" frameborder="0" allowfullscreen></iframe>
+                <iframe width="500" height="280" style="padding-left:150px; margin:auto"; src="https://www.youtube.com/embed/@videoID" frameborder="0" allowfullscreen></iframe>
             }
         </td>
+        <td></td>
 
     </tr>
 
     @foreach (var comentario in Model.Comentarios.OrderBy(c => c.Data))     
     {
-        <tr>
+        <tr style="background-color:lightblue; border-style:double; text-align:center; padding-top: 40px">
             <td>
+                <img src="http://www.icone-png.com/png/54/53785.png" height="60" width="50" />
+            </td>
+            <td class="tdInfo" style="border-right:double; padding-top:20px">
                 @comentario.AspNetUser.Utilizador.Nome
                 <br />
                 @comentario.Data
             </td>
             <td>
+                <br />
                 @comentario.Comment
             </td>
-            <td>
+
+            <td class="tdOpinion" style="padding-top:20px">
                 @using (Ajax.BeginForm("Opiniao", "Forum", new { id = comentario.CommentID }, new AjaxOptions() { HttpMethod = "Post", UpdateTargetId = "divComentarios" }))
-                {
+            {
                     <button class="Gosto" name="selectedOpinion" value="true"></button>
                     <label id="likesLabel">@(comentario.Opiniaos.Where(o => o.Opiniao1 == true).Count() - comentario.Opiniaos.Where(o => o.Opiniao1 == false).Count())</label> <label>Likes</label>
                     <button class="naoGosto" name="selectedOpinion" value="false"></button>
                 }
             </td>
-        </tr>
+
+</tr>
     }
     </table>

@@ -5,31 +5,31 @@
 }
 
 <h2>@Model.Nome</h2>
-
 <p>
     @Html.ActionLink("Novo Post", "CreatePost", new { subcategoria = Model.SubcategoriaID })
 </p>
 <table class="table">
-    <tr>
+    <tr style="background-color:lightblue">
         <th>
-            
         </th>
         <th>
-            Criado por
         </th>
         <th></th>
     </tr>
 
-@foreach (var subcategoria in Model.Posts) {
+@foreach (var subcategoria in Model.Posts)
+{
     <tr>
-        <td>
+        <td style="padding-top: 40px; font-size:larger; border: 1px solid white; text-align:center; background-color:gainsboro">
             @Html.ActionLink(subcategoria.Titulo, "Post", "Forum", new { id = subcategoria.PostID }, null)
         </td>
-        <td>
-            @subcategoria.Data
-            <br />
+        <td style="background-color:orange">
+            <img src="http://www.icone-png.com/png/54/53785.png" height="80" width="70" />
             @subcategoria.AspNetUser.Utilizador.Nome
-                       
+        </td>
+
+        <td class="data" style="padding-top: 40px;background-color:orange">
+            @subcategoria.Data
         </td>
     </tr>
 }

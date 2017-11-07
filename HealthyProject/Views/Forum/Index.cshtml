@@ -14,17 +14,21 @@
         </div>
     </div>
  }
+<table>
+
     @foreach (var categoria in Model)
     {
 
-        <h3>
+        <h3 style="background-color:orange">
             @Html.DisplayFor(modelItem => categoria.Nome)
         </h3>
 
+
         foreach (var subcategoria in categoria.Subcategorias)
         {
-            <h5>
+            <h3>
                 @Html.ActionLink(subcategoria.Nome, "Subcategoria", "Forum", new { id = subcategoria.SubcategoriaID }, null)
-            </h5>
+            </h3>
         }
     }
+</table>
