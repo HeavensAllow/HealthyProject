@@ -157,6 +157,16 @@ namespace HealthyProject.Controllers
             {
                 ViewBag.Count = JsonConvert.SerializeObject(dias);
             }
+            if (objectivo != null)
+            {
+                if (objectivo.Data_inicio > DateTime.Now)
+                {
+                    DateTime start = (DateTime)objectivo.Data_inicio;
+                    ViewBag.TooSoon = Convert.ToInt32(start.Subtract(DateTime.Now).TotalDays);
+                    return View();
+                }
+            }
+
             if (objectivo == null)
             {
                 ViewBag.Sem = "Sem objectivo";
