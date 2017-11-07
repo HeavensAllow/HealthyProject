@@ -28,7 +28,6 @@ textarea {
     max-width: 280px;
 }
 
-<<<<<<< HEAD
 #Facebook {
     background-image: url(https://www.facebook.com/images/fb_icon_325x325.png);
 }
@@ -43,7 +42,7 @@ textarea {
     height: 45px;
     width: 45px;
     border-radius: 25px; /* faz com que os botões tenham cantos curvos */
-=======
+}
 .mybtn {
     background-color: #06ab86;
     border: thin;
@@ -69,5 +68,4 @@ textarea {
 
 .centerAlign{
     text-align: center;
->>>>>>> Andre
 }
