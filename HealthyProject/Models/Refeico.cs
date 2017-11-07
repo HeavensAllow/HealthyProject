@@ -17,9 +17,9 @@ namespace HealthyProject.Models
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public Refeico()
         {
+            this.RefeicaoBebidas = new HashSet<RefeicaoBebida>();
             this.RefeicaoIngredientes = new HashSet<RefeicaoIngrediente>();
             this.RefeicaoPratos = new HashSet<RefeicaoPrato>();
-            this.RefeicaoBebidas = new HashSet<RefeicaoBebida>();
         }
     
         public int RefeicaoID { get; set; }
@@ -28,11 +28,11 @@ namespace HealthyProject.Models
         public string Tipo { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<RefeicaoBebida> RefeicaoBebidas { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<RefeicaoIngrediente> RefeicaoIngredientes { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<RefeicaoPrato> RefeicaoPratos { get; set; }
         public virtual RegistoDiario RegistoDiario { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<RefeicaoBebida> RefeicaoBebidas { get; set; }
     }
 }
