@@ -128,41 +128,19 @@ else
         <div class="slidediv" style="width:85%; overflow-x:scroll; height: 550px; overflow-y: hidden; position: relative;">
             <p id="Totalkg" style="width:100%; position: absolute; height:500px;left:0px;"></p>
             <p id="NrObjectivos" style="height:500px; width: 100%; position:absolute; left:1250px;"></p>
-            @if (ViewBag.Registos != null)
+            @if (ViewBag.Favoritos != null)
             {
-                <p id="Totalkcal" style="height:500px; width: 100%; position:absolute; left:2500px;"></p>
-                if (ViewBag.Favoritos != null)
+                <p id="Favoritos" style="height:500px; width: 100%; position:absolute; left:2500px;"></p>
+                if (ViewBag.Count != null)
                 {
-                    <p id="Favoritos" style="height:500px; width: 100%; position:absolute; left:3750px;"></p>
-                    if (ViewBag.Count != null)
-                    {
-                        <p id="Count" style="height:500px; width: 100%; position:absolute; left:5000px;"></p>
-                    }
-                }
-                else
-                {
-                    if (ViewBag.Count != null)
-                    {
-                        <p id="Count" style="height:500px; width: 100%; position:absolute; left:3750px;"></p>
-                    }
+                    <p id="Count" style="height:500px; width: 100%; position:absolute; left:3750px;"></p>
                 }
             }
             else
             {
-                if (ViewBag.Favoritos != null)
+                if (ViewBag.Count != null)
                 {
-                    <p id="Favoritos" style="height:500px; width: 100%; position:absolute; left:2500px;"></p>
-                    if (ViewBag.Count != null)
-                    {
-                        <p id="Count" style="height:500px; width: 100%; position:absolute; left:3750px;"></p>
-                    }
-                }
-                else
-                {
-                    if (ViewBag.Count != null)
-                    {
-                        <p id="Count" style="height:500px; width: 100%; position:absolute; left:2500px;"></p>
-                    }
+                    <p id="Count" style="height:500px; width: 100%; position:absolute; left:2500px;"></p>
                 }
             }
             <br />
@@ -174,6 +152,10 @@ else
 @section Scripts{
     <script type="text/javascript">
         window.onload = function () {
+
+            @if (ViewBag.Datapoints != null)
+            {
+                <text>
             var chart1 = new CanvasJS.Chart("chartContainer", {
             animationEnabled: true,
             backgroundColor: "#ffffff",
@@ -212,30 +194,32 @@ else
         }]
             });
             chart1.render();
+            </text>
+                        }
 
-        var chart2 = new CanvasJS.Chart("Totalkg", {
+                        var chart2 = new CanvasJS.Chart("Totalkg", {
             animationEnabled: true,
             backgroundColor: "#ffffff",
             title: {
-                text: "Evolução do Peso desde o registo"
+                            text: "Evolução do Peso desde o registo"
             },
 
             toolTip: {
-                shared: true
+                            shared: true
             },
 
             axisY: {
-                interlacedColor: "#F0F8FF",
+                            interlacedColor: "#F0F8FF",
                 title: "Peso"
             },
 
             axisX: {
-                title: "Data",
+                            title: "Data",
              },
 
             data: [
                 {
-                type: "line",
+                            type: "line",
                 showInLegend: true,
                 name: "Peso",
                 legendText: "Peso por data",

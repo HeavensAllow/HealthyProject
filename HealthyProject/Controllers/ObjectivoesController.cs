@@ -28,42 +28,58 @@ namespace HealthyProject.Controllers
             var refeicoes = db.RegistoDiarios.Include(i => i.Objectivo).Where(o => o.Objectivo.ObjectivoID == objectivo.ObjectivoID);
             RegistoPeso peso = db.RegistoPesoes.FirstOrDefault(o => o.User_ID == userId && o.Data == DateTime.Today);
             var today = DateTime.Now;
-
-            int dayOfWeek = (int)today.DayOfWeek;
-
-            int delta = (int)DayOfWeek.Monday - dayOfWeek;
-            if (delta > 0)
-            {
-                delta -= 7;
-            }
             double counter = 0;
-            List<DataPoint> datapoints = new List<DataPoint> { };
-            List<DataPoint> intake = new List<DataPoint> { };
-            while (delta <= 0)
+            double counter2 = 0;
+            if (objectivo != null)
             {
-                var day = today.AddDays(delta);
-                var dailyMeal = refeicoes.FirstOrDefault(p => p.Data == day);
-                if (dailyMeal == null)
+                int dayOfWeek = (int)today.DayOfWeek;
+                int delta = (int)DayOfWeek.Monday - dayOfWeek;
+                if (delta > 0)
                 {
-                    datapoints.Add(new DataPoint(counter, null, day.ToString("dddd")));
-                    intake.Add(new DataPoint(counter, objectivo.Intake_diarioR, day.ToString("dddd")));
-                    counter++;
+                    delta -= 7;
                 }
-                else
+                List<DataPoint> datapoints = new List<DataPoint> { };
+                List<DataPoint> intake = new List<DataPoint> { };
+                while (delta <= 0)
                 {
-                    datapoints.Add(new DataPoint(counter, dailyMeal.Total_Kcal, day.ToString("dddd")));
-                    intake.Add(new DataPoint(counter, objectivo.Intake_diarioR, day.ToString("dddd")));
-                    counter++;
+                    var day = today.AddDays(delta);
+                    var dailyMeal = refeicoes.FirstOrDefault(p => p.Data == day);
+                    if (dailyMeal == null)
+                    {
+                        datapoints.Add(new DataPoint(counter, null, day.ToString("dddd")));
+                        intake.Add(new DataPoint(counter, objectivo.Intake_diarioR, day.ToString("dddd")));
+                        counter++;
+                    }
+                    else
+                    {
+                        datapoints.Add(new DataPoint(counter, dailyMeal.Total_Kcal, day.ToString("dddd")));
+                        intake.Add(new DataPoint(counter, objectivo.Intake_diarioR, day.ToString("dddd")));
+                        counter++;
+                    }
+                    delta++;
                 }
-                delta++;
-            }
 
-            while (intake.Count < 7)
-            {
-                today = today.AddDays(1);
-                datapoints.Add(new DataPoint(counter, null, today.ToString("dddd")));
-                intake.Add(new DataPoint(counter, objectivo.Intake_diarioR, today.ToString("dddd")));
-                counter++;
+                while (intake.Count < 7)
+                {
+                    today = today.AddDays(1);
+                    datapoints.Add(new DataPoint(counter, null, today.ToString("dddd")));
+                    intake.Add(new DataPoint(counter, objectivo.Intake_diarioR, today.ToString("dddd")));
+                    counter++;
+                }
+                ViewBag.DataPoints = JsonConvert.SerializeObject(datapoints);
+                ViewBag.IntakeR = JsonConvert.SerializeObject(intake);
+                ViewBag.IMath = JsonConvert.SerializeObject(objectivo.Intake_diarioR);
+                List<DataPoint> registod = new List<DataPoint> { };
+                counter = 0;
+                foreach (RegistoDiario d in refeicoes)
+                {
+                    registod.Add(new DataPoint(counter, d.Total_Kcal, d.Data.ToString("dd-MM-yyyy")));
+                    counter++;
+                }
+                if (registod.Count() > 0)
+                {
+                    ViewBag.Registos = JsonConvert.SerializeObject(registod);
+                }
             }
 
             var total = db.RegistoPesoes.Include(o => o.Utilizador).Where(i => i.User_ID == userId);
@@ -76,7 +92,6 @@ namespace HealthyProject.Controllers
             }
             List<DataPoint> objectiv = new List<DataPoint> { };
             counter = 0;
-            double counter2 = 0;
             foreach (Objectivo i in objectivoes)
             {
                 if (i.Data_fim != null && i.Peso_Final != i.Peso_objectivo)
@@ -91,16 +106,8 @@ namespace HealthyProject.Controllers
 
             objectiv.Add(new DataPoint(0, counter, "Concluidos com sucesso"));
             objectiv.Add(new DataPoint(1, counter2, "Terminados sem sucesso"));
-            List<DataPoint> registod = new List<DataPoint> { };
-            counter = 0;
-            foreach (RegistoDiario d in refeicoes)
-            {
-                registod.Add(new DataPoint(counter, d.Total_Kcal, d.Data.ToString("dd-MM-yyyy")));
-                counter++;
-            }
             List<DataPoint> ordemCount = new List<DataPoint> { };
             counter = 0;
-            var objID = objectivo.ObjectivoID;
             SqlParameter Id = new SqlParameter("@UserID", userId);
             IList<Favorites> refeicao = db.Database.SqlQuery<Favorites>("Top5 @UserID", Id).ToList();
             List<DataPoint> favoritos = new List<DataPoint> { };
@@ -140,55 +147,30 @@ namespace HealthyProject.Controllers
             }
             dias.Add(new DataPoint(0, counter, "Dias com objectivos"));
             dias.Add(new DataPoint(1, counter2, "Dias sem objectivos"));
-            if (objectivo != null)
+            ViewBag.Total = JsonConvert.SerializeObject(kg);
+            ViewBag.Object = JsonConvert.SerializeObject(objectiv);
+            if (favoritos.Count() > 0)
             {
-                ViewBag.DataPoints = JsonConvert.SerializeObject(datapoints);
-                ViewBag.IntakeR = JsonConvert.SerializeObject(intake);
-                ViewBag.IMath = JsonConvert.SerializeObject(objectivo.Intake_diarioR);
-                ViewBag.Total = JsonConvert.SerializeObject(kg);
-                ViewBag.Object = JsonConvert.SerializeObject(objectiv);
-                if (registod.Count() > 0)
-                {
-                    ViewBag.Registos = JsonConvert.SerializeObject(registod);
-                }
-                if (favoritos.Count() > 0)
-                {
-                    ViewBag.Favoritos = JsonConvert.SerializeObject(favoritos);
-                }
-                if (dias.Count() > 0)
-                {
-                    ViewBag.Count = JsonConvert.SerializeObject(dias);
-                }
-                if ((int)DateTime.Now.DayOfWeek == 1 && peso == null)
-                {
-                    ViewBag.Teste = "Por favor indique o seu novo peso";
-                    return View();
-                }
-                else
-                {
-                    return View();
-                }
+                ViewBag.Favoritos = JsonConvert.SerializeObject(favoritos);
+            }
+            if (dias.Count() > 0)
+            {
+                ViewBag.Count = JsonConvert.SerializeObject(dias);
+            }
+            if (objectivo == null)
+            {
+                ViewBag.Sem = "Sem objectivo";
+                return View();
+            }
+            if ((int)DateTime.Now.DayOfWeek == 1 && peso == null)
+            {
+                ViewBag.Teste = "Por favor indique o seu novo peso";
+                return View();
             }
             else
             {
-                ViewBag.Sem = "Sem objectivo";
-                ViewBag.Total = JsonConvert.SerializeObject(kg);
-                ViewBag.Object = JsonConvert.SerializeObject(objectiv);
-                if (registod.Count() > 0)
-                {
-                    ViewBag.Registos = JsonConvert.SerializeObject(registod);
-                }
-                if (favoritos.Count() > 0)
-                {
-                    ViewBag.Favoritos = JsonConvert.SerializeObject(favoritos);
-                }
-                if (dias.Count() > 0)
-                {
-                    ViewBag.Count = JsonConvert.SerializeObject(dias);
-                }
                 return View();
             }
-
         }
 
         public ActionResult GetPeso()

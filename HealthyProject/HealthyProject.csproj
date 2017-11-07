@@ -251,6 +251,8 @@
       <DependentUpon>Database.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\ManageViewModels.cs" />
+    <Compile Include="Models\Metadata\ObjectivoMetadata.cs" />
+    <Compile Include="Models\Metadata\RefeicaoPratosMetadata.cs" />
     <Compile Include="Models\Objectivo.cs">
       <DependentUpon>Database.tt</DependentUpon>
     </Compile>
