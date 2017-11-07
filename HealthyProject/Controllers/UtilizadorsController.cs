@@ -53,6 +53,11 @@ namespace HealthyProject.Controllers
             if (ModelState.IsValid)
             {
                 db.Utilizadors.Add(utilizador);
+                RegistoPeso peso = new RegistoPeso();
+                peso.Peso = utilizador.Peso;
+                peso.Data = DateTime.Today;
+                peso.User_ID = utilizador.UserID;
+                db.RegistoPesoes.Add(peso);
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
@@ -87,6 +92,11 @@ namespace HealthyProject.Controllers
             if (ModelState.IsValid)
             {
                 db.Entry(utilizador).State = EntityState.Modified;
+                RegistoPeso peso = new RegistoPeso();
+                peso.Peso = utilizador.Peso;
+                peso.Data = DateTime.Today;
+                peso.User_ID = utilizador.UserID;
+                db.RegistoPesoes.Add(peso);
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
@@ -127,6 +137,15 @@ namespace HealthyProject.Controllers
                 db.Dispose();
             }
             base.Dispose(disposing);
+        }
+
+        public double GetAge(DateTime dateofbirth)
+        {
+                var today = DateTime.Today;
+                var calc = today.Subtract(dateofbirth).TotalDays;
+                var calc2 = (calc / 365);
+                var age = Math.Floor(calc2);
+                return age;
         }
     }
 }
