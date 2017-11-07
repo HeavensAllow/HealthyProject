@@ -67,14 +67,39 @@
             @if (ViewBag.Registos != null)
             {
                 <p id="Totalkcal" style="height:500px; width: 100%; position:absolute; left:2500px;"></p>
+                if (ViewBag.Favoritos != null)
+                {
+                    <p id="Favoritos" style="height:500px; width: 100%; position:absolute; left:3750px;"></p>
+                    if (ViewBag.Count != null)
+                    {
+                        <p id="Count" style="height:500px; width: 100%; position:absolute; left:5000px;"></p>
+                    }
+                }
+                else
+                {
+                    if (ViewBag.Count != null)
+                    {
+                        <p id="Count" style="height:500px; width: 100%; position:absolute; left:3750px;"></p>
+                    }
+                }
             }
-            @if (ViewBag.Favoritos != null)
+            else
             {
-                <p id="Favoritos" style="height:500px; width: 100%; position:absolute; left:3750px;"></p>
-            }
-            @if (ViewBag.Count != null)
-            {
-                <p id="Count" style="height:500px; width: 100%; position:absolute; left:5000px;"></p>
+                if (ViewBag.Favoritos != null)
+                {
+                    <p id="Favoritos" style="height:500px; width: 100%; position:absolute; left:2500px;"></p>
+                    if (ViewBag.Count != null)
+                    {
+                        <p id="Count" style="height:500px; width: 100%; position:absolute; left:3750px;"></p>
+                    }
+                }
+                else
+                {
+                    if (ViewBag.Count != null)
+                    {
+                        <p id="Count" style="height:500px; width: 100%; position:absolute; left:2500px;"></p>
+                    }
+                }
             }
 
             <br />
@@ -106,29 +131,50 @@ else
             @if (ViewBag.Registos != null)
             {
                 <p id="Totalkcal" style="height:500px; width: 100%; position:absolute; left:2500px;"></p>
+                if (ViewBag.Favoritos != null)
+                {
+                    <p id="Favoritos" style="height:500px; width: 100%; position:absolute; left:3750px;"></p>
+                    if (ViewBag.Count != null)
+                    {
+                        <p id="Count" style="height:500px; width: 100%; position:absolute; left:5000px;"></p>
+                    }
+                }
+                else
+                {
+                    if (ViewBag.Count != null)
+                    {
+                        <p id="Count" style="height:500px; width: 100%; position:absolute; left:3750px;"></p>
+                    }
+                }
             }
-            @if (ViewBag.Favoritos != null)
+            else
             {
-                <p id="Favoritos" style="height:500px; width: 100%; position:absolute; left:3750px;"></p>
+                if (ViewBag.Favoritos != null)
+                {
+                    <p id="Favoritos" style="height:500px; width: 100%; position:absolute; left:2500px;"></p>
+                    if (ViewBag.Count != null)
+                    {
+                        <p id="Count" style="height:500px; width: 100%; position:absolute; left:3750px;"></p>
+                    }
+                }
+                else
+                {
+                    if (ViewBag.Count != null)
+                    {
+                        <p id="Count" style="height:500px; width: 100%; position:absolute; left:2500px;"></p>
+                    }
+                }
             }
-            @if (ViewBag.Count != null)
-            {
-                <p id="Count" style="height:500px; width: 100%; position:absolute; left:5000px;"></p>
-            }
-
             <br />
         </div>
     </div>
-
-
-
 }
 
 
 @section Scripts{
     <script type="text/javascript">
         window.onload = function () {
-        var chart1 = new CanvasJS.Chart("chartContainer", {
+            var chart1 = new CanvasJS.Chart("chartContainer", {
             animationEnabled: true,
             backgroundColor: "#ffffff",
             title: {
@@ -336,7 +382,7 @@ else
             }
             }
         $(function () {
-            var div = 0;
+            var div = 1;
             var max = $('.slidediv').children("p").length;
             $("#btnright").click(function () {
                 if (div + 1 > max) return;
@@ -344,7 +390,7 @@ else
                 $('.slidediv').children().animate({ left:  '-=1250px' });
             });
             $("#btnleft").click(function () {
-                if (div < 1) return;
+                if (div - 1 < 1) return;
                 div--;
                 $('.slidediv').children().animate({ left: '+=1250px' });
             });

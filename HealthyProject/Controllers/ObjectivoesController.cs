@@ -211,6 +211,7 @@ namespace HealthyProject.Controllers
                 db.Entry(mudar).State = EntityState.Modified;
                 var actual = db.Objectivoes.FirstOrDefault(p => p.UserID == userId && p.Data_fim == null);
                 UtilizadorsController x = new UtilizadorsController();
+                RegistoPeso peso = new RegistoPeso();
                 var age = x.GetAge((DateTime)mudar.Data_nascimento);
                 if (utilizador.Genero == "Feminino")
                 {
@@ -247,7 +248,6 @@ namespace HealthyProject.Controllers
                     }
                 }
                 db.Entry(actual).State = EntityState.Modified;
-                RegistoPeso peso = new RegistoPeso();
                 peso.Peso = utilizador.Peso;
                 peso.Data = DateTime.Today;
                 peso.User_ID = userId;
