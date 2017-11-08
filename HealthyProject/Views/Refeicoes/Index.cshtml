@@ -49,21 +49,25 @@ Seleccione a data que pretende ver:
                     {
                         <p>
                             @prato.Prato.Nome <span>   </span> @prato.Dose <span> gr</span>
-                            <span style="font-size:70%">@Html.ActionLink("Eliminar", "Delete", "RefeicaoPratoes")</span>
+                            <span style="font-size:70%">@Html.ActionLink("Eliminar", "Delete", "RefeicaoPratoes", new { RefeicaoID = refeicao.RefeicaoID, PratoID = prato.PratoID}, null)</span>
                         </p>
                     }
                     @foreach (var ingrediente in refeicao.RefeicaoIngredientes)
                     {
                         <p>
                             @ingrediente.Ingrediente.Nome <span>   </span> @ingrediente.Quantidade <span> gr</span>
+                            <span style="font-size:70%">@Html.ActionLink("Eliminar", "Delete", "RefeicaoIngredientes", new { RefeicaoID = refeicao.RefeicaoID, IngredienteID = ingrediente.IngredienteID }, null)</span>
                         </p>
                     }
                     @foreach (var bebida in refeicao.RefeicaoBebidas)
                     {
-                        <p> @bebida.Bebida.Nome <span>   </span> @bebida.Quantidade <span> ml</span> </p>
+                        <p>
+                            @bebida.Bebida.Nome <span>   </span> @bebida.Quantidade <span> ml</span>
+                            <span style="font-size:70%">@Html.ActionLink("Eliminar", "Delete", "RefeicaoBebidas", new { RefeicaoID = refeicao.RefeicaoID, BebidaID = bebida.BebidaID }, null)</span>
+                        </p>
                     }
                 </td>
-                <td></td>
+                <td>@ViewBag.KcalInfo</td>
                 <td></td>
                 <td></td>
                 <td></td>

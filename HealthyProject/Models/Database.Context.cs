@@ -57,5 +57,14 @@ namespace HealthyProject.Models
     
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<CounterInfoRefeicao_Result>("CounterInfoRefeicao", refeicaoIDParameter);
         }
+    
+        public virtual ObjectResult<CounterKcalRefeicao_Result> CounterKcalRefeicao(Nullable<int> refeicaoID)
+        {
+            var refeicaoIDParameter = refeicaoID.HasValue ?
+                new ObjectParameter("RefeicaoID", refeicaoID) :
+                new ObjectParameter("RefeicaoID", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<CounterKcalRefeicao_Result>("CounterKcalRefeicao", refeicaoIDParameter);
+        }
     }
 }

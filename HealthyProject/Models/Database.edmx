@@ -493,6 +493,9 @@
         <Function Name="CounterInfoRefeicao" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="RefeicaoID" Type="int" Mode="In" />
         </Function>
+        <Function Name="CounterKcalRefeicao" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="RefeicaoID" Type="int" Mode="In" />
+        </Function>
         <EntityContainer Name="HealthyModelStoreContainer">
           <EntitySet Name="__MigrationHistory" EntityType="Self.__MigrationHistory" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="AspNetRoles" EntityType="Self.AspNetRoles" Schema="dbo" store:Type="Tables" />
@@ -1013,6 +1016,9 @@
             <End Role="RefeicaoBebida" EntitySet="RefeicaoBebidas" />
           </AssociationSet>
           <FunctionImport Name="CounterInfoRefeicao" ReturnType="Collection(HealthyModel.CounterInfoRefeicao_Result)">
+          <Parameter Name="RefeicaoID" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="CounterKcalRefeicao" ReturnType="Collection(HealthyModel.CounterKcalRefeicao_Result)">
             <Parameter Name="RefeicaoID" Mode="In" Type="Int32" />
           </FunctionImport>
         </EntityContainer>
@@ -1201,6 +1207,11 @@
           <Property Type="Double" Name="Gordura" Nullable="true" />
           <Property Type="Double" Name="Hidratos" Nullable="true" />
           <Property Type="Double" Name="Acucar" Nullable="true" />
+        </ComplexType>
+        <ComplexType Name="CounterKcalRefeicao_Result">
+          <Property Type="Int32" Name="RefeicaoID" Nullable="false" />
+          <Property Type="String" Name="Tipo" Nullable="false" MaxLength="50" />
+          <Property Type="Double" Name="Kcal" Nullable="true" />
         </ComplexType>
       </Schema>
     </edmx:ConceptualModels>
@@ -1468,6 +1479,15 @@
                 <ScalarProperty Name="Gordura" ColumnName="Gordura" />
                 <ScalarProperty Name="Hidratos" ColumnName="Hidratos" />
                 <ScalarProperty Name="Acucar" ColumnName="Acucar" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="CounterKcalRefeicao" FunctionName="HealthyModel.Store.CounterKcalRefeicao">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="HealthyModel.CounterKcalRefeicao_Result">
+                <ScalarProperty Name="RefeicaoID" ColumnName="RefeicaoID" />
+                <ScalarProperty Name="Tipo" ColumnName="Tipo" />
+                <ScalarProperty Name="Kcal" ColumnName="Kcal" />
               </ComplexTypeMapping>
             </ResultMapping>
           </FunctionImportMapping>

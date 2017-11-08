@@ -8,6 +8,7 @@ using System.Web;
 using System.Web.Mvc;
 using HealthyProject.Models;
 using Microsoft.AspNet.Identity;
+using System.Data.SqlClient;
 
 namespace HealthyProject.Controllers
 {
@@ -16,11 +17,19 @@ namespace HealthyProject.Controllers
         private HealthyEntities db = new HealthyEntities();
 
         // GET: Refeicoes
-        public ActionResult Index()
+        public ActionResult Index(DateTime? dateInput)
         {
-            var refeicoes = db.Refeicoes.Include(r => r.RegistoDiario).Where(d => d.Data == DateTime.Today);
+            if (dateInput == null)
+            {
+                var refeicoes = db.Refeicoes.Include(r => r.RegistoDiario).Where(d => d.Data == DateTime.Today);
+                return View(refeicoes);
 
-            return View(refeicoes);
+            }
+            else
+            {
+                var refeicoes = db.Refeicoes.Include(r => r.RegistoDiario).Where(d => d.Data == dateInput);
+                return View(refeicoes);
+            }
         }
       
         public ActionResult Details(int? id)
@@ -51,7 +60,7 @@ namespace HealthyProject.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Index(DateTime? dateInput)
+        public ActionResult Indexx(DateTime? dateInput)
         {
             if (dateInput == null)
             {
@@ -200,11 +209,20 @@ namespace HealthyProject.Controllers
         }
 
 
-        //public ActionResult NutriInfo (int RefeicaoID)
-        //{
-        //    var nutriInfo = db.Database.SqlQuery("dbo.CounterInfoRefeicao @RefeicaoID", RefeicaoID);
-        //    return View(nutriInfo);
-        //}
+        public ActionResult NutriInfo(int RefeicaoID)
+        {
+            SqlParameter refID = new SqlParameter("@RefeicaoID", RefeicaoID);
+            IList<CounterInfoRefeicao_Result> NutriInfo = db.Database.SqlQuery<CounterInfoRefeicao_Result>("dbo.CounterInfoRefeicao @RefeicaoID", refID).ToList<CounterInfoRefeicao_Result>();
+            return View(NutriInfo);  //Andre diz para usar PartialView
+        }
+
+        public ActionResult KcalInfo(int RefeicaoID)
+        {
+            SqlParameter refID = new SqlParameter("@RefeicaoID", RefeicaoID);
+            IList<CounterKcalRefeicao_Result> KcalInfo = db.Database.SqlQuery<CounterKcalRefeicao_Result>("dbo.CounterInfoRefeicao @RefeicaoID", refID).ToList<CounterKcalRefeicao_Result>();
+            ViewBag.KcalInfo = KcalInfo;
+            return View();
+        }
 
         protected override void Dispose(bool disposing)
         {

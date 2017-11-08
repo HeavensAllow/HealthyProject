@@ -58,7 +58,7 @@ namespace HealthyProject.Controllers
             {
                 db.RefeicaoBebidas.Add(refeicaoBebida);
                 db.SaveChanges();
-                return RedirectToAction("Index");
+                return RedirectToAction("Index", "Refeicoes");
             }
 
             ViewBag.BebidaID = new SelectList(db.Bebidas, "BebidasID", "Categoria", refeicaoBebida.BebidaID);
@@ -94,7 +94,7 @@ namespace HealthyProject.Controllers
             {
                 db.Entry(refeicaoBebida).State = EntityState.Modified;
                 db.SaveChanges();
-                return RedirectToAction("Index");
+                return RedirectToAction("Index", "Refeicoes");
             }
             ViewBag.BebidaID = new SelectList(db.Bebidas, "BebidasID", "Categoria", refeicaoBebida.BebidaID);
             ViewBag.RefeicaoID = new SelectList(db.Refeicoes, "RefeicaoID", "Tipo", refeicaoBebida.RefeicaoID);
@@ -102,13 +102,13 @@ namespace HealthyProject.Controllers
         }
 
         // GET: RefeicaoBebidas/Delete/5
-        public ActionResult Delete(int? id)
+        public ActionResult Delete(int? RefeicaoID, int? BebidaID)
         {
-            if (id == null)
+            if (RefeicaoID == null || BebidaID == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            RefeicaoBebida refeicaoBebida = db.RefeicaoBebidas.Find(id);
+            RefeicaoBebida refeicaoBebida = db.RefeicaoBebidas.FirstOrDefault(r => r.RefeicaoID == RefeicaoID && r.BebidaID == BebidaID);
             if (refeicaoBebida == null)
             {
                 return HttpNotFound();
@@ -124,7 +124,7 @@ namespace HealthyProject.Controllers
             RefeicaoBebida refeicaoBebida = db.RefeicaoBebidas.Find(id);
             db.RefeicaoBebidas.Remove(refeicaoBebida);
             db.SaveChanges();
-            return RedirectToAction("Index");
+            return RedirectToAction("Index", "Refeicoes");
         }
 
         protected override void Dispose(bool disposing)

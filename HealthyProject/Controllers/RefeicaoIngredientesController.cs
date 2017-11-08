@@ -42,7 +42,8 @@ namespace HealthyProject.Controllers
             var Refeicao = db.Refeicoes.FirstOrDefault(r => r.RefeicaoID == RefeicaoID);
             ViewBag.Refeicao = Refeicao;
 
-            ViewBag.IngredienteID = new SelectList(db.Ingredientes, "IngredientesID", "Categoria");
+            ViewBag.Categoria = new SelectList(db.Ingredientes.Distinct().OrderBy(c => c.Nome), "Categoria", "Categoria");
+            ViewBag.IngredienteID = new SelectList(db.Ingredientes.OrderBy(i => i.Nome), "IngredientesID", "Nome");
             ViewBag.RefeicaoID = new SelectList(db.Refeicoes, "RefeicaoID", "Tipo");
             return View();
         }
@@ -58,7 +59,7 @@ namespace HealthyProject.Controllers
             {
                 db.RefeicaoIngredientes.Add(refeicaoIngrediente);
                 db.SaveChanges();
-                return RedirectToAction("Index");
+                return RedirectToAction("Index", "Refeicoes");
             }
 
             ViewBag.IngredienteID = new SelectList(db.Ingredientes, "IngredientesID", "Categoria", refeicaoIngrediente.IngredienteID);
@@ -94,7 +95,7 @@ namespace HealthyProject.Controllers
             {
                 db.Entry(refeicaoIngrediente).State = EntityState.Modified;
                 db.SaveChanges();
-                return RedirectToAction("Index");
+                return RedirectToAction("Index", "Refeicoes");
             }
             ViewBag.IngredienteID = new SelectList(db.Ingredientes, "IngredientesID", "Categoria", refeicaoIngrediente.IngredienteID);
             ViewBag.RefeicaoID = new SelectList(db.Refeicoes, "RefeicaoID", "Tipo", refeicaoIngrediente.RefeicaoID);
@@ -102,13 +103,13 @@ namespace HealthyProject.Controllers
         }
 
         // GET: RefeicaoIngredientes/Delete/5
-        public ActionResult Delete(int? id)
+        public ActionResult Delete(int? RefeicaoID, int? IngredienteID)
         {
-            if (id == null)
+            if ((RefeicaoID == null || IngredienteID == null))
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            RefeicaoIngrediente refeicaoIngrediente = db.RefeicaoIngredientes.Find(id);
+            RefeicaoIngrediente refeicaoIngrediente = db.RefeicaoIngredientes.FirstOrDefault(r => r.RefeicaoID == RefeicaoID && r.IngredienteID == IngredienteID);
             if (refeicaoIngrediente == null)
             {
                 return HttpNotFound();
@@ -119,12 +120,12 @@ namespace HealthyProject.Controllers
         // POST: RefeicaoIngredientes/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
-        public ActionResult DeleteConfirmed(int id)
+        public ActionResult DeleteConfirmed(int RefeicaoID, int IngredienteID)
         {
-            RefeicaoIngrediente refeicaoIngrediente = db.RefeicaoIngredientes.Find(id);
+            RefeicaoIngrediente refeicaoIngrediente = db.RefeicaoIngredientes.FirstOrDefault(r => r.RefeicaoID == RefeicaoID && r.IngredienteID == IngredienteID);
             db.RefeicaoIngredientes.Remove(refeicaoIngrediente);
             db.SaveChanges();
-            return RedirectToAction("Index");
+            return RedirectToAction("Index", "Refeicoes");
         }
 
         protected override void Dispose(bool disposing)

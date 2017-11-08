@@ -20,12 +20,6 @@ namespace HealthyProject.Controllers
             var refeicaoPratos = db.RefeicaoPratos.Include(r => r.Prato).Include(r => r.Refeico);
             return View(refeicaoPratos.ToList());
         }
-        
-        //public ActionResult ListDishes(int RefeicaoID)
-        //{
-        //    var refeicaoPratos = db.RefeicaoPratos.Include(r => r.Prato).Include(r => r.Refeico).Where(id => id.RefeicaoID == RefeicaoID);
-        //    return View(refeicaoPratos.ToList());
-        //}
 
         // GET: RefeicaoPratoes/Details/5
         public ActionResult Details(int? id)
@@ -64,7 +58,7 @@ namespace HealthyProject.Controllers
             {
                 db.RefeicaoPratos.Add(refeicaoPrato);
                 db.SaveChanges();
-                return RedirectToAction("Index");
+                return RedirectToAction("Index", "Refeicoes");
             }
 
             ViewBag.PratoID = new SelectList(db.Pratos, "PratosID", "Nome", refeicaoPrato.PratoID);
@@ -100,7 +94,7 @@ namespace HealthyProject.Controllers
             {
                 db.Entry(refeicaoPrato).State = EntityState.Modified;
                 db.SaveChanges();
-                return RedirectToAction("Index");
+                return RedirectToAction("Index", "Refeicoes");
             }
             ViewBag.PratoID = new SelectList(db.Pratos, "PratosID", "Nome", refeicaoPrato.PratoID);
             ViewBag.RefeicaoID = new SelectList(db.Refeicoes, "RefeicaoID", "Tipo", refeicaoPrato.RefeicaoID);
@@ -108,13 +102,13 @@ namespace HealthyProject.Controllers
         }
 
         // GET: RefeicaoPratoes/Delete/5
-        public ActionResult Delete(int? id)
+        public ActionResult Delete(int? RefeicaoID, int? PratoID)
         {
-            if (id == null)
+            if (RefeicaoID == null || PratoID == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            RefeicaoPrato refeicaoPrato = db.RefeicaoPratos.Find(id);
+            RefeicaoPrato refeicaoPrato = db.RefeicaoPratos.FirstOrDefault(r => r.RefeicaoID == RefeicaoID && r.PratoID == PratoID);
             if (refeicaoPrato == null)
             {
                 return HttpNotFound();
@@ -125,12 +119,12 @@ namespace HealthyProject.Controllers
         // POST: RefeicaoPratoes/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
-        public ActionResult DeleteConfirmed(int id)
+        public ActionResult DeleteConfirmed(int RefeicaoID, int PratoID)
         {
-            RefeicaoPrato refeicaoPrato = db.RefeicaoPratos.Find(id);
+            RefeicaoPrato refeicaoPrato = db.RefeicaoPratos.FirstOrDefault(r => r.RefeicaoID == RefeicaoID && r.PratoID == PratoID);
             db.RefeicaoPratos.Remove(refeicaoPrato);
             db.SaveChanges();
-            return RedirectToAction("Index");
+            return RedirectToAction("Index", "Refeicoes");
         }
 
         protected override void Dispose(bool disposing)
