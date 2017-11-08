@@ -305,6 +305,7 @@
     <Content Include="Content\bootstrap.min.css" />
     <Content Include="Content\canvasjs.min.js" />
     <Content Include="Content\jquery.canvasjs.min.js" />
+    <Content Include="Content\Images\Logo.PNG" />
     <Content Include="favicon.ico" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
@@ -314,6 +315,7 @@
       <DependentUpon>Database.edmx</DependentUpon>
       <LastGenOutput>Database.Context.cs</LastGenOutput>
     </Content>
+    <Content Include="Models\Database.edmx.sql" />
     <Content Include="Models\Database.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
       <DependentUpon>Database.edmx</DependentUpon>
@@ -433,10 +435,12 @@
       <FlavorProperties GUID="{349c5851-65df-11da-9384-00065b846f21}">
         <WebProjectProperties>
           <UseIIS>False</UseIIS>
+          <UseIIS>True</UseIIS>
           <AutoAssignPort>True</AutoAssignPort>
           <DevelopmentServerPort>50463</DevelopmentServerPort>
           <DevelopmentServerVPath>/</DevelopmentServerVPath>
           <IISUrl>http://localhost:50463/</IISUrl>
+          <IISUrl>http://localhost:50464/</IISUrl>
           <NTLMAuthentication>False</NTLMAuthentication>
           <UseCustomServer>False</UseCustomServer>
           <CustomServerUrl>

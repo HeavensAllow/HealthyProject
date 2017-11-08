@@ -1,14 +1,96 @@
 ﻿@{
     ViewBag.Title = "Home Page";
 }
+@Styles.Render("~/Content/css")
+@Scripts.Render("~/bundles/modernizr")
 
-<div class="jumbotron">
-    <h1>ASP.NET</h1>
-    <p class="lead">ASP.NET is a free web framework for building great Web sites and Web applications using HTML, CSS and JavaScript.</p>
-    <p><a href="https://asp.net" class="btn btn-primary btn-lg">Learn more &raquo;</a></p>
-</div>
 
-<div class="row">
+
+<body>
+    @*@if(ViewBag.Sucess == null){*@
+    <br />
+    <div class="row">
+        <div class="col-md-7">
+            <br />
+            <br />
+            <br />
+            <br />
+            <img src="https://portfolios.journalism.ku.edu/natalie-dufek/files/2014/06/healthy-living.jpg" ; style="width:870px; height:500px" />
+            <br />
+            <br />
+        </div>
+        <div class="col-md-5">
+            <br />
+            <br />
+            <br />
+            <br />
+            <br />
+            <br />
+            <br />
+            <br />
+            <br />
+            <b style="text-align: right;font-size:x-large">  Gostaria de ter maior controlo sobre o seu peso? </b>
+            <br />
+            <br />
+            <br />
+            <br />
+            <br />
+            <br />
+            <br />
+            <br />
+            <b style="text-align:right;font-size:x-large"> Um estilo de vida saudavel? </b>
+            <br />
+            <br />
+            <br />
+            <br />
+            <b style="text-align:right;font-size:x-large"> Melhor gestao das suas Refeicoes ?  </b>              
+        </div>
+    </div>
+    <div style="text-align:center">
+        <br />
+        <br />
+        <br />
+        <br />
+        <br />
+        <br />
+        <br />
+        <i style="font-size:xx-large"> Healthy Project tem como objetivo  monitorizar o seu peso ajudando-o a alcancar os seus objetivos de forma rapida e eficaz!</i>.
+        <br />
+        <br />
+        <br />
+        <br />
+     
+        </div>
+        <div style="text-align:center">
+            <br />
+            <br />
+            <br />
+            <br />
+            <br />
+            <br />
+            <b style="font-size:xx-large" >Junte se a nos!</b>
+            <br/>
+
+            <button style="background-color:lightgray; width:200px;height:50px;"> @Html.ActionLink("Registe-se", "register", "account", routeValues: null, htmlAttributes: new { id = "registerLink" })</button>
+        </div>
+
+
+ 
+    
+
+</body>
+
+
+
+
+@*http://www.shineprowindowcleaning.com/wp-content/uploads/2016/02/background-blue-gradient.jpg*@
+@*style="background-image: url(http://static.tumblr.com/17fe60d85d38327f4216e7fb11f81111/bwqiovp/jzyn2ivyx/tumblr_static_best-top-desktop-blue-wallpapers-hd-blue-wallpaper-beautiful-free-backgrounds-31.jpg)" bgproperties="fixed"*@
+
+
+@*Informacao Anterior*@
+@*<p class="lead">ASP.NET is a free web framework for building great Web sites and Web applications using HTML, CSS and JavaScript.</p>
+    <p><a href="https://asp.net" class="btn btn-primary btn-lg">Learn more &raquo;</a></p>*@
+@*<div class="row">
     <div class="col-md-4">
         <h2>Getting started</h2>
         <p>
@@ -27,5 +109,7 @@
         <h2>Web Hosting</h2>
         <p>You can easily find a web hosting company that offers the right mix of features and price for your applications.</p>
         <p><a class="btn btn-default" href="https://go.microsoft.com/fwlink/?LinkId=301867">Learn more &raquo;</a></p>
-    </div>
-</div>
+    </div>*@
+
+
+@*class="jumbotron"*@ 

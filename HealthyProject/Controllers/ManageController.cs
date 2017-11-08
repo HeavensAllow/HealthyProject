@@ -7,6 +7,8 @@ using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.Owin;
 using Microsoft.Owin.Security;
 using HealthyProject.Models;
+using System.Data.Entity;
+using System.Collections.Generic;
 
 namespace HealthyProject.Controllers
 {
@@ -15,6 +17,7 @@ namespace HealthyProject.Controllers
     {
         private ApplicationSignInManager _signInManager;
         private ApplicationUserManager _userManager;
+        private HealthyEntities1 db = new HealthyEntities1();  // Chama se base de dados
 
         public ManageController()
         {
@@ -35,6 +38,9 @@ namespace HealthyProject.Controllers
             private set 
             { 
                 _signInManager = value; 
+            private set
+            {
+                _signInManager = value;
             }
         }
 
@@ -53,7 +59,10 @@ namespace HealthyProject.Controllers
         //
         // GET: /Manage/Index
         public async Task<ActionResult> Index(ManageMessageId? message)
+        // GET: /Manage/Index : onde se mostra dados do utilizador
+        public ActionResult Index(ManageMessageId? message)
         {
+
             ViewBag.StatusMessage =
                 message == ManageMessageId.ChangePasswordSuccess ? "Your password has been changed."
                 : message == ManageMessageId.SetPasswordSuccess ? "Your password has been set."
@@ -65,6 +74,40 @@ namespace HealthyProject.Controllers
 
             var userId = User.Identity.GetUserId();
             var model = new IndexViewModel
+            var userId = Convert.ToInt32(User.Identity.GetUserId()); // estava em string
+
+            //var model = new IndexViewModel
+            //{
+            //    HasPassword = HasPassword(),
+            //    PhoneNumber = await UserManager.GetPhoneNumberAsync(User.Identity.GetUserId<int>()),
+            //    TwoFactor = await UserManager.GetTwoFactorEnabledAsync(User.Identity.GetUserId<int>()),
+            //    Logins = await UserManager.GetLoginsAsync(User.Identity.GetUserId<int>()),
+            //    BrowserRemembered = await AuthenticationManager.TwoFactorBrowserRememberedAsync(userId)
+
+            //};
+            // User.Identity.GetUserId-- - depois defazer log in tenho este
+
+            Utilizador perfil = db.Utilizadors.Find(userId);
+
+            ViewBag.Genders = new SelectList(new List<SelectListItem>
+                {
+                    new SelectListItem { Selected = true, Text = "M", Value = "M"},
+                    new SelectListItem { Selected = false, Text = "F", Value = "F"},
+                }, "Value", "Text");
+
+            return View(perfil);
+            // manda oos dados do utilizador para a view
+        }
+
+
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        // para editar os campos
+
+        public ActionResult Index([Bind(Include = "UserID,Nome,Genero,Data_nascimento,Peso,Altura,Actividade_fisica,Nr_horas_sono,Nr_refeicoes,Habitos_alcoolicos,MMuscular,MGorda")] Utilizador perfilEdit)
+        {
+            if (ModelState.IsValid)
             {
                 HasPassword = HasPassword(),
                 PhoneNumber = await UserManager.GetPhoneNumberAsync(User.Identity.GetUserId<int>()),
@@ -73,12 +116,28 @@ namespace HealthyProject.Controllers
                 BrowserRemembered = await AuthenticationManager.TwoFactorBrowserRememberedAsync(userId)
             };
             return View(model);
+                db.Entry(perfilEdit).State = EntityState.Modified;
+
+                db.SaveChanges();
+
+                return RedirectToAction("Index", "Manage");
+
+            }
+           
+           
+            
+            return View(perfilEdit);
         }
 
 
     //
     // POST: /Manage/RemoveLogin
     [HttpPost]
+
+
+        //
+        // POST: /Manage/RemoveLogin 
+        [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<ActionResult> RemoveLogin(string loginProvider, string providerKey)
         {
@@ -335,6 +394,7 @@ namespace HealthyProject.Controllers
         }
 
 #region Helpers
+        #region Helpers
         // Used for XSRF protection when adding external logins
         private const string XsrfKey = "XsrfId";
 
@@ -386,5 +446,6 @@ namespace HealthyProject.Controllers
         }
 
 #endregion
+        #endregion
     }
 }

@@ -7,16 +7,18 @@ using System.Net;
 using System.Web;
 using System.Web.Mvc;
 using HealthyProject.Models;
+using System.Collections;
 
 namespace HealthyProject.Controllers
 {
     public class UtilizadorsController : Controller
     {
-        private HealthyEntities db = new HealthyEntities();
+        private HealthyEntities1 db = new HealthyEntities1();
 
         // GET: Utilizadors
         public ActionResult Index()
         {
+            
             var utilizadors = db.Utilizadors.Include(u => u.AspNetUser);
             return View(utilizadors.ToList());
         }
@@ -35,6 +37,9 @@ namespace HealthyProject.Controllers
             }
             return View(utilizador);
         }
+
+
+       
 
         // GET: Utilizadors/Create
         public ActionResult Create()
