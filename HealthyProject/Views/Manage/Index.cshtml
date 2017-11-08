@@ -1,4 +1,5 @@
 ﻿@model HealthyProject.Models.Utilizador
+
 @{
     <br />
     <br />
@@ -19,7 +20,7 @@
 
         <dt>
             @Html.DisplayNameFor(model => model.Nome)
-
+           
             @*Mostra o nome*@
         </dt>
 
@@ -39,7 +40,7 @@
         <dd>
             
             @Html.DisplayFor(model=>model.Data_nascimento)
-            @*@Model.Data_nascimento.Value.ToString("dd/MM/yyyy")*@
+            @*@Model.Data_nascimento.Value.ToString("DD/MM/YYYY")*@
 
         </dd>
     </dl>
@@ -57,14 +58,14 @@
                 <tr>
                     <th>@Html.DisplayNameFor(model => model.Nome)</th>
                     <th>@Html.EditorFor(model => model.Nome)</th>
-
+                    @Html.ValidationMessageFor(model => model.Nome, "", new { @class = "text-danger" })
                 </tr>
                 <tr>
                     <th>@Html.DisplayNameFor(model => model.Genero)</th>
 
                     <th>
                         @Html.DropDownListFor(model => model.Genero, (IEnumerable<SelectListItem>)ViewBag.Genders)
-
+                        @Html.ValidationMessageFor(model => model.Genero, "", new { @class = "text-danger" })
                     </th>
                 </tr>
                 <tr>
@@ -74,24 +75,28 @@
 
                     </th>
 
-                    <th> @Html.EditorFor(model => model.Data_nascimento, "{0:dd/MM/yyyy}")
+                    <th> @Html.EditorFor(model => model.Data_nascimento)
+                        @Html.ValidationMessageFor(model => model.Data_nascimento, "", new { @class = "text-danger" })
 
-                       
-                   
+
+
                 <tr>
                     <th>@Html.DisplayNameFor(model => model.Peso)</th>
 
                     <th>@Html.EditorFor(model => model.Peso)</th>
+                    @Html.ValidationMessageFor(model => model.Peso, "", new { @class = "text-danger" })
                 </tr>
                 <tr>
                     <th>@Html.DisplayNameFor(model => model.Altura)</th>
 
                     <th>@Html.EditorFor(model => model.Altura)</th>
+                    @Html.ValidationMessageFor(model => model.Altura, "", new { @class = "text-danger" })
                 </tr>
                 <tr>
                     <th>@Html.DisplayNameFor(model => model.Actividade_fisica)</th>
 
                     <th>@Html.EditorFor(model => model.Actividade_fisica)</th>
+                    @Html.ValidationMessageFor(model => model.Actividade_fisica, "", new { @class = "text-danger" })
                 </tr>
                 <tr>
                     <th>@Html.DisplayNameFor(model => model.Nr_horas_sono)</th>
@@ -129,9 +134,9 @@
         <input type="submit" value="Guardar" class="hidden " id="submeter" />
 
         @Html.AntiForgeryToken()
-    }
-    @section Scripts {
-        @Scripts.Render("~/bundles/jqueryval")
+                    }
+                    @section Scripts {
+                        @Scripts.Render("~/bundles/jqueryval")
         @*permite a utilizacao de comandos query*@
         <script>
 
@@ -149,13 +154,13 @@
 
     <script>
 
-            $(function () {
+            //$(function () {
 
-                $('#Data_Nascimento').datepicker({
-                    dateFormat: '{dd/MM/yyyy}'
-                });
+            //    $('#Data_Nascimento').datepicker({
+            //        dateFormat: '{0:DD/MM/YYYY}'
+            //    });
 
-            });
+            //});
 
     </script>
 

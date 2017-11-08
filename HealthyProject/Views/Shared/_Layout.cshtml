@@ -21,13 +21,16 @@
                 @*@Html.ActionLink("Application name", "Index", "Home", new { area = "" }, new { @class = "navbar-brand" })*@
 
             </div>
-            <div class="navbar-collapse" style="background-color:white">
+            <div class="navbar-collapse" style="background-color:white;text-emphasis-color:green">
                 <img src="~/Content/Images/Logo.PNG" alt="Logotipo" align="middle" style="float:left" />
                 <ul class="nav navbar-nav">
-
-                    <li>@Html.ActionLink("Pagina Inicial", "Index", "Home")</li>
-                    <li>@Html.ActionLink("Sobre Nos", "About", "Home")</li>
-                    <li>@Html.ActionLink("Objectivos", "Index", "Objectivoes")</li>
+                  
+                    
+                        <li>@Html.ActionLink("Pagina Inicial", "Index", "Home")</li>
+                        <li>@Html.ActionLink("Sobre Nos", "About", "Home")</li>
+                        <li>@Html.ActionLink("Objectivos", "Index", "Objectivoes")</li>
+                    
+                    
                 </ul>
                 @Html.Partial("_LoginPartial")
             </div>

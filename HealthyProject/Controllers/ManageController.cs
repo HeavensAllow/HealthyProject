@@ -100,17 +100,82 @@ namespace HealthyProject.Controllers
 
         public ActionResult Index([Bind(Include = "UserID,Nome,Genero,Data_nascimento,Peso,Altura,Actividade_fisica,Nr_horas_sono,Nr_refeicoes,Habitos_alcoolicos,MMuscular,MGorda")] Utilizador perfilEdit)
         {
+
+
             if (ModelState.IsValid)
             {
+                var error = false;
+
+                if (perfilEdit.Nome == null)
+                {
+                    ModelState.AddModelError("Nome", "Introduza o Nome");
+                    error = true;
+                }
+                if (error == true)
+                {
+                    return View();
+                }
+
+                if (perfilEdit.Nome == null)
+                {
+                    ModelState.AddModelError("Genero", "Introduza o Genero");
+                    error = true;
+                }
+                if (error == true)
+                {
+                    return View();
+                }
+                if (perfilEdit.Nome == null)
+                {
+                    ModelState.AddModelError("Data_Nascimento", "Introduza a Data de Nascimento");
+                    error = true;
+                }
+                if (error == true)
+                {
+                    return View();
+                }
+                if (perfilEdit.Nome == null)
+                {
+                    ModelState.AddModelError("Peso", "Introduza o Peso");
+                    error = true;
+                }
+                if (error == true)
+                {
+                    return View();
+                }
+                if (perfilEdit.Nome == null)
+                {
+                    ModelState.AddModelError("Altura", "Introduza a sua Altura");
+                    error = true;
+                }
+                if (error == true)
+                {
+                    return View();
+                }
+                if (perfilEdit.Actividade_fisica == null)
+                {
+                    ModelState.AddModelError("Actividade_fisica", "Introduza o Indice de Atividade Fisica");
+                    error = true;
+                }
+
+                int porcofeio = (int)perfilEdit.Actividade_fisica;
+                switch (porcofeio) {
+                    case 1:
+                        perfilEdit.Actividade_fisica = 1;
+                        break;
+                    case 2:
+                        if(perfilEdit.Genero == "F") {
+                        perfilEdit.Actividade_fisica = 1.12;
+                        }
+                        else { perfilEdit.Actividade_fisica = 1.11; }
+                        break;
+                }  
                 db.Entry(perfilEdit).State = EntityState.Modified;
-
                 db.SaveChanges();
-
                 return RedirectToAction("Index", "Manage");
 
             }
-
-
+          
 
             return View(perfilEdit);
         }
