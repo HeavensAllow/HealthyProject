@@ -1,0 +1,51 @@
+﻿@model HealthyProject.Models.Post
+
+@{
+    ViewBag.Title = "Post";
+}
+
+<h2 style="text-align:center">@Model.Titulo</h2>
+
+
+    <div id="divComentarios">
+        @{Html.RenderPartial("_PostPartial", Model); }
+    </div>
+
+    @using (Ajax.BeginForm("Post", "Forum", new { postId = Model.PostID }, new AjaxOptions() { OnSuccess = "CleanTextArea", HttpMethod = "Post", UpdateTargetId = "divComentarios" }))
+    {
+        @Html.AntiForgeryToken()
+        <tr>
+            <div class="form-horizontal">
+                <label class="col-md-2" for="Texto">Novo Comentário</label>
+                <br />
+                <br />
+            </div>
+        </tr>
+        <tr>
+            <div class="form-group">
+                <div class="col-md-2">
+                    @Html.TextArea("Comment")
+                </div>
+            </div>
+        </tr>
+        <br />
+        <br />
+        <div class="form-group">
+            <div class="col-md-2 col-md-10">
+                <input type="submit" value="Create" class="btn btn-default" />
+            </div>
+        </div>
+    }
+
+@section Scripts{ 
+    <script src="~/Scripts/jquery.unobtrusive-ajax.js"></script>
+    <script>
+        function updateLikes() {
+            $('.likesLabel', $(this)).text(@ViewBag.Likes);
+        }
+        function CleanTextArea(){
+            $('#Comment').val('');
+        }
+    </script>
+    @Scripts.Render("~/bundles/jqueryval")
+}

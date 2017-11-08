@@ -631,13 +631,13 @@
           <FunctionImport Name="Top5" ReturnType="Collection(HealthyModel.Top5_Result)">
           <Parameter Name="UserID" Mode="In" Type="Int32" />
           </FunctionImport>
-          <EntitySet Name="AspNetRoles" EntityType="HealthyModel.AspNetRole" />
-          <EntitySet Name="Categorias" EntityType="HealthyModel.Categoria" />
           <EntitySet Name="C__MigrationHistory" EntityType="HealthyModel.C__MigrationHistory" />
+          <EntitySet Name="AspNetRoles" EntityType="HealthyModel.AspNetRole" />
           <EntitySet Name="AspNetUserClaims" EntityType="HealthyModel.AspNetUserClaim" />
           <EntitySet Name="AspNetUserLogins" EntityType="HealthyModel.AspNetUserLogin" />
           <EntitySet Name="AspNetUsers" EntityType="HealthyModel.AspNetUser" />
           <EntitySet Name="Bebidas" EntityType="HealthyModel.Bebida" />
+          <EntitySet Name="Categorias" EntityType="HealthyModel.Categoria" />
           <EntitySet Name="Comentarios" EntityType="HealthyModel.Comentario" />
           <EntitySet Name="Ingredientes" EntityType="HealthyModel.Ingrediente" />
           <EntitySet Name="Objectivoes" EntityType="HealthyModel.Objectivo" />
@@ -733,27 +733,11 @@
             <End Role="AspNetRole" EntitySet="AspNetRoles" />
             <End Role="AspNetUser" EntitySet="AspNetUsers" />
           </AssociationSet>
-          </EntityContainer>
+        </EntityContainer>
         <ComplexType Name="Top5_Result">
           <Property Type="Int32" Name="PratoID" Nullable="false" />
           <Property Type="Int32" Name="Ocorrencias" Nullable="true" />
         </ComplexType>
-        <EntityType Name="AspNetRole">
-          <Key>
-            <PropertyRef Name="Id" />
-          </Key>
-          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="Name" Type="String" Nullable="false" MaxLength="256" FixedLength="false" Unicode="true" />
-          <NavigationProperty Name="AspNetUsers" Relationship="HealthyModel.AspNetUserRoles" FromRole="AspNetRole" ToRole="AspNetUser" />
-        </EntityType>
-        <EntityType Name="Categoria">
-          <Key>
-            <PropertyRef Name="CategoriaID" />
-          </Key>
-          <Property Name="CategoriaID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="Nome" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
-          <NavigationProperty Name="Subcategorias" Relationship="HealthyModel.FK_Subcategorias_Categorias" FromRole="Categoria" ToRole="Subcategoria" />
-        </EntityType>
         <EntityType Name="C__MigrationHistory">
           <Key>
             <PropertyRef Name="MigrationId" />
@@ -763,6 +747,14 @@
           <Property Name="ContextKey" Type="String" Nullable="false" MaxLength="300" FixedLength="false" Unicode="true" />
           <Property Name="Model" Type="Binary" Nullable="false" MaxLength="Max" FixedLength="false" />
           <Property Name="ProductVersion" Type="String" Nullable="false" MaxLength="32" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <EntityType Name="AspNetRole">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" Nullable="false" MaxLength="256" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="AspNetUsers" Relationship="HealthyModel.AspNetUserRoles" FromRole="AspNetRole" ToRole="AspNetUser" />
         </EntityType>
         <EntityType Name="AspNetUserClaim">
           <Key>
@@ -822,6 +814,14 @@
           <Property Name="HidCarbono" Type="Double" Nullable="false" />
           <Property Name="HC_Acucar" Type="Double" Nullable="false" />
           <NavigationProperty Name="RefeicaoBebidas" Relationship="HealthyModel.FK_RefeicaoBebida_Bebidas" FromRole="Bebida" ToRole="RefeicaoBebida" />
+        </EntityType>
+        <EntityType Name="Categoria">
+          <Key>
+            <PropertyRef Name="CategoriaID" />
+          </Key>
+          <Property Name="CategoriaID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Nome" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Subcategorias" Relationship="HealthyModel.FK_Subcategorias_Categorias" FromRole="Categoria" ToRole="Subcategoria" />
         </EntityType>
         <EntityType Name="Comentario">
           <Key>
@@ -1252,7 +1252,7 @@
           <End Type="HealthyModel.AspNetRole" Role="AspNetRole" Multiplicity="*" />
           <End Type="HealthyModel.AspNetUser" Role="AspNetUser" Multiplicity="*" />
         </Association>
-        </Schema>
+      </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
     <edmx:Mappings>
@@ -1266,22 +1266,6 @@
               </ComplexTypeMapping>
             </ResultMapping>
           </FunctionImportMapping>
-          <EntitySetMapping Name="AspNetRoles">
-            <EntityTypeMapping TypeName="HealthyModel.AspNetRole">
-              <MappingFragment StoreEntitySet="AspNetRoles">
-                <ScalarProperty Name="Name" ColumnName="Name" />
-                <ScalarProperty Name="Id" ColumnName="Id" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="Categorias">
-            <EntityTypeMapping TypeName="HealthyModel.Categoria">
-              <MappingFragment StoreEntitySet="Categorias">
-                <ScalarProperty Name="Nome" ColumnName="Nome" />
-                <ScalarProperty Name="CategoriaID" ColumnName="CategoriaID" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
           <EntitySetMapping Name="C__MigrationHistory">
             <EntityTypeMapping TypeName="HealthyModel.C__MigrationHistory">
               <MappingFragment StoreEntitySet="__MigrationHistory">
@@ -1289,6 +1273,14 @@
                 <ScalarProperty Name="Model" ColumnName="Model" />
                 <ScalarProperty Name="ContextKey" ColumnName="ContextKey" />
                 <ScalarProperty Name="MigrationId" ColumnName="MigrationId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="AspNetRoles">
+            <EntityTypeMapping TypeName="HealthyModel.AspNetRole">
+              <MappingFragment StoreEntitySet="AspNetRoles">
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
@@ -1341,6 +1333,14 @@
                 <ScalarProperty Name="Nome" ColumnName="Nome" />
                 <ScalarProperty Name="Categoria" ColumnName="Categoria" />
                 <ScalarProperty Name="BebidasID" ColumnName="BebidasID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Categorias">
+            <EntityTypeMapping TypeName="HealthyModel.Categoria">
+              <MappingFragment StoreEntitySet="Categorias">
+                <ScalarProperty Name="Nome" ColumnName="Nome" />
+                <ScalarProperty Name="CategoriaID" ColumnName="CategoriaID" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
@@ -1527,7 +1527,7 @@
               <ScalarProperty Name="Id" ColumnName="RoleId" />
             </EndProperty>
           </AssociationSetMapping>
-        </EntityContainerMapping>
+          </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>
   </edmx:Runtime>
