@@ -1,13 +1,18 @@
 ﻿@model HealthyProject.Models.Subcategoria
-
+</br>
+</br>
 @{
     ViewBag.Title = Model.Nome;
 }
 
 <h2>@Model.Nome</h2>
+
+@if (User.Identity.IsAuthenticated)
+{
 <p>
     @Html.ActionLink("Novo Post", "CreatePost", new { subcategoria = Model.SubcategoriaID })
 </p>
+}
 <table class="table">
     <tr style="background-color:lightblue">
         <th>
@@ -24,7 +29,14 @@
             @Html.ActionLink(subcategoria.Titulo, "Post", "Forum", new { id = subcategoria.PostID }, null)
         </td>
         <td style="background-color:orange">
-            <img src="http://www.icone-png.com/png/54/53785.png" height="80" width="70" />
+            @if (subcategoria.AspNetUser.Utilizador.Genero == "M")
+            {
+                <img src="http://www.icone-png.com/png/54/53785.png" height="80" width="70" />
+            }
+            else
+            {
+                <img src="http://www.iconarchive.com/download/i47216/icons-land/vista-people/Office-Client-Female-Light.ico" height="80" width="70" />
+            }
             @subcategoria.AspNetUser.Utilizador.Nome
         </td>
 

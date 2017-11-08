@@ -40,11 +40,18 @@
             </td>
 
             <td class="tdOpinion" style="padding-top:20px">
+
                 @using (Ajax.BeginForm("Opiniao", "Forum", new { id = comentario.CommentID }, new AjaxOptions() { HttpMethod = "Post", UpdateTargetId = "divComentarios" }))
             {
-                    <button class="Gosto" name="selectedOpinion" value="true"></button>
+                    if (User.Identity.IsAuthenticated)
+                    {
+                        <button class="Gosto" name="selectedOpinion" value="true"></button>
+                    }
                     <label id="likesLabel">@(comentario.Opiniaos.Where(o => o.Opiniao1 == true).Count() - comentario.Opiniaos.Where(o => o.Opiniao1 == false).Count())</label> <label>Likes</label>
-                    <button class="naoGosto" name="selectedOpinion" value="false"></button>
+                    if (User.Identity.IsAuthenticated)
+                    {
+                        <button class="naoGosto" name="selectedOpinion" value="false"></button>
+                    }
                 }
             </td>
 

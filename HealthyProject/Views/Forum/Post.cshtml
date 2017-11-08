@@ -1,5 +1,6 @@
 ﻿@model HealthyProject.Models.Post
-
+</br>
+</br>
 @{
     ViewBag.Title = "Post";
 }
@@ -16,24 +17,33 @@
         @Html.AntiForgeryToken()
         <tr>
             <div class="form-horizontal">
+@if (User.Identity.IsAuthenticated)
+{
                 <label class="col-md-2" for="Texto">Novo Comentário</label>
                 <br />
                 <br />
+}
             </div>
         </tr>
         <tr>
             <div class="form-group">
+@if (User.Identity.IsAuthenticated)
+{
                 <div class="col-md-2">
                     @Html.TextArea("Comment")
                 </div>
+}
             </div>
         </tr>
         <br />
         <br />
         <div class="form-group">
+@if (User.Identity.IsAuthenticated)
+{
             <div class="col-md-2 col-md-10">
                 <input type="submit" value="Create" class="btn btn-default" />
             </div>
+}
         </div>
     }
 
