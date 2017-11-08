@@ -144,10 +144,12 @@ namespace HealthyProject.Controllers
 
             if (opiniao == null)
             {
-                opiniao = new Opiniao();
-                opiniao.userID = userID;
-                opiniao.commentID = comentario.CommentID;
-                opiniao.Opiniao1 = selectedOpinion;
+                opiniao = new Opiniao()
+                {
+                    userID = userID,
+                    commentID = comentario.CommentID,
+                    Opiniao1 = selectedOpinion
+                };
                 db.Opiniaos.Add(opiniao);
             }
             else //update

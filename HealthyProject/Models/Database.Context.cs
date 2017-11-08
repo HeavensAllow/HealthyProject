@@ -27,13 +27,13 @@ namespace HealthyProject.Models
             throw new UnintentionalCodeFirstException();
         }
     
-        public virtual DbSet<AspNetRole> AspNetRoles { get; set; }
-        public virtual DbSet<Categoria> Categorias { get; set; }
         public virtual DbSet<C__MigrationHistory> C__MigrationHistory { get; set; }
+        public virtual DbSet<AspNetRole> AspNetRoles { get; set; }
         public virtual DbSet<AspNetUserClaim> AspNetUserClaims { get; set; }
         public virtual DbSet<AspNetUserLogin> AspNetUserLogins { get; set; }
         public virtual DbSet<AspNetUser> AspNetUsers { get; set; }
         public virtual DbSet<Bebida> Bebidas { get; set; }
+        public virtual DbSet<Categoria> Categorias { get; set; }
         public virtual DbSet<Comentario> Comentarios { get; set; }
         public virtual DbSet<Ingrediente> Ingredientes { get; set; }
         public virtual DbSet<Objectivo> Objectivoes { get; set; }
@@ -48,9 +48,6 @@ namespace HealthyProject.Models
         public virtual DbSet<RegistoPeso> RegistoPesoes { get; set; }
         public virtual DbSet<Subcategoria> Subcategorias { get; set; }
         public virtual DbSet<sysdiagram> sysdiagrams { get; set; }
-        public virtual DbSet<Categoria> Categorias { get; set; }
-        public virtual DbSet<Comentario> Comentarios { get; set; }
-        public virtual DbSet<Opiniao> Opiniaos { get; set; }
         public virtual DbSet<Utilizador> Utilizadors { get; set; }
     
         public virtual ObjectResult<Top5_Result> Top5(Nullable<int> userID)
@@ -61,7 +58,5 @@ namespace HealthyProject.Models
     
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<Top5_Result>("Top5", userIDParameter);
         }
-        public virtual DbSet<RegistoPeso> RegistoPesoes { get; set; }
-        public virtual DbSet<Post> Posts { get; set; }
     }
 }

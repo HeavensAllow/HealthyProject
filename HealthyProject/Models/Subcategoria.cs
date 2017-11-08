@@ -12,12 +12,6 @@ namespace HealthyProject.Models
     using System;
     using System.Collections.Generic;
     
-    using HealthyProject.Models.Metadata;
-    using System;
-    using System.Collections.Generic;
-    using System.ComponentModel.DataAnnotations;
-
-    [MetadataType(typeof(SubcategoriasMetadata))]
     public partial class Subcategoria
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]

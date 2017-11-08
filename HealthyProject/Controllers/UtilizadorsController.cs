@@ -60,34 +60,26 @@ namespace HealthyProject.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "UserID,Nome,Genero,Data_nascimento,Peso,Altura,Actividade_fisica,Nr_horas_sono,Nr_refeicoes,Habitos_alcoolicos,MMuscular,MGorda")] Utilizador utilizador)
-        public async Task<ActionResult> Create(RegisterViewModel model, string roleName)
+        public async Task<ActionResult> Create([Bind(Include = "Nome,Genero,Data_nascimento,Peso,Altura,Actividade_fisica,Nr_horas_sono,Nr_refeicoes,Habitos_alcoolicos,MMuscular,MGorda")] RegisterViewModel model, string roleName)
         {
             if (ModelState.IsValid)
             {
-                db.Utilizadors.Add(utilizador);
-                RegistoPeso peso = new RegistoPeso();
-                peso.Peso = utilizador.Peso;
-                peso.Data = DateTime.Today;
-                peso.User_ID = utilizador.UserID;
-                db.RegistoPesoes.Add(peso);
-                db.SaveChanges();
-                return RedirectToAction("Index");
                 var user = new ApplicationUser { UserName = model.Email, Email = model.Email };
                 var result = await userManager.CreateAsync(user, model.Password);
                 if (result.Succeeded)
                 {
                     userManager.AddToRole(user.Id, roleName);
-                    Utilizador newUser = new Utilizador();
-                    newUser.UserID = user.Id;
-                    db.Utilizadors.Add(newUser);
+                    Utilizador utilizador = new Utilizador()
+                    {
+                        UserID = user.Id,
+                    };
+                    db.Utilizadors.Add(utilizador);
+                    
                     db.SaveChanges();
                     return RedirectToAction("Index", "Home");
                 }
             }
-
-            ViewBag.UserID = new SelectList(db.AspNetUsers, "Id", "Email", utilizador.UserID);
-            return View(utilizador);
+            
             ViewBag.Roles = new SelectList(db.AspNetRoles, "Name", "Name");
             return View(model);
         }
@@ -114,7 +106,6 @@ namespace HealthyProject.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "UserID,Nome,Genero,Data_nascimento,Peso,Altura,Actividade_fisica,Nr_horas_sono,Nr_refeicoes,Habitos_alcoolicos,MMuscular,MGorda")] Utilizador utilizador)
         public ActionResult Edit([Bind(Include = "UserID,Nome,Genero,Data_nascimento,Peso,Altura,Actividade_fisica,Nr_horas_sono,Nr_refeicoes,Habitos_alcoolicos,MMuscular,MGorda")] Utilizador utilizador, string roleName)
         {
             if (ModelState.IsValid)
