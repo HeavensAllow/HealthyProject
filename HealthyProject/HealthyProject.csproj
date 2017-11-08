@@ -21,6 +21,10 @@
     <IISExpressSSLPort>44388</IISExpressSSLPort>
     <IISExpressAnonymousAuthentication />
     <IISExpressWindowsAuthentication />
+    <IISExpressAnonymousAuthentication>
+    </IISExpressAnonymousAuthentication>
+    <IISExpressWindowsAuthentication>
+    </IISExpressWindowsAuthentication>
     <IISExpressUseClassicPipelineMode />
     <UseGlobalApplicationHostFile />
     <NuGetPackageImportStamp>
@@ -196,10 +200,13 @@
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\Startup.Auth.cs" />
     <Compile Include="Controllers\AccountController.cs" />
+    <Compile Include="Controllers\CategoriasController.cs" />
+    <Compile Include="Controllers\ForumController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
     <Compile Include="Controllers\ObjectivoesController.cs" />
     <Compile Include="Controllers\RefeicoesController.cs" />
+    <Compile Include="Controllers\SubcategoriasController.cs" />
     <Compile Include="Controllers\UtilizadorsController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
@@ -253,6 +260,10 @@
     <Compile Include="Models\ManageViewModels.cs" />
     <Compile Include="Models\Metadata\ObjectivoMetadata.cs" />
     <Compile Include="Models\Metadata\RefeicaoPratosMetadata.cs" />
+    <Compile Include="Models\Metadata\CategoriasMetadata.cs" />
+    <Compile Include="Models\Metadata\ComentariosMetadata.cs" />
+    <Compile Include="Models\Metadata\PostMetadata.cs" />
+    <Compile Include="Models\Metadata\SubcategoriasMetadata.cs" />
     <Compile Include="Models\Objectivo.cs">
       <DependentUpon>Database.tt</DependentUpon>
     </Compile>
@@ -348,6 +359,8 @@
     <Content Include="Scripts\jquery-3.2.1.slim.js" />
     <Content Include="Scripts\jquery-3.2.1.slim.min.js" />
     <None Include="Scripts\jquery.validate-vsdoc.js" />
+    <Content Include="Scripts\jquery.unobtrusive-ajax.js" />
+    <Content Include="Scripts\jquery.unobtrusive-ajax.min.js" />
     <Content Include="Scripts\jquery.validate.js" />
     <Content Include="Scripts\jquery.validate.min.js" />
     <Content Include="Scripts\jquery.validate.unobtrusive.js" />
@@ -358,6 +371,7 @@
     <Content Include="Scripts\respond.matchmedia.addListener.js" />
     <Content Include="Scripts\respond.matchmedia.addListener.min.js" />
     <Content Include="Scripts\respond.min.js" />
+    <Content Include="Views\Forum\Index.cshtml" />
     <Content Include="Web.config" />
     <Content Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
@@ -410,6 +424,16 @@
     <Content Include="Views\Refeicoes\Edit.cshtml" />
     <Content Include="Views\Refeicoes\Index.cshtml" />
     <Content Include="Views\Objectivoes\_Peso.cshtml" />
+    <Content Include="Views\Forum\Subcategoria.cshtml" />
+    <Content Include="Views\Forum\Post.cshtml" />
+    <Content Include="Views\Forum\CreatePost.cshtml" />
+    <Content Include="Views\Forum\_PostPartial.cshtml" />
+    <Content Include="Views\Categorias\CreateCategoria.cshtml" />
+    <Content Include="Views\Categorias\Edit.cshtml" />
+    <Content Include="Views\Categorias\Index.cshtml" />
+    <Content Include="Views\Subcategorias\CreateSubcategoria.cshtml" />
+    <Content Include="Views\Subcategorias\Edit.cshtml" />
+    <Content Include="Views\Subcategorias\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

@@ -48,6 +48,9 @@ namespace HealthyProject.Models
         public virtual DbSet<RegistoPeso> RegistoPesoes { get; set; }
         public virtual DbSet<Subcategoria> Subcategorias { get; set; }
         public virtual DbSet<sysdiagram> sysdiagrams { get; set; }
+        public virtual DbSet<Categoria> Categorias { get; set; }
+        public virtual DbSet<Comentario> Comentarios { get; set; }
+        public virtual DbSet<Opiniao> Opiniaos { get; set; }
         public virtual DbSet<Utilizador> Utilizadors { get; set; }
     
         public virtual ObjectResult<Top5_Result> Top5(Nullable<int> userID)
@@ -58,5 +61,7 @@ namespace HealthyProject.Models
     
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<Top5_Result>("Top5", userIDParameter);
         }
+        public virtual DbSet<RegistoPeso> RegistoPesoes { get; set; }
+        public virtual DbSet<Post> Posts { get; set; }
     }
 }

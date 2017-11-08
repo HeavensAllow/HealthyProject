@@ -8,12 +8,18 @@ using System.Web;
 using System.Web.Mvc;
 using HealthyProject.Models;
 using System.Collections;
+using Microsoft.AspNet.Identity;
+using System.Threading.Tasks;
 
 namespace HealthyProject.Controllers
 {
+    [Authorize(Roles = "Admin")]
     public class UtilizadorsController : Controller
     {
         private HealthyEntities db = new HealthyEntities();
+        private UserManager<ApplicationUser, int> userManager = new UserManager<ApplicationUser, int>(new CustomUserStore(new ApplicationDbContext()));
+        //usado para atribuir roles a utilizadores
+
 
         // GET: Utilizadors
         public ActionResult Index()
@@ -45,6 +51,7 @@ namespace HealthyProject.Controllers
         public ActionResult Create()
         {
             ViewBag.UserID = new SelectList(db.AspNetUsers, "Id", "Email");
+            ViewBag.Roles = new SelectList(db.AspNetRoles, "Name", "Name");
             return View();
         }
 
@@ -54,6 +61,7 @@ namespace HealthyProject.Controllers
         [HttpPost]
         [ValidateAntiForgeryToken]
         public ActionResult Create([Bind(Include = "UserID,Nome,Genero,Data_nascimento,Peso,Altura,Actividade_fisica,Nr_horas_sono,Nr_refeicoes,Habitos_alcoolicos,MMuscular,MGorda")] Utilizador utilizador)
+        public async Task<ActionResult> Create(RegisterViewModel model, string roleName)
         {
             if (ModelState.IsValid)
             {
@@ -65,10 +73,23 @@ namespace HealthyProject.Controllers
                 db.RegistoPesoes.Add(peso);
                 db.SaveChanges();
                 return RedirectToAction("Index");
+                var user = new ApplicationUser { UserName = model.Email, Email = model.Email };
+                var result = await userManager.CreateAsync(user, model.Password);
+                if (result.Succeeded)
+                {
+                    userManager.AddToRole(user.Id, roleName);
+                    Utilizador newUser = new Utilizador();
+                    newUser.UserID = user.Id;
+                    db.Utilizadors.Add(newUser);
+                    db.SaveChanges();
+                    return RedirectToAction("Index", "Home");
+                }
             }
 
             ViewBag.UserID = new SelectList(db.AspNetUsers, "Id", "Email", utilizador.UserID);
             return View(utilizador);
+            ViewBag.Roles = new SelectList(db.AspNetRoles, "Name", "Name");
+            return View(model);
         }
 
         // GET: Utilizadors/Edit/5
@@ -84,6 +105,7 @@ namespace HealthyProject.Controllers
                 return HttpNotFound();
             }
             ViewBag.UserID = new SelectList(db.AspNetUsers, "Id", "Email", utilizador.UserID);
+            ViewBag.Roles = new SelectList(db.AspNetRoles, "Name", "Name");
             return View(utilizador);
         }
 
@@ -93,6 +115,7 @@ namespace HealthyProject.Controllers
         [HttpPost]
         [ValidateAntiForgeryToken]
         public ActionResult Edit([Bind(Include = "UserID,Nome,Genero,Data_nascimento,Peso,Altura,Actividade_fisica,Nr_horas_sono,Nr_refeicoes,Habitos_alcoolicos,MMuscular,MGorda")] Utilizador utilizador)
+        public ActionResult Edit([Bind(Include = "UserID,Nome,Genero,Data_nascimento,Peso,Altura,Actividade_fisica,Nr_horas_sono,Nr_refeicoes,Habitos_alcoolicos,MMuscular,MGorda")] Utilizador utilizador, string roleName)
         {
             if (ModelState.IsValid)
             {
@@ -102,11 +125,26 @@ namespace HealthyProject.Controllers
                 peso.Data = DateTime.Today;
                 peso.User_ID = utilizador.UserID;
                 db.RegistoPesoes.Add(peso);
+
+                var role = db.AspNetRoles.FirstOrDefault(r => r.Name == roleName);
+                if (role == null)
+                {
+                    return HttpNotFound();
+                }
+                var userRoles = userManager.GetRoles(utilizador.UserID);
+                foreach (string r in userRoles)
+                {
+                    userManager.RemoveFromRole(utilizador.UserID, r);
+                }
+                userManager.AddToRole(utilizador.UserID, role.Name);
+                db.Entry(utilizador).State = EntityState.Modified; // o utilizador foi modificado
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
             ViewBag.UserID = new SelectList(db.AspNetUsers, "Id", "Email", utilizador.UserID);
+            ViewBag.Roles = new SelectList(db.AspNetRoles, "Name", "Name");
             return View(utilizador);
+    
         }
 
         // GET: Utilizadors/Delete/5

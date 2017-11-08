@@ -12,6 +12,12 @@ namespace HealthyProject.Models
     using System;
     using System.Collections.Generic;
     
+    using HealthyProject.Models.Metadata;
+    using System;
+    using System.Collections.Generic;
+    using System.ComponentModel.DataAnnotations;
+
+    [MetadataType(typeof(ComentariosMetadata))]
     public partial class Comentario
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
@@ -30,5 +36,8 @@ namespace HealthyProject.Models
         public virtual Post Post { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Opiniao> Opiniaos { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<Opiniao> Opiniaos { get; set; }
+        public virtual Post Post { get; set; }
     }
 }

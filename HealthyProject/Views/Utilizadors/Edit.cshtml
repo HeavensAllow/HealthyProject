@@ -106,7 +106,12 @@
                 @Html.ValidationMessageFor(model => model.MGorda, "", new { @class = "text-danger" })
             </div>
         </div>
-
+        <div class="form-group">
+            @Html.Label("roleName", "Role", htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.DropDownList("roleName", new SelectList(ViewBag.Roles, "Value", "Text"), new { @class = "form-control" })
+            </div>
+        </div>
         <div class="form-group">
             <div class="col-md-offset-2 col-md-10">
                 <input type="submit" value="Save" class="btn btn-default" />
@@ -114,9 +119,8 @@
         </div>
     </div>
 }
-
 <div>
-    @Html.ActionLink("Back to List", "Index")
+    @Html.ActionLink("Regressar", "Index")
 </div>
 
 @section Scripts {
