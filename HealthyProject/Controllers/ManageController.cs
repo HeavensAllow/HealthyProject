@@ -17,7 +17,7 @@ namespace HealthyProject.Controllers
     {
         private ApplicationSignInManager _signInManager;
         private ApplicationUserManager _userManager;
-        private HealthyEntities1 db = new HealthyEntities1();  // Chama se base de dados
+        private HealthyEntities db = new HealthyEntities();  // Chama se base de dados
 
         public ManageController()
         {
@@ -35,9 +35,6 @@ namespace HealthyProject.Controllers
             {
                 return _signInManager ?? HttpContext.GetOwinContext().Get<ApplicationSignInManager>();
             }
-            private set 
-            { 
-                _signInManager = value; 
             private set
             {
                 _signInManager = value;
@@ -57,8 +54,6 @@ namespace HealthyProject.Controllers
         }
 
         //
-        // GET: /Manage/Index
-        public async Task<ActionResult> Index(ManageMessageId? message)
         // GET: /Manage/Index : onde se mostra dados do utilizador
         public ActionResult Index(ManageMessageId? message)
         {
@@ -72,8 +67,6 @@ namespace HealthyProject.Controllers
                 : message == ManageMessageId.RemovePhoneSuccess ? "Your phone number was removed."
                 : "";
 
-            var userId = User.Identity.GetUserId();
-            var model = new IndexViewModel
             var userId = Convert.ToInt32(User.Identity.GetUserId()); // estava em string
 
             //var model = new IndexViewModel
@@ -109,13 +102,6 @@ namespace HealthyProject.Controllers
         {
             if (ModelState.IsValid)
             {
-                HasPassword = HasPassword(),
-                PhoneNumber = await UserManager.GetPhoneNumberAsync(User.Identity.GetUserId<int>()),
-                TwoFactor = await UserManager.GetTwoFactorEnabledAsync(User.Identity.GetUserId<int>()),
-                Logins = await UserManager.GetLoginsAsync(User.Identity.GetUserId<int>()),
-                BrowserRemembered = await AuthenticationManager.TwoFactorBrowserRememberedAsync(userId)
-            };
-            return View(model);
                 db.Entry(perfilEdit).State = EntityState.Modified;
 
                 db.SaveChanges();
@@ -123,16 +109,13 @@ namespace HealthyProject.Controllers
                 return RedirectToAction("Index", "Manage");
 
             }
-           
-           
-            
+
+
+
             return View(perfilEdit);
         }
 
 
-    //
-    // POST: /Manage/RemoveLogin
-    [HttpPost]
 
 
         //
@@ -393,7 +376,6 @@ namespace HealthyProject.Controllers
             base.Dispose(disposing);
         }
 
-#region Helpers
         #region Helpers
         // Used for XSRF protection when adding external logins
         private const string XsrfKey = "XsrfId";
@@ -445,7 +427,6 @@ namespace HealthyProject.Controllers
             Error
         }
 
-#endregion
         #endregion
     }
 }
