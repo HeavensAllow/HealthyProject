@@ -4,14 +4,22 @@
     ViewBag.Title = "Create";
 }
 
+@if (ViewBag.SemDados != null)
+{
+    <br />
+    <br />
+    @Html.ActionLink("Cria-te", "Index", "Manage", null, new { @class = "img-btn-getpeso modal-link mybtn", title = "Cria-te" });
+}
+else
+{
 <br />
 <h2>Criar novo objectivo</h2>
 
 
-@using (Html.BeginForm()) 
+using (Html.BeginForm())
 {
     @Html.AntiForgeryToken()
-    
+
     <div class="form-horizontal">
         <div class="row">
             <div class="col-md-8">
@@ -60,7 +68,7 @@
 <div>
     @Html.ActionLink("Back to List", "Index")
 </div>
-
+}
 @section Scripts {
     @Scripts.Render("~/bundles/jqueryval")
 }

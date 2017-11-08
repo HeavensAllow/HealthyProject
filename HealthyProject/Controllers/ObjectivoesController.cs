@@ -23,6 +23,12 @@ namespace HealthyProject.Controllers
         public ActionResult Index()
         {
             int userId = Convert.ToInt32(User.Identity.GetUserId());
+            Utilizador user = db.Utilizadors.FirstOrDefault(o => o.UserID == userId);
+            if (user.Nome == null)
+            {
+                ViewBag.SemDados = "Nao tem dados inseridos";
+                return View();
+            }
             var objectivoes = db.Objectivoes.Include(o => o.Utilizador);
             Objectivo objectivo = objectivoes.FirstOrDefault(o => o.UserID == userId && o.Data_fim == null);
             var refeicoes = db.RegistoDiarios.Include(i => i.Objectivo).Where(o => o.Objectivo.ObjectivoID == objectivo.ObjectivoID);
@@ -172,7 +178,7 @@ namespace HealthyProject.Controllers
                 ViewBag.Sem = "Sem objectivo";
                 return View();
             }
-            if ((int)DateTime.Now.DayOfWeek == 1 && peso == null)
+            if ((int)DateTime.Now.DayOfWeek == 3 && peso == null)
             {
                 ViewBag.Teste = "Por favor indique o seu novo peso";
                 return View();
@@ -253,6 +259,13 @@ namespace HealthyProject.Controllers
         // GET: Objectivoes/Details/5
         public ActionResult Details(int? id)
         {
+            int userId = Convert.ToInt32(User.Identity.GetUserId());
+            Utilizador user = db.Utilizadors.FirstOrDefault(o => o.UserID == userId);
+            if (user.Nome == null)
+            {
+                ViewBag.SemDados = "Nao tem dados inseridos";
+                return View();
+            }
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
@@ -273,6 +286,15 @@ namespace HealthyProject.Controllers
             var actual = db.Objectivoes.FirstOrDefault(p => p.UserID == userId && p.Data_fim == null);
             //var procura = objectivoes.Where(p => p.UserID == userId);
             //var actual = procura.Where(l => l.Data_fim == null);
+    
+            Utilizador user = db.Utilizadors.FirstOrDefault(o => o.UserID == userId);
+            if (user.Nome == null)
+            {
+                ViewBag.SemDados = "Nao tem dados inseridos";
+                return View();
+            }
+
+
             if (actual == null)
             {
                 ViewBag.UserID = new SelectList(db.Utilizadors, "UserID", "Nome");
@@ -355,10 +377,18 @@ namespace HealthyProject.Controllers
         // GET: Objectivoes/Edit/5
         public ActionResult Edit(int? id)
         {
+            int userId = Convert.ToInt32(User.Identity.GetUserId());
+            Utilizador user = db.Utilizadors.FirstOrDefault(o => o.UserID == userId);
+            if (user.Nome == null)
+            {
+                ViewBag.SemDados = "Nao tem dados inseridos";
+                return View();
+            }
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
+
             Objectivo objectivo = db.Objectivoes.Find(id);
             if (objectivo == null)
             {
@@ -392,6 +422,12 @@ namespace HealthyProject.Controllers
             var objectivoes = db.Objectivoes.Include(o => o.Utilizador);
             var refeicoes = db.RegistoDiarios.Include(i => i.Objectivo);
             Objectivo objectivo = objectivoes.FirstOrDefault(o => o.UserID == userId && o.Data_fim == null);
+            Utilizador user = db.Utilizadors.FirstOrDefault(o => o.UserID == userId);
+            if (user.Nome == null)
+            {
+                ViewBag.SemDados = "Nao tem dados inseridos";
+                return View();
+            }
 
             if (objectivo == null)
             {

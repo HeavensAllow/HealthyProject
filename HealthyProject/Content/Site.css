@@ -67,9 +67,10 @@ textarea {
     padding-left:15px;
 }
 
-.centerAlign{
+.centerAlign {
     text-align: center;
-/* FORUM */
+    /* FORUM */
+}
 
 .form-newComment textarea{
     width:650px;

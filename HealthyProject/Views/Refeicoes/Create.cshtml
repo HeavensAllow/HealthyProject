@@ -3,13 +3,21 @@
 @{
     ViewBag.Title = "Create";
 }
+@if (ViewBag.SemDados != null)
+{
+    <br />
+    <br />
+    @Html.ActionLink("Cria-te", "Index", "Manage", null, new { @class = "img-btn-getpeso modal-link mybtn", title = "Cria-te" });
+}
+else
+{
 
 <h2>Create</h2>
 
-@using (Html.BeginForm()) 
+using (Html.BeginForm())
 {
     @Html.AntiForgeryToken()
-    
+
     <div class="form-horizontal">
         <h4>Refeico</h4>
         <hr />
@@ -49,3 +57,4 @@
 <div>
     @Html.ActionLink("Back to List", "Index")
 </div>
+}

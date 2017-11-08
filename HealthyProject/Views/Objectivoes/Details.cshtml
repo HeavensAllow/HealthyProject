@@ -4,63 +4,73 @@
     ViewBag.Title = "Details";
 }
 
-<h2>Details</h2>
+@if (ViewBag.SemDados != null)
+{
+    <br />
+    <br />
+    @Html.ActionLink("Cria-te", "Index", "Manage", null, new { @class = "img-btn-getpeso modal-link mybtn", title = "Cria-te" });
+}
+else
+{
+    <h2>Details</h2>
 
-<div>
-    <h4>Objectivo</h4>
-    <hr />
-    <dl class="dl-horizontal" >
-        <dt>
-            Data de Início
-        </dt>
+    <div>
+        <h4>Objectivo</h4>
+        <hr />
+        <dl class="dl-horizontal">
+            <dt>
+                Data de Início
+            </dt>
 
-        <dd>
-            @Html.DisplayFor(model => model.Data_inicio)
-        </dd>
+            <dd>
+                @Html.DisplayFor(model => model.Data_inicio)
+            </dd>
 
-        <dt>
-            Data de Conclusão
-        </dt>
+            <dt>
+                Data de Conclusão
+            </dt>
 
-        <dd>
-            @Html.DisplayFor(model => model.Data_fim)
-        </dd>
+            <dd>
+                @Html.DisplayFor(model => model.Data_fim)
+            </dd>
 
-        <dt>
-            Peso a atingir
-        </dt>
+            <dt>
+                Peso a atingir
+            </dt>
 
-        <dd>
-            @Html.DisplayFor(model => model.Peso_objectivo)
-        </dd>
+            <dd>
+                @Html.DisplayFor(model => model.Peso_objectivo)
+            </dd>
 
-        <dt>
-            Intake Diário Recomendado
-        </dt>
+            <dt>
+                Intake Diário Recomendado
+            </dt>
 
-        <dd>
-            @Html.DisplayFor(model => model.Intake_diarioR)
-        </dd>
+            <dd>
+                @Html.DisplayFor(model => model.Intake_diarioR)
+            </dd>
 
-        <dt>
-            Intake Diário Actual
-        </dt>
+            <dt>
+                Intake Diário Actual
+            </dt>
 
-        <dd>
-            @Html.DisplayFor(model => model.Intake_diarioA)
-        </dd>
+            <dd>
+                @Html.DisplayFor(model => model.Intake_diarioA)
+            </dd>
 
-        <dt>
-            Nome do Utilizador
-        </dt>
+            <dt>
+                Nome do Utilizador
+            </dt>
 
-        <dd>
-            @Html.DisplayFor(model => model.Utilizador.Nome)
-        </dd>
+            <dd>
+                @Html.DisplayFor(model => model.Utilizador.Nome)
+            </dd>
 
-    </dl>
-</div>
-<p>
-    @Html.ActionLink("Edit", "Edit", new { id = Model.ObjectivoID }) |
-    @Html.ActionLink("Back to List", "Index")
-</p>
+        </dl>
+    </div>
+    <p>
+        @Html.ActionLink("Edit", "Edit", new { id = Model.ObjectivoID }) |
+        @Html.ActionLink("Back to List", "Index")
+    </p>
+
+}

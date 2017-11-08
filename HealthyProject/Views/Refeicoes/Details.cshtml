@@ -3,7 +3,14 @@
 @{
     ViewBag.Title = "Details";
 }
-
+@if (ViewBag.SemDados != null)
+{
+    <br />
+    <br />
+    @Html.ActionLink("Cria-te", "Index", "Manage", null, new { @class = "img-btn-getpeso modal-link mybtn", title = "Cria-te" });
+}
+else
+{
 <h2>Details</h2>
 
 <div>
@@ -40,3 +47,4 @@
     @Html.ActionLink("Edit", "Edit", new { id = Model.RefeicaoID }) |
     @Html.ActionLink("Back to List", "Index")
 </p>
+}

@@ -3,7 +3,14 @@
 @{
     ViewBag.Title = "Index";
 }
-
+@if (ViewBag.SemDados != null)
+{
+    <br />
+    <br />
+    @Html.ActionLink("Cria-te", "Index", "Manage", null, new { @class = "img-btn-getpeso modal-link mybtn", title = "Cria-te" });
+}
+else
+{
 <h2>Index</h2>
 
 <script type="text/javascript">
@@ -34,7 +41,8 @@
         <th></th>
     </tr>
 
-@foreach (var item in Model) {
+@foreach (var item in Model)
+{
     <tr>
         <td>
             @Html.DisplayFor(modelItem => item.Data)
@@ -46,11 +54,12 @@
             @Html.DisplayFor(modelItem => item.RegistoDiario.RegistoID)
         </td>
         <td>
-            @Html.ActionLink("Edit", "Edit", new { id=item.RefeicaoID }) |
-            @Html.ActionLink("Details", "Details", new { id=item.RefeicaoID }) |
-            @Html.ActionLink("Delete", "Delete", new { id=item.RefeicaoID })
+            @Html.ActionLink("Edit", "Edit", new { id = item.RefeicaoID }) |
+            @Html.ActionLink("Details", "Details", new { id = item.RefeicaoID }) |
+            @Html.ActionLink("Delete", "Delete", new { id = item.RefeicaoID })
         </td>
     </tr>
 }
 
 </table>
+}

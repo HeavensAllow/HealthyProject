@@ -7,6 +7,7 @@ using System.Net;
 using System.Web;
 using System.Web.Mvc;
 using HealthyProject.Models;
+using Microsoft.AspNet.Identity;
 
 namespace HealthyProject.Controllers
 {
@@ -18,12 +19,27 @@ namespace HealthyProject.Controllers
         public ActionResult Index()
         {
             var refeicoes = db.Refeicoes.Include(r => r.RegistoDiario);
+            int userId = Convert.ToInt32(User.Identity.GetUserId());
+            Utilizador user = db.Utilizadors.FirstOrDefault(o => o.UserID == userId);
+            if (user.Nome == null)
+            {
+                ViewBag.SemDados = "Nao tem dados inseridos";
+                return View();
+            }
             return View(refeicoes.ToList());
         }
 
         // GET: Refeicoes/Details/5
         public ActionResult Details(int? id)
         {
+            int userId = Convert.ToInt32(User.Identity.GetUserId());
+            Utilizador user = db.Utilizadors.FirstOrDefault(o => o.UserID == userId);
+            if (user.Nome == null)
+            {
+                ViewBag.SemDados = "Nao tem dados inseridos";
+                return View();
+            }
+
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
@@ -39,6 +55,13 @@ namespace HealthyProject.Controllers
         // GET: Refeicoes/Create
         public ActionResult Create()
         {
+            int userId = Convert.ToInt32(User.Identity.GetUserId());
+            Utilizador user = db.Utilizadors.FirstOrDefault(o => o.UserID == userId);
+            if (user.Nome == null)
+            {
+                ViewBag.SemDados = "Nao tem dados inseridos";
+                return View();
+            }
             ViewBag.RegistoID = new SelectList(db.RegistoDiarios, "RegistoID", "RegistoID");
             return View();
         }
@@ -64,6 +87,13 @@ namespace HealthyProject.Controllers
         // GET: Refeicoes/Edit/5
         public ActionResult Edit(int? id)
         {
+            int userId = Convert.ToInt32(User.Identity.GetUserId());
+            Utilizador user = db.Utilizadors.FirstOrDefault(o => o.UserID == userId);
+            if (user.Nome == null)
+            {
+                ViewBag.SemDados = "Nao tem dados inseridos";
+                return View();
+            }
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
@@ -97,6 +127,13 @@ namespace HealthyProject.Controllers
         // GET: Refeicoes/Delete/5
         public ActionResult Delete(int? id)
         {
+            int userId = Convert.ToInt32(User.Identity.GetUserId());
+            Utilizador user = db.Utilizadors.FirstOrDefault(o => o.UserID == userId);
+            if (user.Nome == null)
+            {
+                ViewBag.SemDados = "Nao tem dados inseridos";
+                return View();
+            }
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
