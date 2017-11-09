@@ -17,25 +17,13 @@ namespace HealthyProject.Controllers
         private HealthyEntities db = new HealthyEntities();
 
         // GET: Refeicoes
-        public ActionResult Index()
         public ActionResult Index(DateTime? dateInput)
         {
-            var refeicoes = db.Refeicoes.Include(r => r.RegistoDiario);
-            int userId = Convert.ToInt32(User.Identity.GetUserId());
-            Utilizador user = db.Utilizadors.FirstOrDefault(o => o.UserID == userId);
-            if (user.Nome == null)
-            {
-                ViewBag.SemDados = "Nao tem dados inseridos";
-                return View();
-            }
-            return View(refeicoes.ToList());
-        }
             if (dateInput == null)
             {
                 var refeicoes = db.Refeicoes.Include(r => r.RegistoDiario).Where(d => d.Data == DateTime.Today);
                 return View(refeicoes);
 
-        // GET: Refeicoes/Details/5
             }
             else
             {
@@ -43,16 +31,9 @@ namespace HealthyProject.Controllers
                 return View(refeicoes);
             }
         }
+
         public ActionResult Details(int? id)
         {
-            int userId = Convert.ToInt32(User.Identity.GetUserId());
-            Utilizador user = db.Utilizadors.FirstOrDefault(o => o.UserID == userId);
-            if (user.Nome == null)
-            {
-                ViewBag.SemDados = "Nao tem dados inseridos";
-                return View();
-            }
-
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
@@ -68,13 +49,6 @@ namespace HealthyProject.Controllers
         // GET: Refeicoes/Create
         public ActionResult Create()
         {
-            int userId = Convert.ToInt32(User.Identity.GetUserId());
-            Utilizador user = db.Utilizadors.FirstOrDefault(o => o.UserID == userId);
-            if (user.Nome == null)
-            {
-                ViewBag.SemDados = "Nao tem dados inseridos";
-                return View();
-            }
             ViewBag.RegistoID = new SelectList(db.RegistoDiarios, "RegistoID", "RegistoID");
             return View();
         }
@@ -83,6 +57,7 @@ namespace HealthyProject.Controllers
         // Para se proteger de mais ataques, ative as propriedades específicas a que você quer se conectar. Para 
         // obter mais detalhes, consulte https://go.microsoft.com/fwlink/?LinkId=317598.
         // POST: Refeicoes
+
         [HttpPost]
         [ValidateAntiForgeryToken]
         public ActionResult Indexx(DateTime? dateInput)
@@ -91,12 +66,14 @@ namespace HealthyProject.Controllers
             {
                 var refeicoes1 = db.Refeicoes.Include(r => r.RegistoDiario).Where(d => d.Data == DateTime.Today);
                 return View(refeicoes1);
+
             }
             else
             {
                 var refeicoes = db.Refeicoes.Include(r => r.RegistoDiario).Where(d => d.Data == dateInput);
                 return View(refeicoes);
             }
+
         }
 
         [HttpPost]
@@ -105,9 +82,6 @@ namespace HealthyProject.Controllers
         {
             if (ModelState.IsValid)
             {
-                db.Refeicoes.Add(refeico);
-                db.SaveChanges();
-                return RedirectToAction("Index");
                 double counterkcal = 0, counterproteinas = 0, countergordura = 0, counterhc = 0;
                 var registo = db.RegistoDiarios.FirstOrDefault(p => p.Data == DateTime.Today);
                 if (registo == null)
@@ -120,7 +94,7 @@ namespace HealthyProject.Controllers
                     {
                         registo1.ObjectivoID = objectivo.ObjectivoID;
                         db.RegistoDiarios.Add(registo1);
-                        foreach(RefeicaoPrato i in refeicoes)
+                        foreach (RefeicaoPrato i in refeicoes)
                         {
                             counterkcal += (i.Dose / 100) * i.Prato.Kcal;
                             counterproteinas += (i.Dose / 100) * i.Prato.Proteinas;
@@ -130,11 +104,13 @@ namespace HealthyProject.Controllers
                         refeico.RegistoID = registo1.RegistoID;
                         db.Refeicoes.Add(refeico);
                         db.SaveChanges();
+
                         return RedirectToAction("Index");
                     }
                     else
                     {
                         TempData["Alert2"] = "Ainda não existe nenhum objectivo. Por favor, crie um objectivo primeiro.";
+
                         return RedirectToAction("Index");
                     }
                 }
@@ -146,6 +122,7 @@ namespace HealthyProject.Controllers
                     if (objectivo != null)
                     {
                         registo.ObjectivoID = objectivo.ObjectivoID;
+
                         foreach (RefeicaoPrato i in refeicoes)
                         {
                             counterkcal += (i.Dose / 100) * i.Prato.Kcal;
@@ -162,6 +139,7 @@ namespace HealthyProject.Controllers
                     else
                     {
                         TempData["Alert2"] = "Ainda não existe nenhum objectivo. Por favor, crie um objectivo primeiro.";
+
                         return RedirectToAction("Index");
                     }
                 }
@@ -174,13 +152,6 @@ namespace HealthyProject.Controllers
         // GET: Refeicoes/Edit/5
         public ActionResult Edit(int? id)
         {
-            int userId = Convert.ToInt32(User.Identity.GetUserId());
-            Utilizador user = db.Utilizadors.FirstOrDefault(o => o.UserID == userId);
-            if (user.Nome == null)
-            {
-                ViewBag.SemDados = "Nao tem dados inseridos";
-                return View();
-            }
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
@@ -214,13 +185,6 @@ namespace HealthyProject.Controllers
         // GET: Refeicoes/Delete/5
         public ActionResult Delete(int? id)
         {
-            int userId = Convert.ToInt32(User.Identity.GetUserId());
-            Utilizador user = db.Utilizadors.FirstOrDefault(o => o.UserID == userId);
-            if (user.Nome == null)
-            {
-                ViewBag.SemDados = "Nao tem dados inseridos";
-                return View();
-            }
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
@@ -243,6 +207,7 @@ namespace HealthyProject.Controllers
             db.SaveChanges();
             return RedirectToAction("Index");
         }
+
 
         public ActionResult NutriInfo(int RefeicaoID)
         {
@@ -268,3 +233,4 @@ namespace HealthyProject.Controllers
             base.Dispose(disposing);
         }
     }
+}
