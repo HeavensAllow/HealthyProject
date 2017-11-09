@@ -59,7 +59,7 @@ else
         }
 
         <div id="modal-container" class="modal fade" tabindex="-1" role="dialog">
-            <div class="modal-content" style="width: 570px !important; margin: 100px auto !important; border: 5px solid #3A87AD;">
+            <div class="modal-content" style="width: 570px !important; margin: 100px auto !important; border: 5px solid #3A87AD; height: 250px;">
                 <div class="modal-body">
                 </div>
             </div>
@@ -419,6 +419,11 @@ else
                 if (div - 1 < 1) return;
                 div--;
                 $('.slidediv').children().animate({ left: '+=1250px' });
+            });
+            $('body').on('click', '.modal-link', function (e) {
+                e.preventDefault();
+                $(this).attr('data-target', '#modal-container');
+                $(this).attr('data-toggle', 'modal');
             });
         });
     </script>
