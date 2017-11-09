@@ -1006,7 +1006,7 @@
           <Property Name="Data_nascimento" Type="DateTime" Precision="0" />
           <Property Name="Peso" Type="Int32" />
           <Property Name="Altura" Type="Int32" />
-          <Property Name="Actividade_fisica" Type="Int32" />
+          <Property Name="Actividade_fisica" Type="Double" />
           <Property Name="Nr_horas_sono" Type="Int32" />
           <Property Name="Nr_refeicoes" Type="Int32" />
           <Property Name="Habitos_alcoolicos" Type="Boolean" />

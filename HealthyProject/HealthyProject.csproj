@@ -272,6 +272,7 @@
     <Compile Include="Models\Metadata\ComentariosMetadata.cs" />
     <Compile Include="Models\Metadata\PostMetadata.cs" />
     <Compile Include="Models\Metadata\SubcategoriasMetadata.cs" />
+    <Compile Include="Models\Metadata\UtilizadorMetadata.cs" />
     <Compile Include="Models\Objectivo.cs">
       <DependentUpon>Database.tt</DependentUpon>
     </Compile>
@@ -543,6 +544,7 @@
           <DevelopmentServerPort>50463</DevelopmentServerPort>
           <DevelopmentServerVPath>/</DevelopmentServerVPath>
           <IISUrl>http://localhost:50463/</IISUrl>
+          <IISUrl>http://localhost:50464/</IISUrl>
           <NTLMAuthentication>False</NTLMAuthentication>
           <UseCustomServer>False</UseCustomServer>
           <CustomServerUrl>

@@ -1,16 +1,23 @@
-﻿using System;
+﻿using HealthyProject.Models;
+using Microsoft.AspNet.Identity;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using System.Data.SqlClient;
 
 namespace HealthyProject.Controllers
 {
     public class HomeController : Controller
     {
+        private HealthyEntities db = new HealthyEntities();
+
         public ActionResult Index()
         {
-            return View();
+            int userId = Convert.ToInt32(User.Identity.GetUserId());
+            Utilizador utilizador = db.Utilizadors.FirstOrDefault(o => o.UserID == userId);
+            return View(utilizador);
         }
 
         public ActionResult About()

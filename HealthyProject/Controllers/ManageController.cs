@@ -85,8 +85,18 @@ namespace HealthyProject.Controllers
             ViewBag.Genders = new SelectList(new List<SelectListItem>
                 {
                     new SelectListItem { Selected = true, Text = "M", Value = "M"},
+
+
                     new SelectListItem { Selected = false, Text = "F", Value = "F"},
                 }, "Value", "Text");
+
+                ViewBag.Atividade = new SelectList(new List<SelectListItem>
+                {
+                    new SelectListItem {Text = "1", Value = "1"},
+                    new SelectListItem {Text = "2", Value = "2"},
+                    new SelectListItem {Text = "3", Value = "3"},
+                    new SelectListItem {Text = "4", Value = "4"},
+                }, "Value", "Text", perfil.Actividade_fisica);
 
             return View(perfil);
             // manda oos dados do utilizador para a view
@@ -100,17 +110,120 @@ namespace HealthyProject.Controllers
 
         public ActionResult Index([Bind(Include = "UserID,Nome,Genero,Data_nascimento,Peso,Altura,Actividade_fisica,Nr_horas_sono,Nr_refeicoes,Habitos_alcoolicos,MMuscular,MGorda")] Utilizador perfilEdit)
         {
+            ViewBag.Genders = new SelectList(new List<SelectListItem>
+                {
+                    new SelectListItem { Selected = true, Text = "M", Value = "M"},
+
+
+                    new SelectListItem { Selected = false, Text = "F", Value = "F"},
+                }, "Value", "Text");
+
+            ViewBag.Atividade = new SelectList(new List<SelectListItem>
+                {
+                    new SelectListItem {Text = "1", Value = "1"},
+                    new SelectListItem {Text = "2", Value = "2"},
+                    new SelectListItem {Text = "3", Value = "3"},
+                    new SelectListItem {Text = "4", Value = "4"},
+                }, "Value", "Text", perfilEdit.Actividade_fisica);
+
             if (ModelState.IsValid)
             {
+                var error = false;
+
+                if (perfilEdit.Nome == null)
+                {
+                    ModelState.AddModelError("Nome", "Introduza o Nome");
+                    error = true;
+                }
+                if (error == true)
+                {
+                    return View();
+                }
+
+                if (perfilEdit.Genero == null)
+                {
+                    ModelState.AddModelError("Genero", "Introduza o Genero");
+                    error = true;
+                }
+                if (error == true)
+                {
+                    return View();
+                }
+                if (perfilEdit.Data_nascimento == null)
+                {
+                    ModelState.AddModelError("Data_Nascimento", "Introduza a Data de Nascimento");
+                    error = true;
+                }
+                if (error == true)
+                {
+                    return View();
+                }
+                if (perfilEdit.Peso == null)
+                {
+                    ModelState.AddModelError("Peso", "Introduza o Peso");
+                    error = true;
+                }
+                if (error == true)
+                {
+                    return View();
+                }
+                if (perfilEdit.Altura == null)
+                {
+                    ModelState.AddModelError("Altura", "Introduza a sua Altura");
+                    error = true;
+                }
+                if (error == true)
+                {
+                    return View();
+                }
+                if (perfilEdit.Actividade_fisica == null)
+                {
+                    ModelState.AddModelError("Actividade_fisica", "Introduza o Indice de Atividade Fisica");
+                    error = true;
+                }
+
+                
+
+                //int porcofeio = (int)perfilEdit.Actividade_fisica;
+                //switch (porcofeio) {
+                //    case 1:
+                //        perfilEdit.Actividade_fisica = 1;
+                //        break;
+                //    case 2:
+                //        if(perfilEdit.Genero == "F") {
+                //        perfilEdit.Actividade_fisica = 1.12;
+                //        }
+                //        else { perfilEdit.Actividade_fisica = 1.11; }
+                //        break;
+                //    case 3:
+                //        if (perfilEdit.Genero == "F")
+                //        {
+                //            perfilEdit.Actividade_fisica = 1.27;
+                //        }
+                //        else
+                //        {
+                //            perfilEdit.Actividade_fisica = 1.25;
+                //        }
+                //        break;
+
+                //    case 4:
+                //        if (perfilEdit.Genero == "F")
+                //        {
+                //            perfilEdit.Actividade_fisica = 1.45;
+                //        }
+                //        else
+                //        {
+                //            perfilEdit.Actividade_fisica = 1.48;
+                //        }
+                //        break;
+
+                //}  
                 db.Entry(perfilEdit).State = EntityState.Modified;
-
                 db.SaveChanges();
-
                 return RedirectToAction("Index", "Manage");
 
             }
-
-
+          
 
             return View(perfilEdit);
         }
