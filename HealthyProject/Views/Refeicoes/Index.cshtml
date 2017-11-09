@@ -24,14 +24,14 @@ else
 
     <br />
 
-    Seleccione a data que pretende ver:
+    <p>Seleccione a data que pretende ver:</p>
 
-@using(Html.BeginForm("Index", "Refeicoes"))
+using (Html.BeginForm("Index", "Refeicoes"))
 {
         @Html.AntiForgeryToken()
             <input id="dateInput" type="date" width="10" class="date" name="dateInput" value="Guardar" />
             <input id="button" type="submit" value="Guardar">
-    }
+}
 
 <br />
 <br />
@@ -62,21 +62,21 @@ else
             </td>
             <td>
                 @foreach (var prato in refeicao.RefeicaoPratos)
-                    {
+                {
                     <p>
                         @prato.Prato.Nome <span>   </span> @prato.Dose <span> gr</span>
                         <span style="font-size:70%">@Html.ActionLink("Eliminar", "Delete", "RefeicaoPratoes", new { RefeicaoID = refeicao.RefeicaoID, PratoID = prato.PratoID }, null)</span>
                     </p>
                 }
                 @foreach (var ingrediente in refeicao.RefeicaoIngredientes)
-                    {
+                {
                     <p>
                         @ingrediente.Ingrediente.Nome <span>   </span> @ingrediente.Quantidade <span> gr</span>
                         <span style="font-size:70%">@Html.ActionLink("Eliminar", "Delete", "RefeicaoIngredientes", new { RefeicaoID = refeicao.RefeicaoID, IngredienteID = ingrediente.IngredienteID }, null)</span>
                     </p>
                 }
                 @foreach (var bebida in refeicao.RefeicaoBebidas)
-                    {
+                {
                     <p>
                         @bebida.Bebida.Nome <span>   </span> @bebida.Quantidade <span> ml</span>
                         <span style="font-size:70%">@Html.ActionLink("Eliminar", "Delete", "RefeicaoBebidas", new { RefeicaoID = refeicao.RefeicaoID, BebidaID = bebida.BebidaID }, null)</span>
@@ -104,3 +104,4 @@ else
         <td></td>
     </tr>
 </table>
+}
