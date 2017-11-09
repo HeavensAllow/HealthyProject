@@ -33,6 +33,13 @@
 
                     <li>@Html.ActionLink("Pagina Inicial", "Index", "Home")</li>
                     <li>@Html.ActionLink("Sobre Nos", "About", "Home")</li>
+                    <li>@Html.ActionLink("Forum", "Index", "Forum")</li>
+                    @if (User.Identity.IsAuthenticated)
+                    {
+
+                        <li>@Html.ActionLink("Objectivos", "Index", "Objectivoes")</li>
+                    
+                    }
                 </ul>
                 @Html.Partial("_LoginPartial")
             </div>

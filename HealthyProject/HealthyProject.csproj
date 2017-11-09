@@ -18,7 +18,8 @@
     <TargetFrameworkVersion>v4.5.2</TargetFrameworkVersion>
     <MvcBuildViews>false</MvcBuildViews>
     <UseIISExpress>true</UseIISExpress>
-    <IISExpressSSLPort>44388</IISExpressSSLPort>
+    <IISExpressSSLPort>
+    </IISExpressSSLPort>
     <IISExpressAnonymousAuthentication />
     <IISExpressWindowsAuthentication />
     <IISExpressAnonymousAuthentication>enabled</IISExpressAnonymousAuthentication>
@@ -488,7 +489,6 @@
     <Content Include="Views\Refeicoes\Edit.cshtml" />
     <Content Include="Views\Refeicoes\Index.cshtml" />
     <Content Include="Views\Objectivoes\_Peso.cshtml" />
-    <Content Include="Views\Shared\_Users.cshtml" />
     <Content Include="Views\Forum\Subcategoria.cshtml" />
     <Content Include="Views\Forum\Post.cshtml" />
     <Content Include="Views\Forum\CreatePost.cshtml" />
@@ -542,7 +542,7 @@
           <AutoAssignPort>True</AutoAssignPort>
           <DevelopmentServerPort>50463</DevelopmentServerPort>
           <DevelopmentServerVPath>/</DevelopmentServerVPath>
-          <IISUrl>http://localhost:50464/</IISUrl>
+          <IISUrl>http://localhost:50463/</IISUrl>
           <NTLMAuthentication>False</NTLMAuthentication>
           <UseCustomServer>False</UseCustomServer>
           <CustomServerUrl>
