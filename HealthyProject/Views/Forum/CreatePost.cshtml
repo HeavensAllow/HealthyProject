@@ -1,16 +1,15 @@
 ﻿@model HealthyProject.Models.Post
+</br>
+</br>
 @{
     ViewBag.Title = "Novo Post";
 }
-
-
-
+</br>
 @using (Html.BeginForm())
 {
     @Html.AntiForgeryToken()
-<h2>Novo Post</h2>
-<div class="form-group">
-    <label class="control-label col-md-2" for="Titulo">Titulo</label>
+<div class="form-group" style="text-align:center">
+    <label class="control-label col-md-2" for="Titulo" style="font-size:large; color:steelblue">Titulo</label>
     <div class="col-md-10">
         @Html.EditorFor(model => model.Titulo, new { htmlAttributes = new { @class = "form-control" } })
         @Html.ValidationMessageFor(model => model.Titulo, "", new { @class = "text-danger" })
@@ -18,8 +17,9 @@
 </div>
 <br/>
 <br/>
-<div class="form-group">
-    <label class="control-label col-md-2" for="Texto">Texto</label>
+<br/>
+<div class="form-group" style="text-align:center">
+    <label class="control-label col-md-2" for="Texto" style="font-size:large; color:steelblue">Texto</label>
     <div class="col-md-10">
         @Html.EditorFor(model => model.Texto, new { htmlAttributes = new { @class = "form-control" } })
         @Html.ValidationMessageFor(model => model.Texto, "", new { @class = "text-danger" })
@@ -29,8 +29,8 @@
 <br />
     if (Convert.ToInt32(Request.Params["subcategoria"]) == 1)
     {
-<div class="form-group">
-    <label class="control-label col-md-2" id="Link">Link</label>
+<div class="form-group" style="text-align:center">
+    <label class="control-label col-md-2" id="Link" style="font-size:large; color:steelblue">Link</label>
     <div class="col-md-10">
         @Html.EditorFor(model => model.Link, new { htmlAttributes = new { @class = "form-control" } })
         @Html.ValidationMessageFor(model => model.Link, "", new { @class = "text-danger" })
@@ -41,7 +41,7 @@
     <br />
     <div>
         <div class="col-md-offset-2 col-md-10">
-            <input type="submit" value="Create" class="btn btn-default" />
+            <input type="submit" value="Criar" class="btn btn-default" style="border-radius:12px; font-size:large; font-style:unset; background-color: #e6d338;box-shadow: 0 9px rgba(0, 0, 0, 0.63)" />
         </div>
     </div>
 }

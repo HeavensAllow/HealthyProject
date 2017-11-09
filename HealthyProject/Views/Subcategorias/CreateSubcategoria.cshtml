@@ -1,5 +1,6 @@
 ﻿@model HealthyProject.Models.Subcategoria
-
+</br>
+</br>
 @{
     ViewBag.Title = "Nova Subcategoria";
 }
@@ -7,8 +8,8 @@
 {
     @Html.AntiForgeryToken()
 
-    <div class="form-group">
-        <label class="control-label col-md-2" for="Nome">Subcategoria</label>
+    <div class="form-group" style="text-align:center">
+        <label class="control-label col-md-2" for="Nome" style="font-size:large; color:steelblue">Subcategoria</label>
         <div class="col-md-10">
             @Html.EditorFor(model => model.Nome, new { htmlAttributes = new { @class = "form-control" } })
             @Html.ValidationMessageFor(model => model.Nome, "", new { @class = "text-danger" })
@@ -16,7 +17,7 @@
     </div>
     <br />
     <br />
-    <div class="form-group">
+    <div class="form-group" style="font-size:large;text-align:center; color:steelblue">
         @Html.Label("CategoriaID", "Categoria", htmlAttributes: new { @class = "control-label col-md-2" })
         <div class="col-md-10">
             @Html.DropDownList("CategoriaID", new SelectList(ViewBag.Categorias, "Value", "Text"), new { @class = "form-control" })
@@ -26,7 +27,7 @@
     <br />
     <div class="form-group">
         <div class="col-md-offset-2 col-md-10">
-            <input type="submit" value="Create" class="btn btn-default" />
+            <input type="submit" value="Criar" class="btn btn-default" style="border-radius:12px; font-size:large; font-style:unset; background-color: #e6d338;box-shadow: 0 9px rgba(0, 0, 0, 0.63)" />
         </div>
     </div>
 

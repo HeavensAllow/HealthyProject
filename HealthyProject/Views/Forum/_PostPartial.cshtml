@@ -5,9 +5,17 @@
     </tr>
     <tr style="border: 4px double black">
         <td style="padding-top:130px; background-color:orange">
-            <img src="http://www.icone-png.com/png/54/53785.png" height="80" width="70"/>
+            @if (Model.AspNetUser.Utilizador.Genero == "M")
+            {
+                <img src="http://www.icone-png.com/png/54/53785.png" height="80" width="70" />
+            }
+            else
+            {
+                <img src="http://www.iconarchive.com/download/i47216/icons-land/vista-people/Office-Client-Female-Light.ico" height="80" width="70" />
+            }
         </td>
         <td style="padding-top:145px; background-color:orange; border-right-style:double">
+            </br>
             @Model.AspNetUser.Utilizador.Nome 
         </td>
         <td style="margin:auto">
@@ -27,7 +35,14 @@
     {
         <tr style="background-color:lightblue; border-style:double; text-align:center; padding-top: 40px">
             <td>
+                @if(comentario.AspNetUser.Utilizador.Genero == "M")
+                {
                 <img src="http://www.icone-png.com/png/54/53785.png" height="60" width="50" />
+                }
+                else
+                {
+                 <img src="http://www.iconarchive.com/download/i47216/icons-land/vista-people/Office-Client-Female-Light.ico" height="60" width="50" />
+                }
             </td>
             <td class="tdInfo" style="border-right:double; padding-top:20px">
                 @comentario.AspNetUser.Utilizador.Nome
@@ -40,11 +55,18 @@
             </td>
 
             <td class="tdOpinion" style="padding-top:20px">
+
                 @using (Ajax.BeginForm("Opiniao", "Forum", new { id = comentario.CommentID }, new AjaxOptions() { HttpMethod = "Post", UpdateTargetId = "divComentarios" }))
             {
-                    <button class="Gosto" name="selectedOpinion" value="true"></button>
+                    if (User.Identity.IsAuthenticated)
+                    {
+                        <button class="Gosto" name="selectedOpinion" value="true"></button>
+                    }
                     <label id="likesLabel">@(comentario.Opiniaos.Where(o => o.Opiniao1 == true).Count() - comentario.Opiniaos.Where(o => o.Opiniao1 == false).Count())</label> <label>Likes</label>
-                    <button class="naoGosto" name="selectedOpinion" value="false"></button>
+                    if (User.Identity.IsAuthenticated)
+                    {
+                        <button class="naoGosto" name="selectedOpinion" value="false"></button>
+                    }
                 }
             </td>
 

@@ -135,32 +135,32 @@ namespace HealthyProject.Controllers
         {
             var userID = Convert.ToInt32(User.Identity.GetUserId());
             Comentario comentario = db.Comentarios.Find(id);
-            if (comentario == null)
-            {
-                return HttpNotFound();
-            }
-
-            Opiniao opiniao = comentario.Opiniaos.FirstOrDefault(c => c.userID == userID);
-
-            if (opiniao == null)
-            {
-                opiniao = new Opiniao()
+                if (comentario == null)
                 {
-                    userID = userID,
-                    commentID = comentario.CommentID,
-                    Opiniao1 = selectedOpinion
-                };
-                db.Opiniaos.Add(opiniao);
+                    return HttpNotFound();
+                }
+
+                Opiniao opiniao = comentario.Opiniaos.FirstOrDefault(c => c.userID == userID);
+
+                if (opiniao == null)
+                {
+                    opiniao = new Opiniao()
+                    {
+                        userID = userID,
+                        commentID = comentario.CommentID,
+                        Opiniao1 = selectedOpinion
+                    };
+                    db.Opiniaos.Add(opiniao);
+                }
+                else //update
+                {
+                    opiniao.Opiniao1 = selectedOpinion;
+                    db.Entry(opiniao).State = EntityState.Modified;
+                }
+                db.SaveChanges();
+                ViewBag.Likes = comentario.Opiniaos.Where(o => o.Opiniao1 == true).Count() - comentario.Opiniaos.Where(o => o.Opiniao1 == false).Count();
+                return PartialView("_PostPartial", comentario.Post);
             }
-            else //update
-            {
-                opiniao.Opiniao1 = selectedOpinion;
-                db.Entry(opiniao).State = EntityState.Modified;
-            }
-            db.SaveChanges();
-            ViewBag.Likes = comentario.Opiniaos.Where(o => o.Opiniao1 == true).Count() - comentario.Opiniaos.Where(o => o.Opiniao1 == false).Count();
-            return PartialView("_PostPartial", comentario.Post);
-        }
 
         protected override void Dispose(bool disposing)
         {

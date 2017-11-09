@@ -21,11 +21,9 @@
     <IISExpressSSLPort>44388</IISExpressSSLPort>
     <IISExpressAnonymousAuthentication />
     <IISExpressWindowsAuthentication />
-    <IISExpressAnonymousAuthentication>
-    </IISExpressAnonymousAuthentication>
-    <IISExpressWindowsAuthentication>
-    </IISExpressWindowsAuthentication>
-    <IISExpressUseClassicPipelineMode />
+    <IISExpressAnonymousAuthentication>enabled</IISExpressAnonymousAuthentication>
+    <IISExpressWindowsAuthentication>enabled</IISExpressWindowsAuthentication>
+    <IISExpressUseClassicPipelineMode>false</IISExpressUseClassicPipelineMode>
     <UseGlobalApplicationHostFile />
     <NuGetPackageImportStamp>
     </NuGetPackageImportStamp>
@@ -324,6 +322,18 @@
     <Content Include="Content\bootstrap.css" />
     <Content Include="Content\bootstrap.min.css" />
     <Content Include="Content\canvasjs.min.js" />
+    <Content Include="Content\Images\Forum\1.jpg" />
+    <Content Include="Content\Images\Forum\10.jpg" />
+    <Content Include="Content\Images\Forum\11.jpg" />
+    <Content Include="Content\Images\Forum\12.jpg" />
+    <Content Include="Content\Images\Forum\2.jpg" />
+    <Content Include="Content\Images\Forum\3.jpg" />
+    <Content Include="Content\Images\Forum\4.jpg" />
+    <Content Include="Content\Images\Forum\5.jpg" />
+    <Content Include="Content\Images\Forum\6.jpg" />
+    <Content Include="Content\Images\Forum\7.jpg" />
+    <Content Include="Content\Images\Forum\8.jpg" />
+    <Content Include="Content\Images\Forum\9.jpg" />
     <Content Include="Content\jquery.canvasjs.min.js" />
     <Content Include="Content\Images\Logo.PNG" />
     <Content Include="Content\themes\base\accordion.css" />

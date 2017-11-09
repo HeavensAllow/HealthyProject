@@ -1,24 +1,22 @@
 ﻿@model IEnumerable<HealthyProject.Models.Categoria>
-
+</br>
+</br>
 @{
     ViewBag.Title = "Categoria";
 }
 
-<p>
-    @Html.ActionLink("Nova categoria", "createCategoria", "Categorias");
-</p>
 <table class="table">
-    <tr>
-        <th>
+    <tr style="background-color:orange; text-align:center; font-size:large">
+        <th style="text-align:left; text-align:center">
             @Html.DisplayNameFor(model => model.Nome)
         </th>
 
 @foreach (var item in Model) {
     <tr>
-        <td>
+        <td style="text-align:center">
             @Html.DisplayFor(modelItem => item.Nome)
         </td>
-        <td>
+        <td style="text-align:center">
             @Html.ActionLink("Editar", "Edit", new { id=item.CategoriaID })
            
         </td>

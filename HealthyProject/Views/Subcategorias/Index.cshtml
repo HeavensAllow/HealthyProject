@@ -1,19 +1,16 @@
 ﻿@model IEnumerable<HealthyProject.Models.Subcategoria>
-
+</br>
+</br>
 @{
     ViewBag.Title = "Index";
 }
 
-
-<p>
-    @Html.ActionLink("Nova subcategoria", "createSubcategoria", "Subcategorias");
-</p>
 <table class="table">
-    <tr>
-        <th>
+    <tr style="background-color:orange; font-size:large">
+        <th style="text-align:center">
             @Html.DisplayNameFor(model => model.Nome)
         </th>
-        <th>
+        <th style="text-align:center">
             @Html.DisplayNameFor(model => model.Categoria)
         </th>
         <th></th>
@@ -21,13 +18,13 @@
 
 @foreach (var item in Model) {
     <tr>
-        <td>
+        <td style="text-align:center">
             @Html.DisplayFor(modelItem => item.Nome)
         </td>
-        <td>
+        <td style="text-align:center">
             @Html.DisplayFor(modelItem => item.Categoria.Nome)
         </td>
-        <td>
+        <td style="text-align:center">
             @Html.ActionLink("Editar", "Edit", new { id=item.SubcategoriaID })
         </td>
     </tr>
