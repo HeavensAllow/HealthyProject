@@ -1,0 +1,42 @@
+﻿@model HealthyProject.Models.RefeicaoIngrediente
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>RefeicaoIngrediente</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.Quantidade)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Quantidade)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Ingrediente.Categoria)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Ingrediente.Categoria)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Refeico.Tipo)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Refeico.Tipo)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { /* id = Model.PrimaryKey */ }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>

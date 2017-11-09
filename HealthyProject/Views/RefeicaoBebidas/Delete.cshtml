@@ -1,0 +1,58 @@
+﻿@model HealthyProject.Models.RefeicaoBebida
+
+@{
+    ViewBag.Title = "Delete";
+}
+
+<!--<h2>Delete</h2>-->
+<br />
+<br />
+<h3>Tem a certeza que pretende eliminar esta bebida?</h3>
+<br />
+<div>
+    <h4>Bebida</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.Bebida.Categoria)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Bebida.Categoria)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Bebida.Nome)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Bebida.Nome)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Quantidade)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Quantidade) ml
+        </dd>
+
+        <dt>
+            Refeição@*@Html.DisplayNameFor(model => model.Refeico.Tipo)*@
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Refeico.Tipo)
+        </dd>
+
+    </dl>
+
+    @using (Html.BeginForm()) {
+        @Html.AntiForgeryToken()
+
+        <div class="form-actions no-color">
+            <input type="submit" value="Eliminar" class="btn btn-default" /> |
+            @Html.ActionLink("Regressar", "Index", "Refeicoes", new { dateInput = Model.Refeico.Data }, null)
+        </div>
+    }
+</div>
