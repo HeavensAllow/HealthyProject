@@ -13,10 +13,11 @@ namespace HealthyProject.Models.Metadata
 
         [Required(ErrorMessage = "Introduza o Genero")]
         public string Genero { get; set; }
+
         [Required(ErrorMessage = "Introduza a Data de Nascimento")]
-        [DataType(DataType.Date)]
         [Display(Name = "Data de Nascimento")]
-        //[DisplayFormat(DataFormatString = "{0:dd-MM-yyyy", ApplyFormatInEditMode = true)]
+        [DataType(DataType.Date)]
+        [DisplayFormat(DataFormatString = "{0:DD/MM/YYYY}" , ApplyFormatInEditMode = true)]
         public Nullable<System.DateTime> Data_nascimento { get; set; }
 
         [Required(ErrorMessage = "Introduza o Peso (kg)")]
@@ -26,8 +27,8 @@ namespace HealthyProject.Models.Metadata
         public Nullable<int> Altura { get; set; }
 
         
-        [Required(ErrorMessage = "Introduza o Indice de Atividade Fisica")]
-        [Display(Name = "Indice de Atividade Fisica (Escala de 0 a 4)")]
+        [Required(ErrorMessage = "Introduza o Indice de Atividade Fisica ")]
+        [Display(Name = "Indice de Atividade Fisica/ Frequencia")]
         public Nullable<double> Actividade_fisica { get; set; }
 
         [Display(Name = "Numero de Horas de Sono Diarias")]
