@@ -23,7 +23,6 @@ namespace HealthyProject.Models
         public IEnumerable<SelectListItem> Categoria { get; set; }
         public string SelectedCategoria { get; set; }
         public IEnumerable<SelectListItem> Ingredientes { get; set; }
-
         public virtual Ingrediente Ingrediente { get; set; }
         public virtual Refeico Refeico { get; set; }
     }
