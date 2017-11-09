@@ -6,7 +6,7 @@ using System.Web;
 
 namespace HealthyProject.Models.Metadata
 {
-    public partial class Objectivo
+    public class ObjectivoMetadata
     {
         [Required(ErrorMessage = "Por favor introduza a data a dar início ao objectivo")]
         public Nullable<System.DateTime> Data_inicio { get; set; }

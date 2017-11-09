@@ -6,7 +6,7 @@ using System.Web;
 
 namespace HealthyProject.Models.Metadata
 {
-    public partial class RefeicaoPrato
+    public class RefeicaoPratoMetadata
     {
         [Required(ErrorMessage = "Por favor indique qual a refeição se refere")]
         public int RefeicaoID { get; set; }

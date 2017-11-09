@@ -11,7 +11,10 @@ namespace HealthyProject.Models
 {
     using System;
     using System.Collections.Generic;
-    
+    using HealthyProject.Models.Metadata;
+    using System.ComponentModel.DataAnnotations;
+
+    [MetadataType(typeof(ObjectivoMetadata))]
     public partial class Objectivo
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]

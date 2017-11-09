@@ -11,7 +11,10 @@ namespace HealthyProject.Models
 {
     using System;
     using System.Collections.Generic;
-    
+    using HealthyProject.Models.Metadata;
+    using System.ComponentModel.DataAnnotations;
+
+    [MetadataType(typeof(RefeicaoPratoMetadata))]
     public partial class RefeicaoPrato
     {
         public int RefeicaoID { get; set; }
