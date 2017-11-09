@@ -81,28 +81,7 @@ namespace HealthyProject.Models
         [Compare("Password", ErrorMessage = "A password e a respectiva confirmação não coincidem.")]
         public string ConfirmPassword { get; set; }
 
-        [Required]
-        [StringLength(50, ErrorMessage = "O {0} deve ter no mínimo {2} caracteres.", MinimumLength = 3)]
-        public string Nome { get; set; }
-
-        [Required(ErrorMessage = "Por favor seleccione um género dentro dos dois existentes.")]
-        public string Genero { get; set; }
-
-        [Required(ErrorMessage = "Por favor insira a sua data de nascimento")]
-        [Display(Name = "Data de Nascimento")]
-        [DataType(DataType.Date)]
-        [DisplayFormat(DataFormatString = "{0:dd/MM/yyyy}", ApplyFormatInEditMode = true)]
-        public Nullable<System.DateTime> Data_nascimento { get; set; }
-
-        [Required(ErrorMessage = "Por favor insira o seu peso")]
-        public Nullable<int> Peso { get; set; }
-
-        [Required(ErrorMessage = "Por favor insira a sua altura")]
-        public Nullable<int> Altura { get; set; }
-
-        [Required(ErrorMessage = "Por favor insira o seu nível de actividade física")]
-        [Display(Name = "Nível de Actividade Física")]
-        public Nullable<int> Actividade_fisica { get; set; }
+      
     }
 
     public class ResetPasswordViewModel

@@ -19,7 +19,7 @@
             <div class="form-horizontal">
 @if (User.Identity.IsAuthenticated)
 {
-                <label class="col-md-2" for="Texto">Novo Comentário</label>
+                <label class="col-md-2" for="Texto" style="color:steelblue;font-size:large">Novo Comentário</label>
                 <br />
                 <br />
 }
@@ -41,12 +41,15 @@
 @if (User.Identity.IsAuthenticated)
 {
             <div class="col-md-2 col-md-10">
-                <input type="submit" value="Create" class="btn btn-default" />
+                <input type="submit" value="Criar" class="btn btn-default" style="border-radius:12px; font-size:large; font-style:unset; background-color: #e6d338;box-shadow: 0 9px rgba(0, 0, 0, 0.63)" />
             </div>
 }
         </div>
     }
-
+<br/>
+<div>
+    @Html.ActionLink("Regressar", "Subcategoria", new { id = Model.SubcategoriaID })
+</div>
 @section Scripts{ 
     <script src="~/Scripts/jquery.unobtrusive-ajax.js"></script>
     <script>

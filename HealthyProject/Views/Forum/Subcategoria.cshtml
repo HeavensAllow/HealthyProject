@@ -6,13 +6,18 @@
 }
 
 <h2>@Model.Nome</h2>
-
-@if (User.Identity.IsAuthenticated)
-{
 <p>
-    @Html.ActionLink("Novo Post", "CreatePost", new { subcategoria = Model.SubcategoriaID })
+    @if (User.Identity.IsAuthenticated)
+    {
+
+        @* Se nao for a categoria Actualizacoes *@
+        if (!(Model.SubcategoriaID == 4) || User.IsInRole("Admin"))
+        {
+            @Html.ActionLink("Novo Post", "CreatePost", new { subcategoria = Model.SubcategoriaID })
+        }
+    }
 </p>
-}
+
 <table class="table">
     <tr style="background-color:lightblue">
         <th>
@@ -21,29 +26,45 @@
         </th>
         <th></th>
     </tr>
+    @if(Model.Posts.Count > 0)
+    {
+        foreach (var post in Model.Posts)
+        {
+      
+            <tr>
+                <td style="padding-top: 40px; font-size:larger; border-top: 1px solid white; border-bottom: 1px solid white; text-align:center; background-color:gainsboro">
+                    @Html.ActionLink(post.Titulo, "Post", "Forum", new { id = post.PostID }, null)
+                </td>
+                <td style="background-color:orange">
+                    @if (post.AspNetUser.Utilizador.Genero == "M")
+                    {
+                        <img src="http://www.icone-png.com/png/54/53785.png" height="80" width="70" />
+                    }
+                    else
+                    {
+                        <img src="http://www.iconarchive.com/download/i47216/icons-land/vista-people/Office-Client-Female-Light.ico" height="80" width="70" />
+                    }
+                    @post.AspNetUser.Utilizador.Nome
+                </td>
 
-@foreach (var subcategoria in Model.Posts)
-{
-    <tr>
-        <td style="padding-top: 40px; font-size:larger; border: 1px solid white; text-align:center; background-color:gainsboro">
-            @Html.ActionLink(subcategoria.Titulo, "Post", "Forum", new { id = subcategoria.PostID }, null)
-        </td>
-        <td style="background-color:orange">
-            @if (subcategoria.AspNetUser.Utilizador.Genero == "M")
-            {
-                <img src="http://www.icone-png.com/png/54/53785.png" height="80" width="70" />
-            }
-            else
-            {
-                <img src="http://www.iconarchive.com/download/i47216/icons-land/vista-people/Office-Client-Female-Light.ico" height="80" width="70" />
-            }
-            @subcategoria.AspNetUser.Utilizador.Nome
-        </td>
-
-        <td class="data" style="padding-top: 40px;background-color:orange">
-            @subcategoria.Data
-        </td>
-    </tr>
-}
+                <td class="data" style="padding-top: 40px;background-color:orange">
+                    @post.Data
+                </td>
+            </tr>
+        }
+    }
+    else
+    {
+        <tr>
+            <td colspan="3" style="background-color:gainsboro; text-align:center">
+                <h3>
+                    Não há Posts disponíveis :(
+                </h3>
+            </td>
+        </tr>
+    }
 
 </table>
+<div>
+    @Html.ActionLink("Regressar", "Index")
+</div>
