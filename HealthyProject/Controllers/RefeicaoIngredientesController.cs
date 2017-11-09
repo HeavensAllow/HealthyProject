@@ -71,13 +71,15 @@ namespace HealthyProject.Controllers
 
         public ActionResult GetIngredientes(string categoria)
         {
+            
+            var ingredientes = db.Ingredientes.Include(c => c.Categoria).Where(c => c.Categoria == categoria);
             ViewBag.IngredienteID = new SelectList(db.Ingredientes.Where(c => c.Categoria == categoria).OrderBy(i => i.Nome), "IngredientesID", "Nome");
            // List<SelectListItem> items = new List<SelectListItem>();
            // items.Add(new SelectListItem() { Text = "Sub Item 1", Value = "1" });
            // items.Add(new SelectListItem() { Text = "Sub Item 2", Value = "8" });
            // you may replace the above code with data reading from database based on the id
 
-            return Json(JsonRequestBehavior.AllowGet);
+            return Json(ingredientes, JsonRequestBehavior.AllowGet);
         }
 
         // POST: RefeicaoIngredientes/Create
