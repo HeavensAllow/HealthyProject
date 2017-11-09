@@ -28,16 +28,36 @@ else
         $('.date-picker').datepicker();
     })
 </script>
+<h2>Diário Alimentar</h2>
+>>>>>>> origin/Pedro
 
 <input class="date-picker" />
 @Html.TextBox("YourTextBox", "", new { @class = "date-picker" })
+<br />
 
+Seleccione a data que pretende ver: 
 
 <p>
     @Html.ActionLink("Create New", "Create")
 </p>
 <table class="table">
+@using (Html.BeginForm("Index", "Refeicoes"))
+{
+    @Html.AntiForgeryToken()
+    <input id="dateInput" type="date" width="10" class="date" name="dateInput"  value="Guardar"  />
+    <input id="button" type="submit" value="Guardar">
+}
+
+<br />
+<br />
+<br />
+
+<table class="table tableDailyMeals">
     <tr>
+        <th>Refeição</th>
+        <th>Descrição</th>
+        <th>Kcal</th>
+        <th>Proteínas</th>
         <th>
             @Html.DisplayNameFor(model => model.Data)
         </th>
@@ -46,7 +66,10 @@ else
         </th>
         <th>
             @Html.DisplayNameFor(model => model.RegistoDiario.RegistoID)
+            <p>Hidratos de Carbono</p>
+            <p style="font-size:80%">Açúcar</p>
         </th>
+        <th>Gordura</th>
         <th></th>
     </tr>
 
@@ -67,6 +90,57 @@ else
             @Html.ActionLink("Details", "Details", new { id = item.RefeicaoID }) |
             @Html.ActionLink("Delete", "Delete", new { id = item.RefeicaoID })
         </td>
+    @foreach (var refeicao in Model)
+    {
+            <tr>
+                <td>
+                    @*@Html.DisplayFor(modelItem => refeicao.RefeicaoID)<br />
+                    @Html.DisplayFor(modelItem => refeicao.Data)<br />*@
+                    @Html.DisplayFor(modelItem => refeicao.Tipo)
+                    <p style="font-size:70%; color:red">@Html.ActionLink("Editar refeição", "Edit", new { id = refeicao.RefeicaoID })</p>
+</td>
+                <td>
+                    @foreach (var prato in refeicao.RefeicaoPratos)
+                    {
+                        <p>
+                            @prato.Prato.Nome <span>   </span> @prato.Dose <span> gr</span>
+                            <span style="font-size:70%">@Html.ActionLink("Eliminar", "Delete", "RefeicaoPratoes", new { RefeicaoID = refeicao.RefeicaoID, PratoID = prato.PratoID}, null)</span>
+                        </p>
+                    }
+                    @foreach (var ingrediente in refeicao.RefeicaoIngredientes)
+                    {
+                        <p>
+                            @ingrediente.Ingrediente.Nome <span>   </span> @ingrediente.Quantidade <span> gr</span>
+                            <span style="font-size:70%">@Html.ActionLink("Eliminar", "Delete", "RefeicaoIngredientes", new { RefeicaoID = refeicao.RefeicaoID, IngredienteID = ingrediente.IngredienteID }, null)</span>
+                        </p>
+                    }
+                    @foreach (var bebida in refeicao.RefeicaoBebidas)
+                    {
+                        <p>
+                            @bebida.Bebida.Nome <span>   </span> @bebida.Quantidade <span> ml</span>
+                            <span style="font-size:70%">@Html.ActionLink("Eliminar", "Delete", "RefeicaoBebidas", new { RefeicaoID = refeicao.RefeicaoID, BebidaID = bebida.BebidaID }, null)</span>
+                        </p>
+                    }
+                </td>
+                <td>@ViewBag.KcalInfo</td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td>
+                    <p style="font-size:80%">@Html.ActionLink("Adicionar Prato", "Create", "RefeicaoPratoes", new { RefeicaoID = refeicao.RefeicaoID }, null)</p>
+                    <p style="font-size:80%">@Html.ActionLink("Adicionar Ingrediente", "Create", "RefeicaoIngredientes", new { RefeicaoID = refeicao.RefeicaoID }, null)</p>
+                    <p style="font-size:80%">@Html.ActionLink("Adicionar Bebida", "Create", "RefeicaoBebidas", new { RefeicaoID = refeicao.RefeicaoID }, null)</p>
+                </td>
+            </tr>
+        }
+    <tr>
+        <td>@Html.ActionLink("Adicionar Refeição", "Create")</td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
     </tr>
 }
 
