@@ -28,12 +28,27 @@
         </div>
 
         <div class="form-group">
-            @Html.LabelFor(model => model.Ingrediente, "Categoria", htmlAttributes: new { @class = "control-label col-md-2" })
+            @Html.LabelFor(model => model.Categoria, "Categoria", htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
-                @Html.DropDownList("Categoria", null, htmlAttributes: new { @class = "form-control" })
-                @Html.ValidationMessageFor(model => model.IngredienteID, "", new { @class = "text-danger" })
+                @Html.DropDownList("Categoria", null, htmlAttributes: new { @class = "form-control selectedCategoria", @id = "SelectedCategoria"})
+                @Html.ValidationMessageFor(model => model.Categoria, "", new { @class = "text-danger" })
             </div>
         </div>
+
+        <script type="text/javascript">
+            $(function () {
+                $("#SelectedCategoria").change(function () {
+                    var val = $(this).val();
+                    var subItems="";
+                    $.getJSON("@Url.Action("GetIngredientes", "RefeicaoIngredientes")", { categoria: val }, function (data) {
+                        $.each(data, function (index, item) {
+                            subItems += "<option value='" + item.Value + "'>" + item.Text + "</option>"
+                        });
+                        $("#IngredienteID").html(subItems)
+                    });
+                });
+            });
+        </script>
 
         <div class="form-group">
             @Html.LabelFor(model => model.IngredienteID, "Ingrediente", htmlAttributes: new { @class = "control-label col-md-2" })

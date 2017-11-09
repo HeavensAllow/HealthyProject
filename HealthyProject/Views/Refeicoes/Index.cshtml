@@ -78,54 +78,6 @@ Seleccione a data que pretende ver:
                 </td>
             </tr>
         }
-    <!--        <tr>
-                <td>Pequeno-almoço</td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td>
-                    <p style="font-size:80%">@Html.ActionLink("Add dish", "Create", "RefeicaoPratoes")</p>
-                    <p style="font-size:80%"><a href="">Add ingredients</a></p>
-                </td>
-            </tr>
-            <tr>
-                <td>Almoço</td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td>
-                    <p style="font-size:80%"> @Html.ActionLink("Add dish", "Create", "RefeicaoPratoes")</p>
-                    <p style="font-size:80%"><a href="">Add ingredients</a></p>
-                </td>
-            </tr>
-            <tr>
-                <td>Lanche</td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td>
-                    <p style="font-size:80%"> @Html.ActionLink("Add dish", "Create", "RefeicaoPratoes")</p>
-                    <p style="font-size:80%"><a href="">Add ingredients</a></p>
-                </td>
-            </tr>
-            <tr>
-                <td>Jantar</td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td>
-                    <p style="font-size:80%"> @Html.ActionLink("Add dish", "Create", "RefeicaoPratoes")</p>
-                    <p style="font-size:80%"><a href="">Add ingredients</a></p>
-                </td>
-            </tr>-->
     <tr>
         <td>@Html.ActionLink("Adicionar Refeição", "Create")</td>
         <td></td>
@@ -136,49 +88,3 @@ Seleccione a data que pretende ver:
         <td></td>
     </tr>
 </table>
-
-
-
-
-
-    @*<div>
-            <p>
-                @Html.ActionLink("Create New", "Create")
-            </p>
-            <table class="table">
-                <tr>
-                    <th>
-                        @Html.DisplayNameFor(model => model.Data)
-                    </th>
-                    <th>
-                        @Html.DisplayNameFor(model => model.Tipo)
-                    </th>
-                    <th>
-                        @Html.DisplayNameFor(model => model.RegistoDiario.RegistoID)
-                    </th>
-                    <th></th>
-                </tr>
-
-                @foreach (var item in Model)
-                {
-                    <tr>
-                        <td>
-                            @Html.DisplayFor(modelItem => item.Data)
-                        </td>
-                        <td>
-                            @Html.DisplayFor(modelItem => item.Tipo)
-                        </td>
-                        <td>
-                            @Html.DisplayFor(modelItem => item.RegistoDiario.RegistoID)
-                        </td>
-                        <td>
-                            @Html.ActionLink("Edit", "Edit", new { id = item.RefeicaoID }) |
-                            @Html.ActionLink("Details", "Details", new { id = item.RefeicaoID }) |
-                            @Html.ActionLink("Delete", "Delete", new { id = item.RefeicaoID })
-                        </td>
-                    </tr>
-                }
-
-            </table>
-        </div>*@
-@*@Html.EditorForModel(model => HealthyProject.Models.FoodDiaryDate)*@
