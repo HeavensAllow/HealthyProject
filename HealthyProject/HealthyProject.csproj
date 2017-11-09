@@ -79,11 +79,6 @@
     </Reference>
     <Reference Include="Microsoft.CodeDom.Providers.DotNetCompilerPlatform, Version=1.0.8.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <HintPath>..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.1.0.8\lib\net45\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.dll</HintPath>
-    <Reference Include="JQueryUIHelpers, Version=3.0.0.0, Culture=neutral, PublicKeyToken=1440f6df3b58b47e, processorArchitecture=MSIL">
-      <HintPath>..\packages\jQueryUIHelpers.Mvc5.3.0.0\lib\net45\JQueryUIHelpers.dll</HintPath>
-    </Reference>
-    <Reference Include="Microsoft.CodeDom.Providers.DotNetCompilerPlatform, Version=1.0.3.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
-      <HintPath>..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.1.0.3\lib\net45\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.dll</HintPath>
     </Reference>
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="Microsoft.Owin, Version=3.1.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
@@ -210,9 +205,6 @@
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
     <Compile Include="Controllers\ObjectivoesController.cs" />
-    <Compile Include="Controllers\RefeicaoBebidasController.cs" />
-    <Compile Include="Controllers\RefeicaoIngredientesController.cs" />
-    <Compile Include="Controllers\RefeicaoPratoesController.cs" />
     <Compile Include="Controllers\RefeicoesController.cs" />
     <Compile Include="Controllers\SubcategoriasController.cs" />
     <Compile Include="Controllers\UtilizadorsController.cs" />
@@ -240,12 +232,6 @@
     </Compile>
     <Compile Include="Models\Chart.cs" />
     <Compile Include="Models\Comentario.cs">
-      <DependentUpon>Database.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\CounterInfoRefeicao_Result.cs">
-      <DependentUpon>Database.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\CounterKcalRefeicao_Result.cs">
       <DependentUpon>Database.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\C__MigrationHistory.cs">
@@ -331,40 +317,6 @@
     <Content Include="Content\canvasjs.min.js" />
     <Content Include="Content\jquery.canvasjs.min.js" />
     <Content Include="Content\Images\Logo.PNG" />
-    <Content Include="Content\themes\base\accordion.css" />
-    <Content Include="Content\themes\base\all.css" />
-    <Content Include="Content\themes\base\autocomplete.css" />
-    <Content Include="Content\themes\base\base.css" />
-    <Content Include="Content\themes\base\button.css" />
-    <Content Include="Content\themes\base\core.css" />
-    <Content Include="Content\themes\base\datepicker.css" />
-    <Content Include="Content\themes\base\dialog.css" />
-    <Content Include="Content\themes\base\draggable.css" />
-    <Content Include="Content\themes\base\images\animated-overlay.gif" />
-    <Content Include="Content\themes\base\images\ui-bg_flat_0_aaaaaa_40x100.png" />
-    <Content Include="Content\themes\base\images\ui-bg_flat_75_ffffff_40x100.png" />
-    <Content Include="Content\themes\base\images\ui-bg_glass_55_fbf9ee_1x400.png" />
-    <Content Include="Content\themes\base\images\ui-bg_glass_65_ffffff_1x400.png" />
-    <Content Include="Content\themes\base\images\ui-bg_glass_75_dadada_1x400.png" />
-    <Content Include="Content\themes\base\images\ui-bg_glass_75_e6e6e6_1x400.png" />
-    <Content Include="Content\themes\base\images\ui-bg_glass_95_fef1ec_1x400.png" />
-    <Content Include="Content\themes\base\images\ui-bg_highlight-soft_75_cccccc_1x100.png" />
-    <Content Include="Content\themes\base\images\ui-icons_222222_256x240.png" />
-    <Content Include="Content\themes\base\images\ui-icons_2e83ff_256x240.png" />
-    <Content Include="Content\themes\base\images\ui-icons_454545_256x240.png" />
-    <Content Include="Content\themes\base\images\ui-icons_888888_256x240.png" />
-    <Content Include="Content\themes\base\images\ui-icons_cd0a0a_256x240.png" />
-    <Content Include="Content\themes\base\menu.css" />
-    <Content Include="Content\themes\base\progressbar.css" />
-    <Content Include="Content\themes\base\resizable.css" />
-    <Content Include="Content\themes\base\selectable.css" />
-    <Content Include="Content\themes\base\selectmenu.css" />
-    <Content Include="Content\themes\base\slider.css" />
-    <Content Include="Content\themes\base\sortable.css" />
-    <Content Include="Content\themes\base\spinner.css" />
-    <Content Include="Content\themes\base\tabs.css" />
-    <Content Include="Content\themes\base\theme.css" />
-    <Content Include="Content\themes\base\tooltip.css" />
     <Content Include="favicon.ico" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
@@ -409,10 +361,6 @@
     <None Include="Scripts\jquery.validate-vsdoc.js" />
     <Content Include="Scripts\jquery.unobtrusive-ajax.js" />
     <Content Include="Scripts\jquery.unobtrusive-ajax.min.js" />
-    <Content Include="Scripts\jquery-ui-1.11.0.js" />
-    <Content Include="Scripts\jquery-ui-1.11.0.min.js" />
-    <Content Include="Scripts\jquery-ui.unobtrusive-3.0.0.js" />
-    <Content Include="Scripts\jquery-ui.unobtrusive-3.0.0.min.js" />
     <Content Include="Scripts\jquery.validate.js" />
     <Content Include="Scripts\jquery.validate.min.js" />
     <Content Include="Scripts\jquery.validate.unobtrusive.js" />
@@ -487,21 +435,6 @@
     <Content Include="Views\Subcategorias\CreateSubcategoria.cshtml" />
     <Content Include="Views\Subcategorias\Edit.cshtml" />
     <Content Include="Views\Subcategorias\Index.cshtml" />
-    <Content Include="Views\RefeicaoPratoes\Create.cshtml" />
-    <Content Include="Views\RefeicaoPratoes\Delete.cshtml" />
-    <Content Include="Views\RefeicaoPratoes\Details.cshtml" />
-    <Content Include="Views\RefeicaoPratoes\Edit.cshtml" />
-    <Content Include="Views\RefeicaoPratoes\Index.cshtml" />
-    <Content Include="Views\RefeicaoBebidas\Create.cshtml" />
-    <Content Include="Views\RefeicaoBebidas\Delete.cshtml" />
-    <Content Include="Views\RefeicaoBebidas\Details.cshtml" />
-    <Content Include="Views\RefeicaoBebidas\Edit.cshtml" />
-    <Content Include="Views\RefeicaoBebidas\Index.cshtml" />
-    <Content Include="Views\RefeicaoIngredientes\Create.cshtml" />
-    <Content Include="Views\RefeicaoIngredientes\Delete.cshtml" />
-    <Content Include="Views\RefeicaoIngredientes\Details.cshtml" />
-    <Content Include="Views\RefeicaoIngredientes\Edit.cshtml" />
-    <Content Include="Views\RefeicaoIngredientes\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
