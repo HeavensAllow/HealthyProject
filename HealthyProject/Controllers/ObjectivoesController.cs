@@ -29,7 +29,7 @@ namespace HealthyProject.Controllers
                 ViewBag.SemDados = "Nao tem dados inseridos";
                 return View();
             }
-            var objectivoes = db.Objectivoes.Include(o => o.Utilizador);
+            var objectivoes = db.Objectivoes.Include(o => o.Utilizador).Where(o => o.UserID == userId);
             Objectivo objectivo = objectivoes.FirstOrDefault(o => o.UserID == userId && o.Data_fim == null);
             var refeicoes = db.RegistoDiarios.Include(i => i.Objectivo).Where(o => o.Objectivo.ObjectivoID == objectivo.ObjectivoID);
             RegistoPeso peso = db.RegistoPesoes.FirstOrDefault(o => o.User_ID == userId && o.Data == DateTime.Today);
@@ -178,7 +178,7 @@ namespace HealthyProject.Controllers
                 ViewBag.Sem = "Sem objectivo";
                 return View();
             }
-            if ((int)DateTime.Now.DayOfWeek == 3 && peso == null)
+            if ((int)DateTime.Now.DayOfWeek == 4 && peso == null)
             {
                 ViewBag.Teste = "Por favor indique o seu novo peso";
                 return View();

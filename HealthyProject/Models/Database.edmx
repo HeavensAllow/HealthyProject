@@ -244,7 +244,7 @@
           <Property Name="Data_nascimento" Type="date" />
           <Property Name="Peso" Type="int" />
           <Property Name="Altura" Type="int" />
-          <Property Name="Actividade_fisica" Type="int" />
+          <Property Name="Actividade_fisica" Type="float" />
           <Property Name="Nr_horas_sono" Type="int" />
           <Property Name="Nr_refeicoes" Type="int" />
           <Property Name="Habitos_alcoolicos" Type="bit" />
