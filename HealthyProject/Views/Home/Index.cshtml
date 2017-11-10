@@ -1,152 +1,182 @@
-﻿@model HealthyProject.Models.Utilizador
+﻿@model HealthyProject.Models.LoginViewModel
+
 @{
     ViewBag.Title = "Home Page";
 }
 @Styles.Render("~/Content/css")
 @Scripts.Render("~/bundles/modernizr")
-
-
-
 <body>
 
     @*@if(ViewBag.Sucess == null){*@
     @if (User.Identity.IsAuthenticated)
-    { 
-   
-            <div class="row" style="text-align:center;padding:200px 0;">
-            
-        
+    {
+        <div class="row" style="text-align:center;padding:200px 0">
             <div class="col-md-4">
                 <br />
                 <br />
-                <img src="http://www.pcmanias.com/wp-content/uploads/2015/10/forum3.jpg"style="width:250px;height:250px;" />
-                @Html.ActionLink("Clique para ir para o Forum", "Index", "Forum", null, htmlAttributes: new { @class = "mybtn", id = "registerLink"})
+                <img src="http://www.pcmanias.com/wp-content/uploads/2015/10/forum3.jpg" style="width:250px;height:250px;" />
+                @Html.ActionLink("Clique para ir para o Forum", "Index", "Forum", null, htmlAttributes: new { @class = "mybtn", id = "registerLink" })
             </div>
-
-                <div class="col-md-4">
-                    <br />
-                    <br />
-                    <img src="http://cardiacconnect.org.au/wp-content/uploads/2015/12/Healthy-Eating-197x197.png" style=" width:250px;height:250px" />
-                    @Html.ActionLink("Clique para adicionar/gerir as suas Refeicoes", "Index", "Refeicoes", null, htmlAttributes: new { @class = "mybtn", id = "registerLink" })
-                </div>
-      
             <div class="col-md-4">
-                <br/>
-                <br/>
-                <img src="http://igner.info/images/img_84723-75.jpg"style="width:250px;height:200px; "  />
+                <br />
+                <br />
+                <img src="http://cardiacconnect.org.au/wp-content/uploads/2015/12/Healthy-Eating-197x197.png" style=" width:250px;height:250px" />
+                @Html.ActionLink("Clique para adicionar/gerir as suas Refeicoes", "Index", "Refeicoes", null, htmlAttributes: new { @class = "mybtn", id = "registerLink" })
+            </div>
+            <div class="col-md-4">
+                <br />
+                <br />
+                <img src="http://igner.info/images/img_84723-75.jpg" style="width:250px;height:200px; " />
                 @Html.ActionLink("Clique para definir um Objetivo", "Index", "Objectivoes", null, htmlAttributes: new { @class = "mybtn", id = "registerLink" })
             </div>
-
         </div>
-
-
-
-    }
+        }
+}
     else
     {
         <br />
-        <div class="row myDiv">
-            <div class="col-md-7">
-                <br />
-                <br />
-                <br />
-                <br />
-                <img src="https://portfolios.journalism.ku.edu/natalie-dufek/files/2014/06/healthy-living.jpg" ; style="width:870px; height:500px" />
-                <br /> 
-               
-                
+        <div class="row" style="padding-left: 700px">
+            <div class="col-md-8">
+                <section id="loginForm">
+                    @using (Html.BeginForm("Login", "Account", new { ReturnUrl = ViewBag.ReturnUrl }, FormMethod.Post, new { @class = "form-horizontal", role = "form" }))
+                    {
+                        @Html.AntiForgeryToken()
+                        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+
+                        <div class="form-group">
+                            @Html.LabelFor(m => m.Email, new { @class = "col-md-2 control-label" })
+                            <div class="col-md-10">
+                                @Html.TextBoxFor(m => m.Email, new { @class = "form-control" })
+                                @Html.ValidationMessageFor(m => m.Email, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            @Html.LabelFor(m => m.Password, new { @class = "col-md-2 control-label" })
+                            <div class="col-md-10">
+                                @Html.PasswordFor(m => m.Password, new { @class = "form-control" })
+                                @Html.ValidationMessageFor(m => m.Password, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <div class="col-md-offset-2 col-md-10">
+                                <div class="checkbox">
+                                    @Html.CheckBoxFor(m => m.RememberMe)
+                                    @Html.LabelFor(m => m.RememberMe)
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <div class="col-md-offset-2 col-md-10">
+                                <input type="submit" value="Log in" class="btn btn-default" />
+                            </div>
+                        </div>
+                        <p>
+                            @Html.ActionLink("Register as a new user", "Register")
+                        </p>
+                       
+                        <p>
+                           @Html.ActionLink("Forgot your password?", "ForgotPassword")
+                        </p>
+                    }
+                </section>
             </div>
-            <div class="col-md-5">
-                <br />
-                <br />
-                <br />
-                <br />
-                <br />
-                <br />
-                <br />
-                <br />
-                <br />
-                <b style="text-align: right;font-size:x-large">  Gostaria de ter maior controlo sobre o seu peso? </b>
-                <br />
-                <br />
-                <br />
-                <br />
-                <br />
-                <br />
-                <br />
-                <br />
-                <b style="text-align:right;font-size:x-large"> Um estilo de vida saudavel? </b>
-                <br />
-                <br />
-                <br />
-                <br />
-                <b style="text-align:right;font-size:x-large"> Melhor gestao das suas Refeicoes ?  </b>
+            <div class="col-md-4">
+                <section id="socialLoginForm">
+                    @Html.Partial("_ExternalLoginsListPartial", new HealthyProject.Models.ExternalLoginListViewModel { ReturnUrl = ViewBag.ReturnUrl })
+                </section>
             </div>
         </div>
 
-        <div class="row">
-            <div class="col-md-12" style="text-align:center">
-                <img src="https://image.freepik.com/free-photo/medical-stethoscope-and-an-apple-fruit-over-wooden-background-healthy-lifestyle-concept-image_1205-1472.jpg" ; style="width:1151px; height:550px" />
-                <i style="font-size:xx-large; position:absolute; margin-top: -300px; text-align:match-parent; margin-left:-550px"> Healthy Project monitoriza o seu peso</i>.
-                <br />
-                <br />
-                <br />
-                <i style="font-size:xx-large; position:absolute; margin-top: -300px; text-align:match-parent; margin-left:-550px"> ajudando-o a alcancar os seus objetivos</i>.
-                @*<i style="font-size:xx-large; position:absolute; margin-top: -300px; text-align:match-parent; margin-left:-550px"> Healthy Project tem como objetivo  monitorizar o seu peso ajudando-o a alcancar os seus objetivos de forma rapida e eficaz!</i>.*@
-                <br />
-                <br />
-                <br />
-                <i style="font-size:xx-large; position:absolute; margin-top: -300px; text-align:match-parent; margin-left:-550px"> de forma Rapida e Eficaz!</i>.
-            </div>
-        </div>
-        <div style="text-align:center">
+        @section Scripts {
+            @Scripts.Render("~/bundles/jqueryval")
+        }
+        <div>
+                                    <br />
+                                    <br />
+                                    <br />
+                                    <br />
+                                    <br />
+                                    <br />
+                                    <br />
+                                    <br />
+                                    <br />
+                                    <b style="text-align: right;font-size:x-large">  Gostaria de ter maior controlo sobre o seu peso? </b>
+                                    <br />
+                                    <br />
+                                    <br />
+                                    <br />
+                                    <br />
+                                    <br />
+                                    <br />
+                                    <br />
+                                    <b style="text-align:right;font-size:x-large"> Um estilo de vida saudavel? </b>
+                                    <br />
+                                    <br />
+                                    <br />
+                                    <br />
+                                    <b style="text-align:right;font-size:x-large"> Melhor gestao das suas Refeicoes ?  </b>
+                                </div>
+
+
+                        <div class="row">
+                                <div class="col-md-12" style="text-align:center">
+
+                                    <i style="font-size:xx-large; position:absolute; margin-top: -300px; text-align:match-parent; margin-left:-550px"> Healthy Project monitoriza o seu peso</i>.
+                                    <br />
+                                    <br />
+                                    <br />
+                                    <i style="font-size:xx-large; position:absolute; margin-top: -300px; text-align:match-parent; margin-left:-550px"> ajudando-o a alcancar os seus objetivos</i>.
+
+                                    <br />
+                                    <br />
+                                    <br />
+                                    <i style="font-size:xx-large; position:absolute; margin-top: -300px; text-align:match-parent; margin-left:-550px"> de forma Rapida e Eficaz!</i>.
+                                </div>
+                            </div>
+                            <div style="text-align:center">
+
+                                <br />
+                                <br />
+                                <br />
+                                <b style="font-size:xx-large">Junte se a nos!</b>
+                                <br />
+
+                                @Html.ActionLink("Registe-se", "register", "account", routeValues: null, htmlAttributes: new { @class = "mybtn", id = "registerLink" })
+                            </div>
+
+
+
+                }
+            </body>
             
-            <br />
-            <br />
-            <br />
-            <b style="font-size:xx-large">Junte se a nos!</b>
-            <br />
 
-            @Html.ActionLink("Registe-se", "register", "account", routeValues: null, htmlAttributes: new { @class = "mybtn", id = "registerLink" })
-        </div>
+            @*http://www.shineprowindowcleaning.com/wp-content/uploads/2016/02/background-blue-gradient.jpg
+        @*style="background-image: url(http://static.tumblr.com/17fe60d85d38327f4216e7fb11f81111/bwqiovp/jzyn2ivyx/tumblr_static_best-top-desktop-blue-wallpapers-hd-blue-wallpaper-beautiful-free-backgrounds-31.jpg)" bgproperties="fixed"*@
 
 
+        @*Informacao Anterior*@
+        @*<p class="lead">ASP.NET is a free web framework for building great Web sites and Web applications using HTML, CSS and JavaScript.</p>
+            <p><a href="https://asp.net" class="btn btn-primary btn-lg">Learn more &raquo;</a></p>*@
+        @*<div class="row">
+               <div class="col-md-4">
+                   <h2>Getting started</h2>
+                   <p>
+                       ASP.NET MVC gives you a powerful, patterns-based way to build dynamic websites that
+                       enables a clean separation of concerns and gives you full control over markup
+                       for enjoyable, agile development.
+                   </p>
+                   <p><a class="btn btn-default" href="https://go.microsoft.com/fwlink/?LinkId=301865">Learn more &raquo;</a></p>
+               </div>
+               <div class="col-md-4">
+                   <h2>Get more libraries</h2>
+                   <p>NuGet is a free Visual Studio extension that makes it easy to add, remove, and update libraries and tools in Visual Studio projects.</p>
+                   <p><a class="btn btn-default" href="https://go.microsoft.com/fwlink/?LinkId=301866">Learn more &raquo;</a></p>
+               </div>
+               <div class="col-md-4">
+                   <h2>Web Hosting</h2>
+                   <p>You can easily find a web hosting company that offers the right mix of features and price for your applications.</p>
+                   <p><a class="btn btn-default" href="https://go.microsoft.com/fwlink/?LinkId=301867">Learn more &raquo;</a></p>
 
-
-
-
-    }
-</body> 
-
-
-
-@*http://www.shineprowindowcleaning.com/wp-content/uploads/2016/02/background-blue-gradient.jpg*@
-@*style="background-image: url(http://static.tumblr.com/17fe60d85d38327f4216e7fb11f81111/bwqiovp/jzyn2ivyx/tumblr_static_best-top-desktop-blue-wallpapers-hd-blue-wallpaper-beautiful-free-backgrounds-31.jpg)" bgproperties="fixed"*@
-
-
-@*Informacao Anterior*@
-@*<p class="lead">ASP.NET is a free web framework for building great Web sites and Web applications using HTML, CSS and JavaScript.</p>
-    <p><a href="https://asp.net" class="btn btn-primary btn-lg">Learn more &raquo;</a></p>*@
-@*<div class="row">
-       <div class="col-md-4">
-           <h2>Getting started</h2>
-           <p>
-               ASP.NET MVC gives you a powerful, patterns-based way to build dynamic websites that
-               enables a clean separation of concerns and gives you full control over markup
-               for enjoyable, agile development.
-           </p>
-           <p><a class="btn btn-default" href="https://go.microsoft.com/fwlink/?LinkId=301865">Learn more &raquo;</a></p>
-       </div>
-       <div class="col-md-4">
-           <h2>Get more libraries</h2>
-           <p>NuGet is a free Visual Studio extension that makes it easy to add, remove, and update libraries and tools in Visual Studio projects.</p>
-           <p><a class="btn btn-default" href="https://go.microsoft.com/fwlink/?LinkId=301866">Learn more &raquo;</a></p>
-       </div>
-       <div class="col-md-4">
-           <h2>Web Hosting</h2>
-           <p>You can easily find a web hosting company that offers the right mix of features and price for your applications.</p>
-           <p><a class="btn btn-default" href="https://go.microsoft.com/fwlink/?LinkId=301867">Learn more &raquo;</a></p>
-
-       </div>
-    </div>*@
-@*class="jumbotron"*@ 
+               </div>
+            </div>*@
+        @*class="jumbotron"*@

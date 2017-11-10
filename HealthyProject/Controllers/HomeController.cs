@@ -15,9 +15,7 @@ namespace HealthyProject.Controllers
 
         public ActionResult Index()
         {
-            int userId = Convert.ToInt32(User.Identity.GetUserId());
-            Utilizador utilizador = db.Utilizadors.FirstOrDefault(o => o.UserID == userId);
-            return View(utilizador);
+            return View();
         }
 
         public ActionResult About()
