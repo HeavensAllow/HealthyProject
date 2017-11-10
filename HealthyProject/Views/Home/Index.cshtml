@@ -6,13 +6,28 @@
 @Scripts.Render("~/bundles/modernizr")
 
 
-
 <body>
-
-    @*@if(ViewBag.Sucess == null){*@
     @if (User.Identity.IsAuthenticated)
-    { 
-   
+    {
+        if (ViewBag.UserGuide != null)
+        {
+            <br />
+            <br />
+            <br />
+            <div class="centerAlign">
+                <div class="alert alert-success alert-dismissable">
+                    <strong><i class="fa fa-exclamation-triangle" aria-hidden="true"></i> Bem vindo ao HealthyProject! Iremos agora acompanhar-te no teu percurso inicial pelo nosso website, mostrando as suas funcionalidades.</strong>
+                    <br />
+                    <strong><i class="fa fa-exclamation-triangle" aria-hidden="true"></i>Nesta página apresentamos imagens das nossas funcionalidades disponíveis bem como links para as mesmas. </strong>
+                    <br />
+                    <strong><i class="fa fa-exclamation-triangle" aria-hidden="true"></i>No entanto, antes de começares o teu percurso na nossa página precisas de preencher o teu perfil. Por favor carrega no botão abaixo e cria o teu perfil.</strong>
+                    <br />
+                    <br />
+                    @Html.ActionLink("Criar Perfil", "Index", "Manage", null, htmlAttributes: new { @class = "mybtn" })
+                </div>
+            </div>
+        }
+
             <div class="row" style="text-align:center;padding:200px 0;">
             
         

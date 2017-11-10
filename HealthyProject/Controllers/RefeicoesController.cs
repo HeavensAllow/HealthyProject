@@ -212,15 +212,12 @@ namespace HealthyProject.Controllers
         public ActionResult NutriInfo(int RefeicaoID)
         {
             SqlParameter refID = new SqlParameter("@RefeicaoID", RefeicaoID);
-            IList<CounterInfoRefeicao_Result> NutriInfo = db.Database.SqlQuery<CounterInfoRefeicao_Result>("dbo.CounterInfoRefeicao @RefeicaoID", refID).ToList<CounterInfoRefeicao_Result>();
-            return View(NutriInfo);  //Andre diz para usar PartialView
+            return View();  //Andre diz para usar PartialView
         }
 
         public ActionResult KcalInfo(int RefeicaoID)
         {
             SqlParameter refID = new SqlParameter("@RefeicaoID", RefeicaoID);
-            IList<CounterKcalRefeicao_Result> KcalInfo = db.Database.SqlQuery<CounterKcalRefeicao_Result>("dbo.CounterInfoRefeicao @RefeicaoID", refID).ToList<CounterKcalRefeicao_Result>();
-            ViewBag.KcalInfo = KcalInfo;
             return View();
         }
 

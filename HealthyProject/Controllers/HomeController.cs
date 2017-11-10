@@ -17,6 +17,17 @@ namespace HealthyProject.Controllers
         {
             int userId = Convert.ToInt32(User.Identity.GetUserId());
             Utilizador utilizador = db.Utilizadors.FirstOrDefault(o => o.UserID == userId);
+            if(utilizador != null)
+            {
+               if(utilizador.Nome != null)
+                {
+                    return View(utilizador);
+                }
+                else
+                {
+                    ViewBag.UserGuide = "Primeiro Log";
+                }
+            }
             return View(utilizador);
         }
 

@@ -11,7 +11,9 @@ namespace HealthyProject.Models
 {
     using System;
     using System.Collections.Generic;
-    
+    using HealthyProject.Models.Metadata;
+    using System.ComponentModel.DataAnnotations;
+
     public partial class Refeico
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
@@ -20,7 +22,6 @@ namespace HealthyProject.Models
             this.RefeicaoBebidas = new HashSet<RefeicaoBebida>();
             this.RefeicaoIngredientes = new HashSet<RefeicaoIngrediente>();
             this.RefeicaoPratos = new HashSet<RefeicaoPrato>();
-            this.RefeicaoBebidas = new HashSet<RefeicaoBebida>();
         }
     
         public int RefeicaoID { get; set; }

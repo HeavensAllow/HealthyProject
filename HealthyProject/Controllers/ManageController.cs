@@ -68,18 +68,6 @@ namespace HealthyProject.Controllers
                 : "";
 
             var userId = Convert.ToInt32(User.Identity.GetUserId()); // estava em string
-
-            //var model = new IndexViewModel
-            //{
-            //    HasPassword = HasPassword(),
-            //    PhoneNumber = await UserManager.GetPhoneNumberAsync(User.Identity.GetUserId<int>()),
-            //    TwoFactor = await UserManager.GetTwoFactorEnabledAsync(User.Identity.GetUserId<int>()),
-            //    Logins = await UserManager.GetLoginsAsync(User.Identity.GetUserId<int>()),
-            //    BrowserRemembered = await AuthenticationManager.TwoFactorBrowserRememberedAsync(userId)
-
-            //};
-            // User.Identity.GetUserId-- - depois defazer log in tenho este
-
             Utilizador perfil = db.Utilizadors.Find(userId);
 
             ViewBag.Genders = new SelectList(new List<SelectListItem>
@@ -97,7 +85,17 @@ namespace HealthyProject.Controllers
                     new SelectListItem {Text = "3", Value = "3"},
                     new SelectListItem {Text = "4", Value = "4"},
                 }, "Value", "Text", perfil.Actividade_fisica);
-
+            if(perfil != null)
+            {
+                if(perfil.Nome != null)
+                {
+                    return View(perfil);
+                }
+                else
+                {
+                    ViewBag.UserGuide = "Sem Nome";
+                }
+            }
             return View(perfil);
             // manda oos dados do utilizador para a view
         }
@@ -181,7 +179,6 @@ namespace HealthyProject.Controllers
                     ModelState.AddModelError("Actividade_fisica", "Introduza o Indice de Atividade Fisica");
                     error = true;
                 }
-
                 
 
                 //int porcofeio = (int)perfilEdit.Actividade_fisica;

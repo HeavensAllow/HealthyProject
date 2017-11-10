@@ -111,10 +111,12 @@ namespace HealthyProject.Controllers
             if (ModelState.IsValid)
             {
                 db.Entry(utilizador).State = EntityState.Modified;
-                RegistoPeso peso = new RegistoPeso();
-                peso.Peso = utilizador.Peso;
-                peso.Data = DateTime.Today;
-                peso.User_ID = utilizador.UserID;
+                RegistoPeso peso = new RegistoPeso()
+                {
+                    Peso = utilizador.Peso,
+                    Data = DateTime.Today,
+                    User_ID = utilizador.UserID
+                };
                 db.RegistoPesoes.Add(peso);
 
                 var role = db.AspNetRoles.FirstOrDefault(r => r.Name == roleName);

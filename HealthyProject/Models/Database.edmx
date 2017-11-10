@@ -639,7 +639,6 @@
           <EntitySet Name="Bebidas" EntityType="HealthyModel.Bebida" />
           <EntitySet Name="Categorias" EntityType="HealthyModel.Categoria" />
           <EntitySet Name="Comentarios" EntityType="HealthyModel.Comentario" />
-          <EntitySet Name="Ingredientes" EntityType="HealthyModel.Ingrediente" />
           <EntitySet Name="Objectivoes" EntityType="HealthyModel.Objectivo" />
           <EntitySet Name="Opiniaos" EntityType="HealthyModel.Opiniao" />
           <EntitySet Name="Posts" EntityType="HealthyModel.Post" />
@@ -654,84 +653,85 @@
           <EntitySet Name="sysdiagrams" EntityType="HealthyModel.sysdiagram" />
           <EntitySet Name="Utilizadors" EntityType="HealthyModel.Utilizador" />
           <AssociationSet Name="FK_dbo_AspNetUserClaims_dbo_AspNetUsers_UserId" Association="HealthyModel.FK_dbo_AspNetUserClaims_dbo_AspNetUsers_UserId">
-            <End Role="AspNetUser" EntitySet="AspNetUsers" />
-            <End Role="AspNetUserClaim" EntitySet="AspNetUserClaims" />
+            <End EntitySet="AspNetUsers" Role="AspNetUser" />
+            <End EntitySet="AspNetUserClaims" Role="AspNetUserClaim" />
           </AssociationSet>
           <AssociationSet Name="FK_dbo_AspNetUserLogins_dbo_AspNetUsers_UserId" Association="HealthyModel.FK_dbo_AspNetUserLogins_dbo_AspNetUsers_UserId">
-            <End Role="AspNetUser" EntitySet="AspNetUsers" />
-            <End Role="AspNetUserLogin" EntitySet="AspNetUserLogins" />
+            <End EntitySet="AspNetUsers" Role="AspNetUser" />
+            <End EntitySet="AspNetUserLogins" Role="AspNetUserLogin" />
           </AssociationSet>
           <AssociationSet Name="FK_Comentarios_AspNetUsers" Association="HealthyModel.FK_Comentarios_AspNetUsers">
-            <End Role="AspNetUser" EntitySet="AspNetUsers" />
-            <End Role="Comentario" EntitySet="Comentarios" />
+            <End EntitySet="AspNetUsers" Role="AspNetUser" />
+            <End EntitySet="Comentarios" Role="Comentario" />
           </AssociationSet>
           <AssociationSet Name="FK_Posts_AspNetUsers" Association="HealthyModel.FK_Posts_AspNetUsers">
-            <End Role="AspNetUser" EntitySet="AspNetUsers" />
-            <End Role="Post" EntitySet="Posts" />
+            <End EntitySet="AspNetUsers" Role="AspNetUser" />
+            <End EntitySet="Posts" Role="Post" />
           </AssociationSet>
           <AssociationSet Name="FK_Utilizador_AspNetUsers" Association="HealthyModel.FK_Utilizador_AspNetUsers">
-            <End Role="AspNetUser" EntitySet="AspNetUsers" />
-            <End Role="Utilizador" EntitySet="Utilizadors" />
+            <End EntitySet="AspNetUsers" Role="AspNetUser" />
+            <End EntitySet="Utilizadors" Role="Utilizador" />
           </AssociationSet>
           <AssociationSet Name="FK_RefeicaoBebida_Bebidas" Association="HealthyModel.FK_RefeicaoBebida_Bebidas">
-            <End Role="Bebida" EntitySet="Bebidas" />
-            <End Role="RefeicaoBebida" EntitySet="RefeicaoBebidas" />
+            <End EntitySet="Bebidas" Role="Bebida" />
+            <End EntitySet="RefeicaoBebidas" Role="RefeicaoBebida" />
           </AssociationSet>
           <AssociationSet Name="FK_Subcategorias_Categorias" Association="HealthyModel.FK_Subcategorias_Categorias">
-            <End Role="Categoria" EntitySet="Categorias" />
-            <End Role="Subcategoria" EntitySet="Subcategorias" />
+            <End EntitySet="Categorias" Role="Categoria" />
+            <End EntitySet="Subcategorias" Role="Subcategoria" />
           </AssociationSet>
           <AssociationSet Name="FK_Comentarios_Posts" Association="HealthyModel.FK_Comentarios_Posts">
-            <End Role="Post" EntitySet="Posts" />
-            <End Role="Comentario" EntitySet="Comentarios" />
+            <End EntitySet="Posts" Role="Post" />
+            <End EntitySet="Comentarios" Role="Comentario" />
           </AssociationSet>
           <AssociationSet Name="FK_Opiniao_Comentarios" Association="HealthyModel.FK_Opiniao_Comentarios">
-            <End Role="Comentario" EntitySet="Comentarios" />
-            <End Role="Opiniao" EntitySet="Opiniaos" />
+            <End EntitySet="Comentarios" Role="Comentario" />
+            <End EntitySet="Opiniaos" Role="Opiniao" />
           </AssociationSet>
+          <AssociationSet Name="FK_Objectivo_Objectivo" Association="HealthyModel.FK_Objectivo_Objectivo">
+            <End EntitySet="Utilizadors" Role="Utilizador" />
+            <End EntitySet="Objectivoes" Role="Objectivo" />
+          </AssociationSet>
+          <AssociationSet Name="FK_RegistoDiario_RegistoDiario" Association="HealthyModel.FK_RegistoDiario_RegistoDiario">
+            <End EntitySet="Objectivoes" Role="Objectivo" />
+            <End EntitySet="RegistoDiarios" Role="RegistoDiario" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Posts_Subcategorias" Association="HealthyModel.FK_Posts_Subcategorias">
+            <End EntitySet="Subcategorias" Role="Subcategoria" />
+            <End EntitySet="Posts" Role="Post" />
+          </AssociationSet>
+          <AssociationSet Name="FK_RefeicaoPratos_Pratos1" Association="HealthyModel.FK_RefeicaoPratos_Pratos1">
+            <End EntitySet="Pratos" Role="Prato" />
+            <End EntitySet="RefeicaoPratos" Role="RefeicaoPrato" />
+          </AssociationSet>
+          <AssociationSet Name="FK_RefeicaoBebida_Refeicoes" Association="HealthyModel.FK_RefeicaoBebida_Refeicoes">
+            <End EntitySet="Refeicoes" Role="Refeico" />
+            <End EntitySet="RefeicaoBebidas" Role="RefeicaoBebida" />
+          </AssociationSet>
+          <AssociationSet Name="FK_RefeicaoIngredientes_Refeicoes1" Association="HealthyModel.FK_RefeicaoIngredientes_Refeicoes1">
+            <End EntitySet="Refeicoes" Role="Refeico" />
+            <End EntitySet="RefeicaoIngredientes" Role="RefeicaoIngrediente" />
+          </AssociationSet>
+          <AssociationSet Name="FK_RefeicaoPratos_Pratos" Association="HealthyModel.FK_RefeicaoPratos_Pratos">
+            <End EntitySet="Refeicoes" Role="Refeico" />
+            <End EntitySet="RefeicaoPratos" Role="RefeicaoPrato" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Refeicoes_RegistoDiario" Association="HealthyModel.FK_Refeicoes_RegistoDiario">
+            <End EntitySet="RegistoDiarios" Role="RegistoDiario" />
+            <End EntitySet="Refeicoes" Role="Refeico" />
+          </AssociationSet>
+          <AssociationSet Name="FK_RegistoPeso_Utilizador" Association="HealthyModel.FK_RegistoPeso_Utilizador">
+            <End EntitySet="Utilizadors" Role="Utilizador" />
+            <End EntitySet="RegistoPesoes" Role="RegistoPeso" />
+          </AssociationSet>
+          <AssociationSet Name="AspNetUserRoles" Association="HealthyModel.AspNetUserRoles">
+            <End EntitySet="AspNetRoles" Role="AspNetRole" />
+            <End EntitySet="AspNetUsers" Role="AspNetUser" />
+          </AssociationSet>
+          <EntitySet Name="Ingredientes" EntityType="HealthyModel.Ingrediente" />
           <AssociationSet Name="FK_RefeicaoIngredientes_Refeicoes" Association="HealthyModel.FK_RefeicaoIngredientes_Refeicoes">
             <End Role="Ingrediente" EntitySet="Ingredientes" />
             <End Role="RefeicaoIngrediente" EntitySet="RefeicaoIngredientes" />
-          </AssociationSet>
-          <AssociationSet Name="FK_Objectivo_Objectivo" Association="HealthyModel.FK_Objectivo_Objectivo">
-            <End Role="Utilizador" EntitySet="Utilizadors" />
-            <End Role="Objectivo" EntitySet="Objectivoes" />
-          </AssociationSet>
-          <AssociationSet Name="FK_RegistoDiario_RegistoDiario" Association="HealthyModel.FK_RegistoDiario_RegistoDiario">
-            <End Role="Objectivo" EntitySet="Objectivoes" />
-            <End Role="RegistoDiario" EntitySet="RegistoDiarios" />
-          </AssociationSet>
-          <AssociationSet Name="FK_Posts_Subcategorias" Association="HealthyModel.FK_Posts_Subcategorias">
-            <End Role="Subcategoria" EntitySet="Subcategorias" />
-            <End Role="Post" EntitySet="Posts" />
-          </AssociationSet>
-          <AssociationSet Name="FK_RefeicaoPratos_Pratos1" Association="HealthyModel.FK_RefeicaoPratos_Pratos1">
-            <End Role="Prato" EntitySet="Pratos" />
-            <End Role="RefeicaoPrato" EntitySet="RefeicaoPratos" />
-          </AssociationSet>
-          <AssociationSet Name="FK_RefeicaoBebida_Refeicoes" Association="HealthyModel.FK_RefeicaoBebida_Refeicoes">
-            <End Role="Refeico" EntitySet="Refeicoes" />
-            <End Role="RefeicaoBebida" EntitySet="RefeicaoBebidas" />
-          </AssociationSet>
-          <AssociationSet Name="FK_RefeicaoIngredientes_Refeicoes1" Association="HealthyModel.FK_RefeicaoIngredientes_Refeicoes1">
-            <End Role="Refeico" EntitySet="Refeicoes" />
-            <End Role="RefeicaoIngrediente" EntitySet="RefeicaoIngredientes" />
-          </AssociationSet>
-          <AssociationSet Name="FK_RefeicaoPratos_Pratos" Association="HealthyModel.FK_RefeicaoPratos_Pratos">
-            <End Role="Refeico" EntitySet="Refeicoes" />
-            <End Role="RefeicaoPrato" EntitySet="RefeicaoPratos" />
-          </AssociationSet>
-          <AssociationSet Name="FK_Refeicoes_RegistoDiario" Association="HealthyModel.FK_Refeicoes_RegistoDiario">
-            <End Role="RegistoDiario" EntitySet="RegistoDiarios" />
-            <End Role="Refeico" EntitySet="Refeicoes" />
-          </AssociationSet>
-          <AssociationSet Name="FK_RegistoPeso_Utilizador" Association="HealthyModel.FK_RegistoPeso_Utilizador">
-            <End Role="Utilizador" EntitySet="Utilizadors" />
-            <End Role="RegistoPeso" EntitySet="RegistoPesoes" />
-          </AssociationSet>
-          <AssociationSet Name="AspNetUserRoles" Association="HealthyModel.AspNetUserRoles">
-            <End Role="AspNetRole" EntitySet="AspNetRoles" />
-            <End Role="AspNetUser" EntitySet="AspNetUsers" />
           </AssociationSet>
         </EntityContainer>
         <ComplexType Name="Top5_Result">
@@ -743,27 +743,27 @@
             <PropertyRef Name="MigrationId" />
             <PropertyRef Name="ContextKey" />
           </Key>
-          <Property Name="MigrationId" Type="String" Nullable="false" MaxLength="150" FixedLength="false" Unicode="true" />
-          <Property Name="ContextKey" Type="String" Nullable="false" MaxLength="300" FixedLength="false" Unicode="true" />
-          <Property Name="Model" Type="Binary" Nullable="false" MaxLength="Max" FixedLength="false" />
-          <Property Name="ProductVersion" Type="String" Nullable="false" MaxLength="32" FixedLength="false" Unicode="true" />
+          <Property Name="MigrationId" Nullable="false" MaxLength="150" FixedLength="false" Unicode="true" Type="String" />
+          <Property Name="ContextKey" Nullable="false" MaxLength="300" FixedLength="false" Unicode="true" Type="String" />
+          <Property Name="Model" Nullable="false" MaxLength="Max" FixedLength="false" Type="Binary" />
+          <Property Name="ProductVersion" Nullable="false" MaxLength="32" FixedLength="false" Unicode="true" Type="String" />
         </EntityType>
         <EntityType Name="AspNetRole">
           <Key>
             <PropertyRef Name="Id" />
           </Key>
-          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="Name" Type="String" Nullable="false" MaxLength="256" FixedLength="false" Unicode="true" />
+          <Property Name="Id" Nullable="false" annotation:StoreGeneratedPattern="Identity" Type="Int32" />
+          <Property Name="Name" Nullable="false" MaxLength="256" FixedLength="false" Unicode="true" Type="String" />
           <NavigationProperty Name="AspNetUsers" Relationship="HealthyModel.AspNetUserRoles" FromRole="AspNetRole" ToRole="AspNetUser" />
         </EntityType>
         <EntityType Name="AspNetUserClaim">
           <Key>
             <PropertyRef Name="Id" />
           </Key>
-          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="UserId" Type="Int32" Nullable="false" />
-          <Property Name="ClaimType" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
-          <Property Name="ClaimValue" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Id" Nullable="false" annotation:StoreGeneratedPattern="Identity" Type="Int32" />
+          <Property Name="UserId" Nullable="false" Type="Int32" />
+          <Property Name="ClaimType" MaxLength="Max" FixedLength="false" Unicode="true" Type="String" />
+          <Property Name="ClaimValue" MaxLength="Max" FixedLength="false" Unicode="true" Type="String" />
           <NavigationProperty Name="AspNetUser" Relationship="HealthyModel.FK_dbo_AspNetUserClaims_dbo_AspNetUsers_UserId" FromRole="AspNetUserClaim" ToRole="AspNetUser" />
         </EntityType>
         <EntityType Name="AspNetUserLogin">
@@ -772,27 +772,27 @@
             <PropertyRef Name="ProviderKey" />
             <PropertyRef Name="UserId" />
           </Key>
-          <Property Name="LoginProvider" Type="String" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
-          <Property Name="ProviderKey" Type="String" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
-          <Property Name="UserId" Type="Int32" Nullable="false" />
+          <Property Name="LoginProvider" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" Type="String" />
+          <Property Name="ProviderKey" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" Type="String" />
+          <Property Name="UserId" Nullable="false" Type="Int32" />
           <NavigationProperty Name="AspNetUser" Relationship="HealthyModel.FK_dbo_AspNetUserLogins_dbo_AspNetUsers_UserId" FromRole="AspNetUserLogin" ToRole="AspNetUser" />
         </EntityType>
         <EntityType Name="AspNetUser">
           <Key>
             <PropertyRef Name="Id" />
           </Key>
-          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="Email" Type="String" MaxLength="256" FixedLength="false" Unicode="true" />
-          <Property Name="EmailConfirmed" Type="Boolean" Nullable="false" />
-          <Property Name="PasswordHash" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
-          <Property Name="SecurityStamp" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
-          <Property Name="PhoneNumber" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
-          <Property Name="PhoneNumberConfirmed" Type="Boolean" Nullable="false" />
-          <Property Name="TwoFactorEnabled" Type="Boolean" Nullable="false" />
-          <Property Name="LockoutEndDateUtc" Type="DateTime" Precision="3" />
-          <Property Name="LockoutEnabled" Type="Boolean" Nullable="false" />
-          <Property Name="AccessFailedCount" Type="Int32" Nullable="false" />
-          <Property Name="UserName" Type="String" Nullable="false" MaxLength="256" FixedLength="false" Unicode="true" />
+          <Property Name="Id" Nullable="false" annotation:StoreGeneratedPattern="Identity" Type="Int32" />
+          <Property Name="Email" MaxLength="256" FixedLength="false" Unicode="true" Type="String" />
+          <Property Name="EmailConfirmed" Nullable="false" Type="Boolean" />
+          <Property Name="PasswordHash" MaxLength="Max" FixedLength="false" Unicode="true" Type="String" />
+          <Property Name="SecurityStamp" MaxLength="Max" FixedLength="false" Unicode="true" Type="String" />
+          <Property Name="PhoneNumber" MaxLength="Max" FixedLength="false" Unicode="true" Type="String" />
+          <Property Name="PhoneNumberConfirmed" Nullable="false" Type="Boolean" />
+          <Property Name="TwoFactorEnabled" Nullable="false" Type="Boolean" />
+          <Property Name="LockoutEndDateUtc" Precision="3" Type="DateTime" />
+          <Property Name="LockoutEnabled" Nullable="false" Type="Boolean" />
+          <Property Name="AccessFailedCount" Nullable="false" Type="Int32" />
+          <Property Name="UserName" Nullable="false" MaxLength="256" FixedLength="false" Unicode="true" Type="String" />
           <NavigationProperty Name="AspNetUserClaims" Relationship="HealthyModel.FK_dbo_AspNetUserClaims_dbo_AspNetUsers_UserId" FromRole="AspNetUser" ToRole="AspNetUserClaim" />
           <NavigationProperty Name="AspNetUserLogins" Relationship="HealthyModel.FK_dbo_AspNetUserLogins_dbo_AspNetUsers_UserId" FromRole="AspNetUser" ToRole="AspNetUserLogin" />
           <NavigationProperty Name="Comentarios" Relationship="HealthyModel.FK_Comentarios_AspNetUsers" FromRole="AspNetUser" ToRole="Comentario" />
@@ -804,38 +804,427 @@
           <Key>
             <PropertyRef Name="BebidasID" />
           </Key>
-          <Property Name="BebidasID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="Categoria" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="true" />
-          <Property Name="Nome" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="true" />
-          <Property Name="Unidade" Type="Int32" Nullable="false" />
-          <Property Name="Kcal" Type="Double" Nullable="false" />
-          <Property Name="Proteinas" Type="Double" Nullable="false" />
-          <Property Name="Gordura" Type="Double" Nullable="false" />
-          <Property Name="HidCarbono" Type="Double" Nullable="false" />
-          <Property Name="HC_Acucar" Type="Double" Nullable="false" />
+          <Property Name="BebidasID" Nullable="false" annotation:StoreGeneratedPattern="Identity" Type="Int32" />
+          <Property Name="Categoria" Nullable="false" MaxLength="100" FixedLength="false" Unicode="true" Type="String" />
+          <Property Name="Nome" Nullable="false" MaxLength="100" FixedLength="false" Unicode="true" Type="String" />
+          <Property Name="Unidade" Nullable="false" Type="Int32" />
+          <Property Name="Kcal" Nullable="false" Type="Double" />
+          <Property Name="Proteinas" Nullable="false" Type="Double" />
+          <Property Name="Gordura" Nullable="false" Type="Double" />
+          <Property Name="HidCarbono" Nullable="false" Type="Double" />
+          <Property Name="HC_Acucar" Nullable="false" Type="Double" />
           <NavigationProperty Name="RefeicaoBebidas" Relationship="HealthyModel.FK_RefeicaoBebida_Bebidas" FromRole="Bebida" ToRole="RefeicaoBebida" />
         </EntityType>
         <EntityType Name="Categoria">
           <Key>
             <PropertyRef Name="CategoriaID" />
           </Key>
-          <Property Name="CategoriaID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="Nome" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="CategoriaID" Nullable="false" annotation:StoreGeneratedPattern="Identity" Type="Int32" />
+          <Property Name="Nome" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" Type="String" />
           <NavigationProperty Name="Subcategorias" Relationship="HealthyModel.FK_Subcategorias_Categorias" FromRole="Categoria" ToRole="Subcategoria" />
         </EntityType>
         <EntityType Name="Comentario">
           <Key>
             <PropertyRef Name="CommentID" />
           </Key>
-          <Property Name="CommentID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="UserID" Type="Int32" Nullable="false" />
-          <Property Name="Data" Type="DateTime" Nullable="false" Precision="3" />
-          <Property Name="Comment" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="false" />
-          <Property Name="PostID" Type="Int32" Nullable="false" />
+          <Property Name="CommentID" Nullable="false" annotation:StoreGeneratedPattern="Identity" Type="Int32" />
+          <Property Name="UserID" Nullable="false" Type="Int32" />
+          <Property Name="Data" Nullable="false" Precision="3" Type="DateTime" />
+          <Property Name="Comment" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="false" Type="String" />
+          <Property Name="PostID" Nullable="false" Type="Int32" />
           <NavigationProperty Name="AspNetUser" Relationship="HealthyModel.FK_Comentarios_AspNetUsers" FromRole="Comentario" ToRole="AspNetUser" />
           <NavigationProperty Name="Post" Relationship="HealthyModel.FK_Comentarios_Posts" FromRole="Comentario" ToRole="Post" />
           <NavigationProperty Name="Opiniaos" Relationship="HealthyModel.FK_Opiniao_Comentarios" FromRole="Comentario" ToRole="Opiniao" />
         </EntityType>
+        <EntityType Name="Objectivo">
+          <Key>
+            <PropertyRef Name="ObjectivoID" />
+          </Key>
+          <Property Name="ObjectivoID" Nullable="false" annotation:StoreGeneratedPattern="Identity" Type="Int32" />
+          <Property Name="UserID" Nullable="false" Type="Int32" />
+          <Property Name="Data_inicio" Precision="0" Type="DateTime" />
+          <Property Name="Data_fim" Precision="0" Type="DateTime" />
+          <Property Name="Peso_objectivo" Type="Int32" />
+          <Property Name="Intake_diarioR" Type="Int32" />
+          <Property Name="Intake_diarioA" Type="Int32" />
+          <Property Name="Peso_Final" Type="Int32" />
+          <NavigationProperty Name="Utilizador" Relationship="HealthyModel.FK_Objectivo_Objectivo" FromRole="Objectivo" ToRole="Utilizador" />
+          <NavigationProperty Name="RegistoDiarios" Relationship="HealthyModel.FK_RegistoDiario_RegistoDiario" FromRole="Objectivo" ToRole="RegistoDiario" />
+        </EntityType>
+        <EntityType Name="Opiniao">
+          <Key>
+            <PropertyRef Name="commentID" />
+            <PropertyRef Name="userID" />
+          </Key>
+          <Property Name="commentID" Nullable="false" Type="Int32" />
+          <Property Name="userID" Nullable="false" Type="Int32" />
+          <Property Name="Opiniao1" Nullable="false" Type="Boolean" />
+          <NavigationProperty Name="Comentario" Relationship="HealthyModel.FK_Opiniao_Comentarios" FromRole="Opiniao" ToRole="Comentario" />
+        </EntityType>
+        <EntityType Name="Post">
+          <Key>
+            <PropertyRef Name="PostID" />
+          </Key>
+          <Property Name="PostID" Nullable="false" annotation:StoreGeneratedPattern="Identity" Type="Int32" />
+          <Property Name="UserID" Nullable="false" Type="Int32" />
+          <Property Name="Data" Nullable="false" Precision="3" Type="DateTime" />
+          <Property Name="Titulo" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" Type="String" />
+          <Property Name="SubcategoriaID" Nullable="false" Type="Int32" />
+          <Property Name="Texto" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="false" Type="String" />
+          <Property Name="Link" MaxLength="250" FixedLength="false" Unicode="true" Type="String" />
+          <NavigationProperty Name="AspNetUser" Relationship="HealthyModel.FK_Posts_AspNetUsers" FromRole="Post" ToRole="AspNetUser" />
+          <NavigationProperty Name="Comentarios" Relationship="HealthyModel.FK_Comentarios_Posts" FromRole="Post" ToRole="Comentario" />
+          <NavigationProperty Name="Subcategoria" Relationship="HealthyModel.FK_Posts_Subcategorias" FromRole="Post" ToRole="Subcategoria" />
+        </EntityType>
+        <EntityType Name="Prato">
+          <Key>
+            <PropertyRef Name="PratosID" />
+          </Key>
+          <Property Name="PratosID" Nullable="false" annotation:StoreGeneratedPattern="Identity" Type="Int32" />
+          <Property Name="Categoria" Nullable="false" MaxLength="100" FixedLength="false" Unicode="true" Type="String" />
+          <Property Name="Nome" Nullable="false" MaxLength="100" FixedLength="false" Unicode="true" Type="String" />
+          <Property Name="Unidade" Nullable="false" Type="Int32" />
+          <Property Name="Kcal" Nullable="false" Type="Double" />
+          <Property Name="Proteinas" Nullable="false" Type="Double" />
+          <Property Name="Gordura" Nullable="false" Type="Double" />
+          <Property Name="HidCarbono" Nullable="false" Type="Double" />
+          <Property Name="HC_Acucar" Nullable="false" Type="Double" />
+          <NavigationProperty Name="RefeicaoPratos" Relationship="HealthyModel.FK_RefeicaoPratos_Pratos1" FromRole="Prato" ToRole="RefeicaoPrato" />
+        </EntityType>
+        <EntityType Name="RefeicaoBebida">
+          <Key>
+            <PropertyRef Name="BebidaID" />
+            <PropertyRef Name="RefeicaoID" />
+          </Key>
+          <Property Name="BebidaID" Nullable="false" Type="Int32" />
+          <Property Name="RefeicaoID" Nullable="false" Type="Int32" />
+          <Property Name="Quantidade" Nullable="false" Type="Int32" />
+          <NavigationProperty Name="Bebida" Relationship="HealthyModel.FK_RefeicaoBebida_Bebidas" FromRole="RefeicaoBebida" ToRole="Bebida" />
+          <NavigationProperty Name="Refeico" Relationship="HealthyModel.FK_RefeicaoBebida_Refeicoes" FromRole="RefeicaoBebida" ToRole="Refeico" />
+        </EntityType>
+        <EntityType Name="RefeicaoIngrediente">
+          <Key>
+            <PropertyRef Name="IngredienteID" />
+            <PropertyRef Name="RefeicaoID" />
+          </Key>
+          <Property Name="IngredienteID" Nullable="false" Type="Int32" />
+          <Property Name="RefeicaoID" Nullable="false" Type="Int32" />
+          <Property Name="Quantidade" Nullable="false" Type="Int32" />
+          <NavigationProperty Name="Refeico" Relationship="HealthyModel.FK_RefeicaoIngredientes_Refeicoes1" FromRole="RefeicaoIngrediente" ToRole="Refeico" />
+          <NavigationProperty Name="Ingrediente" Relationship="HealthyModel.FK_RefeicaoIngredientes_Refeicoes" FromRole="RefeicaoIngrediente" ToRole="Ingrediente" />
+        </EntityType>
+        <EntityType Name="RefeicaoPrato">
+          <Key>
+            <PropertyRef Name="RefeicaoID" />
+            <PropertyRef Name="PratoID" />
+          </Key>
+          <Property Name="RefeicaoID" Nullable="false" Type="Int32" />
+          <Property Name="PratoID" Nullable="false" Type="Int32" />
+          <Property Name="Dose" Nullable="false" Type="Double" />
+          <NavigationProperty Name="Prato" Relationship="HealthyModel.FK_RefeicaoPratos_Pratos1" FromRole="RefeicaoPrato" ToRole="Prato" />
+          <NavigationProperty Name="Refeico" Relationship="HealthyModel.FK_RefeicaoPratos_Pratos" FromRole="RefeicaoPrato" ToRole="Refeico" />
+        </EntityType>
+        <EntityType Name="Refeico">
+          <Key>
+            <PropertyRef Name="RefeicaoID" />
+          </Key>
+          <Property Name="RefeicaoID" Nullable="false" annotation:StoreGeneratedPattern="Identity" Type="Int32" />
+          <Property Name="RegistoID" Type="Int32" />
+          <Property Name="Data" Nullable="false" Precision="0" Type="DateTime" />
+          <Property Name="Tipo" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" Type="String" />
+          <NavigationProperty Name="RefeicaoBebidas" Relationship="HealthyModel.FK_RefeicaoBebida_Refeicoes" FromRole="Refeico" ToRole="RefeicaoBebida" />
+          <NavigationProperty Name="RefeicaoIngredientes" Relationship="HealthyModel.FK_RefeicaoIngredientes_Refeicoes1" FromRole="Refeico" ToRole="RefeicaoIngrediente" />
+          <NavigationProperty Name="RefeicaoPratos" Relationship="HealthyModel.FK_RefeicaoPratos_Pratos" FromRole="Refeico" ToRole="RefeicaoPrato" />
+          <NavigationProperty Name="RegistoDiario" Relationship="HealthyModel.FK_Refeicoes_RegistoDiario" FromRole="Refeico" ToRole="RegistoDiario" />
+        </EntityType>
+        <EntityType Name="RegistoDiario">
+          <Key>
+            <PropertyRef Name="RegistoID" />
+          </Key>
+          <Property Name="RegistoID" Nullable="false" annotation:StoreGeneratedPattern="Identity" Type="Int32" />
+          <Property Name="ObjectivoID" Type="Int32" />
+          <Property Name="Data" Nullable="false" Precision="0" Type="DateTime" />
+          <Property Name="Total_Kcal" Nullable="false" Type="Double" />
+          <Property Name="Total_proteinas" Nullable="false" Type="Double" />
+          <Property Name="Total_gordura" Nullable="false" Type="Double" />
+          <Property Name="Total_HC" Nullable="false" Type="Double" />
+          <NavigationProperty Name="Objectivo" Relationship="HealthyModel.FK_RegistoDiario_RegistoDiario" FromRole="RegistoDiario" ToRole="Objectivo" />
+          <NavigationProperty Name="Refeicoes" Relationship="HealthyModel.FK_Refeicoes_RegistoDiario" FromRole="RegistoDiario" ToRole="Refeico" />
+        </EntityType>
+        <EntityType Name="RegistoPeso">
+          <Key>
+            <PropertyRef Name="RegistoP_ID" />
+          </Key>
+          <Property Name="RegistoP_ID" Nullable="false" annotation:StoreGeneratedPattern="Identity" Type="Int32" />
+          <Property Name="User_ID" Nullable="false" Type="Int32" />
+          <Property Name="Peso" Type="Int32" />
+          <Property Name="Data" Precision="0" Type="DateTime" />
+          <NavigationProperty Name="Utilizador" Relationship="HealthyModel.FK_RegistoPeso_Utilizador" FromRole="RegistoPeso" ToRole="Utilizador" />
+        </EntityType>
+        <EntityType Name="Subcategoria">
+          <Key>
+            <PropertyRef Name="SubcategoriaID" />
+          </Key>
+          <Property Name="SubcategoriaID" Nullable="false" annotation:StoreGeneratedPattern="Identity" Type="Int32" />
+          <Property Name="Nome" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" Type="String" />
+          <Property Name="CategoriaID" Nullable="false" Type="Int32" />
+          <NavigationProperty Name="Categoria" Relationship="HealthyModel.FK_Subcategorias_Categorias" FromRole="Subcategoria" ToRole="Categoria" />
+          <NavigationProperty Name="Posts" Relationship="HealthyModel.FK_Posts_Subcategorias" FromRole="Subcategoria" ToRole="Post" />
+        </EntityType>
+        <EntityType Name="sysdiagram">
+          <Key>
+            <PropertyRef Name="diagram_id" />
+          </Key>
+          <Property Name="name" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" Type="String" />
+          <Property Name="principal_id" Nullable="false" Type="Int32" />
+          <Property Name="diagram_id" Nullable="false" annotation:StoreGeneratedPattern="Identity" Type="Int32" />
+          <Property Name="version" Type="Int32" />
+          <Property Name="definition" MaxLength="Max" FixedLength="false" Type="Binary" />
+        </EntityType>
+        <EntityType Name="Utilizador">
+          <Key>
+            <PropertyRef Name="UserID" />
+          </Key>
+          <Property Name="UserID" Nullable="false" Type="Int32" />
+          <Property Name="Nome" MaxLength="50" FixedLength="false" Unicode="true" Type="String" />
+          <Property Name="Genero" MaxLength="10" FixedLength="false" Unicode="true" Type="String" />
+          <Property Name="Data_nascimento" Precision="0" Type="DateTime" />
+          <Property Name="Peso" Type="Int32" />
+          <Property Name="Altura" Type="Int32" />
+          <Property Name="Actividade_fisica" Type="Double" />
+          <Property Name="Nr_horas_sono" Type="Int32" />
+          <Property Name="Nr_refeicoes" Type="Int32" />
+          <Property Name="Habitos_alcoolicos" Type="Boolean" />
+          <Property Name="MMuscular" Type="Double" />
+          <Property Name="MGorda" Type="Double" />
+          <NavigationProperty Name="AspNetUser" Relationship="HealthyModel.FK_Utilizador_AspNetUsers" FromRole="Utilizador" ToRole="AspNetUser" />
+          <NavigationProperty Name="Objectivoes" Relationship="HealthyModel.FK_Objectivo_Objectivo" FromRole="Utilizador" ToRole="Objectivo" />
+          <NavigationProperty Name="RegistoPesoes" Relationship="HealthyModel.FK_RegistoPeso_Utilizador" FromRole="Utilizador" ToRole="RegistoPeso" />
+        </EntityType>
+        <Association Name="FK_dbo_AspNetUserClaims_dbo_AspNetUsers_UserId">
+          <End Type="HealthyModel.AspNetUser" Multiplicity="1" Role="AspNetUser">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Type="HealthyModel.AspNetUserClaim" Multiplicity="*" Role="AspNetUserClaim" />
+          <ReferentialConstraint>
+            <Principal Role="AspNetUser">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="AspNetUserClaim">
+              <PropertyRef Name="UserId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_dbo_AspNetUserLogins_dbo_AspNetUsers_UserId">
+          <End Type="HealthyModel.AspNetUser" Multiplicity="1" Role="AspNetUser">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Type="HealthyModel.AspNetUserLogin" Multiplicity="*" Role="AspNetUserLogin" />
+          <ReferentialConstraint>
+            <Principal Role="AspNetUser">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="AspNetUserLogin">
+              <PropertyRef Name="UserId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Comentarios_AspNetUsers">
+          <End Type="HealthyModel.AspNetUser" Multiplicity="1" Role="AspNetUser" />
+          <End Type="HealthyModel.Comentario" Multiplicity="*" Role="Comentario" />
+          <ReferentialConstraint>
+            <Principal Role="AspNetUser">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Comentario">
+              <PropertyRef Name="UserID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Posts_AspNetUsers">
+          <End Type="HealthyModel.AspNetUser" Multiplicity="1" Role="AspNetUser" />
+          <End Type="HealthyModel.Post" Multiplicity="*" Role="Post" />
+          <ReferentialConstraint>
+            <Principal Role="AspNetUser">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Post">
+              <PropertyRef Name="UserID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Utilizador_AspNetUsers">
+          <End Type="HealthyModel.AspNetUser" Multiplicity="1" Role="AspNetUser" />
+          <End Type="HealthyModel.Utilizador" Multiplicity="0..1" Role="Utilizador" />
+          <ReferentialConstraint>
+            <Principal Role="AspNetUser">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Utilizador">
+              <PropertyRef Name="UserID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_RefeicaoBebida_Bebidas">
+          <End Type="HealthyModel.Bebida" Multiplicity="1" Role="Bebida" />
+          <End Type="HealthyModel.RefeicaoBebida" Multiplicity="*" Role="RefeicaoBebida" />
+          <ReferentialConstraint>
+            <Principal Role="Bebida">
+              <PropertyRef Name="BebidasID" />
+            </Principal>
+            <Dependent Role="RefeicaoBebida">
+              <PropertyRef Name="BebidaID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Subcategorias_Categorias">
+          <End Type="HealthyModel.Categoria" Multiplicity="1" Role="Categoria" />
+          <End Type="HealthyModel.Subcategoria" Multiplicity="*" Role="Subcategoria" />
+          <ReferentialConstraint>
+            <Principal Role="Categoria">
+              <PropertyRef Name="CategoriaID" />
+            </Principal>
+            <Dependent Role="Subcategoria">
+              <PropertyRef Name="CategoriaID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Comentarios_Posts">
+          <End Type="HealthyModel.Post" Multiplicity="1" Role="Post" />
+          <End Type="HealthyModel.Comentario" Multiplicity="*" Role="Comentario" />
+          <ReferentialConstraint>
+            <Principal Role="Post">
+              <PropertyRef Name="PostID" />
+            </Principal>
+            <Dependent Role="Comentario">
+              <PropertyRef Name="PostID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Opiniao_Comentarios">
+          <End Type="HealthyModel.Comentario" Multiplicity="1" Role="Comentario" />
+          <End Type="HealthyModel.Opiniao" Multiplicity="*" Role="Opiniao" />
+          <ReferentialConstraint>
+            <Principal Role="Comentario">
+              <PropertyRef Name="CommentID" />
+            </Principal>
+            <Dependent Role="Opiniao">
+              <PropertyRef Name="commentID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Objectivo_Objectivo">
+          <End Type="HealthyModel.Utilizador" Multiplicity="1" Role="Utilizador" />
+          <End Type="HealthyModel.Objectivo" Multiplicity="*" Role="Objectivo" />
+          <ReferentialConstraint>
+            <Principal Role="Utilizador">
+              <PropertyRef Name="UserID" />
+            </Principal>
+            <Dependent Role="Objectivo">
+              <PropertyRef Name="UserID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_RegistoDiario_RegistoDiario">
+          <End Type="HealthyModel.Objectivo" Multiplicity="0..1" Role="Objectivo" />
+          <End Type="HealthyModel.RegistoDiario" Multiplicity="*" Role="RegistoDiario" />
+          <ReferentialConstraint>
+            <Principal Role="Objectivo">
+              <PropertyRef Name="ObjectivoID" />
+            </Principal>
+            <Dependent Role="RegistoDiario">
+              <PropertyRef Name="ObjectivoID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Posts_Subcategorias">
+          <End Type="HealthyModel.Subcategoria" Multiplicity="1" Role="Subcategoria" />
+          <End Type="HealthyModel.Post" Multiplicity="*" Role="Post" />
+          <ReferentialConstraint>
+            <Principal Role="Subcategoria">
+              <PropertyRef Name="SubcategoriaID" />
+            </Principal>
+            <Dependent Role="Post">
+              <PropertyRef Name="SubcategoriaID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_RefeicaoPratos_Pratos1">
+          <End Type="HealthyModel.Prato" Multiplicity="1" Role="Prato" />
+          <End Type="HealthyModel.RefeicaoPrato" Multiplicity="*" Role="RefeicaoPrato" />
+          <ReferentialConstraint>
+            <Principal Role="Prato">
+              <PropertyRef Name="PratosID" />
+            </Principal>
+            <Dependent Role="RefeicaoPrato">
+              <PropertyRef Name="PratoID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_RefeicaoBebida_Refeicoes">
+          <End Type="HealthyModel.Refeico" Multiplicity="1" Role="Refeico" />
+          <End Type="HealthyModel.RefeicaoBebida" Multiplicity="*" Role="RefeicaoBebida" />
+          <ReferentialConstraint>
+            <Principal Role="Refeico">
+              <PropertyRef Name="RefeicaoID" />
+            </Principal>
+            <Dependent Role="RefeicaoBebida">
+              <PropertyRef Name="RefeicaoID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_RefeicaoIngredientes_Refeicoes1">
+          <End Type="HealthyModel.Refeico" Multiplicity="1" Role="Refeico" />
+          <End Type="HealthyModel.RefeicaoIngrediente" Multiplicity="*" Role="RefeicaoIngrediente" />
+          <ReferentialConstraint>
+            <Principal Role="Refeico">
+              <PropertyRef Name="RefeicaoID" />
+            </Principal>
+            <Dependent Role="RefeicaoIngrediente">
+              <PropertyRef Name="RefeicaoID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_RefeicaoPratos_Pratos">
+          <End Type="HealthyModel.Refeico" Multiplicity="1" Role="Refeico" />
+          <End Type="HealthyModel.RefeicaoPrato" Multiplicity="*" Role="RefeicaoPrato" />
+          <ReferentialConstraint>
+            <Principal Role="Refeico">
+              <PropertyRef Name="RefeicaoID" />
+            </Principal>
+            <Dependent Role="RefeicaoPrato">
+              <PropertyRef Name="RefeicaoID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Refeicoes_RegistoDiario">
+          <End Type="HealthyModel.RegistoDiario" Multiplicity="0..1" Role="RegistoDiario" />
+          <End Type="HealthyModel.Refeico" Multiplicity="*" Role="Refeico" />
+          <ReferentialConstraint>
+            <Principal Role="RegistoDiario">
+              <PropertyRef Name="RegistoID" />
+            </Principal>
+            <Dependent Role="Refeico">
+              <PropertyRef Name="RegistoID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_RegistoPeso_Utilizador">
+          <End Type="HealthyModel.Utilizador" Multiplicity="1" Role="Utilizador" />
+          <End Type="HealthyModel.RegistoPeso" Multiplicity="*" Role="RegistoPeso" />
+          <ReferentialConstraint>
+            <Principal Role="Utilizador">
+              <PropertyRef Name="UserID" />
+            </Principal>
+            <Dependent Role="RegistoPeso">
+              <PropertyRef Name="User_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="AspNetUserRoles">
+          <End Type="HealthyModel.AspNetRole" Multiplicity="*" Role="AspNetRole" />
+          <End Type="HealthyModel.AspNetUser" Multiplicity="*" Role="AspNetUser" />
+        </Association>
         <EntityType Name="Ingrediente">
           <Key>
             <PropertyRef Name="IngredientesID" />
@@ -851,283 +1240,6 @@
           <Property Name="HC_Acucar" Type="Double" Nullable="false" />
           <NavigationProperty Name="RefeicaoIngredientes" Relationship="HealthyModel.FK_RefeicaoIngredientes_Refeicoes" FromRole="Ingrediente" ToRole="RefeicaoIngrediente" />
         </EntityType>
-        <EntityType Name="Objectivo">
-          <Key>
-            <PropertyRef Name="ObjectivoID" />
-          </Key>
-          <Property Name="ObjectivoID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="UserID" Type="Int32" Nullable="false" />
-          <Property Name="Data_inicio" Type="DateTime" Precision="0" />
-          <Property Name="Data_fim" Type="DateTime" Precision="0" />
-          <Property Name="Peso_objectivo" Type="Int32" />
-          <Property Name="Intake_diarioR" Type="Int32" />
-          <Property Name="Intake_diarioA" Type="Int32" />
-          <Property Name="Peso_Final" Type="Int32" />
-          <NavigationProperty Name="Utilizador" Relationship="HealthyModel.FK_Objectivo_Objectivo" FromRole="Objectivo" ToRole="Utilizador" />
-          <NavigationProperty Name="RegistoDiarios" Relationship="HealthyModel.FK_RegistoDiario_RegistoDiario" FromRole="Objectivo" ToRole="RegistoDiario" />
-        </EntityType>
-        <EntityType Name="Opiniao">
-          <Key>
-            <PropertyRef Name="commentID" />
-            <PropertyRef Name="userID" />
-          </Key>
-          <Property Name="commentID" Type="Int32" Nullable="false" />
-          <Property Name="userID" Type="Int32" Nullable="false" />
-          <Property Name="Opiniao1" Type="Boolean" Nullable="false" />
-          <NavigationProperty Name="Comentario" Relationship="HealthyModel.FK_Opiniao_Comentarios" FromRole="Opiniao" ToRole="Comentario" />
-        </EntityType>
-        <EntityType Name="Post">
-          <Key>
-            <PropertyRef Name="PostID" />
-          </Key>
-          <Property Name="PostID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="UserID" Type="Int32" Nullable="false" />
-          <Property Name="Data" Type="DateTime" Nullable="false" Precision="3" />
-          <Property Name="Titulo" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="SubcategoriaID" Type="Int32" Nullable="false" />
-          <Property Name="Texto" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="false" />
-          <Property Name="Link" Type="String" MaxLength="250" FixedLength="false" Unicode="true" />
-          <NavigationProperty Name="AspNetUser" Relationship="HealthyModel.FK_Posts_AspNetUsers" FromRole="Post" ToRole="AspNetUser" />
-          <NavigationProperty Name="Comentarios" Relationship="HealthyModel.FK_Comentarios_Posts" FromRole="Post" ToRole="Comentario" />
-          <NavigationProperty Name="Subcategoria" Relationship="HealthyModel.FK_Posts_Subcategorias" FromRole="Post" ToRole="Subcategoria" />
-        </EntityType>
-        <EntityType Name="Prato">
-          <Key>
-            <PropertyRef Name="PratosID" />
-          </Key>
-          <Property Name="PratosID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="Categoria" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="true" />
-          <Property Name="Nome" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="true" />
-          <Property Name="Unidade" Type="Int32" Nullable="false" />
-          <Property Name="Kcal" Type="Double" Nullable="false" />
-          <Property Name="Proteinas" Type="Double" Nullable="false" />
-          <Property Name="Gordura" Type="Double" Nullable="false" />
-          <Property Name="HidCarbono" Type="Double" Nullable="false" />
-          <Property Name="HC_Acucar" Type="Double" Nullable="false" />
-          <NavigationProperty Name="RefeicaoPratos" Relationship="HealthyModel.FK_RefeicaoPratos_Pratos1" FromRole="Prato" ToRole="RefeicaoPrato" />
-        </EntityType>
-        <EntityType Name="RefeicaoBebida">
-          <Key>
-            <PropertyRef Name="BebidaID" />
-            <PropertyRef Name="RefeicaoID" />
-          </Key>
-          <Property Name="BebidaID" Type="Int32" Nullable="false" />
-          <Property Name="RefeicaoID" Type="Int32" Nullable="false" />
-          <Property Name="Quantidade" Type="Int32" Nullable="false" />
-          <NavigationProperty Name="Bebida" Relationship="HealthyModel.FK_RefeicaoBebida_Bebidas" FromRole="RefeicaoBebida" ToRole="Bebida" />
-          <NavigationProperty Name="Refeico" Relationship="HealthyModel.FK_RefeicaoBebida_Refeicoes" FromRole="RefeicaoBebida" ToRole="Refeico" />
-        </EntityType>
-        <EntityType Name="RefeicaoIngrediente">
-          <Key>
-            <PropertyRef Name="IngredienteID" />
-            <PropertyRef Name="RefeicaoID" />
-          </Key>
-          <Property Name="IngredienteID" Type="Int32" Nullable="false" />
-          <Property Name="RefeicaoID" Type="Int32" Nullable="false" />
-          <Property Name="Quantidade" Type="Int32" Nullable="false" />
-          <NavigationProperty Name="Ingrediente" Relationship="HealthyModel.FK_RefeicaoIngredientes_Refeicoes" FromRole="RefeicaoIngrediente" ToRole="Ingrediente" />
-          <NavigationProperty Name="Refeico" Relationship="HealthyModel.FK_RefeicaoIngredientes_Refeicoes1" FromRole="RefeicaoIngrediente" ToRole="Refeico" />
-        </EntityType>
-        <EntityType Name="RefeicaoPrato">
-          <Key>
-            <PropertyRef Name="RefeicaoID" />
-            <PropertyRef Name="PratoID" />
-          </Key>
-          <Property Name="RefeicaoID" Type="Int32" Nullable="false" />
-          <Property Name="PratoID" Type="Int32" Nullable="false" />
-          <Property Name="Dose" Type="Double" Nullable="false" />
-          <NavigationProperty Name="Prato" Relationship="HealthyModel.FK_RefeicaoPratos_Pratos1" FromRole="RefeicaoPrato" ToRole="Prato" />
-          <NavigationProperty Name="Refeico" Relationship="HealthyModel.FK_RefeicaoPratos_Pratos" FromRole="RefeicaoPrato" ToRole="Refeico" />
-        </EntityType>
-        <EntityType Name="Refeico">
-          <Key>
-            <PropertyRef Name="RefeicaoID" />
-          </Key>
-          <Property Name="RefeicaoID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="RegistoID" Type="Int32" />
-          <Property Name="Data" Type="DateTime" Nullable="false" Precision="0" />
-          <Property Name="Tipo" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
-          <NavigationProperty Name="RefeicaoBebidas" Relationship="HealthyModel.FK_RefeicaoBebida_Refeicoes" FromRole="Refeico" ToRole="RefeicaoBebida" />
-          <NavigationProperty Name="RefeicaoIngredientes" Relationship="HealthyModel.FK_RefeicaoIngredientes_Refeicoes1" FromRole="Refeico" ToRole="RefeicaoIngrediente" />
-          <NavigationProperty Name="RefeicaoPratos" Relationship="HealthyModel.FK_RefeicaoPratos_Pratos" FromRole="Refeico" ToRole="RefeicaoPrato" />
-          <NavigationProperty Name="RegistoDiario" Relationship="HealthyModel.FK_Refeicoes_RegistoDiario" FromRole="Refeico" ToRole="RegistoDiario" />
-        </EntityType>
-        <EntityType Name="RegistoDiario">
-          <Key>
-            <PropertyRef Name="RegistoID" />
-          </Key>
-          <Property Name="RegistoID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="ObjectivoID" Type="Int32" />
-          <Property Name="Data" Type="DateTime" Nullable="false" Precision="0" />
-          <Property Name="Total_Kcal" Type="Double" Nullable="false" />
-          <Property Name="Total_proteinas" Type="Double" Nullable="false" />
-          <Property Name="Total_gordura" Type="Double" Nullable="false" />
-          <Property Name="Total_HC" Type="Double" Nullable="false" />
-          <NavigationProperty Name="Objectivo" Relationship="HealthyModel.FK_RegistoDiario_RegistoDiario" FromRole="RegistoDiario" ToRole="Objectivo" />
-          <NavigationProperty Name="Refeicoes" Relationship="HealthyModel.FK_Refeicoes_RegistoDiario" FromRole="RegistoDiario" ToRole="Refeico" />
-        </EntityType>
-        <EntityType Name="RegistoPeso">
-          <Key>
-            <PropertyRef Name="RegistoP_ID" />
-          </Key>
-          <Property Name="RegistoP_ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="User_ID" Type="Int32" Nullable="false" />
-          <Property Name="Peso" Type="Int32" />
-          <Property Name="Data" Type="DateTime" Precision="0" />
-          <NavigationProperty Name="Utilizador" Relationship="HealthyModel.FK_RegistoPeso_Utilizador" FromRole="RegistoPeso" ToRole="Utilizador" />
-        </EntityType>
-        <EntityType Name="Subcategoria">
-          <Key>
-            <PropertyRef Name="SubcategoriaID" />
-          </Key>
-          <Property Name="SubcategoriaID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="Nome" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="CategoriaID" Type="Int32" Nullable="false" />
-          <NavigationProperty Name="Categoria" Relationship="HealthyModel.FK_Subcategorias_Categorias" FromRole="Subcategoria" ToRole="Categoria" />
-          <NavigationProperty Name="Posts" Relationship="HealthyModel.FK_Posts_Subcategorias" FromRole="Subcategoria" ToRole="Post" />
-        </EntityType>
-        <EntityType Name="sysdiagram">
-          <Key>
-            <PropertyRef Name="diagram_id" />
-          </Key>
-          <Property Name="name" Type="String" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
-          <Property Name="principal_id" Type="Int32" Nullable="false" />
-          <Property Name="diagram_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="version" Type="Int32" />
-          <Property Name="definition" Type="Binary" MaxLength="Max" FixedLength="false" />
-        </EntityType>
-        <EntityType Name="Utilizador">
-          <Key>
-            <PropertyRef Name="UserID" />
-          </Key>
-          <Property Name="UserID" Type="Int32" Nullable="false" />
-          <Property Name="Nome" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="Genero" Type="String" MaxLength="10" FixedLength="false" Unicode="true" />
-          <Property Name="Data_nascimento" Type="DateTime" Precision="0" />
-          <Property Name="Peso" Type="Int32" />
-          <Property Name="Altura" Type="Int32" />
-          <Property Name="Actividade_fisica" Type="Double" />
-          <Property Name="Nr_horas_sono" Type="Int32" />
-          <Property Name="Nr_refeicoes" Type="Int32" />
-          <Property Name="Habitos_alcoolicos" Type="Boolean" />
-          <Property Name="MMuscular" Type="Double" />
-          <Property Name="MGorda" Type="Double" />
-          <NavigationProperty Name="AspNetUser" Relationship="HealthyModel.FK_Utilizador_AspNetUsers" FromRole="Utilizador" ToRole="AspNetUser" />
-          <NavigationProperty Name="Objectivoes" Relationship="HealthyModel.FK_Objectivo_Objectivo" FromRole="Utilizador" ToRole="Objectivo" />
-          <NavigationProperty Name="RegistoPesoes" Relationship="HealthyModel.FK_RegistoPeso_Utilizador" FromRole="Utilizador" ToRole="RegistoPeso" />
-        </EntityType>
-        <Association Name="FK_dbo_AspNetUserClaims_dbo_AspNetUsers_UserId">
-          <End Type="HealthyModel.AspNetUser" Role="AspNetUser" Multiplicity="1">
-            <OnDelete Action="Cascade" />
-          </End>
-          <End Type="HealthyModel.AspNetUserClaim" Role="AspNetUserClaim" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="AspNetUser">
-              <PropertyRef Name="Id" />
-            </Principal>
-            <Dependent Role="AspNetUserClaim">
-              <PropertyRef Name="UserId" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_dbo_AspNetUserLogins_dbo_AspNetUsers_UserId">
-          <End Type="HealthyModel.AspNetUser" Role="AspNetUser" Multiplicity="1">
-            <OnDelete Action="Cascade" />
-          </End>
-          <End Type="HealthyModel.AspNetUserLogin" Role="AspNetUserLogin" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="AspNetUser">
-              <PropertyRef Name="Id" />
-            </Principal>
-            <Dependent Role="AspNetUserLogin">
-              <PropertyRef Name="UserId" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_Comentarios_AspNetUsers">
-          <End Type="HealthyModel.AspNetUser" Role="AspNetUser" Multiplicity="1" />
-          <End Type="HealthyModel.Comentario" Role="Comentario" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="AspNetUser">
-              <PropertyRef Name="Id" />
-            </Principal>
-            <Dependent Role="Comentario">
-              <PropertyRef Name="UserID" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_Posts_AspNetUsers">
-          <End Type="HealthyModel.AspNetUser" Role="AspNetUser" Multiplicity="1" />
-          <End Type="HealthyModel.Post" Role="Post" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="AspNetUser">
-              <PropertyRef Name="Id" />
-            </Principal>
-            <Dependent Role="Post">
-              <PropertyRef Name="UserID" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_Utilizador_AspNetUsers">
-          <End Type="HealthyModel.AspNetUser" Role="AspNetUser" Multiplicity="1" />
-          <End Type="HealthyModel.Utilizador" Role="Utilizador" Multiplicity="0..1" />
-          <ReferentialConstraint>
-            <Principal Role="AspNetUser">
-              <PropertyRef Name="Id" />
-            </Principal>
-            <Dependent Role="Utilizador">
-              <PropertyRef Name="UserID" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_RefeicaoBebida_Bebidas">
-          <End Type="HealthyModel.Bebida" Role="Bebida" Multiplicity="1" />
-          <End Type="HealthyModel.RefeicaoBebida" Role="RefeicaoBebida" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Bebida">
-              <PropertyRef Name="BebidasID" />
-            </Principal>
-            <Dependent Role="RefeicaoBebida">
-              <PropertyRef Name="BebidaID" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_Subcategorias_Categorias">
-          <End Type="HealthyModel.Categoria" Role="Categoria" Multiplicity="1" />
-          <End Type="HealthyModel.Subcategoria" Role="Subcategoria" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Categoria">
-              <PropertyRef Name="CategoriaID" />
-            </Principal>
-            <Dependent Role="Subcategoria">
-              <PropertyRef Name="CategoriaID" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_Comentarios_Posts">
-          <End Type="HealthyModel.Post" Role="Post" Multiplicity="1" />
-          <End Type="HealthyModel.Comentario" Role="Comentario" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Post">
-              <PropertyRef Name="PostID" />
-            </Principal>
-            <Dependent Role="Comentario">
-              <PropertyRef Name="PostID" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_Opiniao_Comentarios">
-          <End Type="HealthyModel.Comentario" Role="Comentario" Multiplicity="1" />
-          <End Type="HealthyModel.Opiniao" Role="Opiniao" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Comentario">
-              <PropertyRef Name="CommentID" />
-            </Principal>
-            <Dependent Role="Opiniao">
-              <PropertyRef Name="commentID" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
         <Association Name="FK_RefeicaoIngredientes_Refeicoes">
           <End Type="HealthyModel.Ingrediente" Role="Ingrediente" Multiplicity="1" />
           <End Type="HealthyModel.RefeicaoIngrediente" Role="RefeicaoIngrediente" Multiplicity="*" />
@@ -1139,118 +1251,6 @@
               <PropertyRef Name="IngredienteID" />
             </Dependent>
           </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_Objectivo_Objectivo">
-          <End Type="HealthyModel.Utilizador" Role="Utilizador" Multiplicity="1" />
-          <End Type="HealthyModel.Objectivo" Role="Objectivo" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Utilizador">
-              <PropertyRef Name="UserID" />
-            </Principal>
-            <Dependent Role="Objectivo">
-              <PropertyRef Name="UserID" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_RegistoDiario_RegistoDiario">
-          <End Type="HealthyModel.Objectivo" Role="Objectivo" Multiplicity="0..1" />
-          <End Type="HealthyModel.RegistoDiario" Role="RegistoDiario" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Objectivo">
-              <PropertyRef Name="ObjectivoID" />
-            </Principal>
-            <Dependent Role="RegistoDiario">
-              <PropertyRef Name="ObjectivoID" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_Posts_Subcategorias">
-          <End Type="HealthyModel.Subcategoria" Role="Subcategoria" Multiplicity="1" />
-          <End Type="HealthyModel.Post" Role="Post" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Subcategoria">
-              <PropertyRef Name="SubcategoriaID" />
-            </Principal>
-            <Dependent Role="Post">
-              <PropertyRef Name="SubcategoriaID" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_RefeicaoPratos_Pratos1">
-          <End Type="HealthyModel.Prato" Role="Prato" Multiplicity="1" />
-          <End Type="HealthyModel.RefeicaoPrato" Role="RefeicaoPrato" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Prato">
-              <PropertyRef Name="PratosID" />
-            </Principal>
-            <Dependent Role="RefeicaoPrato">
-              <PropertyRef Name="PratoID" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_RefeicaoBebida_Refeicoes">
-          <End Type="HealthyModel.Refeico" Role="Refeico" Multiplicity="1" />
-          <End Type="HealthyModel.RefeicaoBebida" Role="RefeicaoBebida" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Refeico">
-              <PropertyRef Name="RefeicaoID" />
-            </Principal>
-            <Dependent Role="RefeicaoBebida">
-              <PropertyRef Name="RefeicaoID" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_RefeicaoIngredientes_Refeicoes1">
-          <End Type="HealthyModel.Refeico" Role="Refeico" Multiplicity="1" />
-          <End Type="HealthyModel.RefeicaoIngrediente" Role="RefeicaoIngrediente" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Refeico">
-              <PropertyRef Name="RefeicaoID" />
-            </Principal>
-            <Dependent Role="RefeicaoIngrediente">
-              <PropertyRef Name="RefeicaoID" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_RefeicaoPratos_Pratos">
-          <End Type="HealthyModel.Refeico" Role="Refeico" Multiplicity="1" />
-          <End Type="HealthyModel.RefeicaoPrato" Role="RefeicaoPrato" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Refeico">
-              <PropertyRef Name="RefeicaoID" />
-            </Principal>
-            <Dependent Role="RefeicaoPrato">
-              <PropertyRef Name="RefeicaoID" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_Refeicoes_RegistoDiario">
-          <End Type="HealthyModel.RegistoDiario" Role="RegistoDiario" Multiplicity="0..1" />
-          <End Type="HealthyModel.Refeico" Role="Refeico" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="RegistoDiario">
-              <PropertyRef Name="RegistoID" />
-            </Principal>
-            <Dependent Role="Refeico">
-              <PropertyRef Name="RegistoID" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_RegistoPeso_Utilizador">
-          <End Type="HealthyModel.Utilizador" Role="Utilizador" Multiplicity="1" />
-          <End Type="HealthyModel.RegistoPeso" Role="RegistoPeso" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Utilizador">
-              <PropertyRef Name="UserID" />
-            </Principal>
-            <Dependent Role="RegistoPeso">
-              <PropertyRef Name="User_ID" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="AspNetUserRoles">
-          <End Type="HealthyModel.AspNetRole" Role="AspNetRole" Multiplicity="*" />
-          <End Type="HealthyModel.AspNetUser" Role="AspNetUser" Multiplicity="*" />
         </Association>
       </Schema>
     </edmx:ConceptualModels>
@@ -1352,21 +1352,6 @@
                 <ScalarProperty Name="Data" ColumnName="Data" />
                 <ScalarProperty Name="UserID" ColumnName="UserID" />
                 <ScalarProperty Name="CommentID" ColumnName="CommentID" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="Ingredientes">
-            <EntityTypeMapping TypeName="HealthyModel.Ingrediente">
-              <MappingFragment StoreEntitySet="Ingredientes">
-                <ScalarProperty Name="HC_Acucar" ColumnName="HC_Acucar" />
-                <ScalarProperty Name="HidCarbono" ColumnName="HidCarbono" />
-                <ScalarProperty Name="Gordura" ColumnName="Gordura" />
-                <ScalarProperty Name="Proteinas" ColumnName="Proteinas" />
-                <ScalarProperty Name="Kcal" ColumnName="Kcal" />
-                <ScalarProperty Name="Unidade" ColumnName="Unidade" />
-                <ScalarProperty Name="Nome" ColumnName="Nome" />
-                <ScalarProperty Name="Categoria" ColumnName="Categoria" />
-                <ScalarProperty Name="IngredientesID" ColumnName="IngredientesID" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
@@ -1527,6 +1512,21 @@
               <ScalarProperty Name="Id" ColumnName="RoleId" />
             </EndProperty>
           </AssociationSetMapping>
+          <EntitySetMapping Name="Ingredientes">
+            <EntityTypeMapping TypeName="HealthyModel.Ingrediente">
+              <MappingFragment StoreEntitySet="Ingredientes">
+                <ScalarProperty Name="HC_Acucar" ColumnName="HC_Acucar" />
+                <ScalarProperty Name="HidCarbono" ColumnName="HidCarbono" />
+                <ScalarProperty Name="Gordura" ColumnName="Gordura" />
+                <ScalarProperty Name="Proteinas" ColumnName="Proteinas" />
+                <ScalarProperty Name="Kcal" ColumnName="Kcal" />
+                <ScalarProperty Name="Unidade" ColumnName="Unidade" />
+                <ScalarProperty Name="Nome" ColumnName="Nome" />
+                <ScalarProperty Name="Categoria" ColumnName="Categoria" />
+                <ScalarProperty Name="IngredientesID" ColumnName="IngredientesID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
           </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>
