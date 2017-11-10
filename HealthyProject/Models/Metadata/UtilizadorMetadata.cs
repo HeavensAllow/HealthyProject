@@ -17,7 +17,7 @@ namespace HealthyProject.Models.Metadata
         [Required(ErrorMessage = "Introduza a Data de Nascimento")]
         [Display(Name = "Data de Nascimento")]
         [DataType(DataType.Date)]
-        [DisplayFormat(DataFormatString = "{0:DD/MM/YYYY}" , ApplyFormatInEditMode = true)]
+        [DisplayFormat(DataFormatString = "{0:dd/MM/yyyy}" , ApplyFormatInEditMode = true)]
         public Nullable<System.DateTime> Data_nascimento { get; set; }
 
         [Required(ErrorMessage = "Introduza o Peso (kg)")]
