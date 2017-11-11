@@ -172,10 +172,18 @@ namespace HealthyProject.Controllers
                     return View();
                 }
             }
-
             if (objectivo == null)
             {
-                ViewBag.Sem = "Sem objectivo";
+                var objectivos = db.Objectivoes.FirstOrDefault(c => c.UserID == userId);
+                if (objectivos != null)
+                {
+                    ViewBag.Sem = "Sem objectivo";
+                }
+                else
+                {
+                    ViewBag.Sem = "Sem objectivo";
+                    ViewBag.Userguide = "Nenhum criado";
+                }
                 return View();
             }
             if ((int)DateTime.Now.DayOfWeek == 4 && peso == null)
@@ -287,7 +295,7 @@ namespace HealthyProject.Controllers
             ViewBag.UserID = new SelectList(db.AspNetUsers, "Id", "Email", utilizador.UserID);
             return View(utilizador);
         }
-        
+
         // GET: Objectivoes/Details/5
         public ActionResult Details(int? id)
         {
@@ -314,21 +322,20 @@ namespace HealthyProject.Controllers
         public ActionResult Create()
         {
             var userId = Convert.ToInt32(User.Identity.GetUserId());
-            //var objectivos = db.Objectivoes.Include(o => o.Utilizador);
             var actual = db.Objectivoes.FirstOrDefault(p => p.UserID == userId && p.Data_fim == null);
-            //var procura = objectivoes.Where(p => p.UserID == userId);
-            //var actual = procura.Where(l => l.Data_fim == null);
-    
+            var objectivo = db.Objectivoes.FirstOrDefault(p => p.UserID == userId);
             Utilizador user = db.Utilizadors.FirstOrDefault(o => o.UserID == userId);
             if (user.Nome == null)
             {
                 ViewBag.SemDados = "Nao tem dados inseridos";
                 return View();
             }
-
-
             if (actual == null)
             {
+                if(objectivo == null)
+                {
+                    ViewBag.UserGuide = "Primeiro Objectivo";
+                }
                 ViewBag.UserID = new SelectList(db.Utilizadors, "UserID", "Nome");
                 return View();
             }
@@ -347,17 +354,17 @@ namespace HealthyProject.Controllers
         public ActionResult Create([Bind(Include = "ObjectivoID,Data_inicio,Peso_objectivo")] Objectivo objectivo)
         {
             var error = false;
-            if(objectivo.Data_inicio == null)
+            if (objectivo.Data_inicio == null)
             {
                 ModelState.AddModelError("Data de Início", "Por favor introduza a data a dar início ao objectivo");
                 error = true;
             }
-            if(objectivo.Peso_objectivo == null)
+            if (objectivo.Peso_objectivo == null)
             {
                 ModelState.AddModelError("Peso objectivo", "Por favor introduza o peso objectivo a atingir");
                 error = true;
             }
-            if(error == true)
+            if (error == true)
             {
                 return View();
             }
@@ -438,12 +445,12 @@ namespace HealthyProject.Controllers
                     }
                     db.Objectivoes.Add(objectivo);
                     db.SaveChanges();
-                    return RedirectToAction("Index", "Home");
+                    return RedirectToAction("Index", "Objectivoes");
                 }
                 else
                 {
                     TempData["notice"] = "<script>alert('Ja existe um objectivo criado e por terminar')>;</script>";
-                    return RedirectToAction("Index", "Objectivo");
+                    return RedirectToAction("Index", "Objectivoes");
                 }
             }
 

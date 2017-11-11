@@ -69,6 +69,7 @@ namespace HealthyProject.Controllers
 
             var userId = Convert.ToInt32(User.Identity.GetUserId()); // estava em string
             Utilizador perfil = db.Utilizadors.Find(userId);
+            var objectivoes = db.Objectivoes.FirstOrDefault(c => c.UserID == userId);
 
             ViewBag.Genders = new SelectList(new List<SelectListItem>
                 {
@@ -78,17 +79,25 @@ namespace HealthyProject.Controllers
                     new SelectListItem { Selected = false, Text = "F", Value = "F"},
                 }, "Value", "Text");
 
-                ViewBag.Atividade = new SelectList(new List<SelectListItem>
+            ViewBag.Atividade = new SelectList(new List<SelectListItem>
                 {
                     new SelectListItem {Text = "1", Value = "1"},
                     new SelectListItem {Text = "2", Value = "2"},
                     new SelectListItem {Text = "3", Value = "3"},
                     new SelectListItem {Text = "4", Value = "4"},
                 }, "Value", "Text", perfil.Actividade_fisica);
-            if(perfil != null)
+            if (perfil != null)
             {
-                if(perfil.Nome != null)
+                if (perfil.Nome != null)
                 {
+                    if (objectivoes != null)
+                    {
+                        return View(perfil);
+                    }
+                    else
+                    {
+                        ViewBag.UserGuide2 = "Sem Objectivos";
+                    }
                     return View(perfil);
                 }
                 else
@@ -96,6 +105,7 @@ namespace HealthyProject.Controllers
                     ViewBag.UserGuide = "Sem Nome";
                 }
             }
+
             return View(perfil);
             // manda oos dados do utilizador para a view
         }
@@ -179,48 +189,12 @@ namespace HealthyProject.Controllers
                     ModelState.AddModelError("Actividade_fisica", "Introduza o Indice de Atividade Fisica");
                     error = true;
                 }
-                
-
-                //int porcofeio = (int)perfilEdit.Actividade_fisica;
-                //switch (porcofeio) {
-                //    case 1:
-                //        perfilEdit.Actividade_fisica = 1;
-                //        break;
-                //    case 2:
-                //        if(perfilEdit.Genero == "F") {
-                //        perfilEdit.Actividade_fisica = 1.12;
-                //        }
-                //        else { perfilEdit.Actividade_fisica = 1.11; }
-                //        break;
-                //    case 3:
-                //        if (perfilEdit.Genero == "F")
-                //        {
-                //            perfilEdit.Actividade_fisica = 1.27;
-                //        }
-                //        else
-                //        {
-                //            perfilEdit.Actividade_fisica = 1.25;
-                //        }
-                //        break;
-
-                //    case 4:
-                //        if (perfilEdit.Genero == "F")
-                //        {
-                //            perfilEdit.Actividade_fisica = 1.45;
-                //        }
-                //        else
-                //        {
-                //            perfilEdit.Actividade_fisica = 1.48;
-                //        }
-                //        break;
-
-                //}  
                 db.Entry(perfilEdit).State = EntityState.Modified;
                 db.SaveChanges();
                 return RedirectToAction("Index", "Manage");
 
             }
-          
+
 
             return View(perfilEdit);
         }

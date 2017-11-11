@@ -22,6 +22,25 @@
     </div>
 }
 
+@if (ViewBag.UserGuide2 != null)
+{
+    <br />
+    <br />
+    <br />
+    <div class="centerAlign">
+        <div class="alert alert-success alert-dismissable">
+            <strong><i class="fa fa-exclamation-triangle" aria-hidden="true"></i>Criado o perfil, podes agora criar um objectivo e fazer registos diários relativamente à tua alimentação!</strong>
+            <br />
+            <strong><i class="fa fa-exclamation-triangle" aria-hidden="true"></i>Para começar, vamos criar um objectivo de forma a perceber como tudo isto funciona.</strong>
+            <br />
+            <strong><i class="fa fa-exclamation-triangle" aria-hidden="true"></i> Carrega no butão abaixo apresentado para ires para a página dos objectivos.</strong>
+            <br />
+            @Html.ActionLink("Criar Objectivo", "Index", "Objectivoes", null, htmlAttributes: new { @class = "mybtn" })
+        </div>
+    </div>
+}
+
+
 <h2>@ViewBag.Title.</h2>
 
 <p class="text-success">@ViewBag.StatusMessage</p>
