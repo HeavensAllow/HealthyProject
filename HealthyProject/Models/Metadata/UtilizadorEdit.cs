@@ -6,8 +6,10 @@ using System.Web;
 
 namespace HealthyProject.Models.Metadata
 {
-    public class UtilizadorMetadata
+    public class UtilizadorEdit
     {
+        public int UserID { get; set; }
+
         [Required(ErrorMessage ="Introduza o Nome")]
         public string Nome { get; set; }
 
@@ -44,5 +46,6 @@ namespace HealthyProject.Models.Metadata
 
         [Display(Name = "Indice de Massa Gorda (%)")]
         public Nullable<double> MGorda { get; set; }
+
     }
 }

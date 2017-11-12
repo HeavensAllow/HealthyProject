@@ -9,6 +9,7 @@ using Microsoft.Owin.Security;
 using HealthyProject.Models;
 using System.Data.Entity;
 using System.Collections.Generic;
+using HealthyProject.Models.Metadata;
 
 namespace HealthyProject.Controllers
 {
@@ -81,6 +82,20 @@ namespace HealthyProject.Controllers
             // User.Identity.GetUserId-- - depois defazer log in tenho este
 
             Utilizador perfil = db.Utilizadors.Find(userId);
+            Eutilizador perfilEdit = new Eutilizador();
+
+            perfilEdit.Nome = perfil.Nome;
+            perfilEdit.Genero = perfil.Genero;
+            perfilEdit.Data_nascimento = perfil.Data_nascimento;
+            perfilEdit.Peso = perfil.Peso;
+            perfilEdit.Altura = perfil.Altura;
+            perfilEdit.Actividade_fisica = perfil.Actividade_fisica;
+            perfilEdit.Nr_horas_sono = perfil.Nr_horas_sono;
+            perfilEdit.Nr_refeicoes = perfil.Nr_refeicoes;
+            perfilEdit.MGorda = perfil.MGorda;
+            perfilEdit.MMuscular = perfil.MMuscular;
+
+           
 
             ViewBag.Genders = new SelectList(new List<SelectListItem>
                 {
@@ -98,7 +113,7 @@ namespace HealthyProject.Controllers
                     new SelectListItem {Text = "4", Value = "4"},
                 }, "Value", "Text", perfil.Actividade_fisica);
 
-            return View(perfil);
+            return View(perfilEdit);
             // manda oos dados do utilizador para a view
         }
 
@@ -108,8 +123,23 @@ namespace HealthyProject.Controllers
         [ValidateAntiForgeryToken]
         // para editar os campos
 
-        public ActionResult Index([Bind(Include = "UserID,Nome,Genero,Data_nascimento,Peso,Altura,Actividade_fisica,Nr_horas_sono,Nr_refeicoes,Habitos_alcoolicos,MMuscular,MGorda")] Utilizador perfilEdit)
+        public ActionResult Index([Bind(Include = "UserID,Nome,Genero,Data_nascimento,Peso,Altura,Actividade_fisica,Nr_horas_sono,Nr_refeicoes,Habitos_alcoolicos,MMuscular,MGorda")] Eutilizador perfilEdit)
         {
+            
+           int userId = Convert.ToInt32(User.Identity.GetUserId());
+           Utilizador perfil = db.Utilizadors.FirstOrDefault(o => o.UserID == userId);
+
+            perfil.Nome = perfilEdit.Nome;
+            perfil.Genero = perfilEdit.Genero;
+            perfil.Data_nascimento = perfilEdit.Data_nascimento;
+            perfil.Peso = perfilEdit.Peso;
+            perfil.Altura = perfilEdit.Altura;
+            perfil.Actividade_fisica = perfilEdit.Actividade_fisica;
+            perfil.Nr_horas_sono = perfilEdit.Nr_horas_sono;
+            perfil.Nr_refeicoes = perfilEdit.Nr_refeicoes;
+            perfil.MGorda = perfilEdit.MGorda;
+            perfil.MMuscular = perfilEdit.MMuscular;
+
             ViewBag.Genders = new SelectList(new List<SelectListItem>
                 {
                     new SelectListItem { Selected = true, Text = "M", Value = "M"},
@@ -182,44 +212,13 @@ namespace HealthyProject.Controllers
                     error = true;
                 }
 
+
+
                 
+                db.Entry(perfil).State = EntityState.Modified;
 
-                //int porcofeio = (int)perfilEdit.Actividade_fisica;
-                //switch (porcofeio) {
-                //    case 1:
-                //        perfilEdit.Actividade_fisica = 1;
-                //        break;
-                //    case 2:
-                //        if(perfilEdit.Genero == "F") {
-                //        perfilEdit.Actividade_fisica = 1.12;
-                //        }
-                //        else { perfilEdit.Actividade_fisica = 1.11; }
-                //        break;
-                //    case 3:
-                //        if (perfilEdit.Genero == "F")
-                //        {
-                //            perfilEdit.Actividade_fisica = 1.27;
-                //        }
-                //        else
-                //        {
-                //            perfilEdit.Actividade_fisica = 1.25;
-                //        }
-                //        break;
-
-                //    case 4:
-                //        if (perfilEdit.Genero == "F")
-                //        {
-                //            perfilEdit.Actividade_fisica = 1.45;
-                //        }
-                //        else
-                //        {
-                //            perfilEdit.Actividade_fisica = 1.48;
-                //        }
-                //        break;
-
-                //}  
-                db.Entry(perfilEdit).State = EntityState.Modified;
                 db.SaveChanges();
+
                 return RedirectToAction("Index", "Manage");
 
             }

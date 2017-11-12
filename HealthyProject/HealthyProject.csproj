@@ -18,12 +18,11 @@
     <TargetFrameworkVersion>v4.5.2</TargetFrameworkVersion>
     <MvcBuildViews>false</MvcBuildViews>
     <UseIISExpress>true</UseIISExpress>
-    <IISExpressSSLPort>
-    </IISExpressSSLPort>
+    <IISExpressSSLPort>44388</IISExpressSSLPort>
     <IISExpressAnonymousAuthentication />
     <IISExpressWindowsAuthentication />
     <IISExpressAnonymousAuthentication>enabled</IISExpressAnonymousAuthentication>
-    <IISExpressWindowsAuthentication>enabled</IISExpressWindowsAuthentication>
+    <IISExpressWindowsAuthentication>disabled</IISExpressWindowsAuthentication>
     <IISExpressUseClassicPipelineMode>false</IISExpressUseClassicPipelineMode>
     <UseGlobalApplicationHostFile />
     <NuGetPackageImportStamp>
@@ -260,6 +259,7 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>Database.edmx</DependentUpon>
     </Compile>
+    <Compile Include="Models\Eutilizador.cs" />
     <Compile Include="Models\Favorites.cs" />
     <Compile Include="Models\IdentityModels.cs" />
     <Compile Include="Models\Ingrediente.cs">
@@ -272,7 +272,7 @@
     <Compile Include="Models\Metadata\ComentariosMetadata.cs" />
     <Compile Include="Models\Metadata\PostMetadata.cs" />
     <Compile Include="Models\Metadata\SubcategoriasMetadata.cs" />
-    <Compile Include="Models\Metadata\UtilizadorMetadata.cs" />
+    <Compile Include="Models\Metadata\UtilizadorEdit.cs" />
     <Compile Include="Models\Objectivo.cs">
       <DependentUpon>Database.tt</DependentUpon>
     </Compile>
@@ -543,7 +543,6 @@
           <AutoAssignPort>True</AutoAssignPort>
           <DevelopmentServerPort>50463</DevelopmentServerPort>
           <DevelopmentServerVPath>/</DevelopmentServerVPath>
-          <IISUrl>http://localhost:50463/</IISUrl>
           <IISUrl>http://localhost:50464/</IISUrl>
           <NTLMAuthentication>False</NTLMAuthentication>
           <UseCustomServer>False</UseCustomServer>

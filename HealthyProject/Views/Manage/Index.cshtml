@@ -1,181 +1,181 @@
-﻿@model HealthyProject.Models.Utilizador
+﻿@model HealthyProject.Models.Eutilizador
 
-@{
-    <br />
-    <br />
-    ViewBag.Title = "Perfil do Utilizador";
-}
+    @{
+        <br />
+        <br />
+        ViewBag.Title = "Perfil do Utilizador";
+    }
 
-<h2>@ViewBag.Title.</h2>
+    <h2>@ViewBag.Title.</h2>
 
-<p class="text-success">@ViewBag.StatusMessage</p>
+    <p class="text-success">@ViewBag.StatusMessage</p>
 
-<div>
-    @*<h4>Dados do Utilizador</h4>*@
-    <hr />
-    <dl class="dl-horizontal">
+    <div>
+        @*<h4>Dados do Utilizador</h4>*@
+        <hr />
+        <dl class="dl-horizontal">
 
 
-        <dt>
-            @Html.DisplayNameFor(model => model.Nome)
-           
-            @*Mostra o nome*@
-        </dt>
+            <dt>
+                @Html.DisplayNameFor(model => model.Nome)
 
-        <dd>
-            @Html.DisplayFor(model => model.Nome)
-            @*Mostra qual nome*@
-        </dd>
-        <dt>
-            @Html.DisplayNameFor(model => model.Genero)
-        </dt>
-        <dd>
-            @Html.DisplayFor(model => model.Genero)
-            @if (Model.Genero == "F")
+                @*Mostra o nome*@
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.Nome)
+                @*Mostra qual nome*@
+            </dd>
+            <dt>
+                @Html.DisplayNameFor(model => model.Genero)
+            </dt>
+            <dd>
+                @Html.DisplayFor(model => model.Genero)
+                @if (Model.Genero == "F")
             {
-                <img src="http://theskimonster.com/files/theskimonster3/blog/posts/02XeU8RNiL.jpg" style="width:50px;height:50px" />
-            }
-            else
-            {
-                <img src="http://www.psdgraphics.com/wp-content/uploads/2009/06/male-sign.jpg" style="width:50px;height:50px"/>
+                    <img src="http://theskimonster.com/files/theskimonster3/blog/posts/02XeU8RNiL.jpg" style="width:50px;height:50px" />
+                }
+                else
+                {
+                    <img src="http://www.psdgraphics.com/wp-content/uploads/2009/06/male-sign.jpg" style="width:50px;height:50px" />
 
-            }
-        </dd>
-        <dt>
-            @Html.DisplayNameFor(model => model.Data_nascimento)
-        </dt>
-        <dd>
-            
-            @Html.DisplayFor(model=>model.Data_nascimento)
+                }
+            </dd>
+            <dt>
+                @Html.DisplayNameFor(model => model.Data_nascimento)
+            </dt>
+            <dd>
 
-        </dd>
-    </dl>
-    <br/>
-    <br />
-    <br />
+                @Html.DisplayFor(model => model.Data_nascimento)
 
-    @using (Html.BeginForm("Index", "Manage"))
-    {
-        @Html.HiddenFor(model => model.UserID)
-        <table>
-            @*a classe hiden esconde toda esta tabela*@
-            <thead></thead>
-            <tbody>
-                @*utilizo o begin form que reconhece a acao como post no conrolador manage*@
-                <tr>
-                    <th>@Html.DisplayNameFor(model => model.Nome)</th>
-                    <th>@Html.EditorFor(model => model.Nome)</th>
-                    @Html.ValidationMessageFor(model => model.Nome, "", new { @class = "text-danger" })
-                </tr>
-                <tr>
-                    <th>@Html.DisplayNameFor(model => model.Genero)</th>
+            </dd>
+        </dl>
+        <br />
+        <br />
+        <br />
 
-                    <th>
-                        @Html.DropDownListFor(model => model.Genero, (IEnumerable<SelectListItem>)ViewBag.Genders)
-                        @Html.ValidationMessageFor(model => model.Genero, "", new { @class = "text-danger" })
+        @using (Html.BeginForm("Index", "Manage"))
+        {
+            @Html.HiddenFor(model => model.UserID)
+            <table>
+                @*a classe hiden esconde toda esta tabela*@
+                <thead></thead>
+                <tbody>
+                    @*utilizo o begin form que reconhece a acao como post no conrolador manage*@
+                    <tr>
+                        <th>@Html.DisplayNameFor(model => model.Nome)</th>
+                        <th>@Html.EditorFor(model => model.Nome)</th>
+                        @Html.ValidationMessageFor(model => model.Nome, "", new { @class = "text-danger" })
+                    </tr>
+                    <tr>
+                        <th>@Html.DisplayNameFor(model => model.Genero)</th>
 
-                    </th>
-                </tr>
-                <tr>
-                    <th>
+                        <th>
+                            @Html.DropDownListFor(model => model.Genero, (IEnumerable<SelectListItem>)ViewBag.Genders)
+                            @Html.ValidationMessageFor(model => model.Genero, "", new { @class = "text-danger" })
 
-                        @Html.DisplayNameFor(model => model.Data_nascimento)
+                        </th>
+                    </tr>
+                    <tr>
+                        <th>
 
-                    </th>
+                            @Html.DisplayNameFor(model => model.Data_nascimento)
 
-                    <th>
-                     
-                        @Html.EditorFor(model => model.Data_nascimento)
-                       
-                   
-                        @Html.ValidationMessageFor(model => model.Data_nascimento, "", new { @class = "text-danger" })
+                        </th>
+
+                        <th>
+
+                            @Html.EditorFor(model => model.Data_nascimento)
 
 
-
-                <tr>
-                    <th>@Html.DisplayNameFor(model => model.Peso)</th>
-
-                    <th>@Html.EditorFor(model => model.Peso)</th>
-                    @Html.ValidationMessageFor(model => model.Peso, "", new { @class = "text-danger" })
-                </tr>
-                <tr>
-                    <th>@Html.DisplayNameFor(model => model.Altura)</th>
-
-                    <th>@Html.EditorFor(model => model.Altura)</th>
-                    @Html.ValidationMessageFor(model => model.Altura, "", new { @class = "text-danger" })
-                </tr>
-
-
-                <tr>
-
-                    <th>
-                        @Html.DisplayNameFor(model => model.Actividade_fisica)
-
-                        <p> 1 - Sedentario: Uma ou menos vezes por mes</p>
-                        <p>2 - Leve: Poucas vezes ao mes</p>
-                        <p>3 - Moderada: 1 a 2 vezes por semana</p>
-                        <p>4 - Intensa: 3 a 5 vezes por semana</p>
-
-                </th>
-
-                    <th>@Html.DropDownListFor(model => model.Actividade_fisica, (IEnumerable<SelectListItem>)ViewBag.Atividade)</th>
+                            @Html.ValidationMessageFor(model => model.Data_nascimento, "", new { @class = "text-danger" })
 
 
 
-                    @Html.ValidationMessageFor(model => model.Actividade_fisica, "", new { @class = "text-danger" })
-                </tr>
-                <tr>
-                    <th>@Html.DisplayNameFor(model => model.Nr_horas_sono)</th>
+                    <tr>
+                        <th>@Html.DisplayNameFor(model => model.Peso)</th>
 
-                    <th>@Html.EditorFor(model => model.Nr_horas_sono)</th>
-                </tr>
-                <tr>
-                    <th>@Html.DisplayNameFor(model => model.Nr_refeicoes)</th>
+                        <th>@Html.EditorFor(model => model.Peso)</th>
+                        @Html.ValidationMessageFor(model => model.Peso, "", new { @class = "text-danger" })
+                    </tr>
+                    <tr>
+                        <th>@Html.DisplayNameFor(model => model.Altura)</th>
 
-                    <th>@Html.EditorFor(model => model.Nr_refeicoes)</th>
-                </tr>
-                <tr>
-                    <th>@Html.DisplayNameFor(model => model.Habitos_alcoolicos)</th>
-
-                    <th>@Html.EditorFor(model => model.Habitos_alcoolicos)</th>
-                </tr>
-                <tr>
-                    <th>@Html.DisplayNameFor(model => model.MMuscular)</th>
-
-                    <th>@Html.EditorFor(model => model.MMuscular)</th>
-                </tr>
-                <tr>
-                    <th>@Html.DisplayNameFor(model => model.MGorda)</th>
-
-                    <th>@Html.EditorFor(model => model.MGorda)</th>
-                </tr>
+                        <th>@Html.EditorFor(model => model.Altura)</th>
+                        @Html.ValidationMessageFor(model => model.Altura, "", new { @class = "text-danger" })
+                    </tr>
 
 
+                    <tr>
+
+                        <th>
+                            @Html.DisplayNameFor(model => model.Actividade_fisica)
+
+                            <p> 1 - Sedentario: Uma ou menos vezes por mes</p>
+                            <p>2 - Leve: Poucas vezes ao mes</p>
+                            <p>3 - Moderada: 1 a 2 vezes por semana</p>
+                            <p>4 - Intensa: 3 a 5 vezes por semana</p>
+
+                        </th>
+
+                        <th>@Html.DropDownListFor(model => model.Actividade_fisica, (IEnumerable<SelectListItem>)ViewBag.Atividade)</th>
 
 
-            </tbody>
 
-        </table>
+                        @Html.ValidationMessageFor(model => model.Actividade_fisica, "", new { @class = "text-danger" })
+                    </tr>
+                    <tr>
+                        <th>@Html.DisplayNameFor(model => model.Nr_horas_sono)</th>
 
-        <input type="submit" value="Guardar" id="submeter" />
+                        <th>@Html.EditorFor(model => model.Nr_horas_sono)</th>
+                    </tr>
+                    <tr>
+                        <th>@Html.DisplayNameFor(model => model.Nr_refeicoes)</th>
 
-        @Html.AntiForgeryToken()
-                        }
-                        @section Scripts {
-                            @Scripts.Render("~/bundles/jqueryval")
-        @*permite a utilizacao de comandos query*@
-        @*<script>
+                        <th>@Html.EditorFor(model => model.Nr_refeicoes)</th>
+                    </tr>
+                    <tr>
+                        <th>@Html.DisplayNameFor(model => model.Habitos_alcoolicos)</th>
 
-            $('#edit').click(function () {
-                $('#tabela').removeClass("hidden");
-                $('#tabela').show();
+                        <th>@Html.EditorFor(model => model.Habitos_alcoolicos)</th>
+                    </tr>
+                    <tr>
+                        <th>@Html.DisplayNameFor(model => model.MMuscular)</th>
 
-                $('#submeter').removeClass("hidden");
+                        <th>@Html.EditorFor(model => model.MMuscular)</th>
+                    </tr>
+                    <tr>
+                        <th>@Html.DisplayNameFor(model => model.MGorda)</th>
 
-            })
-        </script>*@
+                        <th>@Html.EditorFor(model => model.MGorda)</th>
+                    </tr>
 
-    <script>
+
+
+
+                </tbody>
+
+            </table>
+
+            <input type="submit" value="Guardar" id="submeter" />
+
+            @Html.AntiForgeryToken()
+        }
+        @section Scripts {
+            @Scripts.Render("~/bundles/jqueryval")
+            @*permite a utilizacao de comandos query*@
+            @*<script>
+
+                    $('#edit').click(function () {
+                        $('#tabela').removeClass("hidden");
+                        $('#tabela').show();
+
+                        $('#submeter').removeClass("hidden");
+
+                    })
+                </script>*@
+
+            <script>
 
             //$(function () {
 
@@ -185,87 +185,87 @@
 
             //});
 
-    </script>
+            </script>
 
 
 
 
 
-    }
-    @* <dt>Password:</dt> *@
-    @*  [
-            @if (Model.HasPassword)
-            {
-                @Html.ActionLink("Change your password", "ChangePassword")
-            }
-            else
-            {
-                @Html.ActionLink("Create", "SetPassword")
-            }
-            ]
-        </dd>
-        <dt>External Logins:</dt>
-        <dd>
-            @Model.Logins.Count [
-            @Html.ActionLink("Manage", "ManageLogins") ]
-        </dd>
+        }
+        @* <dt>Password:</dt> *@
+        @*  [
+                @if (Model.HasPassword)
+                {
+                    @Html.ActionLink("Change your password", "ChangePassword")
+                }
+                else
+                {
+                    @Html.ActionLink("Create", "SetPassword")
+                }
+                ]
+            </dd>
+            <dt>External Logins:</dt>
+            <dd>
+                @Model.Logins.Count [
+                @Html.ActionLink("Manage", "ManageLogins") ]
+            </dd>
+            @*
+                Phone Numbers can used as a second factor of verification in a two-factor authentication system.
+
+                 See <a href="https://go.microsoft.com/fwlink/?LinkId=403804">this article</a>
+                    for details on setting up this ASP.NET application to support two-factor authentication using SMS.
+
+                 Uncomment the following block after you have set up two-factor authentication *@
+
         @*
-            Phone Numbers can used as a second factor of verification in a two-factor authentication system.
-
-             See <a href="https://go.microsoft.com/fwlink/?LinkId=403804">this article</a>
-                for details on setting up this ASP.NET application to support two-factor authentication using SMS.
-
-             Uncomment the following block after you have set up two-factor authentication *@
-
-    @*
-        <dt>Phone Number:</dt>
-        <dd>
-            @(Model.PhoneNumber ?? "None")
-            @if (Model.PhoneNumber != null)
+            <dt>Phone Number:</dt>
+            <dd>
+                @(Model.PhoneNumber ?? "None")
+                @if (Model.PhoneNumber != null)
+                {
+                    <br />
+                    <text>[&nbsp;&nbsp;@Html.ActionLink("Change", "AddPhoneNumber")&nbsp;&nbsp;]</text>
+                    using (Html.BeginForm("RemovePhoneNumber", "Manage", FormMethod.Post, new { @class = "form-horizontal", role = "form" }))
+                    {
+                        @Html.AntiForgeryToken()
+                        <text>[<input type="submit" value="Remove" class="btn-link" />]</text>
+                    }
+                }
+                else
+                {
+                    <text>[&nbsp;&nbsp;@Html.ActionLink("Add", "AddPhoneNumber")
+                }
+            </dd>
+        *@
+        @*  <dt>Two-Factor Authentication:</dt>
+            <dd>
+                <p>
+                    There are no two-factor authentication providers configured. See <a href="https://go.microsoft.com/fwlink/?LinkId=403804">this article</a>
+                    for details on setting up this ASP.NET application to support two-factor authentication. *@
+        @*</p>*@
+        @*@if (Model.TwoFactor)
             {
-                <br />
-                <text>[&nbsp;&nbsp;@Html.ActionLink("Change", "AddPhoneNumber")&nbsp;&nbsp;]</text>
-                using (Html.BeginForm("RemovePhoneNumber", "Manage", FormMethod.Post, new { @class = "form-horizontal", role = "form" }))
+                using (Html.BeginForm("DisableTwoFactorAuthentication", "Manage", FormMethod.Post, new { @class = "form-horizontal", role = "form" }))
                 {
                     @Html.AntiForgeryToken()
-                    <text>[<input type="submit" value="Remove" class="btn-link" />]</text>
+                    <text>Enabled
+                    <input type="submit" value="Disable" class="btn btn-link" />
+                    </text>
                 }
             }
             else
             {
-                <text>[&nbsp;&nbsp;@Html.ActionLink("Add", "AddPhoneNumber")
-            }
-        </dd>
-    *@
-    @*  <dt>Two-Factor Authentication:</dt>
-        <dd>
-            <p>
-                There are no two-factor authentication providers configured. See <a href="https://go.microsoft.com/fwlink/?LinkId=403804">this article</a>
-                for details on setting up this ASP.NET application to support two-factor authentication. *@
-    @*</p>*@
-    @*@if (Model.TwoFactor)
-        {
-            using (Html.BeginForm("DisableTwoFactorAuthentication", "Manage", FormMethod.Post, new { @class = "form-horizontal", role = "form" }))
-            {
-                @Html.AntiForgeryToken()
-                <text>Enabled
-                <input type="submit" value="Disable" class="btn btn-link" />
-                </text>
-            }
-        }
-        else
-        {
-            using (Html.BeginForm("EnableTwoFactorAuthentication", "Manage", FormMethod.Post, new { @class = "form-horizontal", role = "form" }))
-            {
-                @Html.AntiForgeryToken()
-                <text>Disabled
-                <input type="submit" value="Enable" class="btn btn-link" />
-                </text>
-            }
-                    </dd>
-        }*@
+                using (Html.BeginForm("EnableTwoFactorAuthentication", "Manage", FormMethod.Post, new { @class = "form-horizontal", role = "form" }))
+                {
+                    @Html.AntiForgeryToken()
+                    <text>Disabled
+                    <input type="submit" value="Enable" class="btn btn-link" />
+                    </text>
+                }
+                        </dd>
+            }*@
 
 
 
 
-</div>
+    </div>
