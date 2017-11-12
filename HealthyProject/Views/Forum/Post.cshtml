@@ -6,54 +6,35 @@
 
 <h2>@Model.Titulo</h2>
 
-<table class="table">
-    <tr>
-        <th></th>
-        <th></th>
-    </tr>
-    <tr>
-        <td>
-            @Model.AspNetUser.Utilizador.Nome
-            <br />
-            @Model.Data
-        </td>
-        <td>
-            @Model.Texto
-        </td>
 
-    </tr>
-    @foreach (var comentario in Model.Comentarios)
-    {
-        <tr>
-            <td>
-                @comentario.AspNetUser.Utilizador.Nome
-                <br />
-                @comentario.Data
-            </td>
-            <td>
-                @comentario.Comment
-            </td>
-            <td>
-                @using (Ajax.BeginForm("Gosto", "Forum", new { id = comentario.CommentID }, new AjaxOptions() { HttpMethod = "POST", OnSuccess = "updateLikes" }, null))
-                {
-                    <button class="Gosto"></button>
-                    <label class="likesLabel">@(comentario.Opiniaos.Where(o => o.Opiniao1 == true).Count() - comentario.Opiniaos.Where(o => o.Opiniao1 == false).Count())</label> <label>Likes</label>
-                }
-            </td>
-            <td>
-                @using (Ajax.BeginForm("naoGosto", "Forum", new { id = comentario.CommentID }, new AjaxOptions() { HttpMethod = "POST", OnSuccess = "decreaseLikes" }, null))
-                {
-                    <button class="naoGosto"></button>
-                }
+<div id="divComentarios">
+    @{Html.RenderPartial("_PostPartial", Model); }
+</div>
+
+    
+    @*@using (Ajax.BeginForm("Gosto", "Forum", new AjaxOptions() { HttpMethod="Post", UpdateTargetId = "likesLabel"})) 
+
+              
+        {
+            <button class="Gosto"></button>
+            <label id="likesLabel">@(comentario.Opiniaos.Where(o => o.Opiniao1 == true).Count() - comentario.Opiniaos.Where(o => o.Opiniao1 == false).Count())</label> <label>Likes</label>
+        }
+    </td>
+    <td>
+       
+        {
+            <button class="naoGosto"></button>
+        }
             </td>
         </tr>
-    }
-</table>
-@using (Html.BeginForm("Post", "Forum", new { postId = Model.PostID }, FormMethod.Post, new {  @class = "form-newComment" } ))
-{
-    @Html.AntiForgeryToken()
+    }*@
+@*testa*@
 
-    <div class="form-horizontal">
+@using (Ajax.BeginForm("Post", "Forum", new { postId = Model.PostID }, new AjaxOptions() { HttpMethod = "Post", UpdateTargetId= "divComentarios" }))
+        {
+                @Html.AntiForgeryToken()
+
+            <div class="form-horizontal">
         <label class="control-label col-md-2" for="Texto">Novo Comentário</label>
         <br />
         <div class="form-group">
@@ -71,11 +52,11 @@
     </div>
     
         }
-@section Scripts{
+@section Scripts{ 
     <script src="~/Scripts/jquery.unobtrusive-ajax.js"></script>
-    <script>
+   @* <script>
         function updateLikes() {
             $('.likesLabel', $(this)).text(@ViewBag.Likes);
         }
-    </script>
+    </script>*@
 }

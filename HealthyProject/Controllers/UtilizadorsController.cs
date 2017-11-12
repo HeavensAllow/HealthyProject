@@ -7,13 +7,19 @@ using System.Net;
 using System.Web;
 using System.Web.Mvc;
 using HealthyProject.Models;
-
+using Microsoft.AspNet.Identity;
+using System.Threading.Tasks;
 
 namespace HealthyProject.Controllers
 {
+    [Authorize(Roles="Admin")] 
     public class UtilizadorsController : Controller
     {
         private HealthyEntities db = new HealthyEntities();
+        private UserManager<ApplicationUser, int> userManager = new UserManager<ApplicationUser, int>(new CustomUserStore(new ApplicationDbContext()));
+        //usado para atribuir roles a utilizadores
+
+
 
         // GET: Utilizadors
         public ActionResult Index()
@@ -40,7 +46,9 @@ namespace HealthyProject.Controllers
         // GET: Utilizadors/Create
         public ActionResult Create()
         {
-            ViewBag.UserID = new SelectList(db.AspNetUsers, "Id", "Email");
+            
+            ViewBag.Roles = new SelectList(db.AspNetRoles, "Name", "Name");
+
             return View();
         }
 
@@ -49,17 +57,28 @@ namespace HealthyProject.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "UserID,Nome,Genero,Data_nascimento,Peso,Altura,Actividade_fisica,Nr_horas_sono,Nr_refeicoes,Habitos_alcoolicos,MMuscular,MGorda")] Utilizador utilizador)
+        public async Task<ActionResult> Create(RegisterViewModel model, string roleName) 
         {
             if (ModelState.IsValid)
             {
-                db.Utilizadors.Add(utilizador);
-                db.SaveChanges();
-                return RedirectToAction("Index");
+                var user = new ApplicationUser { UserName = model.Email, Email = model.Email };
+                var result = await userManager.CreateAsync(user, model.Password);
+                if (result.Succeeded)
+                {
+                    userManager.AddToRole(user.Id, roleName);
+                    
+                    Utilizador newUser = new Utilizador();
+                    newUser.UserID = user.Id;
+                    db.Utilizadors.Add(newUser);
+                    db.SaveChanges();
+
+                    return RedirectToAction("Index", "Home");
+                }
             }
 
-            ViewBag.UserID = new SelectList(db.AspNetUsers, "Id", "Email", utilizador.UserID);
-            return View(utilizador);
+            ViewBag.Roles = new SelectList(db.AspNetRoles, "Name", "Name");
+
+            return View(model);
         }
 
         // GET: Utilizadors/Edit/5
@@ -69,6 +88,8 @@ namespace HealthyProject.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
+         
+
             Utilizador utilizador = db.Utilizadors.Find(id);
             if (utilizador == null)
             {
@@ -87,6 +108,7 @@ namespace HealthyProject.Controllers
         {
             if (ModelState.IsValid)
             {
+                
                 db.Entry(utilizador).State = EntityState.Modified;
                 db.SaveChanges();
                 return RedirectToAction("Index");

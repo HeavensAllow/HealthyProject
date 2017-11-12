@@ -19,7 +19,7 @@ namespace HealthyProject
         {
             ApplicationDbContext context = new ApplicationDbContext();
 
-            var roleManager = new RoleManager<CustomRole, int>(new CustomRoleStore(context));
+            var roleManager = new RoleManager<CustomRole, int>(new CustomRoleStore(context)); 
             var UserManager = new UserManager<ApplicationUser, int>(new CustomUserStore(context));
 
 
@@ -31,8 +31,28 @@ namespace HealthyProject
                 var role = new CustomRole();
                 role.Name = "Admin";
                 roleManager.Create(role);
+            }
+
+            //primeiro, criar o role User
+            if (!roleManager.RoleExists("User"))
+            {
+                var role = new CustomRole();
+                role.Name = "User";
+                roleManager.Create(role);
 
             }
+
+            ApplicationUser newUser = new ApplicationUser();
+            newUser.UserName = "admin@gmail.com";
+            newUser.Email = "admin@gmail.com"; 
+            var password = "1-Obesidade"; 
+            var result = UserManager.Create(newUser, password);
+           
+            if (result.Succeeded)
+            {
+                UserManager.AddToRole(newUser.Id, "Admin"); // adicionar ao role Admin
+            }
+            
         }
     }
 }

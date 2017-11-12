@@ -1,0 +1,32 @@
+﻿@model HealthyProject.Models.Post
+<table class="table">
+    <tr>
+        <th></th>
+        <th></th>
+    </tr>
+    <tr>
+        <td>
+            @Model.AspNetUser.Utilizador.Nome 
+            <br />
+            @Model.Data
+        </td>
+        <td>
+            @Model.Texto
+        </td>
+
+    </tr>
+
+    @foreach (var comentario in Model.Comentarios.OrderBy(c => c.Data)) 
+    {
+        <tr>
+            <td>
+                @comentario.AspNetUser.Utilizador.Nome
+                <br />
+                @comentario.Data
+            </td>
+            <td>
+                @comentario.Comment
+            </td>
+        </tr>
+    }
+    </table>
