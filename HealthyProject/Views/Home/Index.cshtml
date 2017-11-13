@@ -1,4 +1,5 @@
 ﻿@model HealthyProject.Models.LoginViewModel
+
 <br />
 <br />
 @{
@@ -6,45 +7,54 @@
 }
 @Styles.Render("~/Content/css")
 @Scripts.Render("~/bundles/modernizr")
-<body style="background-image:url(https://images.unsplash.com/photo-1490818387583-1baba5e638af?auto=format&fit=crop&w=931&q=60&ixid=dW5zcGxhc2guY29tOzs7Ozs%3D); background-size:cover">
-
-    @*@if(ViewBag.Sucess == null){*@
+<body>
     @if (User.Identity.IsAuthenticated)
     {
-        <div style="text-align:center;padding-left:500px">
+        if (ViewBag.UserGuide != null)
+        {
             <br />
             <br />
             <br />
-            <br />
-            <br />
-
-            <br />
-            <div>
-
-                <br />
-                <br />
-
-                @Html.ActionLink(" Fórum", "Index", "Forum", null, htmlAttributes: new { @class = "btn1", id = "registerLink" })
+            <div class="centerAlign">
+                <div class="alert alert-success alert-dismissable">
+                    <strong><i class="fa fa-exclamation-triangle" aria-hidden="true"></i> Bem vindo ao HealthyProject! Iremos agora acompanhar-te no teu percurso inicial pelo nosso website, mostrando as suas funcionalidades.</strong>
+                    <br />
+                    <strong><i class="fa fa-exclamation-triangle" aria-hidden="true"></i>Nesta página apresentamos imagens das nossas funcionalidades disponíveis bem como links para as mesmas. </strong>
+                    <br />
+                    <strong><i class="fa fa-exclamation-triangle" aria-hidden="true"></i>No entanto, antes de começares o teu percurso na nossa página precisas de preencher o teu perfil. Por favor carrega no botão abaixo e cria o teu perfil.</strong>
+                    <br />
+                    <br />
+                    @Html.ActionLink("Criar Perfil", "Index", "Manage", null, htmlAttributes: new { @class = "mybtn" })
+                </div>
             </div>
-            <div>
-                <br />
-                <br />
+        }
+        <div class="row" style="text-align:center;padding:200px 0;">
 
-                @Html.ActionLink("Gestão de refeições", "Index", "Refeicoes", null, htmlAttributes: new { @class = "btn1", id = "registerLink" })
+
+            <div class="col-md-4">
+                <br />
+                <br />
+                <img src="http://www.pcmanias.com/wp-content/uploads/2015/10/forum3.jpg" style="width:250px;height:250px;" />
+                @Html.ActionLink("Clique para ir para o Forum", "Index", "Forum", null, htmlAttributes: new { @class = "mybtn", id = "registerLink" })
             </div>
-            <div>
-                <br />
-                <br />
 
-                @Html.ActionLink(" Objectivos", "Index", "Objectivoes", null, htmlAttributes: new { @class = "btn1", id = "registerLink" })
+            <div class="col-md-4">
+                <br />
+                <br />
+                <img src="http://cardiacconnect.org.au/wp-content/uploads/2015/12/Healthy-Eating-197x197.png" style=" width:250px;height:250px" />
+                @Html.ActionLink("Clique para adicionar/gerir as suas Refeicoes", "Index", "Refeicoes", null, htmlAttributes: new { @class = "mybtn", id = "registerLink" })
+            </div>
+
+            <div class="col-md-4">
+                <br />
+                <br />
+                <img src="http://igner.info/images/img_84723-75.jpg" style="width:250px;height:200px; " />
+                @Html.ActionLink("Clique para definir um Objetivo", "Index", "Objectivoes", null, htmlAttributes: new { @class = "mybtn", id = "registerLink" })
             </div>
         </div>
     }
-
     else
     {
-
-
         <div style="padding-left:600px; text-align: center">
 
             <br />
@@ -69,7 +79,7 @@
         <br />
         <br />
         <br />
-
+        <br />
         <div class="row" style="padding-left: 700px">
             <div class="col-md-8">
                 <section id="loginForm">
@@ -106,11 +116,11 @@
                             </div>
                         </div>
                         <p>
-                            @Html.ActionLink("Registe-se", "Register")
+                            @Html.ActionLink("Register as a new user", "Register")
                         </p>
 
                         <p>
-                            @Html.ActionLink("Esqueceu-se da password?", "ForgotPassword")
+                            @Html.ActionLink("Forgot your password?", "ForgotPassword")
                         </p>
                     }
                 </section>
@@ -130,35 +140,3 @@
         <br />
     }
 </body>
-
-
-@*http://www.shineprowindowcleaning.com/wp-content/uploads/2016/02/background-blue-gradient.jpg
-    @*style="background-image: url(http://static.tumblr.com/17fe60d85d38327f4216e7fb11f81111/bwqiovp/jzyn2ivyx/tumblr_static_best-top-desktop-blue-wallpapers-hd-blue-wallpaper-beautiful-free-backgrounds-31.jpg)" bgproperties="fixed"*@
-
-
-@*Informacao Anterior*@
-@*<p class="lead">ASP.NET is a free web framework for building great Web sites and Web applications using HTML, CSS and JavaScript.</p>
-    <p><a href="https://asp.net" class="btn btn-primary btn-lg">Learn more &raquo;</a></p>*@
-@*<div class="row">
-       <div class="col-md-4">
-           <h2>Getting started</h2>
-           <p>
-               ASP.NET MVC gives you a powerful, patterns-based way to build dynamic websites that
-               enables a clean separation of concerns and gives you full control over markup
-               for enjoyable, agile development.
-           </p>
-           <p><a class="btn btn-default" href="https://go.microsoft.com/fwlink/?LinkId=301865">Learn more &raquo;</a></p>
-       </div>
-       <div class="col-md-4">
-           <h2>Get more libraries</h2>
-           <p>NuGet is a free Visual Studio extension that makes it easy to add, remove, and update libraries and tools in Visual Studio projects.</p>
-           <p><a class="btn btn-default" href="https://go.microsoft.com/fwlink/?LinkId=301866">Learn more &raquo;</a></p>
-       </div>
-       <div class="col-md-4">
-           <h2>Web Hosting</h2>
-           <p>You can easily find a web hosting company that offers the right mix of features and price for your applications.</p>
-           <p><a class="btn btn-default" href="https://go.microsoft.com/fwlink/?LinkId=301867">Learn more &raquo;</a></p>
-
-       </div>
-    </div>*@
-@*class="jumbotron"*@
