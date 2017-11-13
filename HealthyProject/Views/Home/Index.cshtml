@@ -1,5 +1,4 @@
 ﻿@model HealthyProject.Models.LoginViewModel
-
 <br />
 <br />
 @{
@@ -7,7 +6,9 @@
 }
 @Styles.Render("~/Content/css")
 @Scripts.Render("~/bundles/modernizr")
-<body>
+<body style="background-image:url(https://images.unsplash.com/photo-1490818387583-1baba5e638af?auto=format&fit=crop&w=931&q=60&ixid=dW5zcGxhc2guY29tOzs7Ozs%3D); background-size:cover">
+
+    @*@if(ViewBag.Sucess == null){*@
     @if (User.Identity.IsAuthenticated)
     {
         if (ViewBag.UserGuide != null)
@@ -34,47 +35,34 @@
             <br />
             <br />
             <br />
-            <div class="centerAlign">
-                <div class="alert alert-success alert-dismissable">
-                    <strong><i class="fa fa-exclamation-triangle" aria-hidden="true"></i> Bem vindo ao HealthyProject! Iremos agora acompanhar-te no teu percurso inicial pelo nosso website, mostrando as suas funcionalidades.</strong>
-                    <br />
-                    <strong><i class="fa fa-exclamation-triangle" aria-hidden="true"></i>Nesta página apresentamos imagens das nossas funcionalidades disponíveis bem como links para as mesmas. </strong>
-                    <br />
-                    <strong><i class="fa fa-exclamation-triangle" aria-hidden="true"></i>No entanto, antes de começares o teu percurso na nossa página precisas de preencher o teu perfil. Por favor carrega no botão abaixo e cria o teu perfil.</strong>
-                    <br />
-                    <br />
-                    @Html.ActionLink("Criar Perfil", "Index", "Manage", null, htmlAttributes: new { @class = "mybtn" })
-                </div>
+
+            <br />
+            <div>
+
+                <br />
+                <br />
+
+                @Html.ActionLink(" Fórum", "Index", "Forum", null, htmlAttributes: new { @class = "btn1", id = "registerLink" })
             </div>
-        </div>
-
-        <div class="row" style="text-align:center;padding:200px 0;">
-
-
-            <div class="col-md-4">
+            <div>
                 <br />
                 <br />
-                <img src="http://www.pcmanias.com/wp-content/uploads/2015/10/forum3.jpg" style="width:250px;height:250px;" />
-                @Html.ActionLink("Clique para ir para o Forum", "Index", "Forum", null, htmlAttributes: new { @class = "mybtn", id = "registerLink" })
+
+                @Html.ActionLink("Gestão de refeições", "Index", "Refeicoes", null, htmlAttributes: new { @class = "btn1", id = "registerLink" })
             </div>
+            <div>
+                <br />
+                <br />
 
-            <div class="col-md-4">
-                <br />
-                <br />
-                <img src="http://cardiacconnect.org.au/wp-content/uploads/2015/12/Healthy-Eating-197x197.png" style=" width:250px;height:250px" />
-                @Html.ActionLink("Clique para adicionar/gerir as suas Refeicoes", "Index", "Refeicoes", null, htmlAttributes: new { @class = "mybtn", id = "registerLink" })
-            </div>
-
-            <div class="col-md-4">
-                <br />
-                <br />
-                <img src="http://igner.info/images/img_84723-75.jpg" style="width:250px;height:200px; " />
-                @Html.ActionLink("Clique para definir um Objetivo", "Index", "Objectivoes", null, htmlAttributes: new { @class = "mybtn", id = "registerLink" })
+                @Html.ActionLink(" Objectivos", "Index", "Objectivoes", null, htmlAttributes: new { @class = "btn1", id = "registerLink" })
             </div>
         </div>
     }
+
     else
     {
+
+
         <div style="padding-left:600px; text-align: center">
 
             <br />
@@ -99,7 +87,7 @@
         <br />
         <br />
         <br />
-        <br />
+
         <div class="row" style="padding-left: 700px">
             <div class="col-md-8">
                 <section id="loginForm">
@@ -136,11 +124,11 @@
                             </div>
                         </div>
                         <p>
-                            @Html.ActionLink("Register as a new user", "Register")
+                            @Html.ActionLink("Registe-se", "Register")
                         </p>
 
                         <p>
-                            @Html.ActionLink("Forgot your password?", "ForgotPassword")
+                            @Html.ActionLink("Esqueceu-se da password?", "ForgotPassword")
                         </p>
                     }
                 </section>
@@ -154,6 +142,7 @@
 
         @section Scripts {
             @Scripts.Render("~/bundles/jqueryval")
+
         }
         <br />
         <br />
