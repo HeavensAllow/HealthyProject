@@ -122,8 +122,7 @@ namespace HealthyProject.Controllers
                     counter++;
                 }
                 double counterkcal = 0, counterproteinas = 0, countergordura = 0, counterhc = 0;
-                //var registo = db.RegistoDiarios.FirstOrDefault(p => p.Data == DateTime.Today);
-                RegistoDiario registo = db.RegistoDiarios.FirstOrDefault(o => o.Objectivo.UserID == userId && o.Data == DateTime.Today);
+                RegistoDiario registo = db.RegistoDiarios.FirstOrDefault(o => o.Objectivo.UserID == userId && o.Data == refeico.Data);
                 if (registo == null)
                 {
                     RegistoDiario registo1 = new RegistoDiario();

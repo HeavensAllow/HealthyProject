@@ -47,14 +47,10 @@
     @*<h4>Dados do Utilizador</h4>*@
     <hr />
     <dl class="dl-horizontal">
-
-
         <dt>
             @Html.DisplayNameFor(model => model.Nome)
-
             @*Mostra o nome*@
         </dt>
-
         <dd>
             @Html.DisplayFor(model => model.Nome)
             @*Mostra qual nome*@
@@ -71,16 +67,13 @@
             else
             {
                 <img src="http://www.psdgraphics.com/wp-content/uploads/2009/06/male-sign.jpg" style="width:50px;height:50px" />
-
             }
         </dd>
         <dt>
             @Html.DisplayNameFor(model => model.Data_nascimento)
         </dt>
         <dd>
-
             @Html.DisplayFor(model => model.Data_nascimento)
-
         </dd>
     </dl>
     <br />
@@ -89,6 +82,7 @@
 
     @using (Html.BeginForm("Index", "Manage"))
     {
+        @Html.AntiForgeryToken()
         @Html.HiddenFor(model => model.UserID)
         <table>
             @*a classe hiden esconde toda esta tabela*@
@@ -105,29 +99,18 @@
                 </tr>
                 <tr>
                     <th>@Html.DisplayNameFor(model => model.Genero)<span style="color:red;">*</span></th>
-
                     <th>
                         @Html.DropDownListFor(model => model.Genero, (IEnumerable<SelectListItem>)ViewBag.Genders)
                         @Html.ValidationMessageFor(model => model.Genero, "", new { @class = "text-danger" })
-
                     </th>
                 </tr>
                 <tr>
                     <th>
-
                         @Html.DisplayNameFor(model => model.Data_nascimento)<span style="color:red;">*</span>
-
                     </th>
-
                     <th>
-
                         @Html.EditorFor(model => model.Data_nascimento)
-
-
                         @Html.ValidationMessageFor(model => model.Data_nascimento, "", new { @class = "text-danger" })
-
-
-
                 <tr>
                     <th>@Html.DisplayNameFor(model => model.Peso)<span style="color:red;">*</span></th>
 
@@ -136,66 +119,43 @@
                 </tr>
                 <tr>
                     <th>@Html.DisplayNameFor(model => model.Altura)<span style="color:red;">*</span></th>
-
                     <th>@Html.EditorFor(model => model.Altura)</th>
                     @Html.ValidationMessageFor(model => model.Altura, "", new { @class = "text-danger" })
                 </tr>
-
-
                 <tr>
-
                     <th>
                         @Html.DisplayNameFor(model => model.Actividade_fisica)<span style="color:red;">*</span>
-
                         <p> 1 - Sedentario: Uma ou menos vezes por mes</p>
                         <p>2 - Leve: Poucas vezes ao mes</p>
                         <p>3 - Moderada: 1 a 2 vezes por semana</p>
                         <p>4 - Intensa: 3 a 5 vezes por semana</p>
-
                     </th>
-
                     <th>@Html.DropDownListFor(model => model.Actividade_fisica, (IEnumerable<SelectListItem>)ViewBag.Atividade)</th>
-
-
-
                     @Html.ValidationMessageFor(model => model.Actividade_fisica, "", new { @class = "text-danger" })
                 </tr>
                 <tr>
                     <th>@Html.DisplayNameFor(model => model.Nr_horas_sono)</th>
-
                     <th>@Html.EditorFor(model => model.Nr_horas_sono)</th>
                 </tr>
                 <tr>
                     <th>@Html.DisplayNameFor(model => model.Nr_refeicoes)</th>
-
                     <th>@Html.EditorFor(model => model.Nr_refeicoes)</th>
                 </tr>
                 <tr>
                     <th>@Html.DisplayNameFor(model => model.Habitos_alcoolicos)</th>
-
                     <th>@Html.EditorFor(model => model.Habitos_alcoolicos)</th>
                 </tr>
                 <tr>
                     <th>@Html.DisplayNameFor(model => model.MMuscular)</th>
-
                     <th>@Html.EditorFor(model => model.MMuscular)</th>
                 </tr>
                 <tr>
                     <th>@Html.DisplayNameFor(model => model.MGorda)</th>
-
                     <th>@Html.EditorFor(model => model.MGorda)</th>
                 </tr>
-
-
-
-
             </tbody>
-
         </table>
-
             <input type="submit" value="Guardar" id="submeter" />
-
-            @Html.AntiForgeryToken()
     }
     @section Scripts {
         @Scripts.Render("~/bundles/jqueryval")
