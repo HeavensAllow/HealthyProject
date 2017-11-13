@@ -11,9 +11,9 @@
     <br />
     <div class="centerAlign">
         <div class="alert alert-success alert-dismissable">
-            <strong><i class="fa fa-exclamation-triangle" aria-hidden="true"></i>Tendo o objectivo criado está na altura de adicionar refeições ao registo diário, de forma a actualizar os gráficos.</strong>
+            <strong><i class="fa fa-exclamation-triangle" aria-hidden="true"></i>Tendo o objectivo criado, está na altura de adicionar refeições ao registo diário de forma a actualizar os gráficos.</strong>
             <br />
-            <strong><i class="fa fa-exclamation-triangle" aria-hidden="true"></i>Para tal, deverá dirigir-se á página do registo diário, onde tem a possibilidade de registar as suas refeições.</strong>
+            <strong><i class="fa fa-exclamation-triangle" aria-hidden="true"></i>Para tal, deverá dirigir-se à página do registo diário, onde tem a possibilidade de registar as suas refeições.</strong>
             <br />
             <strong><i class="fa fa-exclamation-triangle" aria-hidden="true"></i>Por favor clique no botão abaixo.</strong>
             <br />
@@ -28,9 +28,9 @@
     <br />
     <div class="centerAlign">
         <div class="alert alert-success alert-dismissable">
-            <strong><i class="fa fa-exclamation-triangle" aria-hidden="true"></i>Esta é a página onde poderás ver as suas informações relativamente ao objectivo actual bem como ao seu histórico de objectivos.</strong>
+            <strong><i class="fa fa-exclamation-triangle" aria-hidden="true"></i>Esta é a página onde poderá ver as suas informações relativamente ao objectivo actual bem como ao seu histórico de objectivos.</strong>
             <br />
-            <strong><i class="fa fa-exclamation-triangle" aria-hidden="true"></i>De forma a se actualizar o Intake Recomendado, todas as semanas na Segunda-Feira é requisitado o utilizador actualize o seu peso.</strong>
+            <strong><i class="fa fa-exclamation-triangle" aria-hidden="true"></i>Para a actualização do Intake Recomendado, todas as semanas, à Segunda-Feira, pede-se ao utilizador que actualize o seu peso.</strong>
             <br />
             <strong><i class="fa fa-exclamation-triangle" aria-hidden="true"></i>No entanto, para começar, passemos a criar um objectivo. Por favor clique no botão abaixo.</strong>
             <br />
@@ -46,7 +46,7 @@
     <div class="centerAlign">
         <img src="@Url.Content("http://ak7.picdn.net/shutterstock/videos/15423577/thumb/2.jpg")" style="height: 500px; width:800px; margin: auto;" />
         <div class="alert alert-success alert-dismissable">
-            <strong><i class="fa fa-exclamation-triangle" aria-hidden="true"></i> O dia referido para o início do seu objectivo ainda não chegou!</strong>
+            <strong><i class="fa fa-exclamation-triangle" aria-hidden="true"></i> O dia escolhido para o início do seu objectivo ainda não chegou!</strong>
             <strong><i>Dias Restantes: @Html.Raw(ViewBag.TooSoon)</i></strong>
         </div>
         <br />
@@ -326,7 +326,7 @@ else
 
             axisY: {
                 interlacedColor: "#F0F8FF",
-                title: "Numero de objectivos"
+                title: "Número de objectivos"
             },
 
             axisX: {
@@ -352,7 +352,7 @@ else
             animationEnabled: true,
             backgroundColor: "#ffffff",
             title: {
-                    text: "Kcal registadas por dia"
+                    text: "kcal registadas por dia"
             },
 
             toolTip: {
@@ -361,7 +361,7 @@ else
 
             axisY: {
                     interlacedColor: "#F0F8FF",
-                title: "Kcal"
+                title: "kcal"
             },
 
             axisX: {
@@ -371,8 +371,8 @@ else
             data: [{
                     type: "line",
                 showInLegend: true,
-                name: "Kcal",
-                legendText: "Kcal por data",
+                name: "kcal",
+                legendText: "kcal por data",
                 dataPoints: @Html.Raw(ViewBag.Registos),
                 }]
             });
@@ -396,7 +396,7 @@ else
 
             axisY: {
                 interlacedColor: "#F0F8FF",
-                title: "Numero de vezes ingerida"
+                title: "Número de vezes ingerida"
             },
 
             axisX: {
@@ -406,7 +406,7 @@ else
             data: [{
                 type: "column",
                 showInLegend: false,
-                name: "Numero de vezes ingeridas",
+                name: "Número de vezes ingeridas",
                 legendText: "Top 5 pratos",
                 dataPoints: @Html.Raw(ViewBag.Favoritos),
                 }]
@@ -431,7 +431,7 @@ else
 
             axisY: {
                 interlacedColor: "#F0F8FF",
-                title: "Numero de dias"
+                title: "Número de dias"
             },
 
             axisX: {
@@ -441,8 +441,8 @@ else
             data: [{
                 type: "column",
                 showInLegend: true,
-                name: "Numero de dias",
-                legendText: "Numero de dias com/sem objectivos",
+                name: "Número de dias",
+                legendText: "Número de dias com/sem objectivos",
                 dataPoints: @Html.Raw(ViewBag.Count),
                 }]
             });

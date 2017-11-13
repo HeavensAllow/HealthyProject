@@ -16,45 +16,44 @@ namespace HealthyProject.Models
 
     public class Eutilizador
     {
-
-
        public int UserID { get; set; }
 
-        [Required(ErrorMessage = "Introduza o Nome")]
+        [Required(ErrorMessage = "Introduza o nome")]
         public string Nome { get; set; }
 
-        [Required(ErrorMessage = "Introduza o Genero")]
+        [Required(ErrorMessage = "Introduza o género")]
+        [Display(Name = "Género")]
         public string Genero { get; set; }
 
-        [Required(ErrorMessage = "Introduza a Data de Nascimento")]
-        [Display(Name = "Data de Nascimento")]
+        [Required(ErrorMessage = "Introduza a Data de nascimento")]
+        [Display(Name = "Data de nascimento")]
         [DataType(DataType.Date)]
         [DisplayFormat(DataFormatString = "{0:dd/MM/yyyy}", ApplyFormatInEditMode = true)]
         public Nullable<System.DateTime> Data_nascimento { get; set; }
 
-        [Required(ErrorMessage = "Introduza o Peso (kg)")]
+        [Required(ErrorMessage = "Introduza o peso (kg)")]
         public Nullable<int> Peso { get; set; }
 
-        [Required(ErrorMessage = "Introduza a Altura (metros)")]
+        [Required(ErrorMessage = "Introduza a altura (centímetros)")]
         public Nullable<int> Altura { get; set; }
 
 
-        [Required(ErrorMessage = "Introduza o Indice de Atividade Fisica ")]
-        [Display(Name = "Indice de Atividade Fisica/ Frequencia")]
+        [Required(ErrorMessage = "Introduza o índice de atividade física ")]
+        [Display(Name = "Índice de atividade física/ Frequência")]
         public Nullable<double> Actividade_fisica { get; set; }
 
-        [Display(Name = "Numero de Horas de Sono Diarias")]
+        [Display(Name = "Número de horas de sono diárias")]
         public Nullable<int> Nr_horas_sono { get; set; }
 
-        [Display(Name = "Numero de Refeicoes Diarias")]
+        [Display(Name = "Número de efeições diárias")]
         public Nullable<int> Nr_refeicoes { get; set; }
-        [Display(Name = "Habitos Alcoolicos")]
+        [Display(Name = "Hábitos alcoólicos")]
         public Nullable<bool> Habitos_alcoolicos { get; set; }
 
-        [Display(Name = "Indice de Massa Muscular (%)")]
+        [Display(Name = "Índice de massa muscular (%)")]
         public Nullable<double> MMuscular { get; set; }
 
-        [Display(Name = "Indice de Massa Gorda (%)")]
+        [Display(Name = "Índice de massa gorda (%)")]
         public Nullable<double> MGorda { get; set; }
 
 
