@@ -4,6 +4,40 @@
     ViewBag.Title = "Index";
 }
 
+@if (TempData["UserGuide"] != null || ViewBag.UserGuide2 != null)
+{
+    <br />
+    <br />
+    <br />
+    <div class="centerAlign">
+        <div class="alert alert-success alert-dismissable">
+            <strong><i class="fa fa-exclamation-triangle" aria-hidden="true"></i>Tendo o objectivo criado está na altura de adicionar refeições ao registo diário, de forma a actualizar os gráficos.</strong>
+            <br />
+            <strong><i class="fa fa-exclamation-triangle" aria-hidden="true"></i>Para tal, deverá dirigir-se á página do registo diário, onde tem a possibilidade de registar as suas refeições.</strong>
+            <br />
+            <strong><i class="fa fa-exclamation-triangle" aria-hidden="true"></i>Por favor clique no botão abaixo.</strong>
+            <br />
+            @Html.ActionLink("Registo de Refeições", "Index", "Refeicoes", null, htmlAttributes: new { @class = "mybtn" })
+        </div>
+    </div>
+}
+@if (ViewBag.UserGuide != null)
+{
+    <br />
+    <br />
+    <br />
+    <div class="centerAlign">
+        <div class="alert alert-success alert-dismissable">
+            <strong><i class="fa fa-exclamation-triangle" aria-hidden="true"></i>Esta é a página onde poderás ver as suas informações relativamente ao objectivo actual bem como ao seu histórico de objectivos.</strong>
+            <br />
+            <strong><i class="fa fa-exclamation-triangle" aria-hidden="true"></i>De forma a se actualizar o Intake Recomendado, todas as semanas na Segunda-Feira é requisitado o utilizador actualize o seu peso.</strong>
+            <br />
+            <strong><i class="fa fa-exclamation-triangle" aria-hidden="true"></i>No entanto, para começar, passemos a criar um objectivo. Por favor clique no botão abaixo.</strong>
+            <br />
+            @Html.ActionLink("Criar Objectivo", "Create", "Objectivoes", null, htmlAttributes: new { @class = "mybtn" })
+        </div>
+    </div>
+}
 @if (ViewBag.TooSoon != null)
 {
     <br />
@@ -19,7 +53,7 @@
         <br />
         <br />
     </div>
-        <br />
+    <br />
         <h1 class="centerAlign">Histórico</h1>
 
         <div style="display:inline;">
@@ -54,7 +88,7 @@ else
         if (TempData["Alert"] != null)
         {
             <br />
-                <br />
+            <br />
                 <div class="alert alert-success alert-dismissable">
                     <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
                     <strong><i class="fa fa-exclamation-triangle" aria-hidden="true"></i> Ja existe um objectivo definido por concluir.</strong>
@@ -68,15 +102,15 @@ else
                 </div>
             </div>
         </div>
-            <br />
+        <br />
             <br />
         if (ViewBag.IntakeR == null)
         {
             <p>
-                @Html.ActionLink("Create Objective", "Create")
+                @Html.ActionLink("Criar Objectivo", "Create")
             </p>
 
-                <div id="chartContainer" style="height: 500px; width: 100%;"></div>
+            <div id="chartContainer" style="height: 500px; width: 100%;"></div>
         }
         else
         {
@@ -94,15 +128,15 @@ else
                     }
                 </div>
                 <div style="float:right">
-                    @Html.ActionLink("Delete Objective", "Delete", null, htmlAttributes: (new { @class = "mybtn" }))
+                    @Html.ActionLink("Eliminar Objectivo", "Delete", null, htmlAttributes: (new { @class = "mybtn" }))
                 </div>
                 <br />
                 <br />
             </div>
-                <br />
+            <br />
         }
         <br />
-            <h1 class="centerAlign">Histórico</h1>
+        <h1 class="centerAlign">Histórico</h1>
 
             <div style="display:inline;">
                 <button class="btn btn-default" id="btnleft" value="Left to right" style="width:5%; height:300px; float:left; font-size:50px; margin-top: 100px;"><</button>
@@ -165,9 +199,12 @@ else
             <br />
             <br />
             <br />
-            @Html.ActionLink("Criar objectivo", "Create", "Objectivoes", htmlAttributes: (new { @class = "mybtn" }))
+            @if (ViewBag.Userguide == null)
+            {
+                @Html.ActionLink("Criar objectivo", "Create", "Objectivoes", htmlAttributes: (new { @class = "mybtn" }))
+            }
         </div>
-            <br />
+        <br />
             <h1 class="centerAlign">Histórico</h1>
 
             <div style="display:inline;">

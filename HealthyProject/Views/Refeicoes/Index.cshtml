@@ -20,6 +20,53 @@
 }
 else
 {
+    if (TempData["UserGuide2"] != null)
+    {
+        <br />
+        <br />
+        <br />
+        <div class="centerAlign">
+            <div class="alert alert-success alert-dismissable">
+                <strong><i class="fa fa-exclamation-triangle" aria-hidden="true"></i>E terminou o tutorial! A partir deste momento deverá ter um conhecimento suficiente ao funcionamento regular do nosso website.</strong>
+                <br />
+                <strong><i class="fa fa-exclamation-triangle" aria-hidden="true"></i>De forma a permitir um funcionamento de qualidade, não se esqueça de realizar o seu registo diário de refeições!</strong>
+                <br />
+                <strong><i class="fa fa-exclamation-triangle" aria-hidden="true"></i>Caso ainda tenha alguma dúvida ou pretenda obter mais informações relativamente ao website não se esqueça de visitar o nosso fórum!</strong>
+            </div>
+        </div>
+    }
+    if (TempData["UserGuide"] != null || ViewBag.UserGuide2 != null)
+    {
+        <br />
+        <br />
+        <br />
+        <div class="centerAlign">
+            <div class="alert alert-success alert-dismissable">
+                <strong><i class="fa fa-exclamation-triangle" aria-hidden="true"></i>Este tutorial está quase a terminar! Criada a refeição é agora possível adicionar pratos, ingredientes e bebidas à mesma.</strong>
+                <br />
+                <strong><i class="fa fa-exclamation-triangle" aria-hidden="true"></i>Através da adição dos mesmos, os parâmetros são actualizados, tanto no registo alimentar diário como no objectivo, permitindo um melhor controlo.</strong>
+                <br />
+                <strong><i class="fa fa-exclamation-triangle" aria-hidden="true"></i>Por favor clique no adicionar prato na parte direita da tabela onde se apresenta a sua refeição.</strong>
+            </div>
+        </div>
+    }
+    if (ViewBag.UserGuide != null)
+    {
+        <br />
+        <br />
+        <br />
+        <div class="centerAlign">
+            <div class="alert alert-success alert-dismissable">
+                <strong><i class="fa fa-exclamation-triangle" aria-hidden="true"></i>Nesta página o utilizador consegue tanto ver como registar refeições, possibilitanto a sua análise relativamente a certos parâmetros.</strong>
+                <br />
+                <strong><i class="fa fa-exclamation-triangle" aria-hidden="true"></i>Os parâmetros avaliados são o total de kcal, proteinas, hidratos de carbono e gorduras apresentadas em cada refeição.</strong>
+                <br />
+                <strong><i class="fa fa-exclamation-triangle" aria-hidden="true"></i>Comecemos por fazer o registo de uma refeição. Carregue no botão abaixo apresentado de forma a adicionar uma refeição ao seu registo diário.</strong>
+                <br />
+                @Html.ActionLink("Adicionar refeição", "Create", "Refeicoes", null, htmlAttributes: new { @class = "mybtn" })
+            </div>
+        </div>
+    }
     <br />
     <br />
     <h2>Diário Alimentar</h2>

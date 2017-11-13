@@ -96,6 +96,7 @@ namespace HealthyProject.Controllers
             perfilEdit.MMuscular = perfil.MMuscular;
 
            
+            var objectivoes = db.Objectivoes.FirstOrDefault(c => c.UserID == userId);
 
             ViewBag.Genders = new SelectList(new List<SelectListItem>
                 {
@@ -106,12 +107,32 @@ namespace HealthyProject.Controllers
                 }, "Value", "Text");
 
                 ViewBag.Atividade = new SelectList(new List<SelectListItem>
+            ViewBag.Atividade = new SelectList(new List<SelectListItem>
                 {
                     new SelectListItem {Text = "1", Value = "1"},
                     new SelectListItem {Text = "2", Value = "2"},
                     new SelectListItem {Text = "3", Value = "3"},
                     new SelectListItem {Text = "4", Value = "4"},
                 }, "Value", "Text", perfil.Actividade_fisica);
+            if (perfil != null)
+            {
+                if (perfil.Nome != null)
+                {
+                    if (objectivoes != null)
+                    {
+                        return View(perfil);
+                    }
+                    else
+                    {
+                        ViewBag.UserGuide2 = "Sem Objectivos";
+                    }
+                    return View(perfil);
+                }
+                else
+                {
+                    ViewBag.UserGuide = "Sem Nome";
+                }
+            }
 
             return View(perfilEdit);
             // manda oos dados do utilizador para a view
@@ -140,6 +161,7 @@ namespace HealthyProject.Controllers
             perfil.MGorda = perfilEdit.MGorda;
             perfil.MMuscular = perfilEdit.MMuscular;
 
+            var userId = Convert.ToInt32(User.Identity.GetUserId());
             ViewBag.Genders = new SelectList(new List<SelectListItem>
                 {
                     new SelectListItem { Selected = true, Text = "M", Value = "M"},
@@ -217,6 +239,12 @@ namespace HealthyProject.Controllers
                 
                 db.Entry(perfil).State = EntityState.Modified;
 
+                RegistoPeso peso = new RegistoPeso();
+                peso.Data = DateTime.Today;
+                peso.Peso = perfilEdit.Peso;
+                peso.User_ID = userId;
+                db.RegistoPesoes.Add(peso);
+                db.Entry(perfilEdit).State = EntityState.Modified;
                 db.SaveChanges();
 
                 return RedirectToAction("Index", "Manage");

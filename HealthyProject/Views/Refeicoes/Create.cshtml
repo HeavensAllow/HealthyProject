@@ -3,6 +3,8 @@
 @{
     ViewBag.Title = "Create";
 }
+
+
 @if (ViewBag.SemDados != null)
 {
     <br />
@@ -20,6 +22,21 @@
 }
 else
 {
+    if (ViewBag.UserGuide != null)
+    {
+        <br />
+        <br />
+        <br />
+        <div class="centerAlign">
+            <div class="alert alert-success alert-dismissable">
+                <strong><i class="fa fa-exclamation-triangle" aria-hidden="true"></i>Tendo em conta que os regimes alimentares variam de pessoa para pessoa, é pedido inicialmente a criação do registo de refeição.</strong>
+                <br />
+                <strong><i class="fa fa-exclamation-triangle" aria-hidden="true"></i>Essa é feita na página abaixo apresentada, através da inserção tanto da data como do nome da refeição em questão.</strong>
+                <br />
+                <strong><i class="fa fa-exclamation-triangle" aria-hidden="true"></i>Como exemplo, por favor crie uma refeição á sua escolha.</strong>
+            </div>
+        </div>
+    }
 
 <h2>Create</h2>
 

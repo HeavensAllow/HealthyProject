@@ -22,6 +22,22 @@
 else
 {
 <br />
+<br />
+    if (ViewBag.UserGuide != null)
+    {
+        <br />
+        <div class="centerAlign">
+            <div class="alert alert-success alert-dismissable">
+                <strong><i class="fa fa-exclamation-triangle" aria-hidden="true"></i>Nesta página poderá criar o seu primeiro objectivo, indicando a data de começo bem como o peso a atingir.</strong>
+                <br />
+                <strong><i class="fa fa-exclamation-triangle" aria-hidden="true"></i>A data de começo refere-se à data ao qual pretende dar início ao seu objectivo e o peso objectivo refere-se ao peso que pretende atingir.</strong>
+                <br />
+                <strong><i class="fa fa-exclamation-triangle" aria-hidden="true"></i>Passemos agora à criação do seu primeiro objectivo! Por favor preencha os espaços abaixo expostos após ler a nossa explicação.</strong>
+                <br />
+            </div>
+        </div>
+    }
+
 <h2>Criar novo objectivo</h2>
 
 
@@ -30,8 +46,8 @@ using (Html.BeginForm())
     @Html.AntiForgeryToken()
 
     <div class="form-horizontal">
-        <div class="row">
-            <div class="col-md-8">
+        <div>
+            <div>
                 <br />
                 <div>Nesta pagina e possivel indicar o seu peso objectivo e, atraves do mesmo, iremos calcular qual devera ser o seu intake diario calorico de forma a atingir o seu peso desejado.</div>
                 <div>Tal e possivel atraves do calculo do EER relativo ao objectivo e atraves de um controlo de intake calorico ao qual o restringimos a valores aceitaveis nutricionalmente.</div>

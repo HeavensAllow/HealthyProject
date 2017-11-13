@@ -235,12 +235,6 @@
     <Compile Include="Models\Comentario.cs">
       <DependentUpon>Database.tt</DependentUpon>
     </Compile>
-    <Compile Include="Models\CounterInfoRefeicao_Result.cs">
-      <DependentUpon>Database.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\CounterKcalRefeicao_Result.cs">
-      <DependentUpon>Database.tt</DependentUpon>
-    </Compile>
     <Compile Include="Models\C__MigrationHistory.cs">
       <DependentUpon>Database.tt</DependentUpon>
     </Compile>
@@ -267,6 +261,7 @@
     </Compile>
     <Compile Include="Models\ManageViewModels.cs" />
     <Compile Include="Models\Metadata\ObjectivoMetadata.cs" />
+    <Compile Include="Models\Metadata\RefeicaoIngredientesMetadata.cs" />
     <Compile Include="Models\Metadata\RefeicaoPratosMetadata.cs" />
     <Compile Include="Models\Metadata\CategoriasMetadata.cs" />
     <Compile Include="Models\Metadata\ComentariosMetadata.cs" />

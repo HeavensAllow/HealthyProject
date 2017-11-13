@@ -33,6 +33,7 @@ namespace HealthyProject.Controllers
             Objectivo objectivo = objectivoes.FirstOrDefault(o => o.UserID == userId && o.Data_fim == null);
             var refeicoes = db.RegistoDiarios.Include(i => i.Objectivo).Where(o => o.Objectivo.ObjectivoID == objectivo.ObjectivoID);
             RegistoPeso peso = db.RegistoPesoes.FirstOrDefault(o => o.User_ID == userId && o.Data == DateTime.Today);
+            var refeico = db.Refeicoes.FirstOrDefault(c => c.RegistoDiario.Objectivo.UserID == userId);
             var today = DateTime.Now;
             double counter = 0;
             double counter2 = 0;
@@ -167,24 +168,44 @@ namespace HealthyProject.Controllers
             {
                 if (objectivo.Data_inicio > DateTime.Now)
                 {
+                    if(refeico == null)
+                    {
+                        ViewBag.UserGuide2 = "Sem refeicoes";
+                    }
                     DateTime start = (DateTime)objectivo.Data_inicio;
                     ViewBag.TooSoon = Convert.ToInt32(start.Subtract(DateTime.Now).TotalDays);
                     return View();
                 }
             }
-
             if (objectivo == null)
             {
-                ViewBag.Sem = "Sem objectivo";
+                var objectivos = db.Objectivoes.FirstOrDefault(c => c.UserID == userId);
+                if (objectivos != null)
+                {
+                    ViewBag.Sem = "Sem objectivo";
+                }
+                else
+                {
+                    ViewBag.Sem = "Sem objectivo";
+                    ViewBag.Userguide = "Nenhum criado";
+                }
                 return View();
             }
             if ((int)DateTime.Now.DayOfWeek == 4 && peso == null)
             {
+                if (refeico == null)
+                {
+                    ViewBag.UserGuide2 = "Sem refeicoes";
+                }
                 ViewBag.Teste = "Por favor indique o seu novo peso";
                 return View();
             }
             else
             {
+                if (refeico == null)
+                {
+                    ViewBag.UserGuide2 = "Sem refeicoes";
+                }
                 return View();
             }
         }
@@ -287,7 +308,7 @@ namespace HealthyProject.Controllers
             ViewBag.UserID = new SelectList(db.AspNetUsers, "Id", "Email", utilizador.UserID);
             return View(utilizador);
         }
-        
+
         // GET: Objectivoes/Details/5
         public ActionResult Details(int? id)
         {
@@ -314,21 +335,20 @@ namespace HealthyProject.Controllers
         public ActionResult Create()
         {
             var userId = Convert.ToInt32(User.Identity.GetUserId());
-            //var objectivos = db.Objectivoes.Include(o => o.Utilizador);
             var actual = db.Objectivoes.FirstOrDefault(p => p.UserID == userId && p.Data_fim == null);
-            //var procura = objectivoes.Where(p => p.UserID == userId);
-            //var actual = procura.Where(l => l.Data_fim == null);
-    
+            var objectivo = db.Objectivoes.FirstOrDefault(p => p.UserID == userId);
             Utilizador user = db.Utilizadors.FirstOrDefault(o => o.UserID == userId);
             if (user.Nome == null)
             {
                 ViewBag.SemDados = "Nao tem dados inseridos";
                 return View();
             }
-
-
             if (actual == null)
             {
+                if(objectivo == null)
+                {
+                    ViewBag.UserGuide = "Primeiro Objectivo";
+                }
                 ViewBag.UserID = new SelectList(db.Utilizadors, "UserID", "Nome");
                 return View();
             }
@@ -347,26 +367,33 @@ namespace HealthyProject.Controllers
         public ActionResult Create([Bind(Include = "ObjectivoID,Data_inicio,Peso_objectivo")] Objectivo objectivo)
         {
             var error = false;
-            if(objectivo.Data_inicio == null)
+            if (objectivo.Data_inicio == null)
             {
                 ModelState.AddModelError("Data de Início", "Por favor introduza a data a dar início ao objectivo");
                 error = true;
             }
-            if(objectivo.Peso_objectivo == null)
+            if (objectivo.Peso_objectivo == null)
             {
                 ModelState.AddModelError("Peso objectivo", "Por favor introduza o peso objectivo a atingir");
                 error = true;
             }
-            if(error == true)
+            if (error == true)
             {
                 return View();
             }
             if (ModelState.IsValid)
             {
                 var userId = Convert.ToInt32(User.Identity.GetUserId());
+                var objectivoes = db.Objectivoes.FirstOrDefault(c => c.UserID == userId);
+                int counter = 0;
+                if(objectivoes == null)
+                {
+                    counter++;
+                }
                 var actual = db.Objectivoes.FirstOrDefault(p => p.UserID == userId && p.Data_fim == null);
                 if (actual == null)
                 {
+                    counter++;
                     objectivo.UserID = Convert.ToInt32(userId);
                     Utilizador utilizador = db.Utilizadors.Find(userId);
                     UtilizadorsController x = new UtilizadorsController();
@@ -438,12 +465,16 @@ namespace HealthyProject.Controllers
                     }
                     db.Objectivoes.Add(objectivo);
                     db.SaveChanges();
-                    return RedirectToAction("Index", "Home");
+                    if(counter == 2)
+                    {
+                        TempData["Userguide"] = "Primeiro objectivo";
+                    }
+                    return RedirectToAction("Index", "Objectivoes");
                 }
                 else
                 {
                     TempData["notice"] = "<script>alert('Ja existe um objectivo criado e por terminar')>;</script>";
-                    return RedirectToAction("Index", "Objectivo");
+                    return RedirectToAction("Index", "Objectivoes");
                 }
             }
 

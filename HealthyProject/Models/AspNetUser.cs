@@ -22,8 +22,6 @@ namespace HealthyProject.Models
             this.Comentarios = new HashSet<Comentario>();
             this.Posts = new HashSet<Post>();
             this.AspNetRoles = new HashSet<AspNetRole>();
-            this.Comentarios = new HashSet<Comentario>();
-            this.Posts = new HashSet<Post>();
         }
     
         public int Id { get; set; }

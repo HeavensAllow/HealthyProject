@@ -7,6 +7,7 @@ using System.Net;
 using System.Web;
 using System.Web.Mvc;
 using HealthyProject.Models;
+using Microsoft.AspNet.Identity;
 
 namespace HealthyProject.Controllers
 {
@@ -39,9 +40,14 @@ namespace HealthyProject.Controllers
         // GET: RefeicaoPratoes/Create
         public ActionResult Create(int RefeicaoID)
         {
+            var userId = Convert.ToInt32(User.Identity.GetUserId());
+            var prato = db.RefeicaoPratos.FirstOrDefault(c => c.Refeico.RegistoDiario.Objectivo.UserID == userId);
             var Refeicao = db.Refeicoes.FirstOrDefault(r => r.RefeicaoID == RefeicaoID);
             ViewBag.Refeicao = Refeicao;
-
+            if(prato == null)
+            {
+                ViewBag.UserGuide = "Next Step";
+            }
             ViewBag.PratoID = new SelectList(db.Pratos.OrderBy(p => p.Nome), "PratosID", "Nome");
             ViewBag.RefeicaoID = new SelectList(db.Refeicoes,"RefeicaoID", "Tipo");
             return View();
@@ -56,8 +62,20 @@ namespace HealthyProject.Controllers
         {
             if (ModelState.IsValid)
             {
+                int counter = 0;
+                var userId = Convert.ToInt32(User.Identity.GetUserId());
+                var prato = db.RefeicaoPratos.FirstOrDefault(c => c.Refeico.RegistoDiario.Objectivo.UserID == userId);
+                if(prato == null)
+                {
+                    counter++;
+                }
                 db.RefeicaoPratos.Add(refeicaoPrato);
                 db.SaveChanges();
+                counter++;
+                if(counter == 2)
+                {
+                    TempData["Userguide2"] = "Final";
+                }
                 return RedirectToAction("Index", "Refeicoes");
             }
 
