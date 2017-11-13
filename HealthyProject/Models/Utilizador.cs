@@ -14,7 +14,7 @@ namespace HealthyProject.Models
     using HealthyProject.Models.Metadata;
     using System.ComponentModel.DataAnnotations;
 
-    [MetadataType(typeof(UtilizadorEdit))]
+   
    
     public partial class Utilizador
     {

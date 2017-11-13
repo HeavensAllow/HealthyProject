@@ -17,6 +17,7 @@ namespace HealthyProject.Models
     public class Eutilizador
     {
 
+
        public int UserID { get; set; }
 
         [Required(ErrorMessage = "Introduza o Nome")]
