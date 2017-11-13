@@ -4,6 +4,23 @@
     ViewBag.Title = "Index";
 }
 
+@if (TempData["UserGuide"] != null || ViewBag.UserGuide2 != null)
+{
+    <br />
+    <br />
+    <br />
+    <div class="centerAlign">
+        <div class="alert alert-success alert-dismissable">
+            <strong><i class="fa fa-exclamation-triangle" aria-hidden="true"></i>Tendo o objectivo criado está na altura de adicionar refeições ao registo diário, de forma a actualizar os gráficos.</strong>
+            <br />
+            <strong><i class="fa fa-exclamation-triangle" aria-hidden="true"></i>Para tal, deverá dirigir-se á página do registo diário, onde tem a possibilidade de registar as suas refeições.</strong>
+            <br />
+            <strong><i class="fa fa-exclamation-triangle" aria-hidden="true"></i>Por favor clique no botão abaixo.</strong>
+            <br />
+            @Html.ActionLink("Registo de Refeições", "Index", "Refeicoes", null, htmlAttributes: new { @class = "mybtn" })
+        </div>
+    </div>
+}
 @if (ViewBag.UserGuide != null)
 {
     <br />

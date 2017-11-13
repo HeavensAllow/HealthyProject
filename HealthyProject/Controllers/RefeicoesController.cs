@@ -19,14 +19,33 @@ namespace HealthyProject.Controllers
         // GET: Refeicoes
         public ActionResult Index(DateTime? dateInput)
         {
+            var userId = Convert.ToInt32(User.Identity.GetUserId());
+            var refeicao = db.Refeicoes.FirstOrDefault(c => c.RegistoDiario.Objectivo.UserID == userId);
+            var prato = db.RefeicaoPratos.FirstOrDefault(c => c.Refeico.RegistoDiario.Objectivo.UserID == userId);
             if (dateInput == null)
             {
+                if(refeicao == null)
+                {
+                    ViewBag.UserGuide = "Next Step";
+                }
+                if (prato == null)
+                {
+                    ViewBag.UserGuide2 = "Next Step";
+                }
                 var refeicoes = db.Refeicoes.Include(r => r.RegistoDiario).Where(d => d.Data == DateTime.Today);
                 return View(refeicoes);
 
             }
             else
             {
+                if (refeicao == null)
+                {
+                    ViewBag.UserGuide = "Next Step";
+                }
+                if (prato == null)
+                {
+                    ViewBag.UserGuide2 = "Next Step";
+                }
                 var refeicoes = db.Refeicoes.Include(r => r.RegistoDiario).Where(d => d.Data == dateInput);
                 return View(refeicoes);
             }
@@ -49,6 +68,12 @@ namespace HealthyProject.Controllers
         // GET: Refeicoes/Create
         public ActionResult Create()
         {
+            var userId = Convert.ToInt32(User.Identity.GetUserId());
+            var refeicao = db.Refeicoes.FirstOrDefault(c => c.RegistoDiario.Objectivo.UserID == userId);
+            if (refeicao == null)
+            {
+                ViewBag.UserGuide = "Next Step";
+            }
             ViewBag.RegistoID = new SelectList(db.RegistoDiarios, "RegistoID", "RegistoID");
             return View();
         }
@@ -82,6 +107,13 @@ namespace HealthyProject.Controllers
         {
             if (ModelState.IsValid)
             {
+                var userId = Convert.ToInt32(User.Identity.GetUserId());
+                var refeicao = db.Refeicoes.FirstOrDefault(c => c.RegistoDiario.Objectivo.UserID == userId);
+                int counter = 0;
+                if(refeicao == null)
+                {
+                    counter++;
+                }
                 double counterkcal = 0, counterproteinas = 0, countergordura = 0, counterhc = 0;
                 var registo = db.RegistoDiarios.FirstOrDefault(p => p.Data == DateTime.Today);
                 if (registo == null)
@@ -93,6 +125,7 @@ namespace HealthyProject.Controllers
                     if (objectivo != null)
                     {
                         registo1.ObjectivoID = objectivo.ObjectivoID;
+                        registo1.Data = DateTime.Today;
                         db.RegistoDiarios.Add(registo1);
                         foreach (RefeicaoPrato i in refeicoes)
                         {
@@ -104,7 +137,11 @@ namespace HealthyProject.Controllers
                         refeico.RegistoID = registo1.RegistoID;
                         db.Refeicoes.Add(refeico);
                         db.SaveChanges();
-
+                        counter++;
+                        if(counter == 2)
+                        {
+                            TempData["UserGuide"] = "UserGuide";
+                        }
                         return RedirectToAction("Index");
                     }
                     else
@@ -134,6 +171,11 @@ namespace HealthyProject.Controllers
                         refeico.RegistoID = registo.RegistoID;
                         db.Refeicoes.Add(refeico);
                         db.SaveChanges();
+                        counter++;
+                        if (counter == 2)
+                        {
+                            TempData["UserGuide"] = "UserGuide";
+                        }
                         return RedirectToAction("Index");
                     }
                     else

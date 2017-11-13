@@ -5,7 +5,23 @@
 }
 
 <!--<h2>Create</h2>-->
-
+@if (ViewBag.UserGuide != null)
+{
+    <br />
+    <br />
+        <br />
+        <div class="centerAlign">
+            <div class="alert alert-success alert-dismissable">
+                <strong><i class="fa fa-exclamation-triangle" aria-hidden="true"></i>Nesta página poderá registar tanto qual o prato ingerido como a sua dose em gramas.</strong>
+                <br />
+                <strong><i class="fa fa-exclamation-triangle" aria-hidden="true"></i>Através destes é nos possível o cálculo dos parâmetros e exibir os seus consumos diários.</strong>
+                <br />
+                <strong><i class="fa fa-exclamation-triangle" aria-hidden="true"></i>Tal serve tanto para os pratos, como para ingredientes ou bebidas.</strong>
+                <br />
+                <strong><i class="fa fa-exclamation-triangle" aria-hidden="true"></i>Para dar como terminado o tutorial, por favor introduza um prato no seu registo de refeições.</strong>
+            </div>
+        </div>
+}
 
 @using (Html.BeginForm()) 
 {

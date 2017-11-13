@@ -33,6 +33,7 @@ namespace HealthyProject.Controllers
             Objectivo objectivo = objectivoes.FirstOrDefault(o => o.UserID == userId && o.Data_fim == null);
             var refeicoes = db.RegistoDiarios.Include(i => i.Objectivo).Where(o => o.Objectivo.ObjectivoID == objectivo.ObjectivoID);
             RegistoPeso peso = db.RegistoPesoes.FirstOrDefault(o => o.User_ID == userId && o.Data == DateTime.Today);
+            var refeico = db.Refeicoes.FirstOrDefault(c => c.RegistoDiario.Objectivo.UserID == userId);
             var today = DateTime.Now;
             double counter = 0;
             double counter2 = 0;
@@ -167,6 +168,10 @@ namespace HealthyProject.Controllers
             {
                 if (objectivo.Data_inicio > DateTime.Now)
                 {
+                    if(refeico == null)
+                    {
+                        ViewBag.UserGuide2 = "Sem refeicoes";
+                    }
                     DateTime start = (DateTime)objectivo.Data_inicio;
                     ViewBag.TooSoon = Convert.ToInt32(start.Subtract(DateTime.Now).TotalDays);
                     return View();
@@ -188,11 +193,19 @@ namespace HealthyProject.Controllers
             }
             if ((int)DateTime.Now.DayOfWeek == 4 && peso == null)
             {
+                if (refeico == null)
+                {
+                    ViewBag.UserGuide2 = "Sem refeicoes";
+                }
                 ViewBag.Teste = "Por favor indique o seu novo peso";
                 return View();
             }
             else
             {
+                if (refeico == null)
+                {
+                    ViewBag.UserGuide2 = "Sem refeicoes";
+                }
                 return View();
             }
         }
@@ -371,9 +384,16 @@ namespace HealthyProject.Controllers
             if (ModelState.IsValid)
             {
                 var userId = Convert.ToInt32(User.Identity.GetUserId());
+                var objectivoes = db.Objectivoes.FirstOrDefault(c => c.UserID == userId);
+                int counter = 0;
+                if(objectivoes == null)
+                {
+                    counter++;
+                }
                 var actual = db.Objectivoes.FirstOrDefault(p => p.UserID == userId && p.Data_fim == null);
                 if (actual == null)
                 {
+                    counter++;
                     objectivo.UserID = Convert.ToInt32(userId);
                     Utilizador utilizador = db.Utilizadors.Find(userId);
                     UtilizadorsController x = new UtilizadorsController();
@@ -445,6 +465,10 @@ namespace HealthyProject.Controllers
                     }
                     db.Objectivoes.Add(objectivo);
                     db.SaveChanges();
+                    if(counter == 2)
+                    {
+                        TempData["Userguide"] = "Primeiro objectivo";
+                    }
                     return RedirectToAction("Index", "Objectivoes");
                 }
                 else
