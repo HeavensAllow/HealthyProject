@@ -19,7 +19,7 @@
 </p>
 
 <table class="table">
-    <tr style="background-color:lightblue">
+    <tr style="background-color:lightcoral">
         <th>
         </th>
         <th>
@@ -32,10 +32,10 @@
         {
       
             <tr>
-                <td style="padding-top: 40px; font-size:larger; border-top: 1px solid white; border-bottom: 1px solid white; text-align:center; background-color:gainsboro">
+                <td style="padding-top: 40px; font-size:larger; border-top: 1px solid white; border-bottom: 1px solid white; text-align:center; background-color:lightblue">
                     @Html.ActionLink(post.Titulo, "Post", "Forum", new { id = post.PostID }, null)
                 </td>
-                <td style="background-color:orange">
+                <td style="background-color:lightgray">
                     @if (post.AspNetUser.Utilizador.Genero == "M")
                     {
                         <img src="http://www.icone-png.com/png/54/53785.png" height="80" width="70" />
@@ -47,7 +47,7 @@
                     @post.AspNetUser.Utilizador.Nome
                 </td>
 
-                <td class="data" style="padding-top: 40px;background-color:orange">
+                <td class="data" style="padding-top: 40px;background-color:lightgray">
                     @post.Data
                 </td>
             </tr>
