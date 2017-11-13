@@ -12,9 +12,8 @@
     @Scripts.Render("~/bundles/jquery")
     @Scripts.Render("~/bundles/jqueryval")
     @Scripts.Render("~/bundles/jqueryui")
-    
+
 </head>
-<body style="background-image:url(http://www.bellacor.com/media.bellacor.com/images/1500/2140134720131.jpg); min-height:100vh">
 <body>
     <div class="navbar navbar-inverse navbar-fixed-top" style="background-color:white">
         <div class="container">
@@ -29,37 +28,28 @@
 
             </div>
             <div class="navbar-collapse" style="background-color:white">
-                <img src="~/Content/Images/Logo.PNG" alt="Logotipo" align="middle" style="float:left" />
-                <ul class="nav navbar-nav">
-
-                    <li>@Html.ActionLink("Pagina Inicial", "Index", "Home")</li>
-                    <li>@Html.ActionLink("Sobre Nos", "About", "Home")</li>
-                    <li>@Html.ActionLink("Forum", "Index", "Forum")</li>
                 <a href="@Url.Action("Index", "Home", null)">
                     <img src="~/Content/Images/Logo.PNG" alt="Logotipo" align="middle" style="float:left" />
                 </a>
                 <ul class="nav navbar-nav" style="padding-left:80px; padding-top:20px">
-                    
-                   
+
+
                     <li style="font-size:30px">@Html.ActionLink("Sobre nós", "About", "Home")</li>
                     <li style="font-size:30px">@Html.ActionLink("Fórum", "Index", "Forum")</li>
                     @if (User.Identity.IsAuthenticated)
                     {
 
-                        <li>@Html.ActionLink("Objectivos", "Index", "Objectivoes")</li>
-                    
                         <li style="font-size:30px">@Html.ActionLink("Objectivos", "Index", "Objectivoes")</li>
                         <li style="font-size:30px">@Html.ActionLink("Refeições", "Index", "Refeicoes")</li>
 
                     }
                 </ul>
-                @Html.Partial("_LoginPartial")
-              
-                    @if (User.Identity.IsAuthenticated)
-                    {
-                        @Html.Partial("_LoginPartial")
-                    }
-               
+
+                @if (User.Identity.IsAuthenticated)
+                {
+                    @Html.Partial("_LoginPartial")
+                }
+
 
             </div>
         </div>
@@ -67,15 +57,13 @@
 
 
     <div class="container-fluid body-content">
-  
-    <div class="container-fluid body-content" >
-            @RenderBody()
-            @*<hr />*@
-            @*<footer>
-                <p>@*&copy;*@  @*- My ASP.NET Application</p>*@
-                @*</footer>*@
-            </div>
-      
+
+        @RenderBody()
+        @*<hr />*@
+        @*<footer>
+            <p>@*&copy;*@  @*- My ASP.NET Application</p>*@
+            @*</footer>*@
+        </div>
 
         @Scripts.Render("~/bundles/jquery")
         @Scripts.Render("~/bundles/bootstrap")
