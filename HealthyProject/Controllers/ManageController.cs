@@ -241,7 +241,6 @@ namespace HealthyProject.Controllers
                     User_ID = userId
                 };
                 db.RegistoPesoes.Add(peso);
-                db.Entry(perfilEdit).State = EntityState.Modified;
                 db.SaveChanges();
 
                 return RedirectToAction("Index", "Manage");
