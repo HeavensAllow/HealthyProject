@@ -22,7 +22,7 @@
     <IISExpressAnonymousAuthentication />
     <IISExpressWindowsAuthentication />
     <IISExpressAnonymousAuthentication>enabled</IISExpressAnonymousAuthentication>
-    <IISExpressWindowsAuthentication>disabled</IISExpressWindowsAuthentication>
+    <IISExpressWindowsAuthentication>enabled</IISExpressWindowsAuthentication>
     <IISExpressUseClassicPipelineMode>false</IISExpressUseClassicPipelineMode>
     <UseGlobalApplicationHostFile />
     <NuGetPackageImportStamp>
@@ -267,7 +267,6 @@
     <Compile Include="Models\Metadata\ComentariosMetadata.cs" />
     <Compile Include="Models\Metadata\PostMetadata.cs" />
     <Compile Include="Models\Metadata\SubcategoriasMetadata.cs" />
-    <Compile Include="Models\Metadata\UtilizadorEdit.cs" />
     <Compile Include="Models\Objectivo.cs">
       <DependentUpon>Database.tt</DependentUpon>
     </Compile>

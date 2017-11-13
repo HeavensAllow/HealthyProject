@@ -82,20 +82,19 @@ namespace HealthyProject.Controllers
             // User.Identity.GetUserId-- - depois defazer log in tenho este
 
             Utilizador perfil = db.Utilizadors.Find(userId);
-            Eutilizador perfilEdit = new Eutilizador();
-
-            perfilEdit.Nome = perfil.Nome;
-            perfilEdit.Genero = perfil.Genero;
-            perfilEdit.Data_nascimento = perfil.Data_nascimento;
-            perfilEdit.Peso = perfil.Peso;
-            perfilEdit.Altura = perfil.Altura;
-            perfilEdit.Actividade_fisica = perfil.Actividade_fisica;
-            perfilEdit.Nr_horas_sono = perfil.Nr_horas_sono;
-            perfilEdit.Nr_refeicoes = perfil.Nr_refeicoes;
-            perfilEdit.MGorda = perfil.MGorda;
-            perfilEdit.MMuscular = perfil.MMuscular;
-
-           
+            Eutilizador perfilEdit = new Eutilizador()
+            {
+                Nome = perfil.Nome,
+                Genero = perfil.Genero,
+                Data_nascimento = perfil.Data_nascimento,
+                Peso = perfil.Peso,
+                Altura = perfil.Altura,
+                Actividade_fisica = perfil.Actividade_fisica,
+                Nr_horas_sono = perfil.Nr_horas_sono,
+                Nr_refeicoes = perfil.Nr_refeicoes,
+                MGorda = perfil.MGorda,
+                MMuscular = perfil.MMuscular
+            };
             var objectivoes = db.Objectivoes.FirstOrDefault(c => c.UserID == userId);
 
             ViewBag.Genders = new SelectList(new List<SelectListItem>
@@ -105,8 +104,6 @@ namespace HealthyProject.Controllers
 
                     new SelectListItem { Selected = false, Text = "F", Value = "F"},
                 }, "Value", "Text");
-
-                ViewBag.Atividade = new SelectList(new List<SelectListItem>
             ViewBag.Atividade = new SelectList(new List<SelectListItem>
                 {
                     new SelectListItem {Text = "1", Value = "1"},
@@ -160,8 +157,6 @@ namespace HealthyProject.Controllers
             perfil.Nr_refeicoes = perfilEdit.Nr_refeicoes;
             perfil.MGorda = perfilEdit.MGorda;
             perfil.MMuscular = perfilEdit.MMuscular;
-
-            var userId = Convert.ToInt32(User.Identity.GetUserId());
             ViewBag.Genders = new SelectList(new List<SelectListItem>
                 {
                     new SelectListItem { Selected = true, Text = "M", Value = "M"},
@@ -239,10 +234,12 @@ namespace HealthyProject.Controllers
                 
                 db.Entry(perfil).State = EntityState.Modified;
 
-                RegistoPeso peso = new RegistoPeso();
-                peso.Data = DateTime.Today;
-                peso.Peso = perfilEdit.Peso;
-                peso.User_ID = userId;
+                RegistoPeso peso = new RegistoPeso()
+                {
+                    Data = DateTime.Today,
+                    Peso = perfilEdit.Peso,
+                    User_ID = userId
+                };
                 db.RegistoPesoes.Add(peso);
                 db.Entry(perfilEdit).State = EntityState.Modified;
                 db.SaveChanges();
