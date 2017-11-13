@@ -1,4 +1,7 @@
 ﻿@model HealthyProject.Models.Utilizador
+﻿@model HealthyProject.Models.LoginViewModel
+<br/>
+<br/>
 @{
     ViewBag.Title = "Home Page";
 }
@@ -51,6 +54,8 @@
                 <img src="http://igner.info/images/img_84723-75.jpg"style="width:250px;height:200px; "  />
                 @Html.ActionLink("Clique para definir um Objetivo", "Index", "Objectivoes", null, htmlAttributes: new { @class = "mybtn", id = "registerLink" })
             </div>
+=======
+<body style="background-image:url(https://images.unsplash.com/photo-1490818387583-1baba5e638af?auto=format&fit=crop&w=931&q=60&ixid=dW5zcGxhc2guY29tOzs7Ozs%3D); background-size:cover">
 
         </div>
 
@@ -58,18 +63,32 @@
 
     }
     else
+    @*@if(ViewBag.Sucess == null){*@
+    @if (User.Identity.IsAuthenticated)
     {
         <br />
         <div class="row myDiv">
             <div class="col-md-7">
                 <br />
                 <br />
+        <div style="text-align:center;padding-left:500px">
+            <br />
+            <br />
+            <br />
+            <br />
+            <br />
+>>>>>>> Marta
+        
+            <br />
+            <div >
+
                 <br />
                 <br />
                 <img src="https://portfolios.journalism.ku.edu/natalie-dufek/files/2014/06/healthy-living.jpg" ; style="width:870px; height:500px" />
                 <br /> 
                
                 
+                @Html.ActionLink(" Fórum", "Index", "Forum", null, htmlAttributes: new { @class = "btn1", id = "registerLink" })
             </div>
             <div class="col-md-5">
                 <br />
@@ -89,13 +108,15 @@
                 <br />
                 <br />
                 <br />
+            <div>
                 <br />
-                <b style="text-align:right;font-size:x-large"> Um estilo de vida saudavel? </b>
                 <br />
                 <br />
                 <br />
                 <br />
                 <b style="text-align:right;font-size:x-large"> Melhor gestao das suas Refeicoes ?  </b>
+                
+                @Html.ActionLink("Gestão de refeições", "Index", "Refeicoes", null, htmlAttributes: new { @class = "btn1", id = "registerLink" })
             </div>
         </div>
 
@@ -103,6 +124,7 @@
             <div class="col-md-12" style="text-align:center">
                 <img src="https://image.freepik.com/free-photo/medical-stethoscope-and-an-apple-fruit-over-wooden-background-healthy-lifestyle-concept-image_1205-1472.jpg" ; style="width:1151px; height:550px" />
                 <i style="font-size:xx-large; position:absolute; margin-top: -300px; text-align:match-parent; margin-left:-550px"> Healthy Project monitoriza o seu peso</i>.
+            <div >
                 <br />
                 <br />
                 <br />
@@ -112,19 +134,107 @@
                 <br />
                 <br />
                 <i style="font-size:xx-large; position:absolute; margin-top: -300px; text-align:match-parent; margin-left:-550px"> de forma Rapida e Eficaz!</i>.
+                
+                @Html.ActionLink(" Objectivos", "Index", "Objectivoes", null, htmlAttributes: new { @class = "btn1", id = "registerLink" })
             </div>
         </div>
         <div style="text-align:center">
             
+    }
+
+    else
+    {
+       
+     
+        <div style="padding-left:600px; text-align: center">
+
             <br />
             <br />
+            <b style="font-family:MingLiU_HKSCS; font-size:xx-large">  Gostaria de ter maior controlo sobre o seu peso? </b>
+
+            <b style="font-family:MingLiU_HKSCS; font-size:xx-large"> Um estilo de vida saudável? </b>
+
+            <b style="font-family:MingLiU_HKSCS; font-size:xx-large"> Melhor gestão das suas refeições?  </b>
             <br />
             <b style="font-size:xx-large">Junte se a nos!</b>
             <br />
 
             @Html.ActionLink("Registe-se", "register", "account", routeValues: null, htmlAttributes: new { @class = "mybtn", id = "registerLink" })
+            <br/>
+            <br />
+            <b style="text-align: center; text-transform:uppercase; font-family:MingLiU_HKSCS; font-size:xx-large"> Healthy Project monitoriza o seu peso e ajuda-o a alcançar os seus objectivos!</b>.
+            <br />
+            <br />
+            <br />
+        
+        </div>
+        <br />
+        <br />
+        <br />
+        <br />
+        <br />
+    
+        <div class="row" style="padding-left: 700px">
+            <div class="col-md-8">
+                <section id="loginForm">
+                    @using (Html.BeginForm("Login", "Account", new { ReturnUrl = ViewBag.ReturnUrl }, FormMethod.Post, new { @class = "form-horizontal", role = "form" }))
+                    {
+                        @Html.AntiForgeryToken()
+                        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+
+                        <div class="form-group">
+                            @Html.LabelFor(m => m.Email, new { @class = "col-md-2 control-label" })
+                            <div class="col-md-10">
+                                @Html.TextBoxFor(m => m.Email, new { @class = "form-control" })
+                                @Html.ValidationMessageFor(m => m.Email, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            @Html.LabelFor(m => m.Password, new { @class = "col-md-2 control-label" })
+                            <div class="col-md-10">
+                                @Html.PasswordFor(m => m.Password, new { @class = "form-control" })
+                                @Html.ValidationMessageFor(m => m.Password, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <div class="col-md-offset-2 col-md-10">
+                                <div class="checkbox">
+                                    @Html.CheckBoxFor(m => m.RememberMe)
+                                    @Html.LabelFor(m => m.RememberMe)
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <div class="col-md-offset-2 col-md-10">
+                                <input type="submit" value="Log in" class="btn btn-default" />
+                            </div>
+                        </div>
+                        <p>
+                            @Html.ActionLink("Registe-se", "Register")
+                        </p>
+
+                        <p>
+                            @Html.ActionLink("Esqueceu-se da password?", "ForgotPassword")
+                        </p>
+                    }
+                </section>
+            </div>
+            <div class="col-md-4">
+                <section id="socialLoginForm">
+                    @Html.Partial("_ExternalLoginsListPartial" ,new HealthyProject.Models.ExternalLoginListViewModel { ReturnUrl = ViewBag.ReturnUrl })
+                </section>
+            </div>
         </div>
 
+        @section Scripts {
+            @Scripts.Render("~/bundles/jqueryval")
+        }
+        <br />
+        <br />
+        <br />
+}
+            </body>
+            
 
 
 
@@ -164,4 +274,33 @@
 
        </div>
     </div>*@
-@*class="jumbotron"*@ 
+@*class="jumbotron"*@             @*http://www.shineprowindowcleaning.com/wp-content/uploads/2016/02/background-blue-gradient.jpg
+        @*style="background-image: url(http://static.tumblr.com/17fe60d85d38327f4216e7fb11f81111/bwqiovp/jzyn2ivyx/tumblr_static_best-top-desktop-blue-wallpapers-hd-blue-wallpaper-beautiful-free-backgrounds-31.jpg)" bgproperties="fixed"*@
+
+
+        @*Informacao Anterior*@
+        @*<p class="lead">ASP.NET is a free web framework for building great Web sites and Web applications using HTML, CSS and JavaScript.</p>
+            <p><a href="https://asp.net" class="btn btn-primary btn-lg">Learn more &raquo;</a></p>*@
+        @*<div class="row">
+               <div class="col-md-4">
+                   <h2>Getting started</h2>
+                   <p>
+                       ASP.NET MVC gives you a powerful, patterns-based way to build dynamic websites that
+                       enables a clean separation of concerns and gives you full control over markup
+                       for enjoyable, agile development.
+                   </p>
+                   <p><a class="btn btn-default" href="https://go.microsoft.com/fwlink/?LinkId=301865">Learn more &raquo;</a></p>
+               </div>
+               <div class="col-md-4">
+                   <h2>Get more libraries</h2>
+                   <p>NuGet is a free Visual Studio extension that makes it easy to add, remove, and update libraries and tools in Visual Studio projects.</p>
+                   <p><a class="btn btn-default" href="https://go.microsoft.com/fwlink/?LinkId=301866">Learn more &raquo;</a></p>
+               </div>
+               <div class="col-md-4">
+                   <h2>Web Hosting</h2>
+                   <p>You can easily find a web hosting company that offers the right mix of features and price for your applications.</p>
+                   <p><a class="btn btn-default" href="https://go.microsoft.com/fwlink/?LinkId=301867">Learn more &raquo;</a></p>
+
+               </div>
+            </div>*@
+        @*class="jumbotron"*@

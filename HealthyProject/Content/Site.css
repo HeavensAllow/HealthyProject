@@ -44,17 +44,37 @@ textarea {
     width: 45px;
     border-radius: 25px; /* faz com que os botões tenham cantos curvos */
 }
-.mybtn {
-    background-color: #06ab86;
+.btn1 {
+    background: lightcoral;
+  
     border: thin;
-    color: black;
+    width:50%;
+    color: white;
     padding: 15px 32px;
     text-align: center;
-    text-decoration: solid;
+    text-decoration: none;
     display: inline-block;
-    font-size: 16px;
+    font-size: 30px;
     margin: 4px 2px;
     cursor: pointer;
+    border-radius: 15px;
+    box-shadow: 0 9px #999;
+}
+.mybtn {
+    background: lightcoral;
+    opacity: 0.7;
+    border: thin;
+   
+    color: white;
+    padding: 15px 32px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 20px;
+    margin: 4px 2px;
+    cursor: pointer;
+    border-radius: 15px;
+    box-shadow: 0 9px #999;
 }
 
 .banzai{
@@ -96,6 +116,7 @@ textarea {
 .tdOpinion{
     width:250px;
 }
-.data{
-    width:120px;
-    text-align:center;
+.data {
+    width: 120px;
+    text-align: center;
+}
