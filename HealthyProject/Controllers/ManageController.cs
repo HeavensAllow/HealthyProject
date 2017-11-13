@@ -118,6 +118,7 @@ namespace HealthyProject.Controllers
 
         public ActionResult Index([Bind(Include = "UserID,Nome,Genero,Data_nascimento,Peso,Altura,Actividade_fisica,Nr_horas_sono,Nr_refeicoes,Habitos_alcoolicos,MMuscular,MGorda")] Utilizador perfilEdit)
         {
+            var userId = Convert.ToInt32(User.Identity.GetUserId());
             ViewBag.Genders = new SelectList(new List<SelectListItem>
                 {
                     new SelectListItem { Selected = true, Text = "M", Value = "M"},
@@ -189,6 +190,11 @@ namespace HealthyProject.Controllers
                     ModelState.AddModelError("Actividade_fisica", "Introduza o Indice de Atividade Fisica");
                     error = true;
                 }
+                RegistoPeso peso = new RegistoPeso();
+                peso.Data = DateTime.Today;
+                peso.Peso = perfilEdit.Peso;
+                peso.User_ID = userId;
+                db.RegistoPesoes.Add(peso);
                 db.Entry(perfilEdit).State = EntityState.Modified;
                 db.SaveChanges();
                 return RedirectToAction("Index", "Manage");
