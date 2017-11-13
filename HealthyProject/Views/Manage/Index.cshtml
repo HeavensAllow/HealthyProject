@@ -106,7 +106,6 @@
                     <th>
                         @Html.DropDownListFor(model => model.Genero, (IEnumerable<SelectListItem>)ViewBag.Genders)
                         @Html.ValidationMessageFor(model => model.Genero, "", new { @class = "text-danger" })
-                        @Html.DisplayNameFor(model => model.Data_nascimento) <span style="color:red;">*</span>
 
                     </th>
                 </tr>
@@ -114,9 +113,6 @@
                     <th>
 
                         @Html.DisplayNameFor(model => model.Data_nascimento)
-                    <th>
-                        @Html.EditorFor(model => model.Data_nascimento)
-                        @Html.ValidationMessageFor(model => model.Data_nascimento, "", new { @class = "text-danger" })
 
                     </th>
 
@@ -124,22 +120,13 @@
 
                         @Html.EditorFor(model => model.Data_nascimento)
 
-                <tr>
-                    <th>@Html.DisplayNameFor(model => model.Peso) <span style="color:red;">*</span></th>
-                    <th>@Html.EditorFor(model => model.Peso)</th>
-                    @Html.ValidationMessageFor(model => model.Peso, "", new { @class = "text-danger" })
-                </tr>
-                <tr>
-                    <th>@Html.DisplayNameFor(model => model.Altura) <span style="color:red;">*</span></th>
 
-                    @Html.ValidationMessageFor(model => model.Data_nascimento, "", new { @class = "text-danger" })
+                        @Html.ValidationMessageFor(model => model.Data_nascimento, "", new { @class = "text-danger" })
 
 
 
                 <tr>
                     <th>@Html.DisplayNameFor(model => model.Peso)</th>
-                    <th>
-                        @Html.DisplayNameFor(model => model.Actividade_fisica) <span style="color:red;">*</span>
 
                     <th>@Html.EditorFor(model => model.Peso)</th>
                     @Html.ValidationMessageFor(model => model.Peso, "", new { @class = "text-danger" })
@@ -150,7 +137,6 @@
                     <th>@Html.EditorFor(model => model.Altura)</th>
                     @Html.ValidationMessageFor(model => model.Altura, "", new { @class = "text-danger" })
                 </tr>
-                
 
 
                 <tr>
@@ -233,11 +219,6 @@
             //});
 
         </script>
-
-
-
-
-
     }
     @* <dt>Password:</dt> *@
     @*  [
@@ -316,3 +297,4 @@
 
 
 </div>
+
