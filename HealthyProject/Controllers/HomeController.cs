@@ -21,14 +21,14 @@ namespace HealthyProject.Controllers
             {
                if(utilizador.Nome != null)
                 {
-                    return View(utilizador);
+                    return View();
                 }
                 else
                 {
                     ViewBag.UserGuide = "Primeiro Log";
                 }
             }
-            return View(utilizador);
+            return View();
         }
 
         public ActionResult About()
