@@ -5,46 +5,46 @@
     <br />
     ViewBag.Title = "Perfil do Utilizador";
 }
+<br/>
+<body style="background-image:url(https://images.unsplash.com/photo-1490818387583-1baba5e638af?auto=format&fit=crop&w=931&q=60&ixid=dW5zcGxhc2guY29tOzs7Ozs%3D); background-size:cover">
+<b  style="padding-left:700px; font-family:MingLiU_HKSCS; font-size:xx-large; text-align:left">@ViewBag.Title</b>
 
-<h2>@ViewBag.Title.</h2>
+<p class="text-success" style="font-family:PMingLiU">@ViewBag.StatusMessage</p>
 
-<p class="text-success">@ViewBag.StatusMessage</p>
-
-<div>
+<div style="padding-left:700px; font-family:PMingLiU;font-size:x-large">
     @*<h4>Dados do Utilizador</h4>*@
     <hr />
     <dl class="dl-horizontal">
 
-
-        <dt>
+       
+        <dt style="text-align:left">
             @Html.DisplayNameFor(model => model.Nome)
            
             @*Mostra o nome*@
         </dt>
-
-        <dd>
+        <dd style="text-align:left">
             @Html.DisplayFor(model => model.Nome)
             @*Mostra qual nome*@
         </dd>
-        <dt>
+        <dt style="text-align:left">
             @Html.DisplayNameFor(model => model.Genero)
         </dt>
-        <dd>
+        <dd style="text-align:left">
             @Html.DisplayFor(model => model.Genero)
             @if (Model.Genero == "F")
             {
-                <img src="http://theskimonster.com/files/theskimonster3/blog/posts/02XeU8RNiL.jpg" style="width:50px;height:50px" />
+                <img src="http://www.rw-designer.com/icon-image/8495-256x256x32.png" style="width:50px;height:50px" />
             }
             else
             {
-                <img src="http://www.psdgraphics.com/wp-content/uploads/2009/06/male-sign.jpg" style="width:50px;height:50px"/>
+                <img src="http://www.rw-designer.com/icon-image/8498-256x256x32.png" style="width:50px;height:50px"/>
 
             }
         </dd>
-        <dt>
+        <dt style="text-align:left">
             @Html.DisplayNameFor(model => model.Data_nascimento)
         </dt>
-        <dd>
+        <dd style="text-align:left">
             
             @Html.DisplayFor(model=>model.Data_nascimento)
 
@@ -52,8 +52,6 @@
     </dl>
     <br/>
     <br />
-    <br />
-
     @using (Html.BeginForm("Index", "Manage"))
     {
         @Html.HiddenFor(model => model.UserID)
@@ -269,3 +267,4 @@
 
 
 </div>
+    </body>

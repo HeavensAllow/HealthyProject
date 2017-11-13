@@ -1,40 +1,75 @@
 ﻿@model HealthyProject.Models.LoginViewModel
-
+<br/>
+<br/>
 @{
     ViewBag.Title = "Home Page";
 }
 @Styles.Render("~/Content/css")
 @Scripts.Render("~/bundles/modernizr")
-<body>
+<body style="background-image:url(https://images.unsplash.com/photo-1490818387583-1baba5e638af?auto=format&fit=crop&w=931&q=60&ixid=dW5zcGxhc2guY29tOzs7Ozs%3D); background-size:cover">
 
     @*@if(ViewBag.Sucess == null){*@
     @if (User.Identity.IsAuthenticated)
     {
-        <div class="row" style="text-align:center;padding:200px 0">
-            <div class="col-md-4">
+        <div style="text-align:center;padding-left:500px">
+            <br />
+            <br />
+            <br />
+            <br />
+            <br />
+        
+            <br />
+            <div >
+
                 <br />
                 <br />
-                <img src="http://www.pcmanias.com/wp-content/uploads/2015/10/forum3.jpg" style="width:250px;height:250px;" />
-                @Html.ActionLink("Clique para ir para o Forum", "Index", "Forum", null, htmlAttributes: new { @class = "mybtn", id = "registerLink" })
+                
+                @Html.ActionLink(" Fórum", "Index", "Forum", null, htmlAttributes: new { @class = "btn1", id = "registerLink" })
             </div>
-            <div class="col-md-4">
+            <div>
                 <br />
                 <br />
-                <img src="http://cardiacconnect.org.au/wp-content/uploads/2015/12/Healthy-Eating-197x197.png" style=" width:250px;height:250px" />
-                @Html.ActionLink("Clique para adicionar/gerir as suas Refeicoes", "Index", "Refeicoes", null, htmlAttributes: new { @class = "mybtn", id = "registerLink" })
+                
+                @Html.ActionLink("Gestão de refeições", "Index", "Refeicoes", null, htmlAttributes: new { @class = "btn1", id = "registerLink" })
             </div>
-            <div class="col-md-4">
+            <div >
                 <br />
                 <br />
-                <img src="http://igner.info/images/img_84723-75.jpg" style="width:250px;height:200px; " />
-                @Html.ActionLink("Clique para definir um Objetivo", "Index", "Objectivoes", null, htmlAttributes: new { @class = "mybtn", id = "registerLink" })
+                
+                @Html.ActionLink(" Objectivos", "Index", "Objectivoes", null, htmlAttributes: new { @class = "btn1", id = "registerLink" })
             </div>
         </div>
-        }
-}
+    }
+
     else
     {
+       
+     
+        <div style="padding-left:600px; text-align: center">
+
+            <br />
+            <br />
+            <b style="font-family:MingLiU_HKSCS; font-size:xx-large">  Gostaria de ter maior controlo sobre o seu peso? </b>
+
+            <b style="font-family:MingLiU_HKSCS; font-size:xx-large"> Um estilo de vida saudável? </b>
+
+            <b style="font-family:MingLiU_HKSCS; font-size:xx-large"> Melhor gestão das suas refeições?  </b>
+            <br />
+            <br />
+            <br/>
+            <br />
+            <b style="text-align: center; text-transform:uppercase; font-family:MingLiU_HKSCS; font-size:xx-large"> Healthy Project monitoriza o seu peso e ajuda-o a alcançar os seus objectivos!</b>.
+            <br />
+            <br />
+            <br />
+        
+        </div>
         <br />
+        <br />
+        <br />
+        <br />
+        <br />
+    
         <div class="row" style="padding-left: 700px">
             <div class="col-md-8">
                 <section id="loginForm">
@@ -71,18 +106,18 @@
                             </div>
                         </div>
                         <p>
-                            @Html.ActionLink("Register as a new user", "Register")
+                            @Html.ActionLink("Registe-se", "Register")
                         </p>
-                       
+
                         <p>
-                           @Html.ActionLink("Forgot your password?", "ForgotPassword")
+                            @Html.ActionLink("Esqueceu-se da password?", "ForgotPassword")
                         </p>
                     }
                 </section>
             </div>
             <div class="col-md-4">
                 <section id="socialLoginForm">
-                    @Html.Partial("_ExternalLoginsListPartial", new HealthyProject.Models.ExternalLoginListViewModel { ReturnUrl = ViewBag.ReturnUrl })
+                    @Html.Partial("_ExternalLoginsListPartial" ,new HealthyProject.Models.ExternalLoginListViewModel { ReturnUrl = ViewBag.ReturnUrl })
                 </section>
             </div>
         </div>
@@ -90,63 +125,10 @@
         @section Scripts {
             @Scripts.Render("~/bundles/jqueryval")
         }
-        <div>
-                                    <br />
-                                    <br />
-                                    <br />
-                                    <br />
-                                    <br />
-                                    <br />
-                                    <br />
-                                    <br />
-                                    <br />
-                                    <b style="text-align: right;font-size:x-large">  Gostaria de ter maior controlo sobre o seu peso? </b>
-                                    <br />
-                                    <br />
-                                    <br />
-                                    <br />
-                                    <br />
-                                    <br />
-                                    <br />
-                                    <br />
-                                    <b style="text-align:right;font-size:x-large"> Um estilo de vida saudavel? </b>
-                                    <br />
-                                    <br />
-                                    <br />
-                                    <br />
-                                    <b style="text-align:right;font-size:x-large"> Melhor gestao das suas Refeicoes ?  </b>
-                                </div>
-
-
-                        <div class="row">
-                                <div class="col-md-12" style="text-align:center">
-
-                                    <i style="font-size:xx-large; position:absolute; margin-top: -300px; text-align:match-parent; margin-left:-550px"> Healthy Project monitoriza o seu peso</i>.
-                                    <br />
-                                    <br />
-                                    <br />
-                                    <i style="font-size:xx-large; position:absolute; margin-top: -300px; text-align:match-parent; margin-left:-550px"> ajudando-o a alcancar os seus objetivos</i>.
-
-                                    <br />
-                                    <br />
-                                    <br />
-                                    <i style="font-size:xx-large; position:absolute; margin-top: -300px; text-align:match-parent; margin-left:-550px"> de forma Rapida e Eficaz!</i>.
-                                </div>
-                            </div>
-                            <div style="text-align:center">
-
-                                <br />
-                                <br />
-                                <br />
-                                <b style="font-size:xx-large">Junte se a nos!</b>
-                                <br />
-
-                                @Html.ActionLink("Registe-se", "register", "account", routeValues: null, htmlAttributes: new { @class = "mybtn", id = "registerLink" })
-                            </div>
-
-
-
-                }
+        <br />
+        <br />
+        <br />
+}
             </body>
             
 

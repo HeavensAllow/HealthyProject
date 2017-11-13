@@ -14,7 +14,7 @@
     @Scripts.Render("~/bundles/jqueryui")
     
 </head>
-<body style="background-image:url(https://images.unsplash.com/photo-1490818387583-1baba5e638af?auto=format&fit=crop&w=931&q=60&ixid=dW5zcGxhc2guY29tOzs7Ozs%3D); background-size:cover">
+<body>
     <div class="navbar navbar-inverse navbar-fixed-top" style="background-color:white">
         <div class="container">
             <div class="navbar-header">
@@ -28,20 +28,29 @@
 
             </div>
             <div class="navbar-collapse" style="background-color:white">
-                <img src="~/Content/Images/Logo.PNG" alt="Logotipo" align="middle" style="float:left" />
-                <ul class="nav navbar-nav" style="padding-left:200px">
+                <a href="@Url.Action("Index", "Home", null)">
+                    <img src="~/Content/Images/Logo.PNG" alt="Logotipo" align="middle" style="float:left" />
+                </a>
+                <ul class="nav navbar-nav" style="padding-left:80px; padding-top:20px">
                     
-                    <li style="font-size:30px">@Html.ActionLink("Página inicial", "Index", "Home")</li>
+                   
                     <li style="font-size:30px">@Html.ActionLink("Sobre nós", "About", "Home")</li>
-                    <li style="font-size:30px">@Html.ActionLink("Forum", "Index", "Forum")</li>
+                    <li style="font-size:30px">@Html.ActionLink("Fórum", "Index", "Forum")</li>
                     @if (User.Identity.IsAuthenticated)
                     {
 
-                        <li>@Html.ActionLink("Objectivos", "Index", "Objectivoes")</li>
-                    
+                        <li style="font-size:30px">@Html.ActionLink("Objectivos", "Index", "Objectivoes")</li>
+                        <li style="font-size:30px">@Html.ActionLink("Refeições", "Index", "Refeicoes")</li>
+
                     }
                 </ul>
-                @*@Html.Partial("_LoginPartial")*@
+              
+                    @if (User.Identity.IsAuthenticated)
+                    {
+                        @Html.Partial("_LoginPartial")
+                    }
+               
+
             </div>
         </div>
     </div>
