@@ -70,17 +70,6 @@ namespace HealthyProject.Controllers
 
             var userId = Convert.ToInt32(User.Identity.GetUserId()); // estava em string
 
-            //var model = new IndexViewModel
-            //{
-            //    HasPassword = HasPassword(),
-            //    PhoneNumber = await UserManager.GetPhoneNumberAsync(User.Identity.GetUserId<int>()),
-            //    TwoFactor = await UserManager.GetTwoFactorEnabledAsync(User.Identity.GetUserId<int>()),
-            //    Logins = await UserManager.GetLoginsAsync(User.Identity.GetUserId<int>()),
-            //    BrowserRemembered = await AuthenticationManager.TwoFactorBrowserRememberedAsync(userId)
-
-            //};
-            // User.Identity.GetUserId-- - depois defazer log in tenho este
-
             Utilizador perfil = db.Utilizadors.Find(userId);
             Eutilizador perfilEdit = new Eutilizador()
             {
@@ -96,12 +85,9 @@ namespace HealthyProject.Controllers
                 MMuscular = perfil.MMuscular
             };
             var objectivoes = db.Objectivoes.FirstOrDefault(c => c.UserID == userId);
-
             ViewBag.Genders = new SelectList(new List<SelectListItem>
                 {
                     new SelectListItem { Selected = true, Text = "M", Value = "M"},
-
-
                     new SelectListItem { Selected = false, Text = "F", Value = "F"},
                 }, "Value", "Text");
             ViewBag.Atividade = new SelectList(new List<SelectListItem>
@@ -117,13 +103,13 @@ namespace HealthyProject.Controllers
                 {
                     if (objectivoes != null)
                     {
-                        return View(perfil);
+                        return View(perfilEdit);
                     }
                     else
                     {
                         ViewBag.UserGuide2 = "Sem Objectivos";
                     }
-                    return View(perfil);
+                    return View(perfilEdit);
                 }
                 else
                 {
@@ -143,9 +129,9 @@ namespace HealthyProject.Controllers
 
         public ActionResult Index([Bind(Include = "UserID,Nome,Genero,Data_nascimento,Peso,Altura,Actividade_fisica,Nr_horas_sono,Nr_refeicoes,Habitos_alcoolicos,MMuscular,MGorda")] Eutilizador perfilEdit)
         {
-            
-           int userId = Convert.ToInt32(User.Identity.GetUserId());
-           Utilizador perfil = db.Utilizadors.FirstOrDefault(o => o.UserID == userId);
+
+            int userId = Convert.ToInt32(User.Identity.GetUserId());
+            Utilizador perfil = db.Utilizadors.FirstOrDefault(o => o.UserID == userId);
 
             perfil.Nome = perfilEdit.Nome;
             perfil.Genero = perfilEdit.Genero;
@@ -157,11 +143,10 @@ namespace HealthyProject.Controllers
             perfil.Nr_refeicoes = perfilEdit.Nr_refeicoes;
             perfil.MGorda = perfilEdit.MGorda;
             perfil.MMuscular = perfilEdit.MMuscular;
+
             ViewBag.Genders = new SelectList(new List<SelectListItem>
                 {
                     new SelectListItem { Selected = true, Text = "M", Value = "M"},
-
-
                     new SelectListItem { Selected = false, Text = "F", Value = "F"},
                 }, "Value", "Text");
 
@@ -228,12 +213,6 @@ namespace HealthyProject.Controllers
                     ModelState.AddModelError("Actividade_fisica", "Introduza o Indice de Atividade Fisica");
                     error = true;
                 }
-
-
-
-                
-                db.Entry(perfil).State = EntityState.Modified;
-
                 RegistoPeso peso = new RegistoPeso()
                 {
                     Data = DateTime.Today,
@@ -241,12 +220,12 @@ namespace HealthyProject.Controllers
                     User_ID = userId
                 };
                 db.RegistoPesoes.Add(peso);
+                db.Entry(perfil).State = EntityState.Modified;
                 db.SaveChanges();
-
                 return RedirectToAction("Index", "Manage");
 
             }
-          
+
 
             return View(perfilEdit);
         }
