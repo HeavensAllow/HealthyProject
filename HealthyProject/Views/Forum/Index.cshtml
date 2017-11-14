@@ -10,8 +10,11 @@
 {
     <div class="form-group row">
         <div class="col-md-10">
-            <button style="border-radius:12px; font-size:large; font-style:unset; background-color: #e6d338;box-shadow: 0 9px rgba(0, 0, 0, 0.63)"> @Html.ActionLink("Criar Categoria", "CreateCategoria", "Categorias")</button>
-            <button style="border-radius:12px; font-size:large; font-style:unset; background-color: #e6d338;box-shadow: 0 9px rgba(0, 0, 0, 0.63)"> @Html.ActionLink("Criar Subcategoria", "CreateSubcategoria", "Subcategorias")</button>
+            @*<button class="mybtn"> @Html.ActionLink("Criar Categoria", "CreateCategoria", "Categorias")</button>*@
+
+            @Html.ActionLink("Criar Categoria", "CreateCategoria", "Categorias",null,htmlAttributes:new {@class="mybtn"})
+
+            @Html.ActionLink("Criar Subcategoria", "CreateSubcategoria", "Subcategorias", null, htmlAttributes: new { @class = "mybtn" })
         </div>
     </div>
 }
@@ -20,13 +23,13 @@
     @foreach (var categoria in Model)
     {
         <tr>
-            <th colspan="2" style="background-color:orange; padding-left:50px; text-align:center; font-size:30px">
+            <th colspan="2" style="background-color:lightcoral; padding-left:50px; text-align:center; font-size:30px">
                 @Html.DisplayFor(modelItem => categoria.Nome)
             </th>
         </tr>
         foreach (var subcategoria in categoria.Subcategorias)
         {
-            <tr style="border-bottom-style:double; border-bottom-color:orange">
+            <tr style="border-bottom-style:double; border-bottom-color:coral; ">
                 <td class="col-md-10" style="font-size:25px; padding-left:420px; text-align:center">
                     @Html.ActionLink(subcategoria.Nome, "Subcategoria", "Forum", new { id = subcategoria.SubcategoriaID }, null)
                 </td>
