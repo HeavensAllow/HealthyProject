@@ -214,7 +214,7 @@ namespace HealthyProject.Controllers
                 }
                 return View();
             }
-            if ((int)DateTime.Now.DayOfWeek == 4 && peso == null)
+            if ((int)DateTime.Now.DayOfWeek == 1 && peso == null)
             {
                 if (refeico == null)
                 {
