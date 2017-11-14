@@ -42,7 +42,6 @@
         </div>
     </div>
 }
-<h2>@ViewBag.Title.</h2>
 <p class="text-success" style="font-family:PMingLiU">@ViewBag.StatusMessage</p>
 
 <div style="padding-left:700px; font-family:PMingLiU;font-size:x-large">
@@ -87,9 +86,7 @@
         <dd>
 
             @Html.DisplayFor(model => model.Data_nascimento)
-        <dd style="text-align:left">
-            
-            @Html.DisplayFor(model=>model.Data_nascimento)
+
 
         </dd>
     </dl>
@@ -207,8 +204,6 @@
         </table>
 
             <input type="submit" value="Guardar" id="submeter" />
-
-            @Html.AntiForgeryToken()
     }
     @section Scripts {
         @Scripts.Render("~/bundles/jqueryval")
