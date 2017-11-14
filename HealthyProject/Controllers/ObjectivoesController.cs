@@ -34,7 +34,7 @@ namespace HealthyProject.Controllers
             var refeicoes = db.RegistoDiarios.Include(i => i.Objectivo).Where(o => o.Objectivo.ObjectivoID == objectivo.ObjectivoID);
             RegistoPeso peso = db.RegistoPesoes.FirstOrDefault(o => o.User_ID == userId && o.Data == DateTime.Today);
             var refeico = db.Refeicoes.FirstOrDefault(c => c.RegistoDiario.Objectivo.UserID == userId);
-            var today = DateTime.Now;
+            var today = DateTime.Today;
             double counter = 0;
             double counter2 = 0;
             if (objectivo != null)
@@ -45,11 +45,24 @@ namespace HealthyProject.Controllers
                 {
                     delta -= 7;
                 }
+                
                 List<DataPoint> datapoints = new List<DataPoint> { };
                 List<DataPoint> intake = new List<DataPoint> { };
                 while (delta <= 0)
                 {
+                    
                     var day = today.AddDays(delta);
+                    var registo = db.RegistoDiarios.FirstOrDefault(c => c.Objectivo.UserID == userId && c.Data == day);
+                    SqlParameter RegistoPratos = new SqlParameter("@RegistoID", registo.RegistoID);
+                    IList<SumPratos_Result> registoPratos = db.Database.SqlQuery<SumPratos_Result>("SumPratos @RegistoID", RegistoPratos).ToList();
+                    SqlParameter RegistoIngredientes = new SqlParameter("@RegistoID", registo.RegistoID);
+                    IList<SumIngredientes_Result> registoIngredientes = db.Database.SqlQuery<SumIngredientes_Result>("SumIngredientes @RegistoID", RegistoIngredientes).ToList();
+                    SqlParameter RegistoBebidas = new SqlParameter("@RegistoID", registo.RegistoID);
+                    IList<SumBebidas_Result> registoBebidas = db.Database.SqlQuery<SumBebidas_Result>("SumBebidas @RegistoID", RegistoBebidas).ToList();
+                    RegistoDiario registado = new RegistoDiario()
+                    {
+                        Total_Kcal = (double)(registoBebidas[0].Kcal + registoIngredientes[0].Kcal + registoPratos[0].Kcal)
+                    };
                     var dailyMeal = refeicoes.FirstOrDefault(p => p.Data == day);
                     if (dailyMeal == null)
                     {
@@ -59,7 +72,7 @@ namespace HealthyProject.Controllers
                     }
                     else
                     {
-                        datapoints.Add(new DataPoint(counter, dailyMeal.Total_Kcal, day.ToString("dddd")));
+                        datapoints.Add(new DataPoint(counter, registado.Total_Kcal, day.ToString("dddd")));
                         intake.Add(new DataPoint(counter, objectivo.Intake_diarioR, day.ToString("dddd")));
                         counter++;
                     }

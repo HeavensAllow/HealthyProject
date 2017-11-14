@@ -10,15 +10,13 @@
 namespace HealthyProject.Models
 {
     using System;
-    using System.Collections.Generic;
     
-    public partial class RefeicaoPrato
+    public partial class CounterBebidas_Result
     {
-        public int RefeicaoID { get; set; }
-        public int PratoID { get; set; }
-        public double Dose { get; set; }
-    
-        public virtual Prato Prato { get; set; }
-        public virtual Refeico Refeico { get; set; }
+        public Nullable<double> Kcal { get; set; }
+        public Nullable<double> Proteinas { get; set; }
+        public Nullable<double> Gordura { get; set; }
+        public Nullable<double> Hidratos { get; set; }
+        public Nullable<double> Acucar { get; set; }
     }
 }

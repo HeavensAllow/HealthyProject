@@ -58,5 +58,77 @@ namespace HealthyProject.Models
     
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<Top5_Result>("Top5", userIDParameter);
         }
+    
+        public virtual ObjectResult<a_Result> a(Nullable<int> objectivoID)
+        {
+            var objectivoIDParameter = objectivoID.HasValue ?
+                new ObjectParameter("ObjectivoID", objectivoID) :
+                new ObjectParameter("ObjectivoID", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<a_Result>("a", objectivoIDParameter);
+        }
+    
+        public virtual ObjectResult<CounterInfoRefeicao_Result> CounterInfoRefeicao(Nullable<int> registoID)
+        {
+            var registoIDParameter = registoID.HasValue ?
+                new ObjectParameter("RegistoID", registoID) :
+                new ObjectParameter("RegistoID", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<CounterInfoRefeicao_Result>("CounterInfoRefeicao", registoIDParameter);
+        }
+    
+        public virtual ObjectResult<CounterBebidas_Result> CounterBebidas(Nullable<int> refeicaoID)
+        {
+            var refeicaoIDParameter = refeicaoID.HasValue ?
+                new ObjectParameter("RefeicaoID", refeicaoID) :
+                new ObjectParameter("RefeicaoID", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<CounterBebidas_Result>("CounterBebidas", refeicaoIDParameter);
+        }
+    
+        public virtual ObjectResult<CounterIngredientes_Result> CounterIngredientes(Nullable<int> refeicaoID)
+        {
+            var refeicaoIDParameter = refeicaoID.HasValue ?
+                new ObjectParameter("RefeicaoID", refeicaoID) :
+                new ObjectParameter("RefeicaoID", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<CounterIngredientes_Result>("CounterIngredientes", refeicaoIDParameter);
+        }
+    
+        public virtual ObjectResult<CounterPratos_Result> CounterPratos(Nullable<int> refeicaoID)
+        {
+            var refeicaoIDParameter = refeicaoID.HasValue ?
+                new ObjectParameter("RefeicaoID", refeicaoID) :
+                new ObjectParameter("RefeicaoID", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<CounterPratos_Result>("CounterPratos", refeicaoIDParameter);
+        }
+    
+        public virtual ObjectResult<SumBebidas_Result> SumBebidas(Nullable<int> registoID)
+        {
+            var registoIDParameter = registoID.HasValue ?
+                new ObjectParameter("RegistoID", registoID) :
+                new ObjectParameter("RegistoID", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<SumBebidas_Result>("SumBebidas", registoIDParameter);
+        }
+    
+        public virtual ObjectResult<SumIngredientes_Result> SumIngredientes(Nullable<int> registoID)
+        {
+            var registoIDParameter = registoID.HasValue ?
+                new ObjectParameter("RegistoID", registoID) :
+                new ObjectParameter("RegistoID", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<SumIngredientes_Result>("SumIngredientes", registoIDParameter);
+        }
+    
+        public virtual ObjectResult<SumPratos_Result> SumPratos(Nullable<int> registoID)
+        {
+            var registoIDParameter = registoID.HasValue ?
+                new ObjectParameter("RegistoID", registoID) :
+                new ObjectParameter("RegistoID", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<SumPratos_Result>("SumPratos", registoIDParameter);
+        }
     }
 }
