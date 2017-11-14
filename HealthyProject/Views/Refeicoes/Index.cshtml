@@ -100,8 +100,9 @@ using (Html.BeginForm("Index", "Refeicoes"))
         <th></th>
     </tr>
 
-    @foreach (var refeicao in Model)
-    {
+    @if (Model.Count() != 0) {
+        foreach (var refeicao in Model)
+        {
         <tr>
             <td>
                 @*@Html.DisplayFor(modelItem => refeicao.RefeicaoID)<br />
@@ -141,6 +142,13 @@ using (Html.BeginForm("Index", "Refeicoes"))
                 <p style="font-size:80%">@Html.ActionLink("Adicionar Ingrediente", "Create", "RefeicaoIngredientes", new { RefeicaoID = refeicao.RefeicaoID }, null)</p>
                 <p style="font-size:80%">@Html.ActionLink("Adicionar Bebida", "Create", "RefeicaoBebidas", new { RefeicaoID = refeicao.RefeicaoID }, null)</p>
             </td>
+        </tr>
+        }
+    }
+    else
+    {
+        <tr>
+            <td colspan="7"><p style="text-align:center">Ainda não existe nenhuma refeição para este dia.</p></td>
         </tr>
     }
     <tr>
