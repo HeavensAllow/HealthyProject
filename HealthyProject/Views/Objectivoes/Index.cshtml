@@ -61,20 +61,20 @@
             <button class="btn btn-default" id="btnright" value="Right to left" style="width:5%; height:300px; float:right; font-size:50px; margin-top: 100px;">></button>
             <div class="slidediv" style="width:85%; overflow-x:scroll; height: 550px; overflow-y: hidden; position: relative;">
                 <p id="Totalkg" style="width:100%; position: absolute; height:500px;left:30px;"></p>
-                <p id="NrObjectivos" style="height:500px; width: 100%; position:absolute; left:1280px;"></p>
+                <p id="NrObjectivos" style="height:500px; width: 100%; position:absolute; left:2530px;"></p>
                 @if (ViewBag.Favoritos != null)
                 {
-                    <p id="Favoritos" style="height:500px; width: 100%; position:absolute; left:2530px;"></p>
+                    <p id="Favoritos" style="height:500px; width: 100%; position:absolute; left:5030px;"></p>
                     if (ViewBag.Count != null)
                     {
-                        <p id="Count" style="height:500px; width: 100%; position:absolute; left:3780px;"></p>
+                        <p id="Count" style="height:500px; width: 100%; position:absolute; left:7530px;"></p>
                     }
                 }
                 else
                 {
                     if (ViewBag.Count != null)
                     {
-                        <p id="Count" style="height:500px; width: 100%; position:absolute; left:2530px;"></p>
+                        <p id="Count" style="height:500px; width: 100%; position:absolute; left:5030px;"></p>
                     }
                 }
                 <br />
@@ -143,23 +143,23 @@ else
                 <button class="btn btn-default" id="btnright" value="Right to left" style="width:5%; height:300px; float:right; font-size:50px; margin-top: 100px;">></button>
                 <div class="slidediv" style="width:85%; overflow-x:scroll; height: 550px; overflow-y: hidden; position: relative;">
                     <p id="Totalkg" style="width:100%; position: absolute; height:500px;left:3px;"></p>
-                    <p id="NrObjectivos" style="height:500px; width: 100%; position:absolute; left:1280px;"></p>
+                    <p id="NrObjectivos" style="height:500px; width: 100%; position:absolute; left:2530px;"></p>
                     @if (ViewBag.Registos != null)
                     {
-                        <p id="Totalkcal" style="height:500px; width: 100%; position:absolute; left:2530px;"></p>
+                        <p id="Totalkcal" style="height:500px; width: 100%; position:absolute; left:5030px;"></p>
                         if (ViewBag.Favoritos != null)
                         {
-                            <p id="Favoritos" style="height:500px; width: 100%; position:absolute; left:3780px;"></p>
+                            <p id="Favoritos" style="height:500px; width: 100%; position:absolute; left:7530px;"></p>
                             if (ViewBag.Count != null)
                             {
-                                <p id="Count" style="height:500px; width: 100%; position:absolute; left:5030px;"></p>
+                                <p id="Count" style="height:500px; width: 100%; position:absolute; left:10030px;"></p>
                             }
                         }
                         else
                         {
                             if (ViewBag.Count != null)
                             {
-                                <p id="Count" style="height:500px; width: 100%; position:absolute; left:3780px;"></p>
+                                <p id="Count" style="height:500px; width: 100%; position:absolute; left:7530px;"></p>
                             }
                         }
                     }
@@ -167,17 +167,17 @@ else
                     {
                         if (ViewBag.Favoritos != null)
                         {
-                            <p id="Favoritos" style="height:500px; width: 100%; position:absolute; left:2530px;"></p>
+                            <p id="Favoritos" style="height:500px; width: 100%; position:absolute; left:5030px;"></p>
                             if (ViewBag.Count != null)
                             {
-                                <p id="Count" style="height:500px; width: 100%; position:absolute; left:3780px;"></p>
+                                <p id="Count" style="height:500px; width: 100%; position:absolute; left:7530px;"></p>
                             }
                         }
                         else
                         {
                             if (ViewBag.Count != null)
                             {
-                                <p id="Count" style="height:500px; width: 100%; position:absolute; left:2530px;"></p>
+                                <p id="Count" style="height:500px; width: 100%; position:absolute; left:5030px;"></p>
                             }
                         }
                     }
@@ -212,20 +212,20 @@ else
                 <button class="btn btn-default" id="btnright" value="Right to left" style="width:5%; height:300px; float:right; font-size:50px; margin-top: 100px;">></button>
                 <div class="slidediv" style="width:85%; overflow-x:scroll; height: 550px; overflow-y: hidden; position: relative;">
                     <p id="Totalkg" style="width:100%; position: absolute; height:500px;left:3px;"></p>
-                    <p id="NrObjectivos" style="height:500px; width: 100%; position:absolute; left:1280px;"></p>
+                    <p id="NrObjectivos" style="height:500px; width: 100%; position:absolute; left:2530px;"></p>
                     @if (ViewBag.Favoritos != null)
                     {
-                        <p id="Favoritos" style="height:500px; width: 100%; position:absolute; left:2530px;"></p>
+                        <p id="Favoritos" style="height:500px; width: 100%; position:absolute; left:5030px;"></p>
                         if (ViewBag.Count != null)
                         {
-                            <p id="Count" style="height:500px; width: 100%; position:absolute; left:3780px;"></p>
+                            <p id="Count" style="height:500px; width: 100%; position:absolute; left:7530px;"></p>
                         }
                     }
                     else
                     {
                         if (ViewBag.Count != null)
                         {
-                            <p id="Count" style="height:500px; width: 100%; position:absolute; left:2530px;"></p>
+                            <p id="Count" style="height:500px; width: 100%; position:absolute; left:5030px;"></p>
                         }
                     }
                     <br />
@@ -455,12 +455,12 @@ else
             $("#btnright").click(function () {
                 if (div + 1 > max) return;
                 div++;
-                $('.slidediv').children().animate({ left:  '-=1250px' });
+                $('.slidediv').children().animate({ left:  '-=2500px' });
             });
             $("#btnleft").click(function () {
                 if (div - 1 < 1) return;
                 div--;
-                $('.slidediv').children().animate({ left: '+=1250px' });
+                $('.slidediv').children().animate({ left: '+=2500px' });
             });
             $('body').on('click', '.modal-link', function (e) {
                 e.preventDefault();
