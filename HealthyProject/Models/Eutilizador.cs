@@ -45,7 +45,7 @@ namespace HealthyProject.Models
         [Display(Name = "Número de horas de sono diárias")]
         public Nullable<int> Nr_horas_sono { get; set; }
 
-        [Display(Name = "Número de efeições diárias")]
+        [Display(Name = "Número de refeições diárias")]
         public Nullable<int> Nr_refeicoes { get; set; }
         [Display(Name = "Hábitos alcoólicos")]
         public Nullable<bool> Habitos_alcoolicos { get; set; }
