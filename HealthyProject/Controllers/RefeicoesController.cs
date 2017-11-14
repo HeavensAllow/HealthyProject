@@ -40,16 +40,16 @@ namespace HealthyProject.Controllers
                         SqlParameter RegistoBebidas = new SqlParameter("@RefeicaoID", tipo.RefeicaoID);
                         IList<CounterBebidas_Result> registoBebidas = db.Database.SqlQuery<CounterBebidas_Result>("CounterBebidas @RefeicaoID", RegistoBebidas).ToList();
 
-                        comida.tipo = tipo.Tipo;
-                        comida.listaBebidas = tipo.RefeicaoBebidas;
-                        comida.listaPratos = tipo.RefeicaoPratos;
-                        comida.listaIngredientes = tipo.RefeicaoIngredientes;
-                        comida.refeicaoID = tipo.RefeicaoID;
+                        comida.Tipo = tipo.Tipo;
+                        comida.ListaBebidas = tipo.RefeicaoBebidas;
+                        comida.ListaPratos = tipo.RefeicaoPratos;
+                        comida.ListaIngredientes = tipo.RefeicaoIngredientes;
+                        comida.RefeicaoID = tipo.RefeicaoID;
 
-                        comida.total_kcal = (double)(registoBebidas[0].Kcal + registoIngredientes[0].Kcal + registoPratos[0].Kcal);
-                        comida.total_proteinas = (double)(registoBebidas[0].Proteinas + registoIngredientes[0].Proteinas + registoPratos[0].Proteinas);
-                        comida.total_gordura = (double)(registoBebidas[0].Gordura + registoIngredientes[0].Gordura + registoPratos[0].Gordura);
-                        comida.total_hidratos = (double)(registoBebidas[0].Hidratos + registoIngredientes[0].Hidratos + registoPratos[0].Hidratos);
+                        comida.Total_kcal = (double)(registoBebidas[0].Kcal + registoIngredientes[0].Kcal + registoPratos[0].Kcal);
+                        comida.Total_proteinas = (double)(registoBebidas[0].Proteinas + registoIngredientes[0].Proteinas + registoPratos[0].Proteinas);
+                        comida.Total_gordura = (double)(registoBebidas[0].Gordura + registoIngredientes[0].Gordura + registoPratos[0].Gordura);
+                        comida.Total_hidratos = (double)(registoBebidas[0].Hidratos + registoIngredientes[0].Hidratos + registoPratos[0].Hidratos);
                         muitaComida.Add(comida);
                     }
                 }
@@ -83,16 +83,16 @@ namespace HealthyProject.Controllers
                         SqlParameter RegistoBebidas = new SqlParameter("@RefeicaoID", tipo.RefeicaoID);
                         IList<CounterBebidas_Result> registoBebidas = db.Database.SqlQuery<CounterBebidas_Result>("CounterBebidas @RefeicaoID", RegistoBebidas).ToList();
 
-                        comida.tipo = tipo.Tipo;
-                        comida.listaBebidas = tipo.RefeicaoBebidas;
-                        comida.listaPratos = tipo.RefeicaoPratos;
-                        comida.listaIngredientes = tipo.RefeicaoIngredientes;
-                        comida.refeicaoID = tipo.RefeicaoID;
+                        comida.Tipo = tipo.Tipo;
+                        comida.ListaBebidas = tipo.RefeicaoBebidas;
+                        comida.ListaPratos = tipo.RefeicaoPratos;
+                        comida.ListaIngredientes = tipo.RefeicaoIngredientes;
+                        comida.RefeicaoID = tipo.RefeicaoID;
 
-                        comida.total_kcal = (double)(registoBebidas[0].Kcal + registoIngredientes[0].Kcal + registoPratos[0].Kcal);
-                        comida.total_proteinas = (double)(registoBebidas[0].Proteinas + registoIngredientes[0].Proteinas + registoPratos[0].Proteinas);
-                        comida.total_gordura = (double)(registoBebidas[0].Gordura + registoIngredientes[0].Gordura + registoPratos[0].Gordura);
-                        comida.total_hidratos = (double)(registoBebidas[0].Hidratos + registoIngredientes[0].Hidratos + registoPratos[0].Hidratos);
+                        comida.Total_kcal = (double)(registoBebidas[0].Kcal + registoIngredientes[0].Kcal + registoPratos[0].Kcal);
+                        comida.Total_proteinas = (double)(registoBebidas[0].Proteinas + registoIngredientes[0].Proteinas + registoPratos[0].Proteinas);
+                        comida.Total_gordura = (double)(registoBebidas[0].Gordura + registoIngredientes[0].Gordura + registoPratos[0].Gordura);
+                        comida.Total_hidratos = (double)(registoBebidas[0].Hidratos + registoIngredientes[0].Hidratos + registoPratos[0].Hidratos);
                         muitaComida.Add(comida);
 
                     }

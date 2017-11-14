@@ -1,12 +1,5 @@
 ﻿@model HealthyProject.Models.Eutilizador
 
-@{
-    ViewBag.Title = "Perfil do Utilizador";
-}
-<br/>
-<body style="background-image:url(https://images.unsplash.com/photo-1490818387583-1baba5e638af?auto=format&fit=crop&w=931&q=60&ixid=dW5zcGxhc2guY29tOzs7Ozs%3D); background-size:cover">
-
-
 @if (ViewBag.UserGuide != null)
 {
     <br />
@@ -40,6 +33,15 @@
         </div>
     </div>
 }
+
+<br />
+<br />
+@{
+    ViewBag.Title = "Perfil do Utilizador";
+}
+<br/>
+<body style="background-image:url(https://images.unsplash.com/photo-1490818387583-1baba5e638af?auto=format&fit=crop&w=931&q=60&ixid=dW5zcGxhc2guY29tOzs7Ozs%3D); background-size:cover">
+
 <p class="text-success" style="font-family:PMingLiU">@ViewBag.StatusMessage</p>
 
     <b style="padding-left:700px; font-family:MingLiU_HKSCS; font-size:xx-large; text-align:left">@ViewBag.Title</b>
@@ -90,8 +92,6 @@
 
         </dd>
     </dl>
-    <br />
-    <br />
     <br />
 
     @using (Html.BeginForm("Index", "Manage"))

@@ -8,50 +8,50 @@ namespace HealthyProject.Models
     public class Contas
     {
 
-       public double? total_kcal
+       public double? Total_kcal
         {
             get;
             set;
         }
-        public double? total_proteinas
-        {
-            get;
-            set;
-        }
-
-        public double? total_gordura
+        public double? Total_proteinas
         {
             get;
             set;
         }
 
-        public double? total_hidratos
+        public double? Total_gordura
         {
             get;
             set;
         }
 
-        public string tipo
+        public double? Total_hidratos
         {
             get;
             set;
         }
-        public ICollection<RefeicaoBebida> listaBebidas
+
+        public string Tipo
         {
             get;
             set;
         }
-        public ICollection<RefeicaoPrato> listaPratos
+        public ICollection<RefeicaoBebida> ListaBebidas
         {
             get;
             set;
         }
-        public ICollection<RefeicaoIngrediente> listaIngredientes
+        public ICollection<RefeicaoPrato> ListaPratos
         {
             get;
             set;
         }
-        public int refeicaoID
+        public ICollection<RefeicaoIngrediente> ListaIngredientes
+        {
+            get;
+            set;
+        }
+        public int RefeicaoID
         {
             get;
             set;

@@ -11,22 +11,14 @@ namespace HealthyProject.Models
 {
     using System;
     using System.Collections.Generic;
-    using System.Web.Mvc;
-    using HealthyProject.Models.Metadata;
-    using System.ComponentModel.DataAnnotations;
     
-    [MetadataType(typeof(RefeicaoIngredientesMetadata))]
     public partial class RefeicaoIngrediente
     {
         public int IngredienteID { get; set; }
         public int RefeicaoID { get; set; }
         public int Quantidade { get; set; }
-
-        public IEnumerable<SelectListItem> Categoria { get; set; }
-        public string SelectedCategoria { get; set; }
-        public IEnumerable<SelectListItem> Ingredientes { get; set; }
+    
         public virtual Refeico Refeico { get; set; }
         public virtual Ingrediente Ingrediente { get; set; }
     }
 }
-
