@@ -1,11 +1,10 @@
 ﻿@model IEnumerable<HealthyProject.Models.Contas>
-
 @{
     ViewBag.Title = "Index";
 }
+
 @if (ViewBag.SemDados != null)
-{
-    <br />
+{  <br />
     <br />
     <br />
     <div class="centerAlign">
@@ -75,90 +74,91 @@ else
 
     <p>Seleccione a data que pretende ver:</p>
 
-using (Html.BeginForm("Index", "Refeicoes"))
-{
-        @Html.AntiForgeryToken()
-            <input id="dateInput" type="date" width="10" class="date" name="dateInput" value="Guardar" />
-            <input id="button" type="submit" value="Guardar">
-}
-
-<br />
-<br />
-<br />
-
-<table class="table tableDailyMeals">
-    <tr>
-        <th>Refeição</th>
-        <th>Descrição</th>
-        <th>Kcal</th>
-        <th>Proteínas</th>
-        <th>
-            <p>Hidratos de Carbono</p>
-            <p style="font-size:80%">Açúcar</p>
-        </th>
-        <th>Gordura</th>
-        <th></th>
-    </tr>
-
-    @if (Model.Count() != 0) {
-        foreach (var refeicao in Model)
-        {
-        <tr>
-            <td>
-                @*@Html.DisplayFor(modelItem => refeicao.RefeicaoID)<br />
-                    @Html.DisplayFor(modelItem => refeicao.Data)<br /> so para shit*@
-                @Html.DisplayFor(modelItem => refeicao.tipo)
-                <p style="font-size:70%; color:red">@Html.ActionLink("Editar refeição", "Edit", new { id = refeicao.refeicaoID })</p>
-            </td>
-            <td>
-                @foreach (var prato in refeicao.listaPratos)
-                {
-                    <p>
-                        @prato.Prato.Nome <span>   </span> @prato.Dose <span> gr</span>
-                        <span style="font-size:70%">@Html.ActionLink("Eliminar", "Delete", "RefeicaoPratoes", new { RefeicaoID = refeicao.refeicaoID, PratoID = prato.PratoID }, null)</span>
-                    </p>
-                }
-                @foreach (var ingrediente in refeicao.listaIngredientes)
-                {
-                    <p>
-                        @ingrediente.Ingrediente.Nome <span>   </span> @ingrediente.Quantidade <span> gr</span>
-                        <span style="font-size:70%">@Html.ActionLink("Eliminar", "Delete", "RefeicaoIngredientes", new { RefeicaoID = refeicao.refeicaoID, IngredienteID = ingrediente.IngredienteID }, null)</span>
-                    </p>
-                }
-                @foreach (var bebida in refeicao.listaBebidas)
-                {
-                    <p>
-                        @bebida.Bebida.Nome <span>   </span> @bebida.Quantidade <span> ml</span>
-                        <span style="font-size:70%">@Html.ActionLink("Eliminar", "Delete", "RefeicaoBebidas", new { RefeicaoID = refeicao.refeicaoID, BebidaID = bebida.BebidaID }, null)</span>
-                    </p>
-                }
-            </td>
-            <td>@refeicao.total_kcal</td>
-            <td>@refeicao.total_proteinas</td>
-            <td>@refeicao.total_hidratos</td>
-            <td>@refeicao.total_gordura</td>
-            <td>
-                <p style="font-size:80%">@Html.ActionLink("Adicionar Prato", "Create", "RefeicaoPratoes", new { RefeicaoID = refeicao.refeicaoID }, null)</p>
-                <p style="font-size:80%">@Html.ActionLink("Adicionar Ingrediente", "Create", "RefeicaoIngredientes", new { RefeicaoID = refeicao.refeicaoID }, null)</p>
-                <p style="font-size:80%">@Html.ActionLink("Adicionar Bebida", "Create", "RefeicaoBebidas", new { RefeicaoID = refeicao.refeicaoID }, null)</p>
-            </td>
-        </tr>
-        }
-    }
-    else
+    using (Html.BeginForm("Index", "Refeicoes"))
     {
-        <tr>
-            <td colspan="7"><p style="text-align:center">Ainda não existe nenhuma refeição para este dia.</p></td>
-        </tr>
+        @Html.AntiForgeryToken()
+        <input id="dateInput" type="date" width="10" class="date" name="dateInput" value="Guardar" />
+        <input id="button" type="submit" value="Guardar">
     }
-    <tr>
-        <td><button>@Html.ActionLink("Adicionar Refeição", "Create")</button></td>
-        <td></td>
-        <td></td>
-        <td></td>
-        <td></td>
-        <td></td>
-        <td></td>
-    </tr>
-</table>
+
+    <br />
+    <br />
+    <br />
+
+    <table class="table tableDailyMeals">
+        <tr>
+            <th>Refeição</th>
+            <th>Descrição</th>
+            <th>Kcal</th>
+            <th>Proteínas</th>
+            <th>
+                <p>Hidratos de Carbono</p>
+                <p style="font-size:80%">Açúcar</p>
+            </th>
+            <th>Gordura</th>
+            <th></th>
+        </tr>
+
+        @if (Model.Count() != 0)
+        {
+            foreach (var refeicao in Model)
+            {
+                <tr>
+                    <td>
+                        @*@Html.DisplayFor(modelItem => refeicao.RefeicaoID)<br />
+                            @Html.DisplayFor(modelItem => refeicao.Data)<br /> so para shit*@
+                        @Html.DisplayFor(modelItem => refeicao.Tipo)
+                        <p style="font-size:70%; color:red">@Html.ActionLink("Editar refeição", "Edit", new { id = refeicao.RefeicaoID })</p>
+                    </td>
+                    <td>
+                        @foreach (var prato in refeicao.ListaPratos)
+                        {
+                            <p>
+                                @prato.Prato.Nome <span>   </span> @prato.Dose <span> gr</span>
+                                <span style="font-size:70%">@Html.ActionLink("Eliminar", "Delete", "RefeicaoPratoes", new { RefeicaoID = refeicao.RefeicaoID, PratoID = prato.PratoID }, null)</span>
+                            </p>
+                        }
+                        @foreach (var ingrediente in refeicao.ListaIngredientes)
+                        {
+                            <p>
+                                @ingrediente.Ingrediente.Nome <span>   </span> @ingrediente.Quantidade <span> gr</span>
+                                <span style="font-size:70%">@Html.ActionLink("Eliminar", "Delete", "RefeicaoIngredientes", new { RefeicaoID = refeicao.RefeicaoID, IngredienteID = ingrediente.IngredienteID }, null)</span>
+                            </p>
+                        }
+                        @foreach (var bebida in refeicao.ListaBebidas)
+                        {
+                            <p>
+                                @bebida.Bebida.Nome <span>   </span> @bebida.Quantidade <span> ml</span>
+                                <span style="font-size:70%">@Html.ActionLink("Eliminar", "Delete", "RefeicaoBebidas", new { RefeicaoID = refeicao.RefeicaoID, BebidaID = bebida.BebidaID }, null)</span>
+                            </p>
+                        }
+                    </td>
+                    <td>@refeicao.Total_kcal</td>
+                    <td>@refeicao.Total_proteinas</td>
+                    <td>@refeicao.Total_hidratos</td>
+                    <td>@refeicao.Total_gordura</td>
+                    <td>
+                        <p style="font-size:80%">@Html.ActionLink("Adicionar Prato", "Create", "RefeicaoPratoes", new { RefeicaoID = refeicao.RefeicaoID }, null)</p>
+                        <p style="font-size:80%">@Html.ActionLink("Adicionar Ingrediente", "Create", "RefeicaoIngredientes", new { RefeicaoID = refeicao.RefeicaoID }, null)</p>
+                        <p style="font-size:80%">@Html.ActionLink("Adicionar Bebida", "Create", "RefeicaoBebidas", new { RefeicaoID = refeicao.RefeicaoID }, null)</p>
+                    </td>
+                </tr>
+            }
+        }
+        else
+        {
+            <tr>
+                <td colspan="7"><p style="text-align:center">Ainda não existe nenhuma refeição para este dia.</p></td>
+            </tr>
+        }
+        <tr>
+            <td><button>@Html.ActionLink("Adicionar Refeição", "Create")</button></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+        </tr>
+    </table>
 }
