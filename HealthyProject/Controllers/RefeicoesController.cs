@@ -132,7 +132,7 @@ namespace HealthyProject.Controllers
                     if (objectivo != null)
                     {
                         registo1.ObjectivoID = objectivo.ObjectivoID;
-                        registo1.Data = DateTime.Today;
+                        registo1.Data = refeico.Data;
                         db.RegistoDiarios.Add(registo1);
                         foreach (RefeicaoPrato i in refeicoes)
                         {
@@ -165,8 +165,6 @@ namespace HealthyProject.Controllers
                     Objectivo objectivo = db.Objectivoes.FirstOrDefault(o => o.UserID == user && o.Data_fim == null);
                     if (objectivo != null)
                     {
-                        registo.ObjectivoID = objectivo.ObjectivoID;
-
                         foreach (RefeicaoPrato i in refeicoes)
                         {
                             counterkcal += (i.Dose / 100) * i.Prato.Kcal;
@@ -174,7 +172,6 @@ namespace HealthyProject.Controllers
                             countergordura += (i.Dose / 100) * i.Prato.Gordura;
                             counterhc += (i.Dose / 100) * i.Prato.HidCarbono;
                         }
-                        db.RegistoDiarios.Add(registo);
                         refeico.RegistoID = registo.RegistoID;
                         db.Refeicoes.Add(refeico);
                         db.SaveChanges();
