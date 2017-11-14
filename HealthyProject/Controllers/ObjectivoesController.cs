@@ -45,34 +45,32 @@ namespace HealthyProject.Controllers
                 {
                     delta -= 7;
                 }
-                
+
                 List<DataPoint> datapoints = new List<DataPoint> { };
                 List<DataPoint> intake = new List<DataPoint> { };
                 while (delta <= 0)
                 {
-                    
                     var day = today.AddDays(delta);
                     var registo = db.RegistoDiarios.FirstOrDefault(c => c.Objectivo.UserID == userId && c.Data == day);
-                    SqlParameter RegistoPratos = new SqlParameter("@RegistoID", registo.RegistoID);
-                    IList<SumPratos_Result> registoPratos = db.Database.SqlQuery<SumPratos_Result>("SumPratos @RegistoID", RegistoPratos).ToList();
-                    SqlParameter RegistoIngredientes = new SqlParameter("@RegistoID", registo.RegistoID);
-                    IList<SumIngredientes_Result> registoIngredientes = db.Database.SqlQuery<SumIngredientes_Result>("SumIngredientes @RegistoID", RegistoIngredientes).ToList();
-                    SqlParameter RegistoBebidas = new SqlParameter("@RegistoID", registo.RegistoID);
-                    IList<SumBebidas_Result> registoBebidas = db.Database.SqlQuery<SumBebidas_Result>("SumBebidas @RegistoID", RegistoBebidas).ToList();
-                    RegistoDiario registado = new RegistoDiario()
+                    if (registo != null)
                     {
-                        Total_Kcal = (double)(registoBebidas[0].Kcal + registoIngredientes[0].Kcal + registoPratos[0].Kcal)
-                    };
-                    var dailyMeal = refeicoes.FirstOrDefault(p => p.Data == day);
-                    if (dailyMeal == null)
-                    {
-                        datapoints.Add(new DataPoint(counter, null, day.ToString("dddd")));
+                        SqlParameter RegistoPratos = new SqlParameter("@RegistoID", registo.RegistoID);
+                        IList<SumPratos_Result> registoPratos = db.Database.SqlQuery<SumPratos_Result>("SumPratos @RegistoID", RegistoPratos).ToList();
+                        SqlParameter RegistoIngredientes = new SqlParameter("@RegistoID", registo.RegistoID);
+                        IList<SumIngredientes_Result> registoIngredientes = db.Database.SqlQuery<SumIngredientes_Result>("SumIngredientes @RegistoID", RegistoIngredientes).ToList();
+                        SqlParameter RegistoBebidas = new SqlParameter("@RegistoID", registo.RegistoID);
+                        IList<SumBebidas_Result> registoBebidas = db.Database.SqlQuery<SumBebidas_Result>("SumBebidas @RegistoID", RegistoBebidas).ToList();
+                        RegistoDiario registado = new RegistoDiario()
+                        {
+                            Total_Kcal = (double)(registoBebidas[0].Kcal + registoIngredientes[0].Kcal + registoPratos[0].Kcal)
+                        };
+                        datapoints.Add(new DataPoint(counter, registado.Total_Kcal, day.ToString("dddd")));
                         intake.Add(new DataPoint(counter, objectivo.Intake_diarioR, day.ToString("dddd")));
                         counter++;
                     }
                     else
                     {
-                        datapoints.Add(new DataPoint(counter, registado.Total_Kcal, day.ToString("dddd")));
+                        datapoints.Add(new DataPoint(counter, null, day.ToString("dddd")));
                         intake.Add(new DataPoint(counter, objectivo.Intake_diarioR, day.ToString("dddd")));
                         counter++;
                     }
@@ -191,7 +189,7 @@ namespace HealthyProject.Controllers
             {
                 if (objectivo.Data_inicio > DateTime.Now)
                 {
-                    if(refeico == null)
+                    if (refeico == null)
                     {
                         ViewBag.UserGuide2 = "Sem refeicoes";
                     }
@@ -368,7 +366,7 @@ namespace HealthyProject.Controllers
             }
             if (actual == null)
             {
-                if(objectivo == null)
+                if (objectivo == null)
                 {
                     ViewBag.UserGuide = "Primeiro Objectivo";
                 }
@@ -409,7 +407,7 @@ namespace HealthyProject.Controllers
                 var userId = Convert.ToInt32(User.Identity.GetUserId());
                 var objectivoes = db.Objectivoes.FirstOrDefault(c => c.UserID == userId);
                 int counter = 0;
-                if(objectivoes == null)
+                if (objectivoes == null)
                 {
                     counter++;
                 }
@@ -488,7 +486,7 @@ namespace HealthyProject.Controllers
                     }
                     db.Objectivoes.Add(objectivo);
                     db.SaveChanges();
-                    if(counter == 2)
+                    if (counter == 2)
                     {
                         TempData["Userguide"] = "Primeiro objectivo";
                     }
