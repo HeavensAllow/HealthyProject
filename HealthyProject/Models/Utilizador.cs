@@ -11,14 +11,9 @@ namespace HealthyProject.Models
 {
     using System;
     using System.Collections.Generic;
-    using HealthyProject.Models.Metadata;
-    using System.ComponentModel.DataAnnotations;
-
-   
-   
+    
     public partial class Utilizador
     {
-
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public Utilizador()
         {

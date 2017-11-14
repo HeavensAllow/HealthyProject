@@ -514,7 +514,25 @@
         <Function Name="a" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="ObjectivoID" Type="int" Mode="In" />
         </Function>
+        <Function Name="CounterBebidas" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="RefeicaoID" Type="int" Mode="In" />
+        </Function>
         <Function Name="CounterInfoRefeicao" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="RegistoID" Type="int" Mode="In" />
+        </Function>
+        <Function Name="CounterIngredientes" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="RefeicaoID" Type="int" Mode="In" />
+        </Function>
+        <Function Name="CounterPratos" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="RefeicaoID" Type="int" Mode="In" />
+        </Function>
+        <Function Name="SumBebidas" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="RegistoID" Type="int" Mode="In" />
+        </Function>
+        <Function Name="SumIngredientes" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="RegistoID" Type="int" Mode="In" />
+        </Function>
+        <Function Name="SumPratos" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="RegistoID" Type="int" Mode="In" />
         </Function>
         <Function Name="Top5" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
@@ -743,7 +761,25 @@
           <Parameter Name="ObjectivoID" Mode="In" Type="Int32" />
           </FunctionImport>
           <FunctionImport Name="CounterInfoRefeicao" ReturnType="Collection(HealthyModel.CounterInfoRefeicao_Result)">
-            <Parameter Name="RegistoID" Mode="In" Type="Int32" />
+          <Parameter Name="RegistoID" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="CounterBebidas" ReturnType="Collection(HealthyModel.CounterBebidas_Result)">
+          <Parameter Name="RefeicaoID" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="CounterIngredientes" ReturnType="Collection(HealthyModel.CounterIngredientes_Result)">
+          <Parameter Name="RefeicaoID" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="CounterPratos" ReturnType="Collection(HealthyModel.CounterPratos_Result)">
+          <Parameter Name="RefeicaoID" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="SumBebidas" ReturnType="Collection(HealthyModel.SumBebidas_Result)">
+          <Parameter Name="RegistoID" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="SumIngredientes" ReturnType="Collection(HealthyModel.SumIngredientes_Result)">
+          <Parameter Name="RegistoID" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="SumPratos" ReturnType="Collection(HealthyModel.SumPratos_Result)">
+          <Parameter Name="RegistoID" Mode="In" Type="Int32" />
           </FunctionImport>
         </EntityContainer>
         <ComplexType Name="Top5_Result">
@@ -1278,6 +1314,48 @@
           <Property Type="Double" Name="Hidratos" Nullable="true" />
           <Property Type="Double" Name="Acucar" Nullable="true" />
         </ComplexType>
+        <ComplexType Name="CounterBebidas_Result">
+          <Property Type="Double" Name="Kcal" Nullable="true" />
+          <Property Type="Double" Name="Proteinas" Nullable="true" />
+          <Property Type="Double" Name="Gordura" Nullable="true" />
+          <Property Type="Double" Name="Hidratos" Nullable="true" />
+          <Property Type="Double" Name="Acucar" Nullable="true" />
+        </ComplexType>
+        <ComplexType Name="CounterIngredientes_Result">
+          <Property Type="Double" Name="Kcal" Nullable="true" />
+          <Property Type="Double" Name="Proteinas" Nullable="true" />
+          <Property Type="Double" Name="Gordura" Nullable="true" />
+          <Property Type="Double" Name="Hidratos" Nullable="true" />
+          <Property Type="Double" Name="Acucar" Nullable="true" />
+        </ComplexType>
+        <ComplexType Name="CounterPratos_Result">
+          <Property Type="Double" Name="Kcal" Nullable="true" />
+          <Property Type="Double" Name="Proteinas" Nullable="true" />
+          <Property Type="Double" Name="Gordura" Nullable="true" />
+          <Property Type="Double" Name="Hidratos" Nullable="true" />
+          <Property Type="Double" Name="Acucar" Nullable="true" />
+        </ComplexType>
+        <ComplexType Name="SumBebidas_Result">
+          <Property Type="Double" Name="Kcal" Nullable="true" />
+          <Property Type="Double" Name="Proteinas" Nullable="true" />
+          <Property Type="Double" Name="Gordura" Nullable="true" />
+          <Property Type="Double" Name="Hidratos" Nullable="true" />
+          <Property Type="Double" Name="Acucar" Nullable="true" />
+        </ComplexType>
+        <ComplexType Name="SumIngredientes_Result">
+          <Property Type="Double" Name="Kcal" Nullable="true" />
+          <Property Type="Double" Name="Proteinas" Nullable="true" />
+          <Property Type="Double" Name="Gordura" Nullable="true" />
+          <Property Type="Double" Name="Hidratos" Nullable="true" />
+          <Property Type="Double" Name="Acucar" Nullable="true" />
+        </ComplexType>
+        <ComplexType Name="SumPratos_Result">
+          <Property Type="Double" Name="Kcal" Nullable="true" />
+          <Property Type="Double" Name="Proteinas" Nullable="true" />
+          <Property Type="Double" Name="Gordura" Nullable="true" />
+          <Property Type="Double" Name="Hidratos" Nullable="true" />
+          <Property Type="Double" Name="Acucar" Nullable="true" />
+        </ComplexType>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -1567,6 +1645,72 @@
           <FunctionImportMapping FunctionImportName="CounterInfoRefeicao" FunctionName="HealthyModel.Store.CounterInfoRefeicao">
             <ResultMapping>
               <ComplexTypeMapping TypeName="HealthyModel.CounterInfoRefeicao_Result">
+                <ScalarProperty Name="Kcal" ColumnName="Kcal" />
+                <ScalarProperty Name="Proteinas" ColumnName="Proteinas" />
+                <ScalarProperty Name="Gordura" ColumnName="Gordura" />
+                <ScalarProperty Name="Hidratos" ColumnName="Hidratos" />
+                <ScalarProperty Name="Acucar" ColumnName="Acucar" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="CounterBebidas" FunctionName="HealthyModel.Store.CounterBebidas">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="HealthyModel.CounterBebidas_Result">
+                <ScalarProperty Name="Kcal" ColumnName="Kcal" />
+                <ScalarProperty Name="Proteinas" ColumnName="Proteinas" />
+                <ScalarProperty Name="Gordura" ColumnName="Gordura" />
+                <ScalarProperty Name="Hidratos" ColumnName="Hidratos" />
+                <ScalarProperty Name="Acucar" ColumnName="Acucar" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="CounterIngredientes" FunctionName="HealthyModel.Store.CounterIngredientes">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="HealthyModel.CounterIngredientes_Result">
+                <ScalarProperty Name="Kcal" ColumnName="Kcal" />
+                <ScalarProperty Name="Proteinas" ColumnName="Proteinas" />
+                <ScalarProperty Name="Gordura" ColumnName="Gordura" />
+                <ScalarProperty Name="Hidratos" ColumnName="Hidratos" />
+                <ScalarProperty Name="Acucar" ColumnName="Acucar" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="CounterPratos" FunctionName="HealthyModel.Store.CounterPratos">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="HealthyModel.CounterPratos_Result">
+                <ScalarProperty Name="Kcal" ColumnName="Kcal" />
+                <ScalarProperty Name="Proteinas" ColumnName="Proteinas" />
+                <ScalarProperty Name="Gordura" ColumnName="Gordura" />
+                <ScalarProperty Name="Hidratos" ColumnName="Hidratos" />
+                <ScalarProperty Name="Acucar" ColumnName="Acucar" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="SumBebidas" FunctionName="HealthyModel.Store.SumBebidas">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="HealthyModel.SumBebidas_Result">
+                <ScalarProperty Name="Kcal" ColumnName="Kcal" />
+                <ScalarProperty Name="Proteinas" ColumnName="Proteinas" />
+                <ScalarProperty Name="Gordura" ColumnName="Gordura" />
+                <ScalarProperty Name="Hidratos" ColumnName="Hidratos" />
+                <ScalarProperty Name="Acucar" ColumnName="Acucar" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="SumIngredientes" FunctionName="HealthyModel.Store.SumIngredientes">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="HealthyModel.SumIngredientes_Result">
+                <ScalarProperty Name="Kcal" ColumnName="Kcal" />
+                <ScalarProperty Name="Proteinas" ColumnName="Proteinas" />
+                <ScalarProperty Name="Gordura" ColumnName="Gordura" />
+                <ScalarProperty Name="Hidratos" ColumnName="Hidratos" />
+                <ScalarProperty Name="Acucar" ColumnName="Acucar" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="SumPratos" FunctionName="HealthyModel.Store.SumPratos">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="HealthyModel.SumPratos_Result">
                 <ScalarProperty Name="Kcal" ColumnName="Kcal" />
                 <ScalarProperty Name="Proteinas" ColumnName="Proteinas" />
                 <ScalarProperty Name="Gordura" ColumnName="Gordura" />

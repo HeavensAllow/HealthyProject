@@ -53,8 +53,16 @@ namespace HealthyProject.Controllers
                     
                     var day = today.AddDays(delta);
                     var registo = db.RegistoDiarios.FirstOrDefault(c => c.Objectivo.UserID == userId && c.Data == day);
-                    SqlParameter RegistoId = new SqlParameter("@RegistoID", registo.RegistoID);
-                    IList<CounterInfoRefeicao_Result> registado = db.Database.SqlQuery<CounterInfoRefeicao_Result>("CounterInfoRefeicao @RegistoID", RegistoId).ToList();
+                    SqlParameter RegistoPratos = new SqlParameter("@RegistoID", registo.RegistoID);
+                    IList<SumPratos_Result> registoPratos = db.Database.SqlQuery<SumPratos_Result>("SumPratos @RegistoID", RegistoPratos).ToList();
+                    SqlParameter RegistoIngredientes = new SqlParameter("@RegistoID", registo.RegistoID);
+                    IList<SumIngredientes_Result> registoIngredientes = db.Database.SqlQuery<SumIngredientes_Result>("SumIngredientes @RegistoID", RegistoIngredientes).ToList();
+                    SqlParameter RegistoBebidas = new SqlParameter("@RegistoID", registo.RegistoID);
+                    IList<SumBebidas_Result> registoBebidas = db.Database.SqlQuery<SumBebidas_Result>("SumBebidas @RegistoID", RegistoBebidas).ToList();
+                    RegistoDiario registado = new RegistoDiario()
+                    {
+                        Total_Kcal = (double)(registoBebidas[0].Kcal + registoIngredientes[0].Kcal + registoPratos[0].Kcal)
+                    };
                     var dailyMeal = refeicoes.FirstOrDefault(p => p.Data == day);
                     if (dailyMeal == null)
                     {
@@ -64,7 +72,7 @@ namespace HealthyProject.Controllers
                     }
                     else
                     {
-                        datapoints.Add(new DataPoint(counter, registado[0].Kcal, day.ToString("dddd")));
+                        datapoints.Add(new DataPoint(counter, registado.Total_Kcal, day.ToString("dddd")));
                         intake.Add(new DataPoint(counter, objectivo.Intake_diarioR, day.ToString("dddd")));
                         counter++;
                     }
