@@ -238,6 +238,7 @@
     <Compile Include="Models\Comentario.cs">
       <DependentUpon>Database.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\Contas.cs" />
     <Compile Include="Models\CounterBebidas_Result.cs">
       <DependentUpon>Database.tt</DependentUpon>
     </Compile>

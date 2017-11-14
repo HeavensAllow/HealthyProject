@@ -19,12 +19,40 @@ namespace HealthyProject.Controllers
         // GET: Refeicoes
         public ActionResult Index(DateTime? dateInput)
         {
+            List<Contas> muitaComida = new List<Contas>();
             var userId = Convert.ToInt32(User.Identity.GetUserId());
             var objectivo = db.Objectivoes.FirstOrDefault(c => c.UserID == userId);
             var refeicao = db.Refeicoes.FirstOrDefault(c => c.RegistoDiario.Objectivo.UserID == userId);
             var prato = db.RefeicaoPratos.FirstOrDefault(c => c.Refeico.RegistoDiario.Objectivo.UserID == userId);
             if (dateInput == null)
             {
+                var registo = db.RegistoDiarios.FirstOrDefault(c => c.Objectivo.UserID == userId && c.Data == DateTime.Today);
+                if(registo != null)
+                {
+                    foreach (var tipo in registo.Refeicoes.OrderBy(c => c.RefeicaoID))
+                    {
+                        Contas comida = new Contas();
+
+                        SqlParameter RegistoPratos = new SqlParameter("@RefeicaoID", tipo.RefeicaoID);
+                        IList<CounterPratos_Result> registoPratos = db.Database.SqlQuery<CounterPratos_Result>("CounterPratos @RefeicaoID", RegistoPratos).ToList();
+                        SqlParameter RegistoIngredientes = new SqlParameter("@RefeicaoID", tipo.RefeicaoID);
+                        IList<CounterIngredientes_Result> registoIngredientes = db.Database.SqlQuery<CounterIngredientes_Result>("CounterIngredientes @RefeicaoID", RegistoIngredientes).ToList();
+                        SqlParameter RegistoBebidas = new SqlParameter("@RefeicaoID", tipo.RefeicaoID);
+                        IList<CounterBebidas_Result> registoBebidas = db.Database.SqlQuery<CounterBebidas_Result>("CounterBebidas @RefeicaoID", RegistoBebidas).ToList();
+
+                        comida.tipo = tipo.Tipo;
+                        comida.listaBebidas = tipo.RefeicaoBebidas;
+                        comida.listaPratos = tipo.RefeicaoPratos;
+                        comida.listaIngredientes = tipo.RefeicaoIngredientes;
+                        comida.refeicaoID = tipo.RefeicaoID;
+
+                        comida.total_kcal = (double)(registoBebidas[0].Kcal + registoIngredientes[0].Kcal + registoPratos[0].Kcal);
+                        comida.total_proteinas = (double)(registoBebidas[0].Proteinas + registoIngredientes[0].Proteinas + registoPratos[0].Proteinas);
+                        comida.total_gordura = (double)(registoBebidas[0].Gordura + registoIngredientes[0].Gordura + registoPratos[0].Gordura);
+                        comida.total_hidratos = (double)(registoBebidas[0].Hidratos + registoIngredientes[0].Hidratos + registoPratos[0].Hidratos);
+                        muitaComida.Add(comida);
+                    }
+                }
                 if (objectivo != null)
                 {
                     if (refeicao == null)
@@ -36,12 +64,39 @@ namespace HealthyProject.Controllers
                         ViewBag.UserGuide2 = "Next Step";
                     }
                 }
-                var refeicoes = db.Refeicoes.Include(r => r.RegistoDiario).Where(d => d.Data == DateTime.Today && d.RegistoDiario.Objectivo.UserID == userId);
-                return View(refeicoes);
+
+                return View(muitaComida);
 
             }
             else
             {
+                var registo = db.RegistoDiarios.FirstOrDefault(c => c.Objectivo.UserID == userId && c.Data == dateInput);
+                if (registo != null)
+                {
+                    foreach (var tipo in registo.Refeicoes.OrderBy(c => c.RefeicaoID))
+                    {
+                        Contas comida = new Contas();
+                        SqlParameter RegistoPratos = new SqlParameter("@RefeicaoID", tipo.RefeicaoID);
+                        IList<CounterPratos_Result> registoPratos = db.Database.SqlQuery<CounterPratos_Result>("CounterPratos @RefeicaoID", RegistoPratos).ToList();
+                        SqlParameter RegistoIngredientes = new SqlParameter("@RefeicaoID", tipo.RefeicaoID);
+                        IList<CounterIngredientes_Result> registoIngredientes = db.Database.SqlQuery<CounterIngredientes_Result>("CounterIngredientes @RefeicaoID", RegistoIngredientes).ToList();
+                        SqlParameter RegistoBebidas = new SqlParameter("@RefeicaoID", tipo.RefeicaoID);
+                        IList<CounterBebidas_Result> registoBebidas = db.Database.SqlQuery<CounterBebidas_Result>("CounterBebidas @RefeicaoID", RegistoBebidas).ToList();
+
+                        comida.tipo = tipo.Tipo;
+                        comida.listaBebidas = tipo.RefeicaoBebidas;
+                        comida.listaPratos = tipo.RefeicaoPratos;
+                        comida.listaIngredientes = tipo.RefeicaoIngredientes;
+                        comida.refeicaoID = tipo.RefeicaoID;
+
+                        comida.total_kcal = (double)(registoBebidas[0].Kcal + registoIngredientes[0].Kcal + registoPratos[0].Kcal);
+                        comida.total_proteinas = (double)(registoBebidas[0].Proteinas + registoIngredientes[0].Proteinas + registoPratos[0].Proteinas);
+                        comida.total_gordura = (double)(registoBebidas[0].Gordura + registoIngredientes[0].Gordura + registoPratos[0].Gordura);
+                        comida.total_hidratos = (double)(registoBebidas[0].Hidratos + registoIngredientes[0].Hidratos + registoPratos[0].Hidratos);
+                        muitaComida.Add(comida);
+
+                    }
+                }
                 if (objectivo != null)
                 {
                     if (refeicao == null)
@@ -53,8 +108,7 @@ namespace HealthyProject.Controllers
                         ViewBag.UserGuide2 = "Next Step";
                     }
                 }
-                var refeicoes = db.Refeicoes.Include(r => r.RegistoDiario).Where(d => d.Data == dateInput && d.RegistoDiario.Objectivo.UserID == userId);
-                return View(refeicoes);
+                return View(muitaComida);
             }
         }
 
