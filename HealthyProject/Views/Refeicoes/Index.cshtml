@@ -1,4 +1,4 @@
-﻿@model IEnumerable<HealthyProject.Models.Refeico>
+﻿@model IEnumerable<HealthyProject.Models.Contas>
 
 @{
     ViewBag.Title = "Index";
@@ -107,40 +107,40 @@ using (Html.BeginForm("Index", "Refeicoes"))
             <td>
                 @*@Html.DisplayFor(modelItem => refeicao.RefeicaoID)<br />
                     @Html.DisplayFor(modelItem => refeicao.Data)<br /> so para shit*@
-                @Html.DisplayFor(modelItem => refeicao.Tipo)
-                <p style="font-size:70%; color:red">@Html.ActionLink("Editar refeição", "Edit", new { id = refeicao.RefeicaoID })</p>
+                @Html.DisplayFor(modelItem => refeicao.tipo)
+                <p style="font-size:70%; color:red">@Html.ActionLink("Editar refeição", "Edit", new { id = refeicao.refeicaoID })</p>
             </td>
             <td>
-                @foreach (var prato in refeicao.RefeicaoPratos)
+                @foreach (var prato in refeicao.listaPratos)
                 {
                     <p>
                         @prato.Prato.Nome <span>   </span> @prato.Dose <span> gr</span>
-                        <span style="font-size:70%">@Html.ActionLink("Eliminar", "Delete", "RefeicaoPratoes", new { RefeicaoID = refeicao.RefeicaoID, PratoID = prato.PratoID }, null)</span>
+                        <span style="font-size:70%">@Html.ActionLink("Eliminar", "Delete", "RefeicaoPratoes", new { RefeicaoID = refeicao.refeicaoID, PratoID = prato.PratoID }, null)</span>
                     </p>
                 }
-                @foreach (var ingrediente in refeicao.RefeicaoIngredientes)
+                @foreach (var ingrediente in refeicao.listaIngredientes)
                 {
                     <p>
                         @ingrediente.Ingrediente.Nome <span>   </span> @ingrediente.Quantidade <span> gr</span>
-                        <span style="font-size:70%">@Html.ActionLink("Eliminar", "Delete", "RefeicaoIngredientes", new { RefeicaoID = refeicao.RefeicaoID, IngredienteID = ingrediente.IngredienteID }, null)</span>
+                        <span style="font-size:70%">@Html.ActionLink("Eliminar", "Delete", "RefeicaoIngredientes", new { RefeicaoID = refeicao.refeicaoID, IngredienteID = ingrediente.IngredienteID }, null)</span>
                     </p>
                 }
-                @foreach (var bebida in refeicao.RefeicaoBebidas)
+                @foreach (var bebida in refeicao.listaBebidas)
                 {
                     <p>
                         @bebida.Bebida.Nome <span>   </span> @bebida.Quantidade <span> ml</span>
-                        <span style="font-size:70%">@Html.ActionLink("Eliminar", "Delete", "RefeicaoBebidas", new { RefeicaoID = refeicao.RefeicaoID, BebidaID = bebida.BebidaID }, null)</span>
+                        <span style="font-size:70%">@Html.ActionLink("Eliminar", "Delete", "RefeicaoBebidas", new { RefeicaoID = refeicao.refeicaoID, BebidaID = bebida.BebidaID }, null)</span>
                     </p>
                 }
             </td>
-            <td>@ViewBag.KcalInfo</td>
-            <td></td>
-            <td></td>
-            <td></td>
+            <td>@refeicao.total_kcal</td>
+            <td>@refeicao.total_proteinas</td>
+            <td>@refeicao.total_hidratos</td>
+            <td>@refeicao.total_gordura</td>
             <td>
-                <p style="font-size:80%">@Html.ActionLink("Adicionar Prato", "Create", "RefeicaoPratoes", new { RefeicaoID = refeicao.RefeicaoID }, null)</p>
-                <p style="font-size:80%">@Html.ActionLink("Adicionar Ingrediente", "Create", "RefeicaoIngredientes", new { RefeicaoID = refeicao.RefeicaoID }, null)</p>
-                <p style="font-size:80%">@Html.ActionLink("Adicionar Bebida", "Create", "RefeicaoBebidas", new { RefeicaoID = refeicao.RefeicaoID }, null)</p>
+                <p style="font-size:80%">@Html.ActionLink("Adicionar Prato", "Create", "RefeicaoPratoes", new { RefeicaoID = refeicao.refeicaoID }, null)</p>
+                <p style="font-size:80%">@Html.ActionLink("Adicionar Ingrediente", "Create", "RefeicaoIngredientes", new { RefeicaoID = refeicao.refeicaoID }, null)</p>
+                <p style="font-size:80%">@Html.ActionLink("Adicionar Bebida", "Create", "RefeicaoBebidas", new { RefeicaoID = refeicao.refeicaoID }, null)</p>
             </td>
         </tr>
         }

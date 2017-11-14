@@ -91,9 +91,19 @@ namespace HealthyProject.Controllers
                 ViewBag.IMath = JsonConvert.SerializeObject(objectivo.Intake_diarioR);
                 List<DataPoint> registod = new List<DataPoint> { };
                 counter = 0;
-                foreach (RegistoDiario d in refeicoes)
+                foreach (RegistoDiario d in refeicoes.OrderBy(c => c.Data))
                 {
-                    registod.Add(new DataPoint(counter, d.Total_Kcal, d.Data.ToString("dd-MM-yyyy")));
+                    SqlParameter RegistoPratos = new SqlParameter("@RegistoID", d.RegistoID);
+                    IList<SumPratos_Result> registoPratos = db.Database.SqlQuery<SumPratos_Result>("SumPratos @RegistoID", RegistoPratos).ToList();
+                    SqlParameter RegistoIngredientes = new SqlParameter("@RegistoID", d.RegistoID);
+                    IList<SumIngredientes_Result> registoIngredientes = db.Database.SqlQuery<SumIngredientes_Result>("SumIngredientes @RegistoID", RegistoIngredientes).ToList();
+                    SqlParameter RegistoBebidas = new SqlParameter("@RegistoID", d.RegistoID);
+                    IList<SumBebidas_Result> registoBebidas = db.Database.SqlQuery<SumBebidas_Result>("SumBebidas @RegistoID", RegistoBebidas).ToList();
+                    RegistoDiario registado = new RegistoDiario()
+                    {
+                        Total_Kcal = (double)(registoBebidas[0].Kcal + registoIngredientes[0].Kcal + registoPratos[0].Kcal)
+                    };
+                    registod.Add(new DataPoint(counter, registado.Total_Kcal, d.Data.ToString("dd-MM-yyyy")));
                     counter++;
                 }
                 if (registod.Count() > 0)
@@ -162,7 +172,7 @@ namespace HealthyProject.Controllers
                 }
                 if (inicio != null && fim == null)
                 {
-                    counter += inicio.Subtract(DateTime.Today).TotalDays;
+                    counter += DateTime.Today.Subtract(inicio).TotalDays;
                 }
             }
             dias.Add(new DataPoint(0, counter, "Dias com objectivos"));
