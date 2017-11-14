@@ -42,7 +42,7 @@ textarea {
     background-size: cover; /* faz com que a imagem se adeque ao tamanho do botão */
     height: 45px;
     width: 45px;
-    border-radius: 25px; /* faz com que os botões tenham cantos curvos */
+    /*border-radius: 25px; /* faz com que os botões tenham cantos curvos */
 }
 .btn1 {
     background: lightcoral;
