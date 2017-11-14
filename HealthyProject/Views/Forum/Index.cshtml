@@ -1,7 +1,7 @@
 ﻿@model IEnumerable<HealthyProject.Models.Categoria>
-</br>
-</br>
-</br>
+<br />
+<br />
+<br />
 @{
     ViewBag.Title = "Forum";
 }
@@ -34,7 +34,7 @@
                     @Html.ActionLink(subcategoria.Nome, "Subcategoria", "Forum", new { id = subcategoria.SubcategoriaID }, null)
                 </td>
                 <td>
-                    <img src="~/Content/Images/Forum/@(subcategoria.SubcategoriaID).jpg" style="height:50px; padding-right: 300px; width:60; text-align:left" />
+                    <img src="~/Content/Images/Forum/@(subcategoria.SubcategoriaID).jpg" style="height:50px; padding-right: 300px; width:60px; text-align:left" />
                 </td>
             </tr>
         }

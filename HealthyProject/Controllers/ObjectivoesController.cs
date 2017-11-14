@@ -34,7 +34,7 @@ namespace HealthyProject.Controllers
             var refeicoes = db.RegistoDiarios.Include(i => i.Objectivo).Where(o => o.Objectivo.ObjectivoID == objectivo.ObjectivoID);
             RegistoPeso peso = db.RegistoPesoes.FirstOrDefault(o => o.User_ID == userId && o.Data == DateTime.Today);
             var refeico = db.Refeicoes.FirstOrDefault(c => c.RegistoDiario.Objectivo.UserID == userId);
-            var today = DateTime.Now;
+            var today = DateTime.Today;
             double counter = 0;
             double counter2 = 0;
             if (objectivo != null)
@@ -45,11 +45,16 @@ namespace HealthyProject.Controllers
                 {
                     delta -= 7;
                 }
+                
                 List<DataPoint> datapoints = new List<DataPoint> { };
                 List<DataPoint> intake = new List<DataPoint> { };
                 while (delta <= 0)
                 {
+                    
                     var day = today.AddDays(delta);
+                    var registo = db.RegistoDiarios.FirstOrDefault(c => c.Objectivo.UserID == userId && c.Data == day);
+                    SqlParameter RegistoId = new SqlParameter("@RegistoID", registo.RegistoID);
+                    IList<CounterInfoRefeicao_Result> registado = db.Database.SqlQuery<CounterInfoRefeicao_Result>("CounterInfoRefeicao @RegistoID", RegistoId).ToList();
                     var dailyMeal = refeicoes.FirstOrDefault(p => p.Data == day);
                     if (dailyMeal == null)
                     {
@@ -59,7 +64,7 @@ namespace HealthyProject.Controllers
                     }
                     else
                     {
-                        datapoints.Add(new DataPoint(counter, dailyMeal.Total_Kcal, day.ToString("dddd")));
+                        datapoints.Add(new DataPoint(counter, registado[0].Kcal, day.ToString("dddd")));
                         intake.Add(new DataPoint(counter, objectivo.Intake_diarioR, day.ToString("dddd")));
                         counter++;
                     }

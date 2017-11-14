@@ -511,6 +511,12 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Function Name="a" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="ObjectivoID" Type="int" Mode="In" />
+        </Function>
+        <Function Name="CounterInfoRefeicao" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="RegistoID" Type="int" Mode="In" />
+        </Function>
         <Function Name="Top5" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="UserID" Type="int" Mode="In" />
         </Function>
@@ -733,6 +739,12 @@
             <End Role="Ingrediente" EntitySet="Ingredientes" />
             <End Role="RefeicaoIngrediente" EntitySet="RefeicaoIngredientes" />
           </AssociationSet>
+          <FunctionImport Name="a" ReturnType="Collection(HealthyModel.a_Result)">
+          <Parameter Name="ObjectivoID" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="CounterInfoRefeicao" ReturnType="Collection(HealthyModel.CounterInfoRefeicao_Result)">
+            <Parameter Name="RegistoID" Mode="In" Type="Int32" />
+          </FunctionImport>
         </EntityContainer>
         <ComplexType Name="Top5_Result">
           <Property Type="Int32" Name="PratoID" Nullable="false" />
@@ -1252,6 +1264,20 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <ComplexType Name="a_Result">
+          <Property Type="Double" Name="Kcal" Nullable="true" />
+          <Property Type="Double" Name="Proteinas" Nullable="true" />
+          <Property Type="Double" Name="Gordura" Nullable="true" />
+          <Property Type="Double" Name="Hidratos" Nullable="true" />
+          <Property Type="Double" Name="Acucar" Nullable="true" />
+        </ComplexType>
+        <ComplexType Name="CounterInfoRefeicao_Result">
+          <Property Type="Double" Name="Kcal" Nullable="true" />
+          <Property Type="Double" Name="Proteinas" Nullable="true" />
+          <Property Type="Double" Name="Gordura" Nullable="true" />
+          <Property Type="Double" Name="Hidratos" Nullable="true" />
+          <Property Type="Double" Name="Acucar" Nullable="true" />
+        </ComplexType>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -1527,6 +1553,28 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
+          <FunctionImportMapping FunctionImportName="a" FunctionName="HealthyModel.Store.a">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="HealthyModel.a_Result">
+                <ScalarProperty Name="Kcal" ColumnName="Kcal" />
+                <ScalarProperty Name="Proteinas" ColumnName="Proteinas" />
+                <ScalarProperty Name="Gordura" ColumnName="Gordura" />
+                <ScalarProperty Name="Hidratos" ColumnName="Hidratos" />
+                <ScalarProperty Name="Acucar" ColumnName="Acucar" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="CounterInfoRefeicao" FunctionName="HealthyModel.Store.CounterInfoRefeicao">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="HealthyModel.CounterInfoRefeicao_Result">
+                <ScalarProperty Name="Kcal" ColumnName="Kcal" />
+                <ScalarProperty Name="Proteinas" ColumnName="Proteinas" />
+                <ScalarProperty Name="Gordura" ColumnName="Gordura" />
+                <ScalarProperty Name="Hidratos" ColumnName="Hidratos" />
+                <ScalarProperty Name="Acucar" ColumnName="Acucar" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
           </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>

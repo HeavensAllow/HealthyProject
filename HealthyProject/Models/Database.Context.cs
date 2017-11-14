@@ -58,5 +58,23 @@ namespace HealthyProject.Models
     
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<Top5_Result>("Top5", userIDParameter);
         }
+    
+        public virtual ObjectResult<a_Result> a(Nullable<int> objectivoID)
+        {
+            var objectivoIDParameter = objectivoID.HasValue ?
+                new ObjectParameter("ObjectivoID", objectivoID) :
+                new ObjectParameter("ObjectivoID", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<a_Result>("a", objectivoIDParameter);
+        }
+    
+        public virtual ObjectResult<CounterInfoRefeicao_Result> CounterInfoRefeicao(Nullable<int> registoID)
+        {
+            var registoIDParameter = registoID.HasValue ?
+                new ObjectParameter("RegistoID", registoID) :
+                new ObjectParameter("RegistoID", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<CounterInfoRefeicao_Result>("CounterInfoRefeicao", registoIDParameter);
+        }
     }
 }
