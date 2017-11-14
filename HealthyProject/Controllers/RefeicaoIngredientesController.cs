@@ -36,51 +36,51 @@ namespace HealthyProject.Controllers
             return View(refeicaoIngrediente);
         }
 
-        // GET: RefeicaoIngredientes/Create
-        //public ActionResult Create(int RefeicaoID)
-        //{
-        //    var Refeicao = db.Refeicoes.FirstOrDefault(r => r.RefeicaoID == RefeicaoID);
-        //    ViewBag.Refeicao = Refeicao;
-
-        //    ViewBag.Categoria = new SelectList(db.Ingredientes.Distinct().OrderBy(c => c.Nome), "Categoria", "Categoria");
-        //    ViewBag.IngredienteID = new SelectList(db.Ingredientes.OrderBy(i => i.Nome), "IngredientesID", "Nome");
-        //    ViewBag.RefeicaoID = new SelectList(db.Refeicoes, "RefeicaoID", "Tipo");
-        //    return View();
-        //}
-
+        //GET: RefeicaoIngredientes/Create
         public ActionResult Create(int RefeicaoID)
         {
             var Refeicao = db.Refeicoes.FirstOrDefault(r => r.RefeicaoID == RefeicaoID);
             ViewBag.Refeicao = Refeicao;
 
-            var ingrediente = new RefeicaoIngrediente();
-            var queryCategoria = db.Ingredientes
-                 .OrderBy(c => c.Categoria)
-                 .Select(c => c.Categoria)
-                 .Distinct();
-            ingrediente.Categoria = new SelectList(queryCategoria);
-            ViewBag.Categoria = ingrediente.Categoria;
-
-            ingrediente.Ingredientes = new[] { new SelectListItem { Value = "", Text = "" } };
-            ViewBag.IngredienteID = ingrediente.Ingredientes;
-
+           // ViewBag.Categoria = new SelectList(db.Ingredientes.Distinct().OrderBy(c => c.Nome), "Categoria", "Categoria");
+            ViewBag.IngredienteID = new SelectList(db.Ingredientes.OrderBy(i => i.Nome), "IngredientesID", "Nome");
             ViewBag.RefeicaoID = new SelectList(db.Refeicoes, "RefeicaoID", "Tipo");
-
             return View();
         }
 
-        public ActionResult GetIngredientes(string categoria)
-        {
-            
-            var ingredientes = db.Ingredientes.Include(c => c.Categoria).Where(c => c.Categoria == categoria);
-            ViewBag.IngredienteID = new SelectList(db.Ingredientes.Where(c => c.Categoria == categoria).OrderBy(i => i.Nome), "IngredientesID", "Nome");
-           // List<SelectListItem> items = new List<SelectListItem>();
-           // items.Add(new SelectListItem() { Text = "Sub Item 1", Value = "1" });
-           // items.Add(new SelectListItem() { Text = "Sub Item 2", Value = "8" });
-           // you may replace the above code with data reading from database based on the id
+        //public ActionResult Create(int RefeicaoID)
+        //{
+        //    var Refeicao = db.Refeicoes.FirstOrDefault(r => r.RefeicaoID == RefeicaoID);
+        //    ViewBag.Refeicao = Refeicao;
 
-            return Json(ingredientes, JsonRequestBehavior.AllowGet);
-        }
+        //    var ingrediente = new RefeicaoIngrediente();
+        //    var queryCategoria = db.Ingredientes
+        //         .OrderBy(c => c.Categoria)
+        //         .Select(c => c.Categoria)
+        //         .Distinct();
+        //    ingrediente.Categoria = new SelectList(queryCategoria);
+        //    ViewBag.Categoria = ingrediente.Categoria;
+
+        //    ingrediente.Ingredientes = new[] { new SelectListItem { Value = "", Text = "" } };
+        //    ViewBag.IngredienteID = ingrediente.Ingredientes;
+
+        //    ViewBag.RefeicaoID = new SelectList(db.Refeicoes, "RefeicaoID", "Tipo");
+
+        //    return View();
+        //}
+
+        //public ActionResult GetIngredientes(string categoria)
+        //{
+
+        //    var ingredientes = db.Ingredientes.Include(c => c.Categoria).Where(c => c.Categoria == categoria);
+        //    ViewBag.IngredienteID = new SelectList(db.Ingredientes.Where(c => c.Categoria == categoria).OrderBy(i => i.Nome), "IngredientesID", "Nome");
+        //   // List<SelectListItem> items = new List<SelectListItem>();
+        //   // items.Add(new SelectListItem() { Text = "Sub Item 1", Value = "1" });
+        //   // items.Add(new SelectListItem() { Text = "Sub Item 2", Value = "8" });
+        //   // you may replace the above code with data reading from database based on the id
+
+        //    return Json(ingredientes, JsonRequestBehavior.AllowGet);
+        //}
 
         // POST: RefeicaoIngredientes/Create
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
