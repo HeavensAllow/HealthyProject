@@ -27,9 +27,10 @@ namespace HealthyProject.Models
         public Nullable<int> Peso_objectivo { get; set; }
         public Nullable<int> Intake_diarioR { get; set; }
         public Nullable<int> Intake_diarioA { get; set; }
+        public Nullable<int> Peso_Final { get; set; }
     
+        public virtual Utilizador Utilizador { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<RegistoDiario> RegistoDiarios { get; set; }
-        public virtual Utilizador Utilizador { get; set; }
     }
 }

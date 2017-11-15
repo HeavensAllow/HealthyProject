@@ -1,37 +1,70 @@
 ﻿@model HealthyProject.Models.Subcategoria
-
+<br />
+<br />
 @{
     ViewBag.Title = Model.Nome;
 }
 
 <h2>@Model.Nome</h2>
-
 <p>
-    @Html.ActionLink("Novo Post", "CreatePost", new { subcategoria = Model.SubcategoriaID })
+    @if (User.Identity.IsAuthenticated)
+    {
+
+        @* Se nao for a categoria Actualizacoes *@
+        if (!(Model.SubcategoriaID == 4) || User.IsInRole("Admin"))
+        {
+            @Html.ActionLink("Novo Post", "CreatePost", new { subcategoria = Model.SubcategoriaID })
+        }
+    }
 </p>
+
 <table class="table">
-    <tr>
+    <tr style="background-color:lightcoral">
         <th>
-            
         </th>
         <th>
-            Criado por
         </th>
         <th></th>
     </tr>
+    @if(Model.Posts.Count > 0)
+    {
+        foreach (var post in Model.Posts)
+        {
+      
+            <tr>
+                <td style="padding-top: 40px; font-size:larger; border-top: 1px solid white; border-bottom: 1px solid white; text-align:center; background-color:lightblue">
+                    @Html.ActionLink(post.Titulo, "Post", "Forum", new { id = post.PostID }, null)
+                </td>
+                <td style="background-color:lightgray">
+                    @if (post.AspNetUser.Utilizador.Genero == "M")
+                    {
+                        <img src="http://www.icone-png.com/png/54/53785.png" height="80" width="70" />
+                    }
+                    else
+                    {
+                        <img src="http://www.iconarchive.com/download/i47216/icons-land/vista-people/Office-Client-Female-Light.ico" height="80" width="70" />
+                    }
+                    @post.AspNetUser.Utilizador.Nome
+                </td>
 
-@foreach (var subcategoria in Model.Posts) {
-    <tr>
-        <td>
-            @Html.ActionLink(subcategoria.Titulo, "Post", "Forum", new { id = subcategoria.PostID }, null)
-        </td>
-        <td>
-            @subcategoria.Data
-            <br />
-            @subcategoria.AspNetUser.Utilizador.Nome
-                       
-        </td>
-    </tr>
-}
+                <td class="data" style="padding-top: 40px;background-color:lightgray">
+                    @post.Data
+                </td>
+            </tr>
+        }
+    }
+    else
+    {
+        <tr>
+            <td colspan="3" style="background-color:gainsboro; text-align:center">
+                <h3>
+                    Não há Posts disponíveis :(
+                </h3>
+            </td>
+        </tr>
+    }
 
 </table>
+<div>
+    @Html.ActionLink("Regressar", "Index")
+</div>

@@ -1,20 +1,42 @@
 ﻿@model IEnumerable<HealthyProject.Models.Categoria>
+<br />
+<br />
+<br />
 @{
     ViewBag.Title = "Forum";
 }
 
-<h2>Forum</h2>
-
-@foreach (var categoria in Model)
+@if (User.IsInRole("Admin"))
 {
-    <h3>
-        @Html.DisplayFor(modelItem => categoria.Nome)
-    </h3>
+    <div class="form-group row">
+        <div class="col-md-10">
+            @*<button class="mybtn"> @Html.ActionLink("Criar Categoria", "CreateCategoria", "Categorias")</button>*@
 
-    foreach (var subcategoria in categoria.Subcategorias)
-    {
-        <h5>
-            @Html.ActionLink(subcategoria.Nome,"Subcategoria","Forum",new { id = subcategoria.SubcategoriaID },null)
-        </h5>
-    }
+            @Html.ActionLink("Criar Categoria", "CreateCategoria", "Categorias",null,htmlAttributes:new {@class="mybtn"})
+
+            @Html.ActionLink("Criar Subcategoria", "CreateSubcategoria", "Subcategorias", null, htmlAttributes: new { @class = "mybtn" })
+        </div>
+    </div>
 }
+<table style="width:100%; background-color:antiquewhite">
+
+    @foreach (var categoria in Model)
+    {
+        <tr>
+            <th colspan="2" style="background-color:lightcoral; padding-left:50px; text-align:center; font-size:30px">
+                @Html.DisplayFor(modelItem => categoria.Nome)
+            </th>
+        </tr>
+        foreach (var subcategoria in categoria.Subcategorias)
+        {
+            <tr style="border-bottom-style:double; border-bottom-color:coral; ">
+                <td style="width:47%; text-align:right;">
+                    <img src="~/Content/Images/Forum/@(subcategoria.SubcategoriaID).jpg" style="height:50px;" />
+                </td>
+                <td class="col-md-10" style="font-size:25px;text-align:left;padding-left:30px;">
+                    @Html.ActionLink(subcategoria.Nome, "Subcategoria", "Forum", new { id = subcategoria.SubcategoriaID }, null)
+                </td>
+            </tr>
+        }
+    }
+</table>

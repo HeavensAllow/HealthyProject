@@ -1,0 +1,474 @@
+﻿@model IEnumerable<HealthyProject.Models.Objectivo>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+@if (TempData["UserGuide"] != null || ViewBag.UserGuide2 != null)
+{
+    <br />
+    <br />
+    <br />
+    <div class="centerAlign">
+        <div class="alert alert-success alert-dismissable">
+            <strong><i class="fa fa-exclamation-triangle" aria-hidden="true"></i>Tendo o objectivo criado, está na altura de adicionar refeições ao registo diário de forma a actualizar os gráficos.</strong>
+            <br />
+            <strong><i class="fa fa-exclamation-triangle" aria-hidden="true"></i>Para tal, deverá dirigir-se à página do registo diário, onde tem a possibilidade de registar as suas refeições.</strong>
+            <br />
+            <strong><i class="fa fa-exclamation-triangle" aria-hidden="true"></i>Por favor clique no botão abaixo.</strong>
+            <br />
+            @Html.ActionLink("Registo de Refeições", "Index", "Refeicoes", null, htmlAttributes: new { @class = "mybtn" })
+        </div>
+    </div>
+}
+@if (ViewBag.UserGuide != null)
+{
+    <br />
+    <br />
+    <br />
+    <div class="centerAlign">
+        <div class="alert alert-success alert-dismissable">
+            <strong><i class="fa fa-exclamation-triangle" aria-hidden="true"></i>Esta é a página onde poderá ver as suas informações relativamente ao objectivo actual bem como ao seu histórico de objectivos.</strong>
+            <br />
+            <strong><i class="fa fa-exclamation-triangle" aria-hidden="true"></i>Para a actualização do Intake Recomendado, todas as semanas, à Segunda-Feira, pede-se ao utilizador que actualize o seu peso.</strong>
+            <br />
+            <strong><i class="fa fa-exclamation-triangle" aria-hidden="true"></i>No entanto, para começar, passemos a criar um objectivo. Por favor clique no botão abaixo.</strong>
+            <br />
+            @Html.ActionLink("Criar Objectivo", "Create", "Objectivoes", null, htmlAttributes: new { @class = "mybtn" })
+        </div>
+    </div>
+}
+@if (ViewBag.TooSoon != null)
+{
+    <br />
+    <br />
+    <br />
+    <div class="centerAlign">
+        <img src="@Url.Content("http://ak7.picdn.net/shutterstock/videos/15423577/thumb/2.jpg")" style="height: 500px; width:800px; margin: auto;" />
+        <div class="alert alert-success alert-dismissable">
+            <strong><i class="fa fa-exclamation-triangle" aria-hidden="true"></i> O dia escolhido para o início do seu objectivo ainda não chegou!</strong>
+            <strong><i>Dias Restantes: @Html.Raw(ViewBag.TooSoon)</i></strong>
+        </div>
+        <br />
+        <br />
+        <br />
+    </div>
+    <br />
+        <h1 class="centerAlign">Histórico</h1>
+
+        <div style="display:inline;">
+            <button class="btn btn-default" id="btnleft" value="Left to right" style="width:5%; height:300px; float:left; font-size:50px; margin-top: 100px;"><</button>
+            <button class="btn btn-default" id="btnright" value="Right to left" style="width:5%; height:300px; float:right; font-size:50px; margin-top: 100px;">></button>
+            <div class="slidediv" style="width:85%; overflow-x:scroll; height: 550px; overflow-y: hidden; position: relative;">
+                <p id="Totalkg" style="width:100%; position: absolute; height:500px;left:30px;"></p>
+                <p id="NrObjectivos" style="height:500px; width: 100%; position:absolute; left:2530px;"></p>
+                @if (ViewBag.Favoritos != null)
+                {
+                    <p id="Favoritos" style="height:500px; width: 100%; position:absolute; left:5030px;"></p>
+                    if (ViewBag.Count != null)
+                    {
+                        <p id="Count" style="height:500px; width: 100%; position:absolute; left:7530px;"></p>
+                    }
+                }
+                else
+                {
+                    if (ViewBag.Count != null)
+                    {
+                        <p id="Count" style="height:500px; width: 100%; position:absolute; left:5030px;"></p>
+                    }
+                }
+                <br />
+            </div>
+        </div>
+}
+else
+{
+    if (ViewBag.Sem == null)
+    {
+        if (TempData["Alert"] != null)
+        {
+            <br />
+            <br />
+                <div class="alert alert-success alert-dismissable">
+                    <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+                    <strong><i class="fa fa-exclamation-triangle" aria-hidden="true"></i> Ja existe um objectivo definido por concluir.</strong>
+                </div>
+        }
+        <br />
+        <br />
+        <div id="modal-container" class="modal fade" tabindex="-1" role="dialog">
+            <div class="modal-content" style="width: 570px !important; margin: 100px auto !important; border: 5px solid #3A87AD; height: 250px;">
+                <div class="modal-body">
+                </div>
+            </div>
+        </div>
+        <br />
+            <br />
+        if (ViewBag.IntakeR == null)
+        {
+            <p>
+                @Html.ActionLink("Criar Objectivo", "Create")
+            </p>
+
+            <div id="chartContainer" style="height: 500px; width: 100%;"></div>
+        }
+        else
+        {
+            <div>
+                <div id="chartContainer" style="height: 500px; width: 100%;"></div>
+                <br />
+                <div style="float:left">
+                    @if (ViewBag.Teste != null)
+                        {
+                        @Html.ActionLink("Editar Peso", "GetPeso", null, new { @class = "img-btn-getpeso modal-link mybtn", title = "Modificar Peso" })
+                    }
+                    else
+                    {
+                        @Html.ActionLink("Adicionar refeições", "Index", "Refeicoes", null, htmlAttributes: new { @class = "mybtn" })
+                    }
+                </div>
+                <div style="float:right">
+                    @Html.ActionLink("Eliminar Objectivo", "Delete", null, htmlAttributes: (new { @class = "mybtn" }))
+                </div>
+                <br />
+                <br />
+            </div>
+            <br />
+        }
+        <br />
+        <h1 class="centerAlign">Histórico</h1>
+
+            <div style="display:inline;">
+                <button class="btn btn-default" id="btnleft" value="Left to right" style="width:5%; height:300px; float:left; font-size:50px; margin-top: 100px;"><</button>
+                <button class="btn btn-default" id="btnright" value="Right to left" style="width:5%; height:300px; float:right; font-size:50px; margin-top: 100px;">></button>
+                <div class="slidediv" style="width:85%; overflow-x:scroll; height: 550px; overflow-y: hidden; position: relative;">
+                    <p id="Totalkg" style="width:100%; position: absolute; height:500px;left:3px;"></p>
+                    <p id="NrObjectivos" style="height:500px; width: 100%; position:absolute; left:2530px;"></p>
+                    @if (ViewBag.Registos != null)
+                    {
+                        <p id="Totalkcal" style="height:500px; width: 100%; position:absolute; left:5030px;"></p>
+                        if (ViewBag.Favoritos != null)
+                        {
+                            <p id="Favoritos" style="height:500px; width: 100%; position:absolute; left:7530px;"></p>
+                            if (ViewBag.Count != null)
+                            {
+                                <p id="Count" style="height:500px; width: 100%; position:absolute; left:10030px;"></p>
+                            }
+                        }
+                        else
+                        {
+                            if (ViewBag.Count != null)
+                            {
+                                <p id="Count" style="height:500px; width: 100%; position:absolute; left:7530px;"></p>
+                            }
+                        }
+                    }
+                    else
+                    {
+                        if (ViewBag.Favoritos != null)
+                        {
+                            <p id="Favoritos" style="height:500px; width: 100%; position:absolute; left:5030px;"></p>
+                            if (ViewBag.Count != null)
+                            {
+                                <p id="Count" style="height:500px; width: 100%; position:absolute; left:7530px;"></p>
+                            }
+                        }
+                        else
+                        {
+                            if (ViewBag.Count != null)
+                            {
+                                <p id="Count" style="height:500px; width: 100%; position:absolute; left:5030px;"></p>
+                            }
+                        }
+                    }
+
+                    <br />
+                </div>
+            </div>
+    }
+    else
+    {
+        <br />
+        <br />
+        <div class="centerAlign">
+            <img src="@Url.Content("http://www.changefactory.com.au/wp-content/uploads/2010/09/bigstock-Vector-Error-Icon-66246010.jpg")" style="height: 600px; width:600px; margin: auto;" />
+            <div class="alert alert-success alert-dismissable">
+                <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+                <strong><i class="fa fa-exclamation-triangle" aria-hidden="true"></i> Ainda não tem um objectivo definido. Por favor crie um objectivo de forma a aceder ao "Objectivo Actual".</strong>
+            </div>
+            <br />
+            <br />
+            <br />
+            @if (ViewBag.Userguide == null)
+            {
+                @Html.ActionLink("Criar objectivo", "Create", "Objectivoes", htmlAttributes: (new { @class = "mybtn" }))
+            }
+        </div>
+        <br />
+            <h1 class="centerAlign">Histórico</h1>
+
+            <div style="display:inline;">
+                <button class="btn btn-default" id="btnleft" value="Left to right" style="width:5%; height:300px; float:left; font-size:50px; margin-top: 100px;"><</button>
+                <button class="btn btn-default" id="btnright" value="Right to left" style="width:5%; height:300px; float:right; font-size:50px; margin-top: 100px;">></button>
+                <div class="slidediv" style="width:85%; overflow-x:scroll; height: 550px; overflow-y: hidden; position: relative;">
+                    <p id="Totalkg" style="width:100%; position: absolute; height:500px;left:3px;"></p>
+                    <p id="NrObjectivos" style="height:500px; width: 100%; position:absolute; left:2530px;"></p>
+                    @if (ViewBag.Favoritos != null)
+                    {
+                        <p id="Favoritos" style="height:500px; width: 100%; position:absolute; left:5030px;"></p>
+                        if (ViewBag.Count != null)
+                        {
+                            <p id="Count" style="height:500px; width: 100%; position:absolute; left:7530px;"></p>
+                        }
+                    }
+                    else
+                    {
+                        if (ViewBag.Count != null)
+                        {
+                            <p id="Count" style="height:500px; width: 100%; position:absolute; left:5030px;"></p>
+                        }
+                    }
+                    <br />
+                </div>
+            </div>
+    }
+}
+
+@section Scripts{
+    <script type="text/javascript">
+        window.onload = function () {
+
+            @if (ViewBag.TooSoon == null && ViewBag.DataPoints != null)
+            {
+                <text>
+            var chart1 = new CanvasJS.Chart("chartContainer", {
+            animationEnabled: true,
+            backgroundColor: "#ffffff",
+            title: {
+                text: "Objectivo Actual"
+            },
+
+            toolTip: {
+                shared: true
+            },
+
+            axisY: {
+                maximum: @Html.Raw(ViewBag.IMath)+750,
+                interlacedColor: "#F0F8FF",
+                title: "Intake diário"
+    },
+
+    axisX: {
+        title: "Dia da semana",
+    },
+
+        data: [{
+            type: "column",
+            showInLegend: true,
+            name: "IDA",
+            legendText: "Intake Diário Submetido",
+            dataPoints: @Html.Raw(ViewBag.DataPoints),
+    },
+        {
+            type: "line",
+            showInLegend: true,
+            name: "IDR",
+            legendText: "Intake Diário Recomendado",
+            dataPoints: @Html.Raw(ViewBag.IntakeR),
+        }]
+            });
+            chart1.render();
+            </text>
+                        }
+
+                        var chart2 = new CanvasJS.Chart("Totalkg", {
+            animationEnabled: true,
+            backgroundColor: "#ffffff",
+            title: {
+                            text: "Evolução do Peso desde o registo"
+            },
+
+            toolTip: {
+                            shared: true
+            },
+
+            axisY: {
+                            interlacedColor: "#F0F8FF",
+                title: "Peso"
+            },
+
+            axisX: {
+                            title: "Data",
+             },
+
+            data: [
+                {
+                            type: "line",
+                showInLegend: true,
+                name: "Peso",
+                legendText: "Peso por data",
+                dataPoints: @Html.Raw(ViewBag.Total),
+                }]
+            });
+            chart2.render();
+
+                    var chart3 = new CanvasJS.Chart("NrObjectivos", {
+            animationEnabled: true,
+            backgroundColor: "#ffffff",
+            title: {
+                text: "Nr de Objectivos"
+            },
+
+            toolTip: {
+                shared: true
+            },
+
+            axisY: {
+                interlacedColor: "#F0F8FF",
+                title: "Número de objectivos"
+            },
+
+            axisX: {
+                title: "Objectivos",
+             },
+
+            data: [
+                {
+                type: "column",
+                showInLegend: false,
+                name: "Número",
+                legendText: "Número de objectivos",
+                dataPoints: @Html.Raw(ViewBag.Object),
+                }]
+            });
+                    chart3.render();
+
+            @if(ViewBag.Registos != null)
+            {
+                <text>
+
+                var chart4 = new CanvasJS.Chart("Totalkcal", {
+            animationEnabled: true,
+            backgroundColor: "#ffffff",
+            title: {
+                    text: "kcal registadas por dia"
+            },
+
+            toolTip: {
+                    shared: true
+            },
+
+            axisY: {
+                    interlacedColor: "#F0F8FF",
+                title: "kcal"
+            },
+
+            axisX: {
+                    title: "Data",
+             },
+
+            data: [{
+                    type: "line",
+                showInLegend: true,
+                name: "kcal",
+                legendText: "kcal por data",
+                dataPoints: @Html.Raw(ViewBag.Registos),
+                }]
+            });
+            chart4.render();
+            </text>
+            }
+             @if(ViewBag.Favoritos != null)
+            {
+                <text>
+
+                var chart5 = new CanvasJS.Chart("Favoritos", {
+            animationEnabled: true,
+            backgroundColor: "#ffffff",
+            title: {
+                    text: "Pratos favoritos"
+            },
+
+            toolTip: {
+                    shared: true
+            },
+
+            axisY: {
+                interlacedColor: "#F0F8FF",
+                title: "Número de vezes ingerida"
+            },
+
+            axisX: {
+                title: "Prato",
+             },
+
+            data: [{
+                type: "column",
+                showInLegend: false,
+                name: "Número de vezes ingeridas",
+                legendText: "Top 5 pratos",
+                dataPoints: @Html.Raw(ViewBag.Favoritos),
+                }]
+            });
+            chart5.render();
+            </text>
+            }
+             @if(ViewBag.Count != null)
+            {
+                <text>
+
+            var chart6 = new CanvasJS.Chart("Count", {
+            animationEnabled: true,
+            backgroundColor: "#ffffff",
+            title: {
+                    text: "Total de dias com/sem objectivos"
+            },
+
+            toolTip: {
+                    shared: true
+            },
+
+            axisY: {
+                interlacedColor: "#F0F8FF",
+                title: "Número de dias"
+            },
+
+            axisX: {
+                    title: "Objectivo",
+             },
+
+            data: [{
+                type: "column",
+                showInLegend: true,
+                name: "Número de dias",
+                legendText: "Número de dias com/sem objectivos",
+                dataPoints: @Html.Raw(ViewBag.Count),
+                }]
+            });
+            chart6.render();
+            </text>
+            }
+            }
+        $(function () {
+            var div = 1;
+            var max = $('.slidediv').children("p").length;
+            $("#btnright").click(function () {
+                if (div + 1 > max) return;
+                div++;
+                $('.slidediv').children().animate({ left:  '-=2500px' });
+            });
+            $("#btnleft").click(function () {
+                if (div - 1 < 1) return;
+                div--;
+                $('.slidediv').children().animate({ left: '+=2500px' });
+            });
+            $('body').on('click', '.modal-link', function (e) {
+                e.preventDefault();
+                $(this).attr('data-target', '#modal-container');
+                $(this).attr('data-toggle', 'modal');
+            });
+        });
+    </script>
+    <script src="@Url.Content("~/Content/canvasjs.min.js")"></script>
+    <script src="@Url.Content("~/Content/jquery.canvasjs.min.js")"></script>
+}

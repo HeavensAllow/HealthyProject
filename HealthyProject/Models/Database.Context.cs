@@ -12,6 +12,8 @@ namespace HealthyProject.Models
     using System;
     using System.Data.Entity;
     using System.Data.Entity.Infrastructure;
+    using System.Data.Entity.Core.Objects;
+    using System.Linq;
     
     public partial class HealthyEntities : DbContext
     {
@@ -31,20 +33,102 @@ namespace HealthyProject.Models
         public virtual DbSet<AspNetUserLogin> AspNetUserLogins { get; set; }
         public virtual DbSet<AspNetUser> AspNetUsers { get; set; }
         public virtual DbSet<Bebida> Bebidas { get; set; }
-        public virtual DbSet<Ingrediente> Ingredientes { get; set; }
+        public virtual DbSet<Categoria> Categorias { get; set; }
+        public virtual DbSet<Comentario> Comentarios { get; set; }
         public virtual DbSet<Objectivo> Objectivoes { get; set; }
+        public virtual DbSet<Opiniao> Opiniaos { get; set; }
+        public virtual DbSet<Post> Posts { get; set; }
         public virtual DbSet<Prato> Pratos { get; set; }
         public virtual DbSet<RefeicaoBebida> RefeicaoBebidas { get; set; }
         public virtual DbSet<RefeicaoIngrediente> RefeicaoIngredientes { get; set; }
         public virtual DbSet<RefeicaoPrato> RefeicaoPratos { get; set; }
         public virtual DbSet<Refeico> Refeicoes { get; set; }
         public virtual DbSet<RegistoDiario> RegistoDiarios { get; set; }
+        public virtual DbSet<RegistoPeso> RegistoPesoes { get; set; }
         public virtual DbSet<Subcategoria> Subcategorias { get; set; }
         public virtual DbSet<sysdiagram> sysdiagrams { get; set; }
-        public virtual DbSet<Categoria> Categorias { get; set; }
-        public virtual DbSet<Post> Posts { get; set; }
-        public virtual DbSet<Comentario> Comentarios { get; set; }
-        public virtual DbSet<Opiniao> Opiniaos { get; set; }
         public virtual DbSet<Utilizador> Utilizadors { get; set; }
+        public virtual DbSet<Ingrediente> Ingredientes { get; set; }
+    
+        public virtual ObjectResult<Top5_Result> Top5(Nullable<int> userID)
+        {
+            var userIDParameter = userID.HasValue ?
+                new ObjectParameter("UserID", userID) :
+                new ObjectParameter("UserID", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<Top5_Result>("Top5", userIDParameter);
+        }
+    
+        public virtual ObjectResult<a_Result> a(Nullable<int> objectivoID)
+        {
+            var objectivoIDParameter = objectivoID.HasValue ?
+                new ObjectParameter("ObjectivoID", objectivoID) :
+                new ObjectParameter("ObjectivoID", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<a_Result>("a", objectivoIDParameter);
+        }
+    
+        public virtual ObjectResult<CounterInfoRefeicao_Result> CounterInfoRefeicao(Nullable<int> registoID)
+        {
+            var registoIDParameter = registoID.HasValue ?
+                new ObjectParameter("RegistoID", registoID) :
+                new ObjectParameter("RegistoID", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<CounterInfoRefeicao_Result>("CounterInfoRefeicao", registoIDParameter);
+        }
+    
+        public virtual ObjectResult<CounterBebidas_Result> CounterBebidas(Nullable<int> refeicaoID)
+        {
+            var refeicaoIDParameter = refeicaoID.HasValue ?
+                new ObjectParameter("RefeicaoID", refeicaoID) :
+                new ObjectParameter("RefeicaoID", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<CounterBebidas_Result>("CounterBebidas", refeicaoIDParameter);
+        }
+    
+        public virtual ObjectResult<CounterIngredientes_Result> CounterIngredientes(Nullable<int> refeicaoID)
+        {
+            var refeicaoIDParameter = refeicaoID.HasValue ?
+                new ObjectParameter("RefeicaoID", refeicaoID) :
+                new ObjectParameter("RefeicaoID", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<CounterIngredientes_Result>("CounterIngredientes", refeicaoIDParameter);
+        }
+    
+        public virtual ObjectResult<CounterPratos_Result> CounterPratos(Nullable<int> refeicaoID)
+        {
+            var refeicaoIDParameter = refeicaoID.HasValue ?
+                new ObjectParameter("RefeicaoID", refeicaoID) :
+                new ObjectParameter("RefeicaoID", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<CounterPratos_Result>("CounterPratos", refeicaoIDParameter);
+        }
+    
+        public virtual ObjectResult<SumBebidas_Result> SumBebidas(Nullable<int> registoID)
+        {
+            var registoIDParameter = registoID.HasValue ?
+                new ObjectParameter("RegistoID", registoID) :
+                new ObjectParameter("RegistoID", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<SumBebidas_Result>("SumBebidas", registoIDParameter);
+        }
+    
+        public virtual ObjectResult<SumIngredientes_Result> SumIngredientes(Nullable<int> registoID)
+        {
+            var registoIDParameter = registoID.HasValue ?
+                new ObjectParameter("RegistoID", registoID) :
+                new ObjectParameter("RegistoID", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<SumIngredientes_Result>("SumIngredientes", registoIDParameter);
+        }
+    
+        public virtual ObjectResult<SumPratos_Result> SumPratos(Nullable<int> registoID)
+        {
+            var registoIDParameter = registoID.HasValue ?
+                new ObjectParameter("RegistoID", registoID) :
+                new ObjectParameter("RegistoID", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<SumPratos_Result>("SumPratos", registoIDParameter);
+        }
     }
 }

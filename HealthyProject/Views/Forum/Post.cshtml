@@ -1,11 +1,14 @@
 ﻿@model HealthyProject.Models.Post
-
+<br/>
+<br/>
 @{
     ViewBag.Title = "Post";
 }
 
-<h2>@Model.Titulo</h2>
+<h2 style="text-align:center">@Model.Titulo</h2>
 
+
+<<<<<<< HEAD
 
 <div id="divComentarios">
     @{Html.RenderPartial("_PostPartial", Model); }
@@ -40,23 +43,70 @@
         <div class="form-group">
             <div class="col-md-10">
                 @Html.TextArea("Comment")
+=======
+    <div id="divComentarios">
+        @{Html.RenderPartial("_PostPartial", Model); }
+    </div>
+
+    @using (Ajax.BeginForm("Post", "Forum", new { postId = Model.PostID }, new AjaxOptions() { OnSuccess = "CleanTextArea", HttpMethod = "Post", UpdateTargetId = "divComentarios" }))
+    {
+        @Html.AntiForgeryToken()
+        <tr>
+            <div class="form-horizontal">
+@if (User.Identity.IsAuthenticated)
+{
+                <label class="col-md-2" for="Texto" style="color:steelblue;font-size:large">Novo Comentário</label>
+                <br />
+                <br />
+}
             </div>
-        </div>
+        </tr>
+        <tr>
+            <div class="form-group">
+@if (User.Identity.IsAuthenticated)
+{
+                <div class="col-md-2">
+                    @Html.TextArea("Comment")
+                </div>
+}
+>>>>>>> 2e0c6c14de8590b612bee7b0434aa5304fcf70f6
+            </div>
+        </tr>
         <br />
         <br />
         <div class="form-group">
-            <div class="col-md-offset-2 col-md-10">
-                <input type="submit" value="Create" class="btn btn-default" />
+@if (User.Identity.IsAuthenticated)
+{
+            <div class="col-md-2 col-md-10">
+                <input type="submit" value="Criar" class="mybtn btn-default " />
             </div>
+}
         </div>
+<<<<<<< HEAD
     </div>
     
         }
+=======
+    }
+<br/>
+<div>
+    @Html.ActionLink("Regressar", "Subcategoria", new { id = Model.SubcategoriaID })
+</div>
+>>>>>>> 2e0c6c14de8590b612bee7b0434aa5304fcf70f6
 @section Scripts{ 
     <script src="~/Scripts/jquery.unobtrusive-ajax.js"></script>
    @* <script>
         function updateLikes() {
             $('.likesLabel', $(this)).text(@ViewBag.Likes);
         }
+<<<<<<< HEAD
     </script>*@
 }
+=======
+        function CleanTextArea(){
+            $('#Comment').val('');
+        }
+    </script>
+    @Scripts.Render("~/bundles/jqueryval")
+}
+>>>>>>> 2e0c6c14de8590b612bee7b0434aa5304fcf70f6

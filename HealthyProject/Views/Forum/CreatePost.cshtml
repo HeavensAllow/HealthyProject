@@ -1,39 +1,55 @@
 ﻿@model HealthyProject.Models.Post
+</br>
+</br>
 @{
     ViewBag.Title = "Novo Post";
 }
+</br>
 @using (Html.BeginForm())
 {
     @Html.AntiForgeryToken()
-<h2>Novo Post</h2>
-<div class="form-group">
-    <label class="control-label col-md-2" for="Titulo">Titulo</label>
+<div class="form-group" style="text-align:center">
+    <label class="control-label col-md-2" for="Titulo" style="font-size:large; color:steelblue">Titulo</label>
     <div class="col-md-10">
         @Html.EditorFor(model => model.Titulo, new { htmlAttributes = new { @class = "form-control" } })
-      
+        @Html.ValidationMessageFor(model => model.Titulo, "", new { @class = "text-danger" })
     </div>
 </div>
 <br/>
 <br/>
-<div class="form-group">
-    <label class="control-label col-md-2" for="Texto">Texto</label>
+<br/>
+<div class="form-group" style="text-align:center">
+    <label class="control-label col-md-2" for="Texto" style="font-size:large; color:steelblue">Texto</label>
     <div class="col-md-10">
         @Html.EditorFor(model => model.Texto, new { htmlAttributes = new { @class = "form-control" } })
-
+        @Html.ValidationMessageFor(model => model.Texto, "", new { @class = "text-danger" })
     </div>
 </div>
-<br/>
-<br/>
-<div class="form-group">
-    <div class="col-md-offset-2 col-md-10">
-        <input type="submit" value="Create" class="btn btn-default" />
+<br />
+<br />
+    if (Convert.ToInt32(Request.Params["subcategoria"]) == 1)
+    {
+<div class="form-group" style="text-align:center">
+    <label class="control-label col-md-2" id="Link" style="font-size:large; color:steelblue">Link</label>
+    <div class="col-md-10">
+        @Html.EditorFor(model => model.Link, new { htmlAttributes = new { @class = "form-control" } })
+        @Html.ValidationMessageFor(model => model.Link, "", new { @class = "text-danger" })
     </div>
 </div>
-
-    
-
+    }
+    <br />
+    <br />
+    <div>
+        <div class="col-md-offset-2 col-md-10">
+            <input type="submit" value="Criar" class="mybtn btn-default" />
+        </div>
+    </div>
 }
-<div>
-    @Html.ActionLink("Back to List", "Index")
-</div>
+    <div>
+        @Html.ActionLink("Regressar", "Index")
+    </div>
 
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}

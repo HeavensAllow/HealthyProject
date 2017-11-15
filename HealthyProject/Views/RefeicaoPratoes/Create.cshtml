@@ -1,0 +1,75 @@
+﻿@model HealthyProject.Models.RefeicaoPrato
+
+@{
+    ViewBag.Title = "Create";
+}
+
+<!--<h2>Create</h2>-->
+@if (ViewBag.UserGuide != null)
+{
+    <br />
+    <br />
+        <br />
+        <div class="centerAlign">
+            <div class="alert alert-success alert-dismissable">
+                <strong><i class="fa fa-exclamation-triangle" aria-hidden="true"></i>Nesta página poderá registar tanto qual o prato ingerido como a sua dose em gramas.</strong>
+                <br />
+                <strong><i class="fa fa-exclamation-triangle" aria-hidden="true"></i>Através destes é nos possível o cálculo dos parâmetros e exibir os seus consumos diários.</strong>
+                <br />
+                <strong><i class="fa fa-exclamation-triangle" aria-hidden="true"></i>Tal serve tanto para os pratos, como para ingredientes ou bebidas.</strong>
+                <br />
+                <strong><i class="fa fa-exclamation-triangle" aria-hidden="true"></i>Para dar como terminado o tutorial, por favor introduza um prato no seu registo de refeições.</strong>
+            </div>
+        </div>
+}
+
+@using (Html.BeginForm()) 
+{
+    @Html.AntiForgeryToken()
+    
+    <div class="form-horizontal">
+        <br />
+        <h4>Adicionar prato à refeição</h4>
+        <hr />
+        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.RefeicaoID, "Refeição", htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @ViewBag.Refeicao.Tipo
+                @*@Html.DropDownList("RefeicaoID", null, htmlAttributes: new { @class = "form-control" })
+                @Html.ValidationMessageFor(model => model.RefeicaoID, "", new { @class = "text-danger" })*@
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.PratoID, "Nome Prato", htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.DropDownList("PratoID", null, htmlAttributes: new { @class = "form-control" })
+                @Html.ValidationMessageFor(model => model.PratoID, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.Dose, "Quantidade (gr)", htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.Dose, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.Dose, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            <div class="col-md-offset-2 col-md-10">
+                <input type="submit" value="Adicionar" class="btn btn-default" />
+            </div>
+        </div>
+    </div>
+}
+
+<div>
+    @Html.ActionLink("Regressar", "Index", "Refeicoes")
+</div>
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}

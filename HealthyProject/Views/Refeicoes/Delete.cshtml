@@ -1,0 +1,69 @@
+﻿@model HealthyProject.Models.Refeico
+
+@{
+    ViewBag.Title = "Delete";
+}
+@if (ViewBag.SemDados != null)
+{
+    <br />
+    <br />
+    <br />
+    <div class="centerAlign">
+        <img src="@Url.Content("https://i2.wp.com/1.bp.blogspot.com/-2bMNd_UnqzY/T5leMQhNFZI/AAAAAAAAALI/s-6dxHzS7Kg/s1600/page-not-found-404.png")" style="height: 600px; width:600px; margin: auto;" />
+        <div class="alert alert-success alert-dismissable">
+            <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+            <strong><i class="fa fa-exclamation-triangle" aria-hidden="true"></i> Aparentemente o seu perfil ainda não foi definido, o que impossibilita o correcto funcionamento desta página. Por favor preencha os campos necessários no seu Perfil de Utilizador.</strong>
+        </div>
+        <br />
+        @Html.ActionLink("Criar Perfil", "Index", "Manage", null, new { @class = "img-btn-getpeso modal-link mybtn", title = "Cria-te" })
+    </div>
+}
+else
+{
+
+<!--<h2>Delete</h2>-->
+<br />
+<br />
+<h3>Tem a certeza que pretende eliminar esta refeição?</h3>
+<br />
+<div>
+    <h4>Refeição</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            Registo@*@Html.DisplayNameFor(model => model.RegistoDiario.RegistoID)*@
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.RegistoDiario.RegistoID)
+        </dd>
+
+        <dt>
+            Nome da Refeição@*@Html.DisplayNameFor(model => model.Tipo)*@
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Tipo)
+        </dd>
+        
+        <dt>
+            Data da Refeição@*@Html.DisplayNameFor(model => model.Data)*@
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Data)
+        </dd>
+
+    </dl>
+
+    @using (Html.BeginForm())
+    {
+        @Html.AntiForgeryToken()
+
+        <div class="form-actions no-color">
+            <input type="submit" value="Delete" class="btn btn-default" /> |
+            @Html.ActionLink("Regressar", "Edit", new { id = Model.RefeicaoID })
+        </div>
+    }
+</div>
+}

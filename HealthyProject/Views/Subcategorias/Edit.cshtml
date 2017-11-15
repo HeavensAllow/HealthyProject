@@ -1,5 +1,6 @@
 ﻿@model HealthyProject.Models.Subcategoria
-
+</br>
+</br>
 @{
     ViewBag.Title = "Edit";
 }
@@ -25,7 +26,7 @@
         </div>
 
         <div class="form-group">
-            @Html.LabelFor(model => model.CategoriaID, "CategoriaID", htmlAttributes: new { @class = "control-label col-md-2" })
+            @Html.LabelFor(model => model.CategoriaID, "Categoria", htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
                 @Html.DropDownList("CategoriaID", null, htmlAttributes: new { @class = "form-control" })
                 @Html.ValidationMessageFor(model => model.CategoriaID, "", new { @class = "text-danger" })
@@ -41,5 +42,5 @@
 }
 
 <div>
-    @Html.ActionLink("Back to List", "Index")
+    @Html.ActionLink("Regressar", "Index")
 </div>

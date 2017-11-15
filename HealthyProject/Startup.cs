@@ -9,6 +9,7 @@ namespace HealthyProject
 {
     public partial class Startup
     {
+        private HealthyEntities db = new HealthyEntities();
         public void Configuration(IAppBuilder app)
         {
             ConfigureAuth(app);
@@ -42,6 +43,7 @@ namespace HealthyProject
 
             }
 
+<<<<<<< HEAD
             ApplicationUser newUser = new ApplicationUser();
             newUser.UserName = "admin@gmail.com";
             newUser.Email = "admin@gmail.com"; 
@@ -52,6 +54,37 @@ namespace HealthyProject
             {
                 UserManager.AddToRole(newUser.Id, "Admin"); // adicionar ao role Admin
             }
+=======
+
+                ApplicationUser newUser = new ApplicationUser();
+                newUser.UserName = "admin@gmail.com";
+                newUser.Email = "admin@gmail.com";
+                var password = "1-Obesidade";
+                var result = UserManager.Create(newUser, password);
+
+                var newUtilizador = new Utilizador();
+                newUtilizador.UserID = newUser.Id;
+                db.Utilizadors.Add(newUtilizador);
+                db.SaveChanges();
+
+
+                if (result.Succeeded)
+                {
+                    UserManager.AddToRole(newUser.Id, "Admin"); // adicionar ao role Admin
+                }
+            }
+
+            //primeiro, criar o role User
+            if (!roleManager.RoleExists("User"))
+            {
+                var role = new CustomRole();
+                role.Name = "User";
+                roleManager.Create(role);
+
+            }
+
+            
+>>>>>>> 2e0c6c14de8590b612bee7b0434aa5304fcf70f6
             
         }
     }

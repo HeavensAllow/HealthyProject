@@ -36,17 +36,20 @@ namespace HealthyProject.Controllers
             return View(subcategoria);
         }
 
-
-
         //GET
         public ActionResult CreatePost()
         {
             return View();
         }
+
         //POST
         [HttpPost]
         [ValidateAntiForgeryToken]
+<<<<<<< HEAD
         public ActionResult CreatePost([Bind(Include = "Titulo,Texto")] Post newPost, int? subcategoria)
+=======
+        public ActionResult CreatePost([Bind(Include = "Titulo,Texto,Link")] Post newPost, int? subcategoria)
+>>>>>>> 2e0c6c14de8590b612bee7b0434aa5304fcf70f6
         {
             if (subcategoria == null)
             {
@@ -55,7 +58,33 @@ namespace HealthyProject.Controllers
             newPost.UserID = Convert.ToInt32(User.Identity.GetUserId());
             newPost.Data = DateTime.Now;
             newPost.SubcategoriaID = (int)subcategoria;
-
+            var error = false;
+            if(newPost.Texto == null)
+            {
+                ModelState.AddModelError("Texto", "Por favor insira o texto");
+                error = true;
+            }
+            if (newPost.Titulo == null)
+            {
+                ModelState.AddModelError("Titulo", "Por favor insira o título");
+                error = true;
+            }
+            if (subcategoria == 1)
+            {
+                if(newPost.Link == null)
+                {
+                    ModelState.AddModelError("Link", "Por favor insira o link");
+                    error = true;
+                }
+            }
+            else
+            {
+                newPost.Link = "";
+            }
+            if (error == true)
+            {
+                return View();
+            }
             db.Posts.Add(newPost);
             db.SaveChanges();
             return RedirectToAction("Post", new { id = newPost.PostID });
@@ -93,10 +122,16 @@ namespace HealthyProject.Controllers
             newComment.Data = DateTime.Now;
             newComment.PostID = (int)postId;
 
+            if (newComment.Comment == null)
+            {
+                ModelState.AddModelError("Comment", "Por favor insira o comentário");
+                return View();
+            }
             db.Comentarios.Add(newComment);
             db.SaveChanges();
             post = db.Posts.Find(postId);
             return PartialView("_PostPartial", post);
+<<<<<<< HEAD
            
         }
 
@@ -126,16 +161,43 @@ namespace HealthyProject.Controllers
             }
             db.SaveChanges();
             return PartialView("Post", comentario.Post);
+=======
+
+>>>>>>> 2e0c6c14de8590b612bee7b0434aa5304fcf70f6
         }
+
         [HttpPost]
-        public ActionResult naoGosto(int? id)
+        public ActionResult Opiniao(int? id, bool selectedOpinion)
         {
             var userID = Convert.ToInt32(User.Identity.GetUserId());
             Comentario comentario = db.Comentarios.Find(id);
-            if(comentario == null)
-            {
-                return HttpNotFound();
+                if (comentario == null)
+                {
+                    return HttpNotFound();
+                }
+
+                Opiniao opiniao = comentario.Opiniaos.FirstOrDefault(c => c.userID == userID);
+
+                if (opiniao == null)
+                {
+                    opiniao = new Opiniao()
+                    {
+                        userID = userID,
+                        commentID = comentario.CommentID,
+                        Opiniao1 = selectedOpinion
+                    };
+                    db.Opiniaos.Add(opiniao);
+                }
+                else //update
+                {
+                    opiniao.Opiniao1 = selectedOpinion;
+                    db.Entry(opiniao).State = EntityState.Modified;
+                }
+                db.SaveChanges();
+                ViewBag.Likes = comentario.Opiniaos.Where(o => o.Opiniao1 == true).Count() - comentario.Opiniaos.Where(o => o.Opiniao1 == false).Count();
+                return PartialView("_PostPartial", comentario.Post);
             }
+<<<<<<< HEAD
             Opiniao opiniao = comentario.Opiniaos.FirstOrDefault(c => c.userID == userID);
 
             if (opiniao == null)
@@ -156,6 +218,8 @@ namespace HealthyProject.Controllers
             return PartialView("Post", comentario.Post);
         }
 
+=======
+>>>>>>> 2e0c6c14de8590b612bee7b0434aa5304fcf70f6
 
         protected override void Dispose(bool disposing)
         {

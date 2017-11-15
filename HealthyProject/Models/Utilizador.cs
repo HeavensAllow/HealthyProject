@@ -18,6 +18,7 @@ namespace HealthyProject.Models
         public Utilizador()
         {
             this.Objectivoes = new HashSet<Objectivo>();
+            this.RegistoPesoes = new HashSet<RegistoPeso>();
         }
     
         public int UserID { get; set; }
@@ -26,7 +27,7 @@ namespace HealthyProject.Models
         public Nullable<System.DateTime> Data_nascimento { get; set; }
         public Nullable<int> Peso { get; set; }
         public Nullable<int> Altura { get; set; }
-        public Nullable<int> Actividade_fisica { get; set; }
+        public Nullable<double> Actividade_fisica { get; set; }
         public Nullable<int> Nr_horas_sono { get; set; }
         public Nullable<int> Nr_refeicoes { get; set; }
         public Nullable<bool> Habitos_alcoolicos { get; set; }
@@ -36,5 +37,7 @@ namespace HealthyProject.Models
         public virtual AspNetUser AspNetUser { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Objectivo> Objectivoes { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<RegistoPeso> RegistoPesoes { get; set; }
     }
 }

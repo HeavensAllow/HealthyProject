@@ -18,7 +18,7 @@ namespace HealthyProject.Models
         public int RefeicaoID { get; set; }
         public int Quantidade { get; set; }
     
-        public virtual Ingrediente Ingrediente { get; set; }
         public virtual Refeico Refeico { get; set; }
+        public virtual Ingrediente Ingrediente { get; set; }
     }
 }

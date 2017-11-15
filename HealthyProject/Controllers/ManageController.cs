@@ -7,6 +7,9 @@ using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.Owin;
 using Microsoft.Owin.Security;
 using HealthyProject.Models;
+using System.Data.Entity;
+using System.Collections.Generic;
+using HealthyProject.Models.Metadata;
 
 namespace HealthyProject.Controllers
 {
@@ -15,6 +18,7 @@ namespace HealthyProject.Controllers
     {
         private ApplicationSignInManager _signInManager;
         private ApplicationUserManager _userManager;
+        private HealthyEntities db = new HealthyEntities();  // Chama se base de dados
 
         public ManageController()
         {
@@ -32,9 +36,9 @@ namespace HealthyProject.Controllers
             {
                 return _signInManager ?? HttpContext.GetOwinContext().Get<ApplicationSignInManager>();
             }
-            private set 
-            { 
-                _signInManager = value; 
+            private set
+            {
+                _signInManager = value;
             }
         }
 
@@ -51,9 +55,10 @@ namespace HealthyProject.Controllers
         }
 
         //
-        // GET: /Manage/Index
-        public async Task<ActionResult> Index(ManageMessageId? message)
+        // GET: /Manage/Index : onde se mostra dados do utilizador
+        public ActionResult Index(ManageMessageId? message)
         {
+
             ViewBag.StatusMessage =
                 message == ManageMessageId.ChangePasswordSuccess ? "Your password has been changed."
                 : message == ManageMessageId.SetPasswordSuccess ? "Your password has been set."
@@ -63,22 +68,174 @@ namespace HealthyProject.Controllers
                 : message == ManageMessageId.RemovePhoneSuccess ? "Your phone number was removed."
                 : "";
 
-            var userId = User.Identity.GetUserId();
-            var model = new IndexViewModel
+            var userId = Convert.ToInt32(User.Identity.GetUserId()); // estava em string
+
+            Utilizador perfil = db.Utilizadors.Find(userId);
+            Eutilizador perfilEdit = new Eutilizador()
             {
-                HasPassword = HasPassword(),
-                PhoneNumber = await UserManager.GetPhoneNumberAsync(User.Identity.GetUserId<int>()),
-                TwoFactor = await UserManager.GetTwoFactorEnabledAsync(User.Identity.GetUserId<int>()),
-                Logins = await UserManager.GetLoginsAsync(User.Identity.GetUserId<int>()),
-                BrowserRemembered = await AuthenticationManager.TwoFactorBrowserRememberedAsync(userId)
+                Nome = perfil.Nome,
+                Genero = perfil.Genero,
+                Data_nascimento = perfil.Data_nascimento,
+                Peso = perfil.Peso,
+                Altura = perfil.Altura,
+                Actividade_fisica = perfil.Actividade_fisica,
+                Nr_horas_sono = perfil.Nr_horas_sono,
+                Nr_refeicoes = perfil.Nr_refeicoes,
+                MGorda = perfil.MGorda,
+                MMuscular = perfil.MMuscular
             };
-            return View(model);
+            var objectivoes = db.Objectivoes.FirstOrDefault(c => c.UserID == userId);
+            ViewBag.Genders = new SelectList(new List<SelectListItem>
+                {
+                    new SelectListItem { Selected = true, Text = "M", Value = "M"},
+                    new SelectListItem { Selected = false, Text = "F", Value = "F"},
+                }, "Value", "Text");
+            ViewBag.Atividade = new SelectList(new List<SelectListItem>
+                {
+                    new SelectListItem {Text = "1", Value = "1"},
+                    new SelectListItem {Text = "2", Value = "2"},
+                    new SelectListItem {Text = "3", Value = "3"},
+                    new SelectListItem {Text = "4", Value = "4"},
+                }, "Value", "Text", perfil.Actividade_fisica);
+            if (perfil != null)
+            {
+                if (perfil.Nome != null)
+                {
+                    if (objectivoes != null)
+                    {
+                        return View(perfilEdit);
+                    }
+                    else
+                    {
+                        ViewBag.UserGuide2 = "Sem Objectivos";
+                    }
+                    return View(perfilEdit);
+                }
+                else
+                {
+                    ViewBag.UserGuide = "Sem Nome";
+                }
+            }
+
+            return View(perfilEdit);
+            // manda oos dados do utilizador para a view
         }
 
 
-    //
-    // POST: /Manage/RemoveLogin
-    [HttpPost]
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        // para editar os campos
+
+        public ActionResult Index([Bind(Include = "UserID,Nome,Genero,Data_nascimento,Peso,Altura,Actividade_fisica,Nr_horas_sono,Nr_refeicoes,Habitos_alcoolicos,MMuscular,MGorda")] Eutilizador perfilEdit)
+        {
+
+            int userId = Convert.ToInt32(User.Identity.GetUserId());
+            Utilizador perfil = db.Utilizadors.FirstOrDefault(o => o.UserID == userId);
+
+            perfil.Nome = perfilEdit.Nome;
+            perfil.Genero = perfilEdit.Genero;
+            perfil.Data_nascimento = perfilEdit.Data_nascimento;
+            perfil.Peso = perfilEdit.Peso;
+            perfil.Altura = perfilEdit.Altura;
+            perfil.Actividade_fisica = perfilEdit.Actividade_fisica;
+            perfil.Nr_horas_sono = perfilEdit.Nr_horas_sono;
+            perfil.Nr_refeicoes = perfilEdit.Nr_refeicoes;
+            perfil.MGorda = perfilEdit.MGorda;
+            perfil.MMuscular = perfilEdit.MMuscular;
+
+            ViewBag.Genders = new SelectList(new List<SelectListItem>
+                {
+                    new SelectListItem { Selected = true, Text = "M", Value = "M"},
+                    new SelectListItem { Selected = false, Text = "F", Value = "F"},
+                }, "Value", "Text");
+
+            ViewBag.Atividade = new SelectList(new List<SelectListItem>
+                {
+                    new SelectListItem {Text = "1", Value = "1"},
+                    new SelectListItem {Text = "2", Value = "2"},
+                    new SelectListItem {Text = "3", Value = "3"},
+                    new SelectListItem {Text = "4", Value = "4"},
+                }, "Value", "Text", perfilEdit.Actividade_fisica);
+
+            if (ModelState.IsValid)
+            {
+                var error = false;
+
+                if (perfilEdit.Nome == null)
+                {
+                    ModelState.AddModelError("Nome", "Introduza o Nome");
+                    error = true;
+                }
+                if (error == true)
+                {
+                    return View();
+                }
+
+                if (perfilEdit.Genero == null)
+                {
+                    ModelState.AddModelError("Genero", "Introduza o Genero");
+                    error = true;
+                }
+                if (error == true)
+                {
+                    return View();
+                }
+                if (perfilEdit.Data_nascimento == null)
+                {
+                    ModelState.AddModelError("Data_Nascimento", "Introduza a Data de Nascimento");
+                    error = true;
+                }
+                if (error == true)
+                {
+                    return View();
+                }
+                if (perfilEdit.Peso == null)
+                {
+                    ModelState.AddModelError("Peso", "Introduza o Peso");
+                    error = true;
+                }
+                if (error == true)
+                {
+                    return View();
+                }
+                if (perfilEdit.Altura == null)
+                {
+                    ModelState.AddModelError("Altura", "Introduza a sua Altura");
+                    error = true;
+                }
+                if (error == true)
+                {
+                    return View();
+                }
+                if (perfilEdit.Actividade_fisica == null)
+                {
+                    ModelState.AddModelError("Actividade_fisica", "Introduza o Indice de Atividade Fisica");
+                    error = true;
+                }
+                RegistoPeso peso = new RegistoPeso()
+                {
+                    Data = DateTime.Today,
+                    Peso = perfilEdit.Peso,
+                    User_ID = userId
+                };
+                db.RegistoPesoes.Add(peso);
+                db.Entry(perfil).State = EntityState.Modified;
+                db.SaveChanges();
+                return RedirectToAction("Index", "Manage");
+
+            }
+
+
+            return View(perfilEdit);
+        }
+
+
+
+
+        //
+        // POST: /Manage/RemoveLogin 
+        [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<ActionResult> RemoveLogin(string loginProvider, string providerKey)
         {
@@ -334,7 +491,7 @@ namespace HealthyProject.Controllers
             base.Dispose(disposing);
         }
 
-#region Helpers
+        #region Helpers
         // Used for XSRF protection when adding external logins
         private const string XsrfKey = "XsrfId";
 
@@ -385,6 +542,6 @@ namespace HealthyProject.Controllers
             Error
         }
 
-#endregion
+        #endregion
     }
 }

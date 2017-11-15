@@ -1,0 +1,164 @@
+﻿@model IEnumerable<HealthyProject.Models.Contas>
+@{
+    ViewBag.Title = "Index";
+}
+
+@if (ViewBag.SemDados != null)
+{  <br />
+    <br />
+    <br />
+    <div class="centerAlign">
+        <img src="@Url.Content("https://i2.wp.com/1.bp.blogspot.com/-2bMNd_UnqzY/T5leMQhNFZI/AAAAAAAAALI/s-6dxHzS7Kg/s1600/page-not-found-404.png")" style="height: 600px; width:600px; margin: auto;" />
+        <div class="alert alert-success alert-dismissable">
+            <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+            <strong><i class="fa fa-exclamation-triangle" aria-hidden="true"></i> Aparentemente o seu perfil ainda não foi definido, o que impossibilita o correcto funcionamento desta página. Por favor preencha os campos necessários no seu Perfil de Utilizador.</strong>
+        </div>
+        <br />
+        @Html.ActionLink("Criar Perfil", "Index", "Manage", null, new { @class = "img-btn-getpeso modal-link mybtn", title = "Cria-te" })
+    </div>
+}
+else
+{
+    if (TempData["UserGuide2"] != null)
+    {
+        <br />
+        <br />
+        <br />
+        <div class="centerAlign">
+            <div class="alert alert-success alert-dismissable">
+                <strong><i class="fa fa-exclamation-triangle" aria-hidden="true"></i>E terminou o tutorial! A partir deste momento deverá ter um conhecimento suficiente ao funcionamento regular do nosso website.</strong>
+                <br />
+                <strong><i class="fa fa-exclamation-triangle" aria-hidden="true"></i>De forma a permitir um funcionamento de qualidade, não se esqueça de realizar o seu registo diário de refeições!</strong>
+                <br />
+                <strong><i class="fa fa-exclamation-triangle" aria-hidden="true"></i>Caso ainda tenha alguma dúvida ou pretenda obter mais informações relativamente ao website não se esqueça de visitar o nosso fórum!</strong>
+            </div>
+        </div>
+    }
+    if (TempData["UserGuide"] != null || ViewBag.UserGuide2 != null)
+    {
+        <br />
+        <br />
+        <br />
+        <div class="centerAlign">
+            <div class="alert alert-success alert-dismissable">
+                <strong><i class="fa fa-exclamation-triangle" aria-hidden="true"></i>Este tutorial está quase a terminar! Criada a refeição é agora possível adicionar pratos, ingredientes e bebidas à mesma.</strong>
+                <br />
+                <strong><i class="fa fa-exclamation-triangle" aria-hidden="true"></i>Através da adição dos mesmos, os parâmetros são actualizados, tanto no registo alimentar diário como no objectivo, permitindo um melhor controlo.</strong>
+                <br />
+                <strong><i class="fa fa-exclamation-triangle" aria-hidden="true"></i>Por favor clique no adicionar prato na parte direita da tabela onde se apresenta a sua refeição.</strong>
+            </div>
+        </div>
+    }
+    if (ViewBag.UserGuide != null)
+    {
+        <br />
+        <br />
+        <br />
+        <div class="centerAlign">
+            <div class="alert alert-success alert-dismissable">
+                <strong><i class="fa fa-exclamation-triangle" aria-hidden="true"></i>Nesta página o utilizador consegue tanto ver como registar refeições, possibilitanto a sua análise relativamente a certos parâmetros.</strong>
+                <br />
+                <strong><i class="fa fa-exclamation-triangle" aria-hidden="true"></i>Os parâmetros avaliados são o total de kcal, proteinas, hidratos de carbono e gorduras apresentadas em cada refeição.</strong>
+                <br />
+                <strong><i class="fa fa-exclamation-triangle" aria-hidden="true"></i>Comecemos por fazer o registo de uma refeição. Carregue no botão abaixo apresentado de forma a adicionar uma refeição ao seu registo diário.</strong>
+                <br />
+                @Html.ActionLink("Adicionar refeição", "Create", "Refeicoes", null, htmlAttributes: new { @class = "mybtn" })
+            </div>
+        </div>
+    }
+    <br />
+    <br />
+    <h2>Diário Alimentar</h2>
+
+    <br />
+
+    <p>Seleccione a data que pretende ver:</p>
+
+    using (Html.BeginForm("Index", "Refeicoes"))
+    {
+        @Html.AntiForgeryToken()
+        <input id="dateInput" type="date" width="10" class="date" name="dateInput" value="Guardar" />
+        <input id="button" type="submit" value="Guardar">
+    }
+
+    <br />
+    <br />
+    <br />
+
+    <table class="table tableDailyMeals">
+        <tr>
+            <th>Refeição</th>
+            <th>Descrição</th>
+            <th>Kcal</th>
+            <th>Proteínas</th>
+            <th>
+                <p>Hidratos de Carbono</p>
+                <p style="font-size:80%">Açúcar</p>
+            </th>
+            <th>Gordura</th>
+            <th></th>
+        </tr>
+
+        @if (Model.Count() != 0)
+        {
+            foreach (var refeicao in Model)
+            {
+                <tr>
+                    <td>
+                        @*@Html.DisplayFor(modelItem => refeicao.RefeicaoID)<br />
+                            @Html.DisplayFor(modelItem => refeicao.Data)<br /> so para shit*@
+                        @Html.DisplayFor(modelItem => refeicao.Tipo)
+                        <p style="font-size:70%; color:red">@Html.ActionLink("Editar refeição", "Edit", new { id = refeicao.RefeicaoID })</p>
+                    </td>
+                    <td>
+                        @foreach (var prato in refeicao.ListaPratos)
+                        {
+                            <p>
+                                @prato.Prato.Nome <span>   </span> @prato.Dose <span> gr</span>
+                                <span style="font-size:70%">@Html.ActionLink("Eliminar", "Delete", "RefeicaoPratoes", new { RefeicaoID = refeicao.RefeicaoID, PratoID = prato.PratoID }, null)</span>
+                            </p>
+                        }
+                        @foreach (var ingrediente in refeicao.ListaIngredientes)
+                        {
+                            <p>
+                                @ingrediente.Ingrediente.Nome <span>   </span> @ingrediente.Quantidade <span> gr</span>
+                                <span style="font-size:70%">@Html.ActionLink("Eliminar", "Delete", "RefeicaoIngredientes", new { RefeicaoID = refeicao.RefeicaoID, IngredienteID = ingrediente.IngredienteID }, null)</span>
+                            </p>
+                        }
+                        @foreach (var bebida in refeicao.ListaBebidas)
+                        {
+                            <p>
+                                @bebida.Bebida.Nome <span>   </span> @bebida.Quantidade <span> ml</span>
+                                <span style="font-size:70%">@Html.ActionLink("Eliminar", "Delete", "RefeicaoBebidas", new { RefeicaoID = refeicao.RefeicaoID, BebidaID = bebida.BebidaID }, null)</span>
+                            </p>
+                        }
+                    </td>
+                    <td>@refeicao.Total_kcal</td>
+                    <td>@refeicao.Total_proteinas</td>
+                    <td>@refeicao.Total_hidratos</td>
+                    <td>@refeicao.Total_gordura</td>
+                    <td>
+                        <p style="font-size:80%">@Html.ActionLink("Adicionar Prato", "Create", "RefeicaoPratoes", new { RefeicaoID = refeicao.RefeicaoID }, null)</p>
+                        <p style="font-size:80%">@Html.ActionLink("Adicionar Ingrediente", "Create", "RefeicaoIngredientes", new { RefeicaoID = refeicao.RefeicaoID }, null)</p>
+                        <p style="font-size:80%">@Html.ActionLink("Adicionar Bebida", "Create", "RefeicaoBebidas", new { RefeicaoID = refeicao.RefeicaoID }, null)</p>
+                    </td>
+                </tr>
+            }
+        }
+        else
+        {
+            <tr>
+                <td colspan="7"><p style="text-align:center">Ainda não existe nenhuma refeição para este dia.</p></td>
+            </tr>
+        }
+        <tr>
+            <td><button>@Html.ActionLink("Adicionar Refeição", "Create")</button></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+        </tr>
+    </table>
+}

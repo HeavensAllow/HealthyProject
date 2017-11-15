@@ -83,7 +83,8 @@ namespace HealthyProject.Controllers
             switch (result)
             {
                 case SignInStatus.Success:
-                    return RedirectToLocal(returnUrl);
+                    //ViewBag.Sucess = "Sucess";
+                    return RedirectToAction("Index","Home");
                 case SignInStatus.LockedOut:
                     return View("Lockout");
                 case SignInStatus.RequiresVerification:
@@ -162,8 +163,10 @@ namespace HealthyProject.Controllers
                     UserManager.AddToRole(user.Id, "User");
 
                     await SignInManager.SignInAsync(user, isPersistent:false, rememberBrowser:false);
-                    Utilizador newUser = new Utilizador();
-                    newUser.UserID = user.Id;
+                    Utilizador newUser = new Utilizador()
+                    {
+                        UserID = user.Id
+                    };
                     db.Utilizadors.Add(newUser);
                     db.SaveChanges();  
 

@@ -36,7 +36,7 @@
         <div class="form-group">
             @Html.LabelFor(model => model.Data_nascimento, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
-                @Html.EditorFor(model => model.Data_nascimento, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.EditorFor(model => model.Data_nascimento, new { htmlAttributes = new { @class = "form-control", type = "date" } })
                 @Html.ValidationMessageFor(model => model.Data_nascimento, "", new { @class = "text-danger" })
             </div>
         </div>
@@ -106,6 +106,7 @@
                 @Html.ValidationMessageFor(model => model.MGorda, "", new { @class = "text-danger" })
             </div>
         </div>
+<<<<<<< HEAD
  
         <div class="form-group">
             @Html.LabelFor(model => model.AspNetUser.AspNetRoles, htmlAttributes: new { @class = "control-label col-md-2" })
@@ -115,6 +116,14 @@
             </div>
         </div>
 
+=======
+        <div class="form-group">
+            @Html.Label("roleName", "Role", htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.DropDownList("roleName", new SelectList(ViewBag.Roles, "Value", "Text"), new { @class = "form-control" })
+            </div>
+        </div>
+>>>>>>> 2e0c6c14de8590b612bee7b0434aa5304fcf70f6
         <div class="form-group">
             <div class="col-md-offset-2 col-md-10">
                 <input type="submit" value="Save" class="btn btn-default" />
@@ -123,7 +132,7 @@
     </div>
 }
 <div>
-    @Html.ActionLink("Back to List", "Index")
+    @Html.ActionLink("Regressar", "Index")
 </div>
 
 @section Scripts {

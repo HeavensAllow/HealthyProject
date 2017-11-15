@@ -1,0 +1,97 @@
+﻿@model HealthyProject.Models.Objectivo
+
+@{
+    ViewBag.Title = "Create";
+}
+
+@if (ViewBag.SemDados != null)
+{
+    <br />
+    <br />
+    <br />
+    <div class="centerAlign">
+        <img src="@Url.Content("https://i2.wp.com/1.bp.blogspot.com/-2bMNd_UnqzY/T5leMQhNFZI/AAAAAAAAALI/s-6dxHzS7Kg/s1600/page-not-found-404.png")" style="height: 600px; width:600px; margin: auto;" />
+        <div class="alert alert-success alert-dismissable">
+            <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+            <strong><i class="fa fa-exclamation-triangle" aria-hidden="true"></i> Aparentemente o seu perfil ainda não foi definido, o que impossibilita o correcto funcionamento desta página. Por favor preencha os campos necessários no seu Perfil de Utilizador.</strong>
+        </div>
+        <br />
+        @Html.ActionLink("Criar Perfil", "Index", "Manage", null, new { @class = "img-btn-getpeso modal-link mybtn", title = "Cria-te" })
+    </div>
+}
+else
+{
+<br />
+<br />
+    if (ViewBag.UserGuide != null)
+    {
+        <br />
+        <div class="centerAlign">
+            <div class="alert alert-success alert-dismissable">
+                <strong><i class="fa fa-exclamation-triangle" aria-hidden="true"></i>Nesta página poderá criar o seu primeiro objectivo, indicando a data de começo bem como o peso a atingir.</strong>
+                <br />
+                <strong><i class="fa fa-exclamation-triangle" aria-hidden="true"></i>A data de começo refere-se à data ao qual pretende dar início ao seu objectivo e o peso objectivo refere-se ao peso que pretende atingir.</strong>
+                <br />
+                <strong><i class="fa fa-exclamation-triangle" aria-hidden="true"></i>Passemos agora à criação do seu primeiro objectivo! Por favor preencha os espaços abaixo expostos após ler a nossa explicação.</strong>
+                <br />
+            </div>
+        </div>
+    }
+
+<h2>Criar novo objectivo</h2>
+
+
+using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+
+    <div class="form-horizontal">
+        <div>
+            <div>
+                <br />
+                <div>Nesta página é possível indicar o seu peso objectivo e, através do mesmo, iremos calcular qual deverá ser o seu intake diário calórico de forma a atingir o seu peso desejado.</div>
+                <div>Tal é possível através do cálculo do EER relativo ao objectivo e através de um controlo de intake calórico ao qual o restringimos a valores aceitáveis nutricionalmente.</div>
+                <div>Esta funcionalidade permite ao utilizador observar quanto foi o seu intake calórico diário relativamente ao recomendado, através de um gráfico comparativo semanal, ajustável ao peso actual.</div>
+                <br />
+                <div>Após cada refeição ou no final do dia, deverá inserir quais as refeições tomadas no decorrer do mesmo de forma a se proceder ao cálculo do intake calórico do dia.</div>
+                <div>Caso a refeição tomada não exista, e possível realizar uma combinação de alimentos.</div>
+                <br />
+                <div>A cada 7 dias, será requisitada ao utilizador a introdução do seu peso actual.</div>
+                <div>Tal é feito de forma a ajustar o intake calórico recomendado ao utilizador na semana seguinte, conforme o peso actual do utilizador para que atinga o seu objectivo.</div>
+            </div>
+        </div>
+
+        <hr />
+        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.Data_inicio, "Data de Início", htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.Data_inicio, new { htmlAttributes = new { @class = "form-control", type = "date" } })
+                @Html.ValidationMessageFor(model => model.Data_inicio, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.Peso_objectivo, "Peso a atingir", htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.Peso_objectivo, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.Peso_objectivo, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            <div class="col-md-offset-2 col-md-10">
+                <input type="submit" value="Criar" class="btn btn-default" />
+            </div>
+        </div>
+    </div>
+}
+
+<div>
+    @Html.ActionLink("Regressar", "Index")
+</div>
+}
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}
